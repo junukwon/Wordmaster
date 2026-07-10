@@ -7,6 +7,7 @@ import {
   getNextStudyItem,
   getSessionQueueItems,
   getSessionSummary,
+  selectTargetDays,
 } from '../../src/domain/sessionEngine';
 
 const now = new Date('2026-07-10T09:00:00.000Z');
@@ -84,4 +85,12 @@ test('due reviews appear before new words without reducing the new target', () =
   const session = createStudySession(words, [1, 2, 3, 4, 5], [due], now, identity);
   expect(session.targetWordIds).toHaveLength(125);
   expect(getNextStudyItem(session)).toMatchObject({ wordId: '0201', isReview: true });
+});
+
+test('selects the next five-DAY block after the first block is mastered', () => {
+  expect(selectTargetDays(words, [])).toEqual([1, 2, 3, 4, 5]);
+  const mastered = words.filter((word) => word.day <= 5).map((word) => ({
+    ...progress(word.id, 'strong'), stage: 'mastered_today' as const,
+  }));
+  expect(selectTargetDays(words, mastered)).toEqual([6, 7, 8, 9, 10]);
 });

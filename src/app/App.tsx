@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { HashRouter } from 'react-router-dom';
 import { loadVocabulary } from '../content/vocabulary';
-import { createStudySession } from '../domain/sessionEngine';
+import { createStudySession, selectTargetDays } from '../domain/sessionEngine';
 import { isReviewDue } from '../domain/reviewScheduler';
 import { LocalStorageProgressRepository } from '../storage/LocalStorageProgressRepository';
 import { SpeechPlayer } from '../speech/SpeechPlayer';
@@ -19,9 +19,11 @@ export function App() {
 
   const homeViewModel = useMemo<HomeViewModel>(() => {
     const activeSession = repository.loadActiveSession();
-    const targetIds = activeSession?.targetWordIds ?? vocabulary.filter((word) => word.day <= 5).map((word) => word.id);
-    const targetSet = new Set(targetIds);
     const progress = repository.getAllWordProgress();
+    const targetDays = activeSession?.targetDayIds ?? selectTargetDays(vocabulary, progress);
+    const targetDaySet = new Set(targetDays);
+    const targetIds = activeSession?.targetWordIds ?? vocabulary.filter((word) => targetDaySet.has(word.day)).map((word) => word.id);
+    const targetSet = new Set(targetIds);
     const targetProgress = progress.filter((item) => targetSet.has(item.wordId));
     const strong = targetProgress.filter((item) => item.confidence === 'strong').length;
     const uncertain = targetProgress.filter((item) => item.confidence === 'uncertain').length;
@@ -34,12 +36,14 @@ export function App() {
       remaining: targetIds.length - strong - uncertain - weak,
       dueReviews: progress.filter((item) => isReviewDue(item, new Date())).length,
       activeSession,
+      storageError: repository.getLastError(),
     };
   }, [repository, revision]);
 
   const startStudy = useCallback(() => {
     if (!repository.loadActiveSession()) {
-      repository.saveActiveSession(createStudySession(vocabulary, [1, 2, 3, 4, 5], repository.getAllWordProgress(), new Date()));
+      const progress = repository.getAllWordProgress();
+      repository.saveActiveSession(createStudySession(vocabulary, selectTargetDays(vocabulary, progress), progress, new Date()));
       refresh();
     }
   }, [repository, refresh]);

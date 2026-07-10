@@ -48,9 +48,16 @@ export function AppRouter({ homeViewModel, words, repository, speechPlayer, onSt
     navigate('/test/setup');
   };
 
+  const openRegularTest = () => {
+    setLimitedWordIds(undefined);
+    setSetupMode('mixed');
+    setAttempt(null);
+    setResult(null);
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<HomePage viewModel={homeViewModel} onStartStudy={onStartStudy} />} />
+      <Route path="/" element={<HomePage viewModel={homeViewModel} onStartStudy={onStartStudy} onOpenTest={openRegularTest} />} />
       <Route path="/study" element={<StudyPage words={words} repository={repository} speechPlayer={speechPlayer} onProgressChange={onDataChanged} />} />
       <Route path="/test/setup" element={<TestSetupPage words={words} progress={repository.getAllWordProgress()} shuffle={fisherYatesShuffle} onStart={startTest} initialWordIds={limitedWordIds} initialMode={setupMode} />} />
       <Route path="/test/run" element={attempt ? <TestPage initialAttempt={attempt} words={words} repository={repository} onAttemptChange={setAttempt} onComplete={completeTest} /> : <Navigate to="/test/setup" replace />} />

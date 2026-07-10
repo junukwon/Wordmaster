@@ -46,3 +46,10 @@ test('configures and completes a mixed 10-word test with result actions', async 
   await user.click(screen.getByRole('button', { name: '틀린 단어만 필기 연습' }));
   expect(screen.getByText('practice')).toBeInTheDocument();
 });
+
+test('preselects the DAYs that contain retry-only words', () => {
+  render(<MemoryRouter><TestSetupPage words={words} progress={[]} shuffle={identity} now={() => now} onStart={() => {}} initialWordIds={['0126']} /></MemoryRouter>);
+  expect(screen.getByRole('checkbox', { name: 'DAY 06' })).toBeChecked();
+  expect(screen.getByText(/1문제/)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: '테스트 시작하기' })).toBeEnabled();
+});

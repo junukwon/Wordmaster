@@ -10,6 +10,7 @@ a { color: inherit; }
 .brand-bar { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
 .brand { margin: 0; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: -0.04em; }
 .brand-bar p { margin: 0; color: var(--color-muted); }
+.storage-alert { padding: .8rem 1rem; border: 1px solid #e9c46a; border-radius: 12px; background: #fff8df; color: #6b5208; }
 .routine-card { padding: clamp(1.25rem, 4vw, 2.5rem); border: 1px solid rgba(255,255,255,.8); border-radius: var(--radius-lg); background: rgba(255,255,255,.94); box-shadow: var(--shadow-card); }
 .routine-card__eyebrow { color: var(--color-primary); font-weight: 800; letter-spacing: .08em; }
 .routine-card__title-row { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin: .5rem 0 1.75rem; }

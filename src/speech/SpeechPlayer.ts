@@ -5,6 +5,13 @@ export class SpeechPlayer {
     return this.englishVoices().length > 0 && typeof this.utteranceConstructor() === 'function';
   }
 
+  subscribe(listener: () => void): () => void {
+    const synthesis = this.synthesis();
+    if (!synthesis) return () => {};
+    synthesis.addEventListener('voiceschanged', listener);
+    return () => synthesis.removeEventListener('voiceschanged', listener);
+  }
+
   speak(term: string): boolean {
     const synthesis = this.synthesis();
     const Utterance = this.utteranceConstructor();

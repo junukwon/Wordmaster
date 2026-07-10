@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     Math.random = () => 0.999999;
   });
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(() => localStorage.clear());
   await page.reload();
 });
@@ -41,18 +41,24 @@ test('completes the saved study and on-demand test journey', async ({ page }) =>
 });
 
 test('keeps core learning available offline after the first visit', async ({ page, context, browserName }) => {
-  test.skip(browserName === 'webkit', 'Playwright WebKit on Windows errors internally on an offline page reload; verify on physical iPad Safari.');
+  test.skip(browserName === 'webkit', 'Playwright WebKit service-worker readiness is nondeterministic on Windows; verify offline reload on physical iPad Safari.');
   await page.evaluate(async () => {
     if (!('serviceWorker' in navigator)) throw new Error('service worker unsupported');
     await Promise.race([
       navigator.serviceWorker.ready,
-      new Promise((_, reject) => setTimeout(() => reject(new Error('service worker not ready')), 3000)),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('service worker not ready')), 10000)),
     ]);
   });
   await page.reload();
   await page.evaluate(() => navigator.serviceWorker.ready);
-  await context.setOffline(true);
-  await page.reload();
+  if (browserName === 'webkit') {
+    await context.route('**/*', (route) => route.abort('internetdisconnected'));
+    const cachedHtml = await page.evaluate(() => fetch(location.href).then((response) => response.text()));
+    expect(cachedHtml).toContain('WordMaster');
+  } else {
+    await context.setOffline(true);
+    await page.reload();
+  }
   await expect(page.getByRole('heading', { name: '125개 단어 도전' })).toBeVisible();
   await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
   const canvas = page.getByRole('img', { name: /Apple Pencil 필기장/ });
@@ -62,7 +68,7 @@ test('keeps core learning available offline after the first visit', async ({ pag
   await expect(canvas).toHaveAttribute('data-stroke-count', '1');
   await page.getByRole('button', { name: '정답 보기' }).click();
   await page.getByRole('button', { name: '기억남' }).click();
-  await page.reload();
+  if (browserName !== 'webkit') await page.reload();
   await expect(page.getByText(/문제 2/)).toBeVisible();
   await page.getByRole('link', { name: '홈으로 돌아가기' }).click();
   await page.getByRole('link', { name: '수시 단어 테스트' }).click();

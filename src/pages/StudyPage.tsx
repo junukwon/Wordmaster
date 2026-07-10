@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DrawingCanvas, type DrawingCanvasHandle } from '../drawing/DrawingCanvas';
 import { applyLearningResult } from '../domain/masteryEngine';
@@ -14,7 +14,7 @@ export type StudyScreenState = 'prompting' | 'revealed' | 'saving' | 'complete';
 type StudyPageProps = {
   words: VocabularyWord[];
   repository: ProgressRepository;
-  speechPlayer: Pick<SpeechPlayer, 'speak' | 'isAvailable' | 'getNotice'>;
+  speechPlayer: Pick<SpeechPlayer, 'speak' | 'isAvailable' | 'getNotice'> & Partial<Pick<SpeechPlayer, 'subscribe'>>;
   initialSession?: StudySession;
   now?: () => Date;
   onProgressChange?: () => void;
@@ -32,9 +32,12 @@ export function StudyPage({
     () => initialSession ?? repository.loadActiveSession(),
   );
   const [screenState, setScreenState] = useState<StudyScreenState>(session ? 'prompting' : 'complete');
+  const [, setVoiceRevision] = useState(0);
   const drawingRef = useRef<DrawingCanvasHandle>(null);
   const item = session ? getNextStudyItem(session) : null;
   const word = item ? words.find((candidate) => candidate.id === item.wordId) : null;
+
+  useEffect(() => speechPlayer.subscribe?.(() => setVoiceRevision((value) => value + 1)), [speechPlayer]);
 
   if (!session || !item || !word || screenState === 'complete') {
     return (
@@ -48,6 +51,10 @@ export function StudyPage({
 
   const dayStart = Math.min(...session.targetDayIds);
   const dayEnd = Math.max(...session.targetDayIds);
+  const targetSet = new Set(session.targetWordIds);
+  const ratedTargetCount = repository.getAllWordProgress().filter(
+    (progress) => targetSet.has(progress.wordId) && progress.confidence !== 'unknown',
+  ).length;
   const promptIsEnglish = item.questionType === 'en_to_ko';
   const isRevealed = screenState === 'revealed' || screenState === 'saving';
 
@@ -76,7 +83,7 @@ export function StudyPage({
         </div>
         <div className="study-progress" aria-live="polite">
           <strong>문제 {session.currentIndex + 1}</strong>
-          <ProgressBar value={Math.min(session.currentIndex, session.targetWordIds.length)} max={session.targetWordIds.length} label="125개 신규 단어 진행률" />
+          <ProgressBar value={ratedTargetCount} max={session.targetWordIds.length} label="125개 신규 단어 진행률" />
         </div>
       </header>
 

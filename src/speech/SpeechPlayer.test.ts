@@ -5,10 +5,13 @@ type MockUtterance = { text: string; voice?: SpeechSynthesisVoice; lang?: string
 function installSpeech(voices: Partial<SpeechSynthesisVoice>[]) {
   const calls: string[] = [];
   const spoken: MockUtterance[] = [];
+  const listeners = new Set<EventListener>();
   const synthesis = {
     getVoices: () => voices as SpeechSynthesisVoice[],
     cancel: () => calls.push('cancel'),
     speak: (utterance: MockUtterance) => { calls.push('speak'); spoken.push(utterance); },
+    addEventListener: (_name: string, listener: EventListener) => listeners.add(listener),
+    removeEventListener: (_name: string, listener: EventListener) => listeners.delete(listener),
   };
   class Utterance implements MockUtterance {
     voice?: SpeechSynthesisVoice;
@@ -19,7 +22,7 @@ function installSpeech(voices: Partial<SpeechSynthesisVoice>[]) {
   Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: synthesis });
   Object.defineProperty(window, 'SpeechSynthesisUtterance', { configurable: true, value: Utterance });
   Object.defineProperty(globalThis, 'SpeechSynthesisUtterance', { configurable: true, value: Utterance });
-  return { calls, spoken };
+  return { calls, spoken, emitVoicesChanged: () => listeners.forEach((listener) => listener(new Event('voiceschanged'))) };
 }
 
 afterEach(() => {
@@ -51,4 +54,16 @@ test('is gracefully unavailable without speech synthesis', () => {
   expect(player.isAvailable()).toBe(false);
   expect(player.speak('knee')).toBe(false);
   expect(player.getNotice()).toMatch(/지원하지/);
+});
+
+test('notifies subscribers when asynchronously loaded voices change', () => {
+  const { emitVoicesChanged } = installSpeech([]);
+  const player = new SpeechPlayer(window);
+  const listener = vi.fn();
+  const unsubscribe = player.subscribe(listener);
+  emitVoicesChanged();
+  expect(listener).toHaveBeenCalledOnce();
+  unsubscribe();
+  emitVoicesChanged();
+  expect(listener).toHaveBeenCalledOnce();
 });

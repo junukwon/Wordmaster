@@ -15,16 +15,70 @@ function cleanState(): StoredStateV1 {
   return { version: 1, progress: {}, activeSession: null, testAttempts: [] };
 }
 
-function isStoredState(value: unknown): value is StoredStateV1 {
+function isWordProgress(value: unknown): value is WordProgress {
   if (!value || typeof value !== 'object') return false;
-  const state = value as Partial<StoredStateV1>;
-  return (
-    state.version === 1 &&
-    !!state.progress &&
-    typeof state.progress === 'object' &&
-    (state.activeSession === null || typeof state.activeSession === 'object') &&
-    Array.isArray(state.testAttempts)
-  );
+  const item = value as Partial<WordProgress>;
+  return typeof item.wordId === 'string'
+    && ['unseen', 'recognized', 'recalled', 'spelled', 'mastered_today', 'long_term'].includes(item.stage ?? '')
+    && ['unknown', 'weak', 'uncertain', 'strong'].includes(item.confidence ?? '')
+    && typeof item.correctCount === 'number'
+    && typeof item.incorrectCount === 'number'
+    && [0, 1, 3, 7, 14].includes(item.reviewStep ?? -1)
+    && (item.nextReviewAt === null || typeof item.nextReviewAt === 'string')
+    && (item.lastReviewedAt === null || typeof item.lastReviewedAt === 'string')
+    && typeof item.updatedAt === 'string';
+}
+
+function isStudySession(value: unknown): value is StudySession {
+  if (!value || typeof value !== 'object') return false;
+  const item = value as Partial<StudySession>;
+  return typeof item.id === 'string'
+    && typeof item.date === 'string'
+    && Array.isArray(item.targetDayIds) && item.targetDayIds.every((day) => typeof day === 'number')
+    && Array.isArray(item.targetWordIds) && item.targetWordIds.every((id) => typeof id === 'string')
+    && Array.isArray(item.queue) && item.queue.every((token) => typeof token === 'string')
+    && typeof item.currentIndex === 'number'
+    && ['diagnosis', 'recognition', 'recall', 'spelling', 'mixed', 'reinforcement'].includes(item.phase ?? '')
+    && typeof item.startedAt === 'string'
+    && typeof item.updatedAt === 'string'
+    && (item.completedAt === null || typeof item.completedAt === 'string');
+}
+
+function isTestAttempt(value: unknown): value is TestAttempt {
+  if (!value || typeof value !== 'object') return false;
+  const item = value as Partial<TestAttempt>;
+  return typeof item.id === 'string'
+    && Array.isArray(item.dayIds)
+    && Array.isArray(item.wordIds)
+    && Array.isArray(item.questions)
+    && Array.isArray(item.answers)
+    && ['en_to_ko', 'ko_to_en', 'spelling', 'mixed'].includes(item.mode ?? '')
+    && ['number', 'random'].includes(item.order ?? '')
+    && typeof item.startedAt === 'string'
+    && (item.completedAt === null || typeof item.completedAt === 'string');
+}
+
+function sanitizeStoredState(value: unknown): { state: StoredStateV1; repaired: boolean } | null {
+  if (!value || typeof value !== 'object' || (value as { version?: unknown }).version !== 1) return null;
+  const raw = value as Partial<StoredStateV1>;
+  const progressEntries = raw.progress && typeof raw.progress === 'object' ? Object.entries(raw.progress) : [];
+  const validProgress = progressEntries.filter(([, progress]) => isWordProgress(progress));
+  const rawAttempts = Array.isArray(raw.testAttempts) ? raw.testAttempts : [];
+  const validAttempts = rawAttempts.filter(isTestAttempt);
+  const activeSession = raw.activeSession === null || isStudySession(raw.activeSession) ? raw.activeSession : null;
+  return {
+    state: {
+      version: 1,
+      progress: Object.fromEntries(validProgress),
+      activeSession: activeSession ?? null,
+      testAttempts: validAttempts,
+    },
+    repaired: validProgress.length !== progressEntries.length
+      || !raw.progress || typeof raw.progress !== 'object'
+      || validAttempts.length !== rawAttempts.length
+      || !Array.isArray(raw.testAttempts)
+      || activeSession !== raw.activeSession,
+  };
 }
 
 export class LocalStorageProgressRepository implements ProgressRepository {
@@ -89,8 +143,14 @@ export class LocalStorageProgressRepository implements ProgressRepository {
     if (!raw) return cleanState();
     try {
       const parsed: unknown = JSON.parse(raw);
-      if (!isStoredState(parsed)) throw new Error('Invalid stored state');
-      return parsed;
+      const sanitized = sanitizeStoredState(parsed);
+      if (!sanitized) throw new Error('Invalid stored state');
+      if (sanitized.repaired) {
+        this.storage.setItem(CORRUPT_KEY, raw);
+        this.storage.setItem(STORAGE_KEY, JSON.stringify(sanitized.state));
+        this.lastError = '학습 기록의 일부 손상된 항목을 백업하고 복구했습니다.';
+      }
+      return sanitized.state;
     } catch {
       try {
         this.storage.setItem(CORRUPT_KEY, raw);

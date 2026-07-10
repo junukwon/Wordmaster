@@ -40,3 +40,9 @@ test('navigates to on-demand test setup', async () => {
   await userEvent.click(screen.getByRole('link', { name: '수시 단어 테스트' }));
   expect(screen.getByRole('heading', { name: '테스트 설정 화면' })).toBeInTheDocument();
 });
+
+test('shows a recoverable storage error without blocking the routine', () => {
+  render(<MemoryRouter><HomePage viewModel={{ ...viewModel, storageError: '학습 기록의 일부를 복구했습니다.' }} /></MemoryRouter>);
+  expect(screen.getByRole('alert')).toHaveTextContent('학습 기록의 일부를 복구했습니다.');
+  expect(screen.getByRole('link', { name: '이어서 학습하기' })).toBeEnabled();
+});

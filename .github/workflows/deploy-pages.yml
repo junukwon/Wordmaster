@@ -31,6 +31,10 @@ jobs:
         run: npm run content:build
       - name: Run tests
         run: npm test
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium webkit
+      - name: Run production end-to-end tests
+        run: npm run test:e2e
       - name: Build GitHub Pages bundle
         run: npm run build
       - name: Configure Pages

@@ -3,7 +3,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vitest/config';
 
 const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1];
-const base = process.env.GITHUB_ACTIONS === 'true' && repositoryName ? `/${repositoryName}/` : '/';
+const isRootPagesRepository = repositoryName?.toLowerCase().endsWith('.github.io');
+const base = process.env.GITHUB_ACTIONS === 'true' && repositoryName && !isRootPagesRepository ? `/${repositoryName}/` : '/';
 
 export default defineConfig({
   base,

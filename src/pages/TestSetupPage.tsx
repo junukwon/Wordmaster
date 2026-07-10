@@ -24,7 +24,10 @@ export function TestSetupPage({
   initialMode = 'mixed',
 }: TestSetupPageProps) {
   const availableDays = [...new Set(words.map((word) => word.day))].sort((a, b) => a - b);
-  const [dayIds, setDayIds] = useState<number[]>(availableDays.slice(0, 5));
+  const retryDays = initialWordIds
+    ? [...new Set(words.filter((word) => initialWordIds.includes(word.id)).map((word) => word.day))].sort((a, b) => a - b)
+    : [];
+  const [dayIds, setDayIds] = useState<number[]>(retryDays.length ? retryDays : availableDays.slice(0, 5));
   const [wordSet, setWordSet] = useState<TestWordSet>('all');
   const [mode, setMode] = useState<QuestionType | 'mixed'>(initialMode);
   const [count, setCount] = useState<TestConfig['count']>(10);

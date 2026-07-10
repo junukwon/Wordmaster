@@ -85,3 +85,15 @@ test('a fresh mount resumes the saved session position', async () => {
   render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} now={() => fixedNow} /></MemoryRouter>);
   expect(screen.getByText(/문제 12/)).toBeInTheDocument();
 });
+
+test('new-word progress counts rated target words instead of queue questions', () => {
+  const { repository, speechPlayer } = services();
+  repository.saveWordProgress({
+    wordId: '0001', stage: 'recognized', confidence: 'strong', correctCount: 1, incorrectCount: 0,
+    reviewStep: 0, nextReviewAt: null, lastReviewedAt: fixedNow.toISOString(), updatedAt: fixedNow.toISOString(),
+  });
+  const session = createStudySession(words, [1, 2, 3, 4, 5], repository.getAllWordProgress(), fixedNow, identity);
+  session.currentIndex = 125;
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+  expect(screen.getByRole('progressbar', { name: '125개 신규 단어 진행률' })).toHaveAttribute('aria-valuenow', '1');
+});

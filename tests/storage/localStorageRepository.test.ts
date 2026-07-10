@@ -75,3 +75,17 @@ test('requesting a new vocabulary ID never deletes existing progress', () => {
   expect(repository.getWordProgress('0251').stage).toBe('unseen');
   expect(repository.getWordProgress('0001')).toEqual(progress('0001'));
 });
+
+test('repairs only a malformed session while preserving valid word progress', () => {
+  localStorage.setItem('wordmaster:v1', JSON.stringify({
+    version: 1,
+    progress: { '0001': progress('0001') },
+    activeSession: {},
+    testAttempts: [],
+  }));
+  const repository = new LocalStorageProgressRepository(localStorage);
+  expect(repository.getWordProgress('0001')).toEqual(progress('0001'));
+  expect(repository.loadActiveSession()).toBeNull();
+  expect(repository.getLastError()).toMatch(/일부/);
+  expect(localStorage.getItem('wordmaster:v1:corrupt')).not.toBeNull();
+});

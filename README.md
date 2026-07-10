@@ -69,7 +69,7 @@ git push -u origin main
 4. GitHub의 **Actions** 탭에서 `Deploy WordMaster to GitHub Pages`가 성공했는지 확인합니다.
 5. 배포 주소 `https://<계정>.github.io/<저장소>/`에 Safari로 접속합니다.
 
-Actions 빌드는 `GITHUB_REPOSITORY`에서 저장소명을 읽어 Vite base 경로를 자동으로 `/<저장소>/`로 설정합니다. 계정이나 저장소명을 코드에 하드코딩할 필요가 없습니다.
+Actions 빌드는 `GITHUB_REPOSITORY`에서 저장소명을 읽어 project Pages의 Vite base 경로를 자동으로 `/<저장소>/`로 설정합니다. `<계정>.github.io` 루트 Pages 저장소는 `/`를 사용합니다. 계정이나 저장소명을 코드에 하드코딩할 필요가 없습니다.
 
 ## 새 버전 업데이트
 
@@ -117,5 +117,5 @@ git push origin main
 - 기록은 현재 iPad/브라우저에만 있으며 기기 간 동기화되지 않습니다.
 - 손글씨는 자동 인식하거나 자동 채점하지 않습니다.
 - 음성 녹음, 음성 인식, 발음 평가는 제공하지 않습니다.
-- Windows Playwright WebKit은 오프라인 새로고침에서 러너 내부 오류가 발생하므로 자동 오프라인 여정은 Desktop Chrome으로 검증합니다. iPad Mini WebKit의 온라인 반응형 여정은 자동 검증하며 실제 iPad Safari 오프라인은 위 체크리스트로 확인해야 합니다.
+- Playwright는 GitHub Pages와 같은 `/wordmaster/` base의 production build를 대상으로 세 화면 크기의 온라인 전체 여정과 Desktop Chrome의 실제 오프라인 reload 여정을 검증합니다. Windows WebKit의 service-worker ready가 비결정적이므로 실제 iPad Safari 오프라인 reload, Apple Pencil 압력, 홈 화면 설치는 위 체크리스트로 별도 확인해야 합니다.
 - 실제 GitHub Pages URL은 GitHub 계정과 저장소가 정해진 뒤 확정됩니다.

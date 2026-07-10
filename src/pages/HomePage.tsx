@@ -10,11 +10,12 @@ export type HomeViewModel = {
   remaining: number;
   dueReviews: number;
   activeSession: StudySession | null;
+  storageError?: string | null;
 };
 
-type HomePageProps = { viewModel: HomeViewModel; onStartStudy?: () => void };
+type HomePageProps = { viewModel: HomeViewModel; onStartStudy?: () => void; onOpenTest?: () => void };
 
-export function HomePage({ viewModel, onStartStudy }: HomePageProps) {
+export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps) {
   const completed = viewModel.strong + viewModel.uncertain + viewModel.weak;
   const statusCards = [
     { label: '확실함', value: viewModel.strong, className: 'status-card--strong' },
@@ -29,6 +30,7 @@ export function HomePage({ viewModel, onStartStudy }: HomePageProps) {
         <h1 className="brand">WordMaster</h1>
         <p>오늘 외운 단어가 오래 남도록</p>
       </header>
+      {viewModel.storageError && <p className="storage-alert" role="alert">{viewModel.storageError}</p>}
 
       <section className="routine-card" aria-labelledby="today-heading">
         <div className="routine-card__eyebrow">오늘의 집중 학습</div>
@@ -56,7 +58,7 @@ export function HomePage({ viewModel, onStartStudy }: HomePageProps) {
           <Link className="button button--primary" to="/study" onClick={onStartStudy}>
             {viewModel.activeSession ? '이어서 학습하기' : '오늘 학습 시작하기'}
           </Link>
-          <Link className="button button--secondary" to="/test/setup">수시 단어 테스트</Link>
+          <Link className="button button--secondary" to="/test/setup" onClick={onOpenTest}>수시 단어 테스트</Link>
         </div>
       </section>
     </main>
