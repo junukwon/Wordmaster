@@ -1,4 +1,5 @@
 import { summarizeTestAttempt } from '../domain/testEngine';
+import { Link } from 'react-router-dom';
 import type { QuestionType, TestAttempt, VocabularyWord } from '../domain/types';
 
 type TestResultPageProps = {
@@ -28,7 +29,7 @@ export function TestResultPage({ attempt, words, onRetryWrong, onPracticeWrong }
       <div className="result-actions">
         <button className="button button--primary" type="button" disabled={!summary.incorrectWordIds.length} onClick={() => onRetryWrong(summary.incorrectWordIds)}>틀린 단어만 다시 테스트</button>
         <button className="button button--secondary" type="button" disabled={!summary.incorrectWordIds.length} onClick={() => onPracticeWrong(summary.incorrectWordIds)}>틀린 단어만 필기 연습</button>
-        <a className="button button--secondary" href="/">홈으로 돌아가기</a>
+        <Link className="button button--secondary" to="/">홈으로 돌아가기</Link>
       </div>
     </main>
   );

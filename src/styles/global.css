@@ -5,6 +5,7 @@ html { min-width: 320px; background: var(--color-canvas); }
 body { margin: 0; min-width: 320px; min-height: 100vh; background: radial-gradient(circle at top left, #fff9ef 0, transparent 32rem), var(--color-canvas); }
 button, a, input, select { font: inherit; }
 a { color: inherit; }
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
 .page { width: min(100% - 2rem, 1080px); margin: 0 auto; padding: 2rem 0 4rem; }
 .brand-bar { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
 .brand { margin: 0; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: -0.04em; }

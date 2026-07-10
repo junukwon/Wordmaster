@@ -1,9 +1,14 @@
 import words from '../../src/content/vocabulary.json';
+import offlineWords from '../../public/data/vocabulary.json';
 
 test('contains the approved 250 words', () => {
   expect(words).toHaveLength(250);
   expect(words[0]).toMatchObject({ id: '0001', term: 'knee', day: 1 });
   expect(words[249]).toMatchObject({ id: '0250', term: 'stay up (late)', day: 10 });
+});
+
+test('publishes the same DAY data as an offline-cacheable asset', () => {
+  expect(offlineWords).toEqual(words);
 });
 
 test('has unique ids and 25 words per day', () => {

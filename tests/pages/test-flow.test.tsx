@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import words from '../../src/content/vocabulary.json';
 import type { TestAttempt } from '../../src/domain/types';
 import { TestSetupPage } from '../../src/pages/TestSetupPage';
@@ -21,7 +22,7 @@ function TestFlow() {
 
 test('configures and completes a mixed 10-word test with result actions', async () => {
   const user = userEvent.setup();
-  render(<TestFlow />);
+  render(<MemoryRouter><TestFlow /></MemoryRouter>);
   expect(screen.getByRole('heading', { name: '수시 단어 테스트' })).toBeInTheDocument();
   expect(screen.getByRole('checkbox', { name: 'DAY 01' })).toBeChecked();
   await user.selectOptions(screen.getByLabelText('문제 유형'), 'mixed');

@@ -799,11 +799,11 @@ git commit -m "feat: add configurable on-demand vocabulary tests"
 **Interfaces:**
 - Produces: release-ready static build and reproducible manual iPad checklist.
 
-- [ ] **Step 1: Configure Playwright projects**
+- [x] **Step 1: Configure Playwright projects**
 
 Define Desktop Chrome, iPad Mini landscape-sized WebKit, and iPhone-sized WebKit projects. Start Vite through Playwright `webServer` using `npm run dev -- --host 127.0.0.1`.
 
-- [ ] **Step 2: Write failing end-to-end journey**
+- [x] **Step 2: Write failing end-to-end journey**
 
 The E2E test must:
 
@@ -817,7 +817,7 @@ The E2E test must:
 8. mark an answer incorrect;
 9. finish and confirm it appears in weak words.
 
-- [ ] **Step 3: Run and diagnose failures**
+- [x] **Step 3: Run and diagnose failures**
 
 ```powershell
 npx playwright install
@@ -826,15 +826,15 @@ npm run test:e2e
 
 Expected: initial failures identify missing integration wiring rather than environment errors.
 
-- [ ] **Step 4: Wire production dependencies**
+- [x] **Step 4: Wire production dependencies**
 
 At app startup, construct one `LocalStorageProgressRepository`, load vocabulary once, and pass stable services through React context or explicit props. Do not instantiate a new repository during every render.
 
-- [ ] **Step 5: Complete accessibility pass**
+- [x] **Step 5: Complete accessibility pass**
 
 Add visible focus styles, accessible names for icon buttons, `aria-live='polite'` for progress changes, textual labels beside status colors, and a reduced-motion media query.
 
-- [ ] **Step 6: Document exact usage**
+- [x] **Step 6: Document exact usage**
 
 `README.md` must include:
 
@@ -847,7 +847,7 @@ Add visible focus styles, accessible names for icon buttons, `aria-live='polite'
 - iPad mini Safari and Apple Pencil manual test checklist;
 - known limitation that progress does not sync between devices.
 
-- [ ] **Step 7: Run complete verification**
+- [x] **Step 7: Run complete verification**
 
 ```powershell
 npm run content:build
@@ -862,7 +862,7 @@ Expected: all unit/component/E2E tests PASS, TypeScript build succeeds, and `dis
 
 Serve the built app on the local network or deploy the static build. Verify Safari landscape and portrait, Pencil drawing, canvas-only scroll prevention, pronunciation button, resume after closing Safari, and no horizontal overflow.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```powershell
 git add .
@@ -873,15 +873,15 @@ git commit -m "test: verify complete WordMaster learning journey"
 
 ## Final Acceptance Checklist
 
-- [ ] DAY 01~10의 250개가 번호·뜻·품사·변화형과 함께 로드된다.
-- [ ] DAY 5개를 고르면 신규 목표가 정확히 125개가 된다.
-- [ ] 5개 묶음, DAY 확인, 누적 확인, 철자 회상 흐름이 작동한다.
-- [ ] 모름·헷갈림·기억남이 재출제와 D+1·3·7·14 복습에 반영된다.
+- [x] DAY 01~10의 250개가 번호·뜻·품사·변화형과 함께 로드된다.
+- [x] DAY 5개를 고르면 신규 목표가 정확히 125개가 된다.
+- [x] 5개 묶음, DAY 확인, 누적 확인, 철자 회상 흐름이 작동한다.
+- [x] 모름·헷갈림·기억남이 재출제와 D+1·3·7·14 복습에 반영된다.
 - [ ] iPad mini에서 Apple Pencil 필기, 되돌리기, 지우기가 작동한다.
-- [ ] 정답 보기 전 영어 철자가 DOM과 화면에 노출되지 않는다.
-- [ ] 발음 버튼이 지원되는 환경에서 영어 발음을 재생하고, 미지원 환경에서도 학습이 중단되지 않는다.
-- [ ] 학습 중단 후 정확한 위치에서 이어진다.
-- [ ] 수시 테스트 범위·유형·개수·순서를 선택할 수 있다.
-- [ ] 테스트 오답은 취약 단어가 되며 정답은 예정 복습을 제거하지 않는다.
-- [ ] 새 DAY를 추가해도 기존 진행 기록이 유지된다.
+- [x] 정답 보기 전 영어 철자가 DOM과 화면에 노출되지 않는다.
+- [x] 발음 버튼이 지원되는 환경에서 영어 발음을 재생하고, 미지원 환경에서도 학습이 중단되지 않는다.
+- [x] 학습 중단 후 정확한 위치에서 이어진다.
+- [x] 수시 테스트 범위·유형·개수·순서를 선택할 수 있다.
+- [x] 테스트 오답은 취약 단어가 되며 정답은 예정 복습을 제거하지 않는다.
+- [x] 새 DAY를 추가해도 기존 진행 기록이 유지된다.
 - [ ] 모든 자동 테스트와 실제 iPad 확인을 통과한다.

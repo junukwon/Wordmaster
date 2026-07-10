@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { DrawingCanvas, type DrawingCanvasHandle } from '../drawing/DrawingCanvas';
 import { applyLearningResult } from '../domain/masteryEngine';
 import { applySessionOutcome, getNextStudyItem } from '../domain/sessionEngine';
@@ -16,6 +17,7 @@ type StudyPageProps = {
   speechPlayer: Pick<SpeechPlayer, 'speak' | 'isAvailable' | 'getNotice'>;
   initialSession?: StudySession;
   now?: () => Date;
+  onProgressChange?: () => void;
 };
 
 export function StudyPage({
@@ -24,6 +26,7 @@ export function StudyPage({
   speechPlayer,
   initialSession,
   now = () => new Date(),
+  onProgressChange,
 }: StudyPageProps) {
   const [session, setSession] = useState<StudySession | null>(
     () => initialSession ?? repository.loadActiveSession(),
@@ -38,7 +41,7 @@ export function StudyPage({
       <main className="page study-page study-page--complete">
         <h1>집중 학습</h1>
         <p>{session?.completedAt ? '오늘의 학습을 마쳤어요.' : '이어갈 학습 세션이 없습니다.'}</p>
-        <a className="button button--primary" href="/">홈으로 돌아가기</a>
+        <Link className="button button--primary" to="/">홈으로 돌아가기</Link>
       </main>
     );
   }
@@ -57,6 +60,7 @@ export function StudyPage({
     repository.saveWordProgress(outcome.progress);
     const updatedSession = applySessionOutcome(session, outcome, timestamp);
     repository.saveActiveSession(updatedSession.completedAt ? null : updatedSession);
+    onProgressChange?.();
     drawingRef.current?.clear();
     setSession(updatedSession);
     setScreenState(updatedSession.completedAt ? 'complete' : 'prompting');
@@ -66,7 +70,7 @@ export function StudyPage({
     <main className="page study-page">
       <header className="study-header">
         <div>
-          <a className="back-link" href="/" aria-label="홈으로 돌아가기">← 홈</a>
+          <Link className="back-link" to="/" aria-label="홈으로 돌아가기">← 홈</Link>
           <p className="study-kicker">DAY {String(dayStart).padStart(2, '0')}–{String(dayEnd).padStart(2, '0')}</p>
           <h1>집중 학습</h1>
         </div>

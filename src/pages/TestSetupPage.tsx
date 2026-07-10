@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { createTestAttempt, type TestConfig, type TestWordSet } from '../domain/testEngine';
 import type { QuestionType, TestAttempt, VocabularyWord, WordProgress } from '../domain/types';
 import type { Shuffle } from '../domain/sessionEngine';
@@ -40,7 +41,7 @@ export function TestSetupPage({
 
   return (
     <main className="page test-setup-page">
-      <a className="back-link" href="/">← 홈</a>
+      <Link className="back-link" to="/">← 홈</Link>
       <header className="test-header">
         <p className="study-kicker">원할 때 언제든 확인</p>
         <h1>수시 단어 테스트</h1>

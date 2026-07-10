@@ -55,8 +55,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === scriptPath) {
   const root = path.resolve(path.dirname(scriptPath), '..');
   const input = path.join(root, 'content', 'source', '영어_단어_DAY01-10.md');
   const output = path.join(root, 'src', 'content', 'vocabulary.json');
+  const publicOutput = path.join(root, 'public', 'data', 'vocabulary.json');
   const words = parseVocabularyMarkdown(fs.readFileSync(input, 'utf8'));
   fs.mkdirSync(path.dirname(output), { recursive: true });
-  fs.writeFileSync(output, `${JSON.stringify(words, null, 2)}\n`, 'utf8');
+  fs.mkdirSync(path.dirname(publicOutput), { recursive: true });
+  const json = `${JSON.stringify(words, null, 2)}\n`;
+  fs.writeFileSync(output, json, 'utf8');
+  fs.writeFileSync(publicOutput, json, 'utf8');
   console.log(`Generated ${words.length} vocabulary records`);
 }

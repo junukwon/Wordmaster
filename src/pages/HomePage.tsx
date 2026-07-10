@@ -12,9 +12,9 @@ export type HomeViewModel = {
   activeSession: StudySession | null;
 };
 
-type HomePageProps = { viewModel: HomeViewModel };
+type HomePageProps = { viewModel: HomeViewModel; onStartStudy?: () => void };
 
-export function HomePage({ viewModel }: HomePageProps) {
+export function HomePage({ viewModel, onStartStudy }: HomePageProps) {
   const completed = viewModel.strong + viewModel.uncertain + viewModel.weak;
   const statusCards = [
     { label: '확실함', value: viewModel.strong, className: 'status-card--strong' },
@@ -53,7 +53,7 @@ export function HomePage({ viewModel }: HomePageProps) {
         </div>
 
         <div className="home-actions">
-          <Link className="button button--primary" to="/study">
+          <Link className="button button--primary" to="/study" onClick={onStartStudy}>
             {viewModel.activeSession ? '이어서 학습하기' : '오늘 학습 시작하기'}
           </Link>
           <Link className="button button--secondary" to="/test/setup">수시 단어 테스트</Link>
