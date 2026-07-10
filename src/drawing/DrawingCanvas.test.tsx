@@ -3,14 +3,17 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { DrawingCanvas, type DrawingCanvasHandle } from './DrawingCanvas';
 
 let lineToMock: ReturnType<typeof vi.fn>;
+let clearRectMock: ReturnType<typeof vi.fn>;
+let boundingRectMock: ReturnType<typeof vi.fn>;
 
 beforeEach(() => {
   lineToMock = vi.fn();
+  clearRectMock = vi.fn();
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue({
-    clearRect: vi.fn(), beginPath: vi.fn(), moveTo: vi.fn(), lineTo: lineToMock, stroke: vi.fn(),
+    clearRect: clearRectMock, beginPath: vi.fn(), moveTo: vi.fn(), lineTo: lineToMock, stroke: vi.fn(),
     setTransform: vi.fn(), lineCap: '', lineJoin: '', strokeStyle: '', lineWidth: 0,
   } as unknown as CanvasRenderingContext2D);
-  vi.spyOn(HTMLCanvasElement.prototype, 'getBoundingClientRect').mockReturnValue({
+  boundingRectMock = vi.spyOn(HTMLCanvasElement.prototype, 'getBoundingClientRect').mockReturnValue({
     x: 0, y: 0, top: 0, left: 0, right: 400, bottom: 240, width: 400, height: 240,
     toJSON: () => ({}),
   });
@@ -60,4 +63,27 @@ test('palm touch cannot interrupt an active Pencil stroke', () => {
 
   expect(canvas).toHaveAttribute('data-stroke-count', '1');
   expect(lineToMock).toHaveBeenCalledWith(90, 70);
+});
+
+test('draws pointer moves incrementally without clearing the canvas', () => {
+  render(<DrawingCanvas />);
+  const canvas = screen.getByRole('img', { name: /Apple Pencil/ });
+
+  fireEvent.pointerDown(canvas, {
+    pointerId: 1, pointerType: 'pen', clientX: 10, clientY: 10, pressure: 0.5,
+  });
+  clearRectMock.mockClear();
+  lineToMock.mockClear();
+  boundingRectMock.mockClear();
+
+  fireEvent.pointerMove(canvas, {
+    pointerId: 1, pointerType: 'pen', clientX: 40, clientY: 35, pressure: 0.7,
+  });
+  fireEvent.pointerMove(canvas, {
+    pointerId: 1, pointerType: 'pen', clientX: 90, clientY: 70, pressure: 0.8,
+  });
+
+  expect(clearRectMock).not.toHaveBeenCalled();
+  expect(boundingRectMock).not.toHaveBeenCalled();
+  expect(lineToMock).toHaveBeenLastCalledWith(90, 70);
 });

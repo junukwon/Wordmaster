@@ -10,6 +10,7 @@ import {
 type Point = { x: number; y: number; pressure: number };
 type Stroke = Point[];
 type ActivePointer = { id: number; type: string };
+type CanvasMetrics = { left: number; top: number; scaleX: number; scaleY: number };
 
 export type DrawingCanvasHandle = {
   undo(): void;
@@ -25,30 +26,60 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const activeStroke = useRef<Stroke | null>(null);
     const activePointer = useRef<ActivePointer | null>(null);
+    const activeMetrics = useRef<CanvasMetrics | null>(null);
     const [strokes, setStrokes] = useState<Stroke[]>([]);
 
-    const pointFromEvent = (event: React.PointerEvent<HTMLCanvasElement>): Point => {
-      const rect = event.currentTarget.getBoundingClientRect();
-      const scaleX = rect.width > 0 ? event.currentTarget.width / (rect.width * (window.devicePixelRatio || 1)) : 1;
-      const scaleY = rect.height > 0 ? event.currentTarget.height / (rect.height * (window.devicePixelRatio || 1)) : 1;
+    const metricsForCanvas = (canvas: HTMLCanvasElement): CanvasMetrics => {
+      const rect = canvas.getBoundingClientRect();
       return {
-        x: (event.clientX - rect.left) * scaleX,
-        y: (event.clientY - rect.top) * scaleY,
-        pressure: event.pressure > 0 ? event.pressure : 0.5,
+        left: rect.left,
+        top: rect.top,
+        scaleX: rect.width > 0 ? canvas.width / (rect.width * (window.devicePixelRatio || 1)) : 1,
+        scaleY: rect.height > 0 ? canvas.height / (rect.height * (window.devicePixelRatio || 1)) : 1,
       };
+    };
+
+    const pointFromCoordinates = (
+      metrics: CanvasMetrics,
+      clientX: number,
+      clientY: number,
+      pressure: number,
+    ): Point => {
+      return {
+        x: (clientX - metrics.left) * metrics.scaleX,
+        y: (clientY - metrics.top) * metrics.scaleY,
+        pressure: pressure > 0 ? pressure : 0.5,
+      };
+    };
+
+    const prepareContext = (context: CanvasRenderingContext2D) => {
+      const ratio = window.devicePixelRatio || 1;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.lineCap = 'round';
+      context.lineJoin = 'round';
+      context.strokeStyle = '#17364c';
+    };
+
+    const drawIncrementally = (previous: Point, points: Point[]) => {
+      const context = canvasRef.current?.getContext('2d');
+      if (!context || points.length === 0) return;
+      prepareContext(context);
+      context.beginPath();
+      context.moveTo(previous.x, previous.y);
+      for (const point of points) {
+        context.lineWidth = 2 + point.pressure * 3;
+        context.lineTo(point.x, point.y);
+      }
+      context.stroke();
     };
 
     const redraw = useCallback((allStrokes: Stroke[]) => {
       const canvas = canvasRef.current;
       const context = canvas?.getContext('2d');
       if (!canvas || !context) return;
-      const ratio = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      prepareContext(context);
       context.clearRect(0, 0, rect.width, rect.height);
-      context.lineCap = 'round';
-      context.lineJoin = 'round';
-      context.strokeStyle = '#17364c';
       for (const stroke of allStrokes) {
         if (stroke.length === 0) continue;
         context.beginPath();
@@ -85,6 +116,7 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
       clear: () => {
         activeStroke.current = null;
         activePointer.current = null;
+        activeMetrics.current = null;
         setStrokes([]);
       },
     }), []);
@@ -97,18 +129,42 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
         if (!PencilTakesPriority) return;
         event.currentTarget.releasePointerCapture?.(currentPointer.id);
         activeStroke.current = null;
+        activeMetrics.current = null;
       }
       activePointer.current = { id: event.pointerId, type: event.pointerType };
       event.currentTarget.setPointerCapture?.(event.pointerId);
-      activeStroke.current = [pointFromEvent(event)];
-      redraw([...strokes, activeStroke.current]);
+      activeMetrics.current = metricsForCanvas(event.currentTarget);
+      const firstPoint = pointFromCoordinates(
+        activeMetrics.current, event.clientX, event.clientY, event.pressure,
+      );
+      activeStroke.current = [firstPoint];
+      drawIncrementally(firstPoint, [{ ...firstPoint, x: firstPoint.x + 0.1, y: firstPoint.y + 0.1 }]);
     };
 
     const handlePointerMove = (event: React.PointerEvent<HTMLCanvasElement>) => {
       if (!activeStroke.current || activePointer.current?.id !== event.pointerId) return;
       event.preventDefault();
-      activeStroke.current.push(pointFromEvent(event));
-      redraw([...strokes, activeStroke.current]);
+      const nativeEvent = event.nativeEvent as PointerEvent & {
+        getCoalescedEvents?: () => PointerEvent[];
+      };
+      const samples = nativeEvent.getCoalescedEvents?.();
+      const metrics = activeMetrics.current ?? metricsForCanvas(event.currentTarget);
+      const points = samples && samples.length > 0
+        ? samples.map((sample) => pointFromCoordinates(
+            metrics,
+            sample.clientX,
+            sample.clientY,
+            sample.pressure,
+          ))
+        : [pointFromCoordinates(
+            metrics,
+            event.clientX,
+            event.clientY,
+            event.pressure,
+          )];
+      const previous = activeStroke.current[activeStroke.current.length - 1];
+      drawIncrementally(previous, points);
+      activeStroke.current.push(...points);
     };
 
     const finishStroke = (event: React.PointerEvent<HTMLCanvasElement>) => {
@@ -117,6 +173,7 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
       const completed = [...activeStroke.current];
       activeStroke.current = null;
       activePointer.current = null;
+      activeMetrics.current = null;
       setStrokes((current) => [...current, completed]);
       event.currentTarget.releasePointerCapture?.(event.pointerId);
     };
