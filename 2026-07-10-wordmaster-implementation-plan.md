@@ -511,7 +511,7 @@ git commit -m "feat: add mastery and spaced review engine"
 - Produces: `createStudySession`, `getNextStudyItem`, `applySessionOutcome`, `getSessionSummary`.
 - Consumes: `VocabularyWord[]`, `WordProgress[]`, `LearningOutcome`.
 
-- [ ] **Step 1: Write failing session tests**
+- [x] **Step 1: Write failing session tests**
 
 Test these exact rules:
 
@@ -524,12 +524,12 @@ Test these exact rules:
 - progress counts satisfy `strong + uncertain + weak + remaining = 125`.
 - due reviews appear before new words but do not reduce the 125-new-word target.
 
-- [ ] **Step 2: Run and verify failure**
+- [x] **Step 2: Run and verify failure**
 
 Run: `npm test -- tests/domain/sessionEngine.test.ts`  
 Expected: FAIL because `sessionEngine` is missing.
 
-- [ ] **Step 3: Implement deterministic queue generation**
+- [x] **Step 3: Implement deterministic queue generation**
 
 Inject a shuffle function:
 
@@ -539,16 +539,16 @@ export type Shuffle = <T>(items: T[]) => T[];
 
 Production uses Fisher–Yates; tests use identity shuffle or a seeded shuffle. Never use `array.sort(() => Math.random() - 0.5)`.
 
-- [ ] **Step 4: Implement save-ready session transitions**
+- [x] **Step 4: Implement save-ready session transitions**
 
 Every `applySessionOutcome` call returns the entire updated `StudySession` so the caller can persist after each rated question.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run: `npm test -- tests/domain/sessionEngine.test.ts`  
 Expected: all session tests PASS.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add src/domain/sessionEngine.ts tests/domain/sessionEngine.test.ts
