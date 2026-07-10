@@ -359,7 +359,7 @@ git commit -m "feat: add validated vocabulary content pipeline"
 - Produces: `ProgressRepository`, `WordProgress`, `StudySession`, `TestAttempt`.
 - Storage key: `wordmaster:v1`.
 
-- [ ] **Step 1: Define records and repository interface**
+- [x] **Step 1: Define records and repository interface**
 
 ```ts
 export type Confidence = 'unknown' | 'weak' | 'uncertain' | 'strong';
@@ -388,16 +388,16 @@ export interface ProgressRepository {
 }
 ```
 
-- [ ] **Step 2: Write failing persistence tests**
+- [x] **Step 2: Write failing persistence tests**
 
 Test that a default unseen record is returned, saved progress survives a new repository instance, active session can be cleared, malformed JSON resets safely, and adding new vocabulary IDs does not delete existing records.
 
-- [ ] **Step 3: Run and verify failure**
+- [x] **Step 3: Run and verify failure**
 
 Run: `npm test -- tests/storage/localStorageRepository.test.ts`  
 Expected: FAIL because the repository implementation is missing.
 
-- [ ] **Step 4: Implement versioned storage**
+- [x] **Step 4: Implement versioned storage**
 
 Use this stored shape:
 
@@ -412,12 +412,12 @@ type StoredStateV1 = {
 
 Parse in `try/catch`; on invalid data, retain a backup in `wordmaster:v1:corrupt`, initialize clean state, and expose an error message for the UI without crashing.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run: `npm test -- tests/storage/localStorageRepository.test.ts`  
 Expected: all persistence tests PASS.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add src/storage src/domain/types.ts tests/storage
