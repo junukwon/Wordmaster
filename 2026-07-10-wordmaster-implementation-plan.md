@@ -196,11 +196,11 @@ git commit -m "chore: initialize WordMaster web app"
 - Produces: `VocabularyWord`, `VocabularyDay`, `loadVocabulary(): VocabularyWord[]`.
 - Validation: exactly 250 unique IDs from `0001` through `0250`, 25 entries per DAY.
 
-- [ ] **Step 1: Copy the approved source content**
+- [x] **Step 1: Copy the approved source content**
 
 Copy the supplied `영어_단어_DAY01-10.md` without changing its meanings into `content/source/영어_단어_DAY01-10.md`.
 
-- [ ] **Step 2: Define content types**
+- [x] **Step 2: Define content types**
 
 ```ts
 export type VocabularyWord = {
@@ -221,7 +221,7 @@ export type VocabularyDay = {
 };
 ```
 
-- [ ] **Step 3: Write failing content validation tests**
+- [x] **Step 3: Write failing content validation tests**
 
 ```ts
 import words from '../../src/content/vocabulary.json';
@@ -240,12 +240,12 @@ test('has unique ids and 25 words per day', () => {
 });
 ```
 
-- [ ] **Step 4: Run and verify failure**
+- [x] **Step 4: Run and verify failure**
 
 Run: `npm test -- tests/content/build-vocabulary.test.ts`  
 Expected: FAIL because `vocabulary.json` is missing.
 
-- [ ] **Step 5: Implement the Markdown converter**
+- [x] **Step 5: Implement the Markdown converter**
 
 The script must:
 
@@ -319,7 +319,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === scriptPath) {
 }
 ```
 
-- [ ] **Step 6: Build and verify content**
+- [x] **Step 6: Build and verify content**
 
 ```powershell
 npm run content:build
@@ -328,7 +328,7 @@ npm test -- tests/content/build-vocabulary.test.ts
 
 Expected: `250` records generated and both tests PASS.
 
-- [ ] **Step 7: Add typed loader**
+- [x] **Step 7: Add typed loader**
 
 ```ts
 import rawWords from './vocabulary.json';
@@ -339,7 +339,7 @@ export function loadVocabulary(): VocabularyWord[] {
 }
 ```
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```powershell
 git add content scripts src/content src/domain/types.ts tests/content
