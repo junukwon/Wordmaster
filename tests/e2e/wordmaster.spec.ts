@@ -80,11 +80,11 @@ test('keeps study actions inside the initial iPad Mini landscape viewport', asyn
   test.skip(testInfo.project.name !== 'iPad Mini landscape');
   await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
 
-  const geometry = await page.evaluate(() => {
-    const actions = document.querySelector('.study-actions');
-    if (!actions) throw new Error('study actions missing');
+  const actions = page.locator('.study-actions');
+  await expect(actions).toBeVisible();
+  const geometry = await actions.evaluate((element) => {
     return {
-      actionsBottom: actions.getBoundingClientRect().bottom,
+      actionsBottom: element.getBoundingClientRect().bottom,
       viewportHeight: window.innerHeight,
       scrollY: window.scrollY,
     };
