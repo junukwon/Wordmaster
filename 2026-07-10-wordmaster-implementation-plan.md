@@ -629,33 +629,33 @@ git commit -m "feat: add routine-centered responsive home"
 **Interfaces:**
 - Produces: `SpeechPlayer.isAvailable()`, `SpeechPlayer.speak(term)`, `DrawingCanvasHandle.undo()`, `DrawingCanvasHandle.clear()`.
 
-- [ ] **Step 1: Write failing speech tests**
+- [x] **Step 1: Write failing speech tests**
 
 Mock `window.speechSynthesis` and verify English voice selection, fixed beginner-friendly rate, cancel-before-speak behavior, and graceful unavailable state.
 
-- [ ] **Step 2: Write failing canvas tests**
+- [x] **Step 2: Write failing canvas tests**
 
 Verify pointer down/move/up creates strokes, `undo` removes only the last stroke, `clear` removes all strokes, and `touch-action: none` applies only to the canvas.
 
-- [ ] **Step 3: Run and verify failures**
+- [x] **Step 3: Run and verify failures**
 
 Run: `npm test -- src/speech/SpeechPlayer.test.ts src/drawing/DrawingCanvas.test.tsx`  
 Expected: FAIL because both adapters are missing.
 
-- [ ] **Step 4: Implement speech adapter**
+- [x] **Step 4: Implement speech adapter**
 
 Use `SpeechSynthesisUtterance`, choose a voice whose `lang` begins with `en`, set `lang = 'en-US'`, `rate = 0.8`, and call `speechSynthesis.cancel()` before `speak()`.
 
-- [ ] **Step 5: Implement drawing canvas**
+- [x] **Step 5: Implement drawing canvas**
 
 Store strokes as arrays of `{ x, y, pressure }`. Scale pointer coordinates by the canvas bounding rectangle and device pixel ratio. Redraw from stroke state after resize, undo, and clear. Do not save stroke images to storage.
 
-- [ ] **Step 6: Verify**
+- [x] **Step 6: Verify**
 
 Run: `npm test -- src/speech/SpeechPlayer.test.ts src/drawing/DrawingCanvas.test.tsx`  
 Expected: PASS.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```powershell
 git add src/speech src/drawing
