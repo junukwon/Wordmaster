@@ -1,0 +1,3069 @@
+[
+  {
+    "id": "0001",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "knee",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "무릎"
+    ]
+  },
+  {
+    "id": "0002",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "shoulder",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "어깨"
+    ]
+  },
+  {
+    "id": "0003",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "slim",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "날씬한"
+    ]
+  },
+  {
+    "id": "0004",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "brain",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 뇌 ② 지능"
+    ]
+  },
+  {
+    "id": "0005",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "weight",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "체중, 무게"
+    ]
+  },
+  {
+    "id": "0006",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "height",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "키, 높이"
+    ]
+  },
+  {
+    "id": "0007",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "teenage",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "십대의"
+    ]
+  },
+  {
+    "id": "0008",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "elderly",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "연세가 드신"
+    ]
+  },
+  {
+    "id": "0009",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "adult",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "성인, 어른 / 성인의, 다 자란"
+    ]
+  },
+  {
+    "id": "0010",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "curly",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "곱슬곱슬한"
+    ]
+  },
+  {
+    "id": "0011",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "female",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "여성의, 암컷의 / 여성, 암컷"
+    ]
+  },
+  {
+    "id": "0012",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "beauty",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 아름다움, 미 ② 미인"
+    ]
+  },
+  {
+    "id": "0013",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "lovely",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "사랑스러운, 아름다운"
+    ]
+  },
+  {
+    "id": "0014",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "gorgeous",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "아주 멋진, 화려한"
+    ]
+  },
+  {
+    "id": "0015",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "thumb",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "엄지손가락"
+    ]
+  },
+  {
+    "id": "0016",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "tongue",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "혀"
+    ]
+  },
+  {
+    "id": "0017",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "beard",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "(턱)수염"
+    ]
+  },
+  {
+    "id": "0018",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "blond/blonde",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "금발인, 금발 머리인"
+    ]
+  },
+  {
+    "id": "0019",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "jaw",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "턱"
+    ]
+  },
+  {
+    "id": "0020",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "cheek",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "볼, 뺨"
+    ]
+  },
+  {
+    "id": "0021",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "wrist",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "손목"
+    ]
+  },
+  {
+    "id": "0022",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "ankle",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "발목"
+    ]
+  },
+  {
+    "id": "0023",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "waist",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "허리"
+    ]
+  },
+  {
+    "id": "0024",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "heel",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① (발)뒤꿈치 ② (신발의) 굽"
+    ]
+  },
+  {
+    "id": "0025",
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "term": "grow up",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "자라다, 성장하다"
+    ],
+    "inflection": "grew–grown"
+  },
+  {
+    "id": "0026",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "mad",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "① 몹시 화가 난 ② 미친, 정신이 나간 (= crazy)"
+    ]
+  },
+  {
+    "id": "0027",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "weak",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "약한"
+    ]
+  },
+  {
+    "id": "0028",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "wise",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "현명한, 지혜로운"
+    ]
+  },
+  {
+    "id": "0029",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "clever",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "영리한, 똑똑한"
+    ]
+  },
+  {
+    "id": "0030",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "honest",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "정직한, 솔직한"
+    ]
+  },
+  {
+    "id": "0031",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "rude",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "버릇없는, 무례한"
+    ]
+  },
+  {
+    "id": "0032",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "polite",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "예의 바른"
+    ]
+  },
+  {
+    "id": "0033",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "asleep",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "잠이 든, 자고 있는"
+    ]
+  },
+  {
+    "id": "0034",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "awake",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "깨어 있는"
+    ]
+  },
+  {
+    "id": "0035",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "active",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "① (특히 신체적으로) 활동적인 ② 적극적인"
+    ]
+  },
+  {
+    "id": "0036",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "friendly",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "친절한, 다정한"
+    ]
+  },
+  {
+    "id": "0037",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "familiar",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "① 익숙한, 친숙한 ② 잘 알고 있는"
+    ]
+  },
+  {
+    "id": "0038",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "curious",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "궁금한, 호기심이 많은"
+    ]
+  },
+  {
+    "id": "0039",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "creative",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "창조적인, 창의적인"
+    ]
+  },
+  {
+    "id": "0040",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "caring",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "배려하는, 보살피는"
+    ]
+  },
+  {
+    "id": "0041",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "talent",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "(타고난) 재능"
+    ]
+  },
+  {
+    "id": "0042",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "gentle",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "상냥한, 부드러운"
+    ]
+  },
+  {
+    "id": "0043",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "silly",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "어리석은, 바보 같은"
+    ]
+  },
+  {
+    "id": "0044",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "silent",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "말을 안 하는, 조용한"
+    ]
+  },
+  {
+    "id": "0045",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "talkative",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "수다스러운, 말하기를 좋아하는"
+    ]
+  },
+  {
+    "id": "0046",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "outgoing",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "외향적인, 사교적인"
+    ]
+  },
+  {
+    "id": "0047",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "personality",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "성격"
+    ]
+  },
+  {
+    "id": "0048",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "be able to-v",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "~할 수 있다 (= can)"
+    ],
+    "inflection": "was/were–been"
+  },
+  {
+    "id": "0049",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "be busy v-ing",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "~하느라 바쁘다"
+    ],
+    "inflection": "was/were–been"
+  },
+  {
+    "id": "0050",
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "term": "have ~ in common",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "~을 공통으로 지니다"
+    ],
+    "inflection": "had–had"
+  },
+  {
+    "id": "0051",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "alone",
+    "partOfSpeech": [
+      "형",
+      "부"
+    ],
+    "meanings": [
+      "혼자인, 외로운 / 홀로, 혼자"
+    ]
+  },
+  {
+    "id": "0052",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "tear",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "눈물"
+    ]
+  },
+  {
+    "id": "0053",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "fear",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "두려움"
+    ]
+  },
+  {
+    "id": "0054",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "scared",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "겁을 먹은"
+    ]
+  },
+  {
+    "id": "0055",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "calm",
+    "partOfSpeech": [
+      "형",
+      "동"
+    ],
+    "meanings": [
+      "차분한, 침착한 / 진정시키다"
+    ]
+  },
+  {
+    "id": "0056",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "jealous",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "질투하는"
+    ]
+  },
+  {
+    "id": "0057",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "worried",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "걱정하는"
+    ]
+  },
+  {
+    "id": "0058",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "surprise",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "놀라게 하다 / 놀라운 일"
+    ]
+  },
+  {
+    "id": "0059",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "terrible",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "① 끔찍한, 무서운 ② 심한, 지독한"
+    ]
+  },
+  {
+    "id": "0060",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "awesome",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "굉장한, 아주 멋진"
+    ]
+  },
+  {
+    "id": "0061",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "emotion",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "감정"
+    ]
+  },
+  {
+    "id": "0062",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "shock",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "충격"
+    ]
+  },
+  {
+    "id": "0063",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "scream",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "비명을 지르다 / 비명"
+    ]
+  },
+  {
+    "id": "0064",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "horror",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "공포"
+    ]
+  },
+  {
+    "id": "0065",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "serious",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "① 진지한 ② 심각한, 나쁜"
+    ]
+  },
+  {
+    "id": "0066",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "pity",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 동정, 연민 ② 유감"
+    ]
+  },
+  {
+    "id": "0067",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "anger",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "화, 분노"
+    ]
+  },
+  {
+    "id": "0068",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "anxious",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "불안한"
+    ]
+  },
+  {
+    "id": "0069",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "pleased",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "기쁜, 만족스러운"
+    ]
+  },
+  {
+    "id": "0070",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "comfortable",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "편안한, 편한"
+    ]
+  },
+  {
+    "id": "0071",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "touching",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "감동적인"
+    ]
+  },
+  {
+    "id": "0072",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "amusing",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "재미있는"
+    ]
+  },
+  {
+    "id": "0073",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "be sorry to-v",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "~해서 유감이다"
+    ],
+    "inflection": "was/were–been"
+  },
+  {
+    "id": "0074",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "be tired of",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "~에 싫증이 나다, 질리다"
+    ],
+    "inflection": "was/were–been"
+  },
+  {
+    "id": "0075",
+    "day": 3,
+    "topic": "기분, 감정",
+    "term": "cheer up",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "기운을 내다, 격려하다"
+    ]
+  },
+  {
+    "id": "0076",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "health",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "건강"
+    ]
+  },
+  {
+    "id": "0077",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "pain",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "아픔, 통증"
+    ]
+  },
+  {
+    "id": "0078",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "blood",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "피, 혈액"
+    ]
+  },
+  {
+    "id": "0079",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "stress",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "스트레스"
+    ]
+  },
+  {
+    "id": "0080",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "sense",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 감각 ② 느낌, 감"
+    ]
+  },
+  {
+    "id": "0081",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "stomach",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "위, 복부, 배"
+    ]
+  },
+  {
+    "id": "0082",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "throat",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "목구멍"
+    ]
+  },
+  {
+    "id": "0083",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "diet",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① (일상적인) 식사 ② 식이요법, 다이어트"
+    ]
+  },
+  {
+    "id": "0084",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "breath",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "숨, 호흡"
+    ]
+  },
+  {
+    "id": "0085",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "condition",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 상태, 건강 상태 ② 상황, 형편 ③ 조건"
+    ]
+  },
+  {
+    "id": "0086",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "blind",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "눈이 먼, 앞을 못 보는"
+    ]
+  },
+  {
+    "id": "0087",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "deaf",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "청각 장애가 있는, 귀가 먹은"
+    ]
+  },
+  {
+    "id": "0088",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "disease",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "병, 질병"
+    ]
+  },
+  {
+    "id": "0089",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "ache",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "아프다 / 아픔, 통증"
+    ]
+  },
+  {
+    "id": "0090",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "bump",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "부딪치다 / 혹, 타박상"
+    ]
+  },
+  {
+    "id": "0091",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "itchy",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "가려운"
+    ]
+  },
+  {
+    "id": "0092",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "sore",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "아픈, 따가운"
+    ]
+  },
+  {
+    "id": "0093",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "suffer",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① (병을) 앓다, 고통받다 ② (안 좋은 일을) 겪다, 당하다"
+    ]
+  },
+  {
+    "id": "0094",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "cure",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "치료법 / 치료하다"
+    ]
+  },
+  {
+    "id": "0095",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "pill",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "알약"
+    ]
+  },
+  {
+    "id": "0096",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "patient",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "환자 / 참을성 있는, 인내심 있는"
+    ]
+  },
+  {
+    "id": "0097",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "appointment",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "약속, 예약"
+    ]
+  },
+  {
+    "id": "0098",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "be in the hospital",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "입원하다"
+    ],
+    "inflection": "was/were–been"
+  },
+  {
+    "id": "0099",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "care for",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "~을 돌보다 (= take care of)"
+    ]
+  },
+  {
+    "id": "0100",
+    "day": 4,
+    "topic": "건강, 질병",
+    "term": "blow one's nose",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "코를 풀다"
+    ],
+    "inflection": "blew–blown"
+  },
+  {
+    "id": "0101",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "twin",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "쌍둥이 (중의 한 명)"
+    ]
+  },
+  {
+    "id": "0102",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "grandparent",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "조부모"
+    ]
+  },
+  {
+    "id": "0103",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "enemy",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "적"
+    ]
+  },
+  {
+    "id": "0104",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "boss",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 상사 ② 사장, 우두머리"
+    ]
+  },
+  {
+    "id": "0105",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "chef",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "요리사, 주방장"
+    ]
+  },
+  {
+    "id": "0106",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "master",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "① 주인 ② 달인, 사범 / ~을 통달하다, 완전히 익히다"
+    ]
+  },
+  {
+    "id": "0107",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "idol",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "우상"
+    ]
+  },
+  {
+    "id": "0108",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "captain",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 선장, 기장 ② (팀의) 주장"
+    ]
+  },
+  {
+    "id": "0109",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "officer",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "관리, 공무원"
+    ]
+  },
+  {
+    "id": "0110",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "director",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "책임자, 관리자, 감독"
+    ]
+  },
+  {
+    "id": "0111",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "designer",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "디자이너"
+    ]
+  },
+  {
+    "id": "0112",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "staff",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "직원, 스태프"
+    ]
+  },
+  {
+    "id": "0113",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "senior",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "(나이나 계급이) 높은, 상급의 / 연장자"
+    ]
+  },
+  {
+    "id": "0114",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "nephew",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "(남자) 조카"
+    ]
+  },
+  {
+    "id": "0115",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "partner",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 배우자 ② 짝, 동료"
+    ]
+  },
+  {
+    "id": "0116",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "neighbor",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "이웃"
+    ]
+  },
+  {
+    "id": "0117",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "coworker",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "동료, 함께 일하는 사람"
+    ]
+  },
+  {
+    "id": "0118",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "author",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "작가"
+    ]
+  },
+  {
+    "id": "0119",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "guard",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "감시인, 경비원 / 지키다, 보호하다"
+    ]
+  },
+  {
+    "id": "0120",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "engineer",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "기술자, 엔지니어"
+    ]
+  },
+  {
+    "id": "0121",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "photographer",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "사진사"
+    ]
+  },
+  {
+    "id": "0122",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "musician",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "음악가"
+    ]
+  },
+  {
+    "id": "0123",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "composer",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "작곡가 (= songwriter)"
+    ]
+  },
+  {
+    "id": "0124",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "dream of",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "~을 꿈꾸다"
+    ]
+  },
+  {
+    "id": "0125",
+    "day": 5,
+    "topic": "관계, 직업",
+    "term": "make a living",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "생계를 유지하다"
+    ],
+    "inflection": "made–made"
+  },
+  {
+    "id": "0126",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "fall",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "① 떨어지다 ② 넘어지다, 쓰러지다 / 가을 (= autumn)"
+    ],
+    "inflection": "fell–fallen"
+  },
+  {
+    "id": "0127",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "hide",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "숨다, 감추다"
+    ],
+    "inflection": "hid–hidden"
+  },
+  {
+    "id": "0128",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "push",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 밀다 ② 누르다"
+    ]
+  },
+  {
+    "id": "0129",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "pull",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "끌다, 당기다"
+    ]
+  },
+  {
+    "id": "0130",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "quickly",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "빨리, 빠르게"
+    ]
+  },
+  {
+    "id": "0131",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "break",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "① 깨다, 부수다 ② 고장 내다 / (짧은) 휴식"
+    ],
+    "inflection": "broke–broken"
+  },
+  {
+    "id": "0132",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "blow",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① (바람이) 불다 ② (입으로) 불다"
+    ],
+    "inflection": "blew–blown"
+  },
+  {
+    "id": "0133",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "lift",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "들어 올리다"
+    ]
+  },
+  {
+    "id": "0134",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "shake",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "흔들다, 흔들리다"
+    ],
+    "inflection": "shook–shaken"
+  },
+  {
+    "id": "0135",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "lie",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "① 거짓말하다 ② 눕다, 누워 있다 / 거짓말"
+    ],
+    "inflection": "거짓말: lied–lied; 눕다: lay–lain"
+  },
+  {
+    "id": "0136",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "action",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "행동, 동작"
+    ]
+  },
+  {
+    "id": "0137",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "appear",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 나타나다, 출현하다 ② ~인 것 같다 (= seem)"
+    ]
+  },
+  {
+    "id": "0138",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "bend",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① (몸을) 굽히다, 숙이다 ② (방향을) 틀다, 휘다"
+    ],
+    "inflection": "bent–bent"
+  },
+  {
+    "id": "0139",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "bite",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "물다, 깨물다 / ① 한 입 ② 물린 상처"
+    ],
+    "inflection": "bit–bitten"
+  },
+  {
+    "id": "0140",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "chew",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "씹다, 깨물다"
+    ]
+  },
+  {
+    "id": "0141",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "grab",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "붙잡다, 잡다"
+    ]
+  },
+  {
+    "id": "0142",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "bother",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "괴롭히다, 귀찮게 하다"
+    ]
+  },
+  {
+    "id": "0143",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "blink",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "눈을 깜빡이다 / 깜빡임"
+    ]
+  },
+  {
+    "id": "0144",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "tap",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "톡톡 두드리다 / 두드리기"
+    ]
+  },
+  {
+    "id": "0145",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "treat",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 대하다, 다루다 ② 치료하다"
+    ]
+  },
+  {
+    "id": "0146",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "pause",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "잠시 멈추다 / 잠깐 멈춤, 중지"
+    ]
+  },
+  {
+    "id": "0147",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "pretend",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~인 척하다"
+    ]
+  },
+  {
+    "id": "0148",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "watch out (for)",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "(~을) 조심하다, 경계하다"
+    ]
+  },
+  {
+    "id": "0149",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "be about to-v",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "막 ~하려고 하다"
+    ],
+    "inflection": "was/were–been"
+  },
+  {
+    "id": "0150",
+    "day": 6,
+    "topic": "행동, 동작",
+    "term": "in a hurry",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "서둘러, 급히"
+    ]
+  },
+  {
+    "id": "0151",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "agree",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "동의하다"
+    ]
+  },
+  {
+    "id": "0152",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "decide",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "결정하다, 결심하다"
+    ]
+  },
+  {
+    "id": "0153",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "seem",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~인 것 같다, ~처럼 보이다 (= appear)"
+    ]
+  },
+  {
+    "id": "0154",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "mind",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "마음, 정신 / 신경 쓰다, 꺼리다"
+    ]
+  },
+  {
+    "id": "0155",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "allow",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "허락하다, 허용하다"
+    ]
+  },
+  {
+    "id": "0156",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "image",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 이미지, 인상 ② 그림"
+    ]
+  },
+  {
+    "id": "0157",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "imagine",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "상상하다"
+    ]
+  },
+  {
+    "id": "0158",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "wonder",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "궁금하다 / 경이, 놀라움"
+    ]
+  },
+  {
+    "id": "0159",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "clue",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "단서, 실마리"
+    ]
+  },
+  {
+    "id": "0160",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "point",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "① 의견, 주장 ② 요점 / 가리키다"
+    ]
+  },
+  {
+    "id": "0161",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "expect",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "기대하다, 예상하다"
+    ]
+  },
+  {
+    "id": "0162",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "prefer",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "선호하다"
+    ]
+  },
+  {
+    "id": "0163",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "certain",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "확신하는, 확실한"
+    ]
+  },
+  {
+    "id": "0164",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "personal",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "개인의, 개인적인"
+    ]
+  },
+  {
+    "id": "0165",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "blame",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "비난하다, ~의 탓으로 돌리다"
+    ]
+  },
+  {
+    "id": "0166",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "confuse",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 혼란시키다 ② 혼동하다"
+    ]
+  },
+  {
+    "id": "0167",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "attention",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 주의, 주목 ② 관심"
+    ]
+  },
+  {
+    "id": "0168",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "positive",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "긍정적인"
+    ]
+  },
+  {
+    "id": "0169",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "belief",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "믿음, 확신, 신념"
+    ]
+  },
+  {
+    "id": "0170",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "admire",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 존경하다 ② 감탄하다"
+    ]
+  },
+  {
+    "id": "0171",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "hopefully",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "바라건대"
+    ]
+  },
+  {
+    "id": "0172",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "realize",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "깨닫다, 알아차리다"
+    ]
+  },
+  {
+    "id": "0173",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "find out",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "알아내다, 알게 되다"
+    ],
+    "inflection": "found–found"
+  },
+  {
+    "id": "0174",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "look forward to (v-ing)",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "~을 기대하다, ~을 고대하다"
+    ],
+    "inflection": "to 뒤 명사/동명사"
+  },
+  {
+    "id": "0175",
+    "day": 7,
+    "topic": "사고, 생각",
+    "term": "think of",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "① ~을 생각하다 ② ~을 생각해 내다"
+    ],
+    "inflection": "thought–thought"
+  },
+  {
+    "id": "0176",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "tip",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① (뾰족한) 끝부분 ② 조언 ③ 팁, 봉사료"
+    ]
+  },
+  {
+    "id": "0177",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "reason",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "① 이유, 원인 ② 근거 ③ 이성"
+    ]
+  },
+  {
+    "id": "0178",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "fact",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "사실"
+    ]
+  },
+  {
+    "id": "0179",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "truth",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "진실, 사실"
+    ]
+  },
+  {
+    "id": "0180",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "advise",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "조언하다, 충고하다"
+    ]
+  },
+  {
+    "id": "0181",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "explain",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "설명하다"
+    ]
+  },
+  {
+    "id": "0182",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "promise",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "약속하다 / 약속"
+    ]
+  },
+  {
+    "id": "0183",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "dialogue",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "대화"
+    ]
+  },
+  {
+    "id": "0184",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "excuse",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "변명 / 용서하다, 참아주다"
+    ]
+  },
+  {
+    "id": "0185",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "text",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "① 본문 ② 글, 문자 / 문자를 보내다"
+    ]
+  },
+  {
+    "id": "0186",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "message",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "메시지, 문자"
+    ]
+  },
+  {
+    "id": "0187",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "repeat",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "반복하다, 되풀이하다"
+    ]
+  },
+  {
+    "id": "0188",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "express",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "표현하다"
+    ]
+  },
+  {
+    "id": "0189",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "yell",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "소리치다, 고함치다"
+    ]
+  },
+  {
+    "id": "0190",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "complain",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "불평하다"
+    ]
+  },
+  {
+    "id": "0191",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "recommend",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "추천하다, 권하다"
+    ]
+  },
+  {
+    "id": "0192",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "communicate",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "의사소통하다"
+    ]
+  },
+  {
+    "id": "0193",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "favor",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "호의, 친절, 부탁"
+    ]
+  },
+  {
+    "id": "0194",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "spread",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "① 펴다, 펼치다 ② 퍼지다, 퍼뜨리다 / 확산, 전파"
+    ],
+    "inflection": "spread–spread"
+  },
+  {
+    "id": "0195",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "detail",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "세부 사항"
+    ]
+  },
+  {
+    "id": "0196",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "comment",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "언급, 논평 / 논평하다"
+    ]
+  },
+  {
+    "id": "0197",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "respond",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 대답하다 ② 반응하다"
+    ]
+  },
+  {
+    "id": "0198",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "go on",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "(어떤 일이) 계속되다, 계속하다"
+    ],
+    "inflection": "went–gone"
+  },
+  {
+    "id": "0199",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "ask for",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "~을 요청하다"
+    ]
+  },
+  {
+    "id": "0200",
+    "day": 8,
+    "topic": "의사소통",
+    "term": "in person",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "직접"
+    ]
+  },
+  {
+    "id": "0201",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "like",
+    "partOfSpeech": [
+      "동",
+      "전"
+    ],
+    "meanings": [
+      "좋아하다 / ~처럼, ~와 같이"
+    ]
+  },
+  {
+    "id": "0202",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "please",
+    "partOfSpeech": [
+      "감",
+      "동"
+    ],
+    "meanings": [
+      "부디, 제발 / (남을) 기쁘게 하다"
+    ]
+  },
+  {
+    "id": "0203",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "actually",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "① 실제로 ② 실은, 사실은"
+    ]
+  },
+  {
+    "id": "0204",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "even",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "① 심지어, ~조차도 ② 훨씬, 더욱"
+    ]
+  },
+  {
+    "id": "0205",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "anyway",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "① 어쨌든 ② 그건 그렇고, 그런데"
+    ]
+  },
+  {
+    "id": "0206",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "instead",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "대신(에)"
+    ]
+  },
+  {
+    "id": "0207",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "else",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "그 밖의 다른, 또 다른"
+    ]
+  },
+  {
+    "id": "0208",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "result",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "결과, 결말"
+    ]
+  },
+  {
+    "id": "0209",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "such",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "① 그런, 그러한 ② 너무나 ~한"
+    ]
+  },
+  {
+    "id": "0210",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "surprisingly",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "놀랍게도"
+    ]
+  },
+  {
+    "id": "0211",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "loudly",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "큰 소리로"
+    ]
+  },
+  {
+    "id": "0212",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "luckily",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "운 좋게도, 다행히"
+    ]
+  },
+  {
+    "id": "0213",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "easily",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "쉽게, 수월하게"
+    ]
+  },
+  {
+    "id": "0214",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "clearly",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "① 또렷하게 ② 분명하게"
+    ]
+  },
+  {
+    "id": "0215",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "especially",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "① 특히 ② 특별히"
+    ]
+  },
+  {
+    "id": "0216",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "completely",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "완전히"
+    ]
+  },
+  {
+    "id": "0217",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "recently",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "최근에"
+    ]
+  },
+  {
+    "id": "0218",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "probably",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "아마도"
+    ]
+  },
+  {
+    "id": "0219",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "truly",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "정말로, 진심으로"
+    ]
+  },
+  {
+    "id": "0220",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "yet",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "(부정문에서) 아직"
+    ]
+  },
+  {
+    "id": "0221",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "throughout",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "① 도처에 ② ~동안, 내내"
+    ]
+  },
+  {
+    "id": "0222",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "altogether",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "① 완전히 ② 총, 모두 합쳐"
+    ]
+  },
+  {
+    "id": "0223",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "for example",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "예를 들어"
+    ]
+  },
+  {
+    "id": "0224",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "by the way",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "그런데, 그건 그렇고"
+    ]
+  },
+  {
+    "id": "0225",
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "term": "and so on",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "기타 등등"
+    ]
+  },
+  {
+    "id": "0226",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "fix",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① ~을 수리하다, 고치다 ② 고정시키다"
+    ]
+  },
+  {
+    "id": "0227",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "leave",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 떠나다 ② ~을 두고 오다, 남기다"
+    ],
+    "inflection": "left–left"
+  },
+  {
+    "id": "0228",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "spend",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① (돈을) 쓰다 ② (시간을) 보내다"
+    ],
+    "inflection": "spent–spent"
+  },
+  {
+    "id": "0229",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "cover",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "덮다, 씌우다, 가리다 / 덮개"
+    ]
+  },
+  {
+    "id": "0230",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "rest",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "쉬다 / ① 휴식, 안정 ② 나머지"
+    ]
+  },
+  {
+    "id": "0231",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "relax",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 휴식을 취하다 ② 긴장을 풀다"
+    ]
+  },
+  {
+    "id": "0232",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "own",
+    "partOfSpeech": [
+      "형",
+      "동"
+    ],
+    "meanings": [
+      "자기 자신의 / 소유하다"
+    ]
+  },
+  {
+    "id": "0233",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "feed",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 먹이다 ② 먹이를 주다"
+    ],
+    "inflection": "fed–fed"
+  },
+  {
+    "id": "0234",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "share",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "함께 쓰다, 공유하다 / 몫"
+    ]
+  },
+  {
+    "id": "0235",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "place",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "장소, 곳 / 놓다, 두다"
+    ]
+  },
+  {
+    "id": "0236",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "set",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "① ~을 두다, 놓다 ② (기계 등을) 맞추다 / 한 벌, 세트"
+    ],
+    "inflection": "set–set"
+  },
+  {
+    "id": "0237",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "clear",
+    "partOfSpeech": [
+      "형",
+      "동"
+    ],
+    "meanings": [
+      "① 투명한, 맑은 ② 분명한, 확실한 / 치우다, 깨끗하게 하다"
+    ]
+  },
+  {
+    "id": "0238",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "usually",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "보통, 대개"
+    ]
+  },
+  {
+    "id": "0239",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "nap",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "낮잠"
+    ]
+  },
+  {
+    "id": "0240",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "press",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "누르다"
+    ]
+  },
+  {
+    "id": "0241",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "remove",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "제거하다, 없애다"
+    ]
+  },
+  {
+    "id": "0242",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "contact",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "연락하다 / ① 연락 ② 접촉"
+    ]
+  },
+  {
+    "id": "0243",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "wipe",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "닦다"
+    ]
+  },
+  {
+    "id": "0244",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "daily",
+    "partOfSpeech": [
+      "형",
+      "부"
+    ],
+    "meanings": [
+      "매일의 / 매일"
+    ]
+  },
+  {
+    "id": "0245",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "regularly",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "규칙적으로, 정기적으로"
+    ]
+  },
+  {
+    "id": "0246",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "ordinary",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "평범한, 보통의"
+    ]
+  },
+  {
+    "id": "0247",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "arrange",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "① 마련하다, 준비하다 ② 정리하다, 배열하다"
+    ]
+  },
+  {
+    "id": "0248",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "wake up",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "깨다, 일어나다"
+    ],
+    "inflection": "woke–woken"
+  },
+  {
+    "id": "0249",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "clean up",
+    "partOfSpeech": [
+      "구동사"
+    ],
+    "meanings": [
+      "~을 치우다, 청소하다"
+    ]
+  },
+  {
+    "id": "0250",
+    "day": 10,
+    "topic": "일상, 집안일",
+    "term": "stay up (late)",
+    "partOfSpeech": [
+      "표현"
+    ],
+    "meanings": [
+      "(늦게까지) 안 자고 있다, 깨어 있다"
+    ]
+  }
+]
