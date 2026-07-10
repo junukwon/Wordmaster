@@ -572,16 +572,16 @@ git commit -m "feat: orchestrate intensive 125-word sessions"
 - Home receives `HomeViewModel` with target, counts, due reviews, and active session.
 - Navigation paths: `/`, `/study`, `/test/setup`, `/test/run`, `/test/result`.
 
-- [ ] **Step 1: Write failing home tests**
+- [x] **Step 1: Write failing home tests**
 
 Verify the home renders `125개 단어 도전`, shows strong/uncertain/weak/remaining counts, shows due review count, displays `이어서 학습하기` when an active session exists, and navigates to test setup from `수시 단어 테스트`.
 
-- [ ] **Step 2: Run and verify failure**
+- [x] **Step 2: Run and verify failure**
 
 Run: `npm test -- tests/pages/home.test.tsx`  
 Expected: FAIL because home components are missing.
 
-- [ ] **Step 3: Implement the A-layout home screen**
+- [x] **Step 3: Implement the A-layout home screen**
 
 Match the approved `홈화면_구성안.html` hierarchy:
 
@@ -594,11 +594,11 @@ Match the approved `홈화면_구성안.html` hierarchy:
 
 Use CSS custom properties in `tokens.css` and keep every tap target at least 44×44px.
 
-- [ ] **Step 4: Add responsive behavior**
+- [x] **Step 4: Add responsive behavior**
 
 At widths under 760px, stack summary cards without horizontal overflow. At iPad landscape widths, center the content with a readable maximum width.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
@@ -609,7 +609,7 @@ npm run build
 
 Expected: PASS and no TypeScript errors.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add src/app src/pages/HomePage.tsx src/components src/styles tests/pages/home.test.tsx
