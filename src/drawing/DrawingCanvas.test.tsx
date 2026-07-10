@@ -2,9 +2,12 @@ import { createRef } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { DrawingCanvas, type DrawingCanvasHandle } from './DrawingCanvas';
 
+let lineToMock: ReturnType<typeof vi.fn>;
+
 beforeEach(() => {
+  lineToMock = vi.fn();
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue({
-    clearRect: vi.fn(), beginPath: vi.fn(), moveTo: vi.fn(), lineTo: vi.fn(), stroke: vi.fn(),
+    clearRect: vi.fn(), beginPath: vi.fn(), moveTo: vi.fn(), lineTo: lineToMock, stroke: vi.fn(),
     setTransform: vi.fn(), lineCap: '', lineJoin: '', strokeStyle: '', lineWidth: 0,
   } as unknown as CanvasRenderingContext2D);
   vi.spyOn(HTMLCanvasElement.prototype, 'getBoundingClientRect').mockReturnValue({
@@ -41,4 +44,20 @@ test('undo removes only the last stroke and clear removes all', () => {
   expect(canvas).toHaveAttribute('data-stroke-count', '1');
   act(() => ref.current?.clear());
   expect(canvas).toHaveAttribute('data-stroke-count', '0');
+});
+
+test('palm touch cannot interrupt an active Pencil stroke', () => {
+  render(<DrawingCanvas />);
+  const canvas = screen.getByRole('img', { name: /Apple Pencil/ });
+
+  fireEvent.pointerDown(canvas, { pointerId: 1, pointerType: 'pen', clientX: 10, clientY: 10, pressure: 0.5 });
+  fireEvent.pointerMove(canvas, { pointerId: 1, pointerType: 'pen', clientX: 40, clientY: 35, pressure: 0.7 });
+  fireEvent.pointerDown(canvas, { pointerId: 2, pointerType: 'touch', clientX: 110, clientY: 100, pressure: 0.5 });
+  fireEvent.pointerMove(canvas, { pointerId: 2, pointerType: 'touch', clientX: 130, clientY: 120, pressure: 0.5 });
+  fireEvent.pointerUp(canvas, { pointerId: 2, pointerType: 'touch', clientX: 130, clientY: 120, pressure: 0.5 });
+  fireEvent.pointerMove(canvas, { pointerId: 1, pointerType: 'pen', clientX: 90, clientY: 70, pressure: 0.8 });
+  fireEvent.pointerUp(canvas, { pointerId: 1, pointerType: 'pen', clientX: 90, clientY: 70, pressure: 0.8 });
+
+  expect(canvas).toHaveAttribute('data-stroke-count', '1');
+  expect(lineToMock).toHaveBeenCalledWith(90, 70);
 });

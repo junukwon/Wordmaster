@@ -9,6 +9,7 @@ import {
 
 type Point = { x: number; y: number; pressure: number };
 type Stroke = Point[];
+type ActivePointer = { id: number; type: string };
 
 export type DrawingCanvasHandle = {
   undo(): void;
@@ -23,6 +24,7 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
   function DrawingCanvas({ className = '' }, ref) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const activeStroke = useRef<Stroke | null>(null);
+    const activePointer = useRef<ActivePointer | null>(null);
     const [strokes, setStrokes] = useState<Stroke[]>([]);
 
     const pointFromEvent = (event: React.PointerEvent<HTMLCanvasElement>): Point => {
@@ -80,28 +82,41 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
 
     useImperativeHandle(ref, () => ({
       undo: () => setStrokes((current) => current.slice(0, -1)),
-      clear: () => setStrokes([]),
+      clear: () => {
+        activeStroke.current = null;
+        activePointer.current = null;
+        setStrokes([]);
+      },
     }), []);
 
     const handlePointerDown = (event: React.PointerEvent<HTMLCanvasElement>) => {
       event.preventDefault();
+      const currentPointer = activePointer.current;
+      if (currentPointer) {
+        const PencilTakesPriority = event.pointerType === 'pen' && currentPointer.type !== 'pen';
+        if (!PencilTakesPriority) return;
+        event.currentTarget.releasePointerCapture?.(currentPointer.id);
+        activeStroke.current = null;
+      }
+      activePointer.current = { id: event.pointerId, type: event.pointerType };
       event.currentTarget.setPointerCapture?.(event.pointerId);
       activeStroke.current = [pointFromEvent(event)];
       redraw([...strokes, activeStroke.current]);
     };
 
     const handlePointerMove = (event: React.PointerEvent<HTMLCanvasElement>) => {
-      if (!activeStroke.current) return;
+      if (!activeStroke.current || activePointer.current?.id !== event.pointerId) return;
       event.preventDefault();
       activeStroke.current.push(pointFromEvent(event));
       redraw([...strokes, activeStroke.current]);
     };
 
     const finishStroke = (event: React.PointerEvent<HTMLCanvasElement>) => {
-      if (!activeStroke.current) return;
+      if (!activeStroke.current || activePointer.current?.id !== event.pointerId) return;
       event.preventDefault();
       const completed = [...activeStroke.current];
       activeStroke.current = null;
+      activePointer.current = null;
       setStrokes((current) => [...current, completed]);
       event.currentTarget.releasePointerCapture?.(event.pointerId);
     };
@@ -114,6 +129,7 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
         aria-label={`Apple Pencil 필기장, ${strokes.length}개 획`}
         data-stroke-count={strokes.length}
         style={{ touchAction: 'none' }}
+        onContextMenu={(event) => event.preventDefault()}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={finishStroke}
