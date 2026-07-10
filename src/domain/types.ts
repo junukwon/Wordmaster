@@ -37,6 +37,7 @@ export type WordProgress = {
   nextReviewAt: string | null;
   lastReviewedAt: string | null;
   updatedAt: string;
+  successfulQuestionTypes?: QuestionType[];
 };
 
 export type StudyPhase =

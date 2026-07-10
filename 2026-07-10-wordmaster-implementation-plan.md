@@ -437,7 +437,7 @@ git commit -m "feat: persist versioned local learning progress"
 **Interfaces:**
 - Produces: `scheduleNextReview(progress, rating, now)`, `applyLearningResult(progress, questionType, rating, now)`.
 
-- [ ] **Step 1: Write failing review date tests**
+- [x] **Step 1: Write failing review date tests**
 
 ```ts
 test.each([
@@ -455,7 +455,7 @@ test.each([
 
 Also test date arithmetic from a fixed local date and overdue review detection.
 
-- [ ] **Step 2: Write failing mastery transition tests**
+- [x] **Step 2: Write failing mastery transition tests**
 
 Verify:
 
@@ -467,16 +467,16 @@ Verify:
 - `weak` increments incorrect count, sets confidence weak, and schedules D+1.
 - One correct answer never produces `long_term`.
 
-- [ ] **Step 3: Run and verify failures**
+- [x] **Step 3: Run and verify failures**
 
 Run: `npm test -- tests/domain/reviewScheduler.test.ts tests/domain/masteryEngine.test.ts`  
 Expected: FAIL because both engines are missing.
 
-- [ ] **Step 4: Implement pure scheduling functions**
+- [x] **Step 4: Implement pure scheduling functions**
 
 Use `const REVIEW_STEPS = [0, 1, 3, 7, 14] as const`. Avoid reading system time inside the engine; accept `now: Date` so tests remain deterministic.
 
-- [ ] **Step 5: Implement pure mastery transitions**
+- [x] **Step 5: Implement pure mastery transitions**
 
 Do not mutate the input object. Return a new `WordProgress` and a queue hint:
 
@@ -487,12 +487,12 @@ type LearningOutcome = {
 };
 ```
 
-- [ ] **Step 6: Verify**
+- [x] **Step 6: Verify**
 
 Run: `npm test -- tests/domain/reviewScheduler.test.ts tests/domain/masteryEngine.test.ts`  
 Expected: all scheduling and transition tests PASS.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```powershell
 git add src/domain tests/domain
