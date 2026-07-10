@@ -675,7 +675,7 @@ git commit -m "feat: add pronunciation and Pencil drawing support"
 - Consumes: session engine, progress repository, speech player, drawing canvas.
 - Produces: persisted outcome after every `모름`, `헷갈림`, or `기억남` response.
 
-- [ ] **Step 1: Write failing study flow tests**
+- [x] **Step 1: Write failing study flow tests**
 
 Verify:
 
@@ -687,16 +687,16 @@ Verify:
 - `모르겠어요` records weak without exposing an accidental strong rating;
 - refresh resumes the same session position.
 
-- [ ] **Step 2: Run and verify failure**
+- [x] **Step 2: Run and verify failure**
 
 Run: `npm test -- tests/pages/study.test.tsx`  
 Expected: FAIL because the study page is missing.
 
-- [ ] **Step 3: Implement approved study layout**
+- [x] **Step 3: Implement approved study layout**
 
 Match `학습화면_구성안.html`. In landscape use a two-column grid; below 760px use a single column. Keep progress and DAY range visible above the question.
 
-- [ ] **Step 4: Implement the reveal state machine**
+- [x] **Step 4: Implement the reveal state machine**
 
 Use explicit states:
 
@@ -706,7 +706,7 @@ type StudyScreenState = 'prompting' | 'revealed' | 'saving' | 'complete';
 
 Disable duplicate taps while saving. Persist outcome and session before moving to the next word.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
@@ -717,7 +717,7 @@ npm run build
 
 Expected: PASS and no hidden spelling appears in the prompting DOM.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add src/pages/StudyPage.tsx src/components/RatingButtons.tsx tests/pages/study.test.tsx
