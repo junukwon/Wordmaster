@@ -89,3 +89,24 @@ test('repairs only a malformed session while preserving valid word progress', ()
   expect(repository.getLastError()).toMatch(/일부/);
   expect(localStorage.getItem('wordmaster:v1:corrupt')).not.toBeNull();
 });
+
+test('keeps sanitized progress in memory when repaired storage cannot be written', () => {
+  const raw = JSON.stringify({
+    version: 1,
+    progress: { '0001': progress('0001') },
+    activeSession: {},
+    testAttempts: [],
+  });
+  const readOnlyStorage: Storage = {
+    length: 1,
+    clear: () => { throw new Error('read only'); },
+    getItem: (key) => key === 'wordmaster:v1' ? raw : null,
+    key: () => 'wordmaster:v1',
+    removeItem: () => { throw new Error('read only'); },
+    setItem: () => { throw new Error('read only'); },
+  };
+  const repository = new LocalStorageProgressRepository(readOnlyStorage);
+  expect(repository.getWordProgress('0001')).toEqual(progress('0001'));
+  expect(repository.loadActiveSession()).toBeNull();
+  expect(repository.getLastError()).toMatch(/메모리/);
+});

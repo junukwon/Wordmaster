@@ -146,9 +146,13 @@ export class LocalStorageProgressRepository implements ProgressRepository {
       const sanitized = sanitizeStoredState(parsed);
       if (!sanitized) throw new Error('Invalid stored state');
       if (sanitized.repaired) {
-        this.storage.setItem(CORRUPT_KEY, raw);
-        this.storage.setItem(STORAGE_KEY, JSON.stringify(sanitized.state));
-        this.lastError = '학습 기록의 일부 손상된 항목을 백업하고 복구했습니다.';
+        try {
+          this.storage.setItem(CORRUPT_KEY, raw);
+          this.storage.setItem(STORAGE_KEY, JSON.stringify(sanitized.state));
+          this.lastError = '학습 기록의 일부 손상된 항목을 백업하고 복구했습니다.';
+        } catch {
+          this.lastError = '일부 손상된 기록을 메모리에서 복구했지만 브라우저 저장소에 쓰지 못했습니다.';
+        }
       }
       return sanitized.state;
     } catch {
