@@ -70,10 +70,16 @@ export type TestAnswer = {
   questionType: QuestionType;
 };
 
+export type TestQuestion = {
+  wordId: string;
+  questionType: QuestionType;
+};
+
 export type TestAttempt = {
   id: string;
   dayIds: number[];
   wordIds: string[];
+  questions: TestQuestion[];
   mode: QuestionType | 'mixed';
   order: 'number' | 'random';
   answers: TestAnswer[];

@@ -64,6 +64,39 @@ a { color: inherit; }
 .rating--uncertain { background: #fff4cf; color: #795e0b; }
 .rating--strong { background: #dff5f1; color: #126c62; }
 .study-page--complete { text-align: center; }
+.test-header h1 { margin: .25rem 0; font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -.05em; }
+.test-header > p:last-child { color: var(--color-muted); }
+.test-settings { display: grid; gap: .75rem; margin-top: 1.5rem; }
+.test-settings fieldset, .setting-row { margin: 0; padding: 1rem 1.25rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: white; }
+.test-settings legend { padding: 0 .35rem; font-weight: 900; }
+.test-settings legend span, .setting-row b { display: inline-grid; width: 28px; height: 28px; place-items: center; margin-right: .5rem; border-radius: 50%; background: var(--color-primary); color: white; }
+.choice-grid { display: grid; gap: .5rem; }
+.choice-grid--days { grid-template-columns: repeat(5, 1fr); }
+.choice-grid label { display: flex; min-height: 44px; align-items: center; gap: .45rem; padding: .5rem; border-radius: 10px; background: #f4f7f9; font-weight: 700; }
+.setting-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-weight: 900; }
+.setting-row select { min-width: 180px; min-height: 44px; padding: .4rem .7rem; border: 1px solid var(--color-line); border-radius: 10px; background: white; }
+.test-summary { position: sticky; bottom: .75rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; padding: 1rem; border-radius: var(--radius-md); background: var(--color-primary-strong); color: white; box-shadow: var(--shadow-card); }
+.test-summary div { display: flex; flex-direction: column; }
+.test-summary strong { font-size: 1.5rem; }
+.test-summary p { margin: 0; font-size: .9rem; }
+.test-summary .button { background: white; color: var(--color-primary); }
+.test-run-header { display: grid; grid-template-columns: auto minmax(280px, 1fr); align-items: end; gap: 2rem; }
+.test-run-header h1 { margin: .15rem 0; }
+.test-question-card { margin: 1rem 0; padding: clamp(1.25rem, 4vw, 2.5rem); border-radius: var(--radius-lg); background: white; box-shadow: var(--shadow-card); }
+.test-prompt { margin: 2rem 0; font-size: clamp(2rem, 7vw, 4.5rem); font-weight: 900; letter-spacing: -.05em; }
+.test-answer-actions { display: grid; grid-template-columns: repeat(3, minmax(120px, 1fr)); gap: .75rem; margin-left: auto; width: min(100%, 620px); }
+.test-answer-actions .button { grid-column: 1 / -1; border: 0; }
+.result-hero { display: grid; justify-items: center; gap: .4rem; padding: 2rem; border-radius: var(--radius-lg); background: var(--color-primary); color: white; text-align: center; }
+.result-hero p, .result-hero h1 { margin: 0; }
+.result-hero > strong { font-size: clamp(3rem, 10vw, 6rem); }
+.result-breakdowns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.result-breakdowns section, .wrong-list { padding: 1.25rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: white; }
+.result-breakdowns h2, .wrong-list h2 { margin-top: 0; }
+.result-breakdowns p { display: flex; justify-content: space-between; }
+.wrong-list { margin-top: 1rem; }
+.wrong-list ul { display: grid; gap: .5rem; padding: 0; list-style: none; }
+.wrong-list li { display: flex; justify-content: space-between; padding: .75rem; border-radius: 10px; background: #fff3ef; }
+.result-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
 
 @media (max-width: 759px) {
   .page { width: min(100% - 1rem, 680px); padding-top: 1rem; }
@@ -79,6 +112,12 @@ a { color: inherit; }
   .study-actions { flex-direction: column; }
   .study-actions > .button { width: 100%; }
   .rating-buttons { grid-template-columns: 1fr; width: 100%; }
+  .choice-grid--days { grid-template-columns: repeat(2, 1fr); }
+  .setting-row, .test-summary { align-items: stretch; flex-direction: column; }
+  .setting-row select { width: 100%; }
+  .test-run-header { grid-template-columns: 1fr; }
+  .test-answer-actions, .result-breakdowns { grid-template-columns: 1fr; }
+  .result-actions { flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {

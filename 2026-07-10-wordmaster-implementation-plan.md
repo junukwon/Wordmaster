@@ -739,35 +739,35 @@ git commit -m "feat: add Pencil-based recall study flow"
 **Interfaces:**
 - Produces: `createTestAttempt(config, words, progress, shuffle)`, `applyTestAnswer`, `summarizeTestAttempt`.
 
-- [ ] **Step 1: Write failing test engine tests**
+- [x] **Step 1: Write failing test engine tests**
 
 Verify filters for selected DAYs, recent/uncertain/weak/all sets, exact counts of 10/25/50/125 when available, deterministic random order, mixed question distribution, and no duplicate word IDs.
 
-- [ ] **Step 2: Write failing screen flow tests**
+- [x] **Step 2: Write failing screen flow tests**
 
 Verify DAY multi-select, problem type, count and order selection; summary text; test start; answer progression; spelling self-rating; result score; DAY and type breakdown; `틀린 단어만 다시 테스트`; `틀린 단어만 필기 연습`.
 
-- [ ] **Step 3: Run and verify failures**
+- [x] **Step 3: Run and verify failures**
 
 Run: `npm test -- tests/domain/testEngine.test.ts tests/pages/test-flow.test.tsx`  
 Expected: FAIL because test engine and pages are missing.
 
-- [ ] **Step 4: Implement test engine**
+- [x] **Step 4: Implement test engine**
 
 If fewer words are available than the requested count, use all matching words and show the actual count before starting. Treat uncertain and incorrect as result categories separate from correct.
 
-- [ ] **Step 5: Implement approved test setup screen**
+- [x] **Step 5: Implement approved test setup screen**
 
 Match `단어테스트_구성안.html`. Preserve the setting order: range, word set, question mode, count, order, summary, start.
 
-- [ ] **Step 6: Integrate progress rules**
+- [x] **Step 6: Integrate progress rules**
 
 - Incorrect: set confidence weak, increment incorrect count, schedule D+1.
 - Uncertain: set confidence uncertain and keep scheduled review no later than D+3.
 - Correct: record in the attempt but do not remove or postpone an existing scheduled review.
 - Never mark regular daily progress complete from an on-demand test.
 
-- [ ] **Step 7: Verify**
+- [x] **Step 7: Verify**
 
 Run:
 
@@ -778,7 +778,7 @@ npm run build
 
 Expected: PASS.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```powershell
 git add src/domain/testEngine.ts src/pages/Test*.tsx tests/domain/testEngine.test.ts tests/pages/test-flow.test.tsx
