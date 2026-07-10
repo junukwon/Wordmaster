@@ -43,8 +43,8 @@ test('creates exact targets for non-contiguous DAY combinations', () => {
 });
 
 test('rejects a selection with no valid DAY', () => {
-  expect(() => createStudySession(words, [], [], now, identity)).toThrow('?섎굹 ?댁긽???좏슚??DAY');
-  expect(() => createStudySession(words, [999], [], now, identity)).toThrow('?섎굹 ?댁긽???좏슚??DAY');
+  expect(() => createStudySession(words, [], [], now, identity)).toThrow('하나 이상의 유효한 DAY를 선택해 주세요.');
+  expect(() => createStudySession(words, [999], [], now, identity)).toThrow('하나 이상의 유효한 DAY를 선택해 주세요.');
 });
 
 test('initial learning operates in groups of five through three recall types', () => {

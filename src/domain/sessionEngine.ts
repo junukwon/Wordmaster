@@ -108,7 +108,7 @@ export function createStudySession(
 ): StudySession {
   const selectedDays = normalizeTargetDays(words, targetDayIds);
   if (selectedDays.length === 0) {
-    throw new RangeError('?섎굹 ?댁긽???좏슚??DAY瑜??좏깮??二쇱꽭??');
+    throw new RangeError('하나 이상의 유효한 DAY를 선택해 주세요.');
   }
   const wordsById = new Map(words.map((word) => [word.id, word]));
   const targetWords = selectedDays.flatMap((day) =>
