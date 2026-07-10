@@ -75,3 +75,21 @@ test('keeps core learning available offline after the first visit', async ({ pag
   await page.getByRole('button', { name: '테스트 시작하기' }).click();
   await expect(page.getByText('수시 테스트')).toBeVisible();
 });
+
+test('keeps study actions inside the initial iPad Mini landscape viewport', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'iPad Mini landscape');
+  await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
+
+  const geometry = await page.evaluate(() => {
+    const actions = document.querySelector('.study-actions');
+    if (!actions) throw new Error('study actions missing');
+    return {
+      actionsBottom: actions.getBoundingClientRect().bottom,
+      viewportHeight: window.innerHeight,
+      scrollY: window.scrollY,
+    };
+  });
+
+  expect(geometry.scrollY).toBe(0);
+  expect(geometry.actionsBottom).toBeLessThanOrEqual(geometry.viewportHeight);
+});
