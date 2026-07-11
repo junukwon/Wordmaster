@@ -24,6 +24,7 @@ export type FanThemeStatus = {
   processed: number;
   total: number;
   notice: string | null;
+  noticeType?: 'status' | 'error';
 };
 
 export type FanThemeImportResult = {

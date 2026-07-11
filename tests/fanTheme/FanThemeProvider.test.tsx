@@ -92,6 +92,28 @@ describe('FanThemeProvider', () => {
     expect(api.status).toMatchObject({ enabled: false, imageCount: 0, totalBytes: 0 });
   });
 
+  test('preserves confirmed enabled state and reports a toggle storage failure without rejecting', async () => {
+    const repo = repository();
+    vi.mocked(repo.setEnabled).mockRejectedValueOnce(new Error('storage closed'));
+    render(<FanThemeProvider repository={repo}><Probe /></FanThemeProvider>);
+    await waitFor(() => expect(api.status.ready).toBe(true));
+
+    await expect(act(() => api.setEnabled(false))).resolves.toBeUndefined();
+    expect(api.status).toMatchObject({ enabled: true, imageCount: 7, totalBytes: 99 });
+    expect(api.status.notice).toMatch(/[가-힣]/);
+  });
+
+  test('preserves active pack and reports a delete storage failure without rejecting', async () => {
+    const repo = repository();
+    vi.mocked(repo.deleteActivePack).mockRejectedValueOnce(new Error('storage closed'));
+    render(<FanThemeProvider repository={repo}><Probe /></FanThemeProvider>);
+    await waitFor(() => expect(api.status.ready).toBe(true));
+
+    await expect(act(() => api.deletePack())).resolves.toBeUndefined();
+    expect(api.status).toMatchObject({ enabled: true, imageCount: 7, totalBytes: 99 });
+    expect(api.status.notice).toMatch(/[가-힣]/);
+  });
+
   test('ignores import progress and completion from a replaced repository', async () => {
     const repoA = repository();
     const repoBPack = { ...pack, id: 'repo-b', imageCount: 3, totalBytes: 30 };

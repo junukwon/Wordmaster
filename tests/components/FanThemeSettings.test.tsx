@@ -45,3 +45,33 @@ test('toggle does not delete and deletion requires confirmation', async () => {
   await user.click(screen.getByRole('button', { name: '삭제 확인' }));
   expect(base.deletePack).toHaveBeenCalledOnce();
 });
+
+test('delete dialog manages focus, traps keyboard navigation, closes with Escape, and restores its trigger', async () => {
+  const user = userEvent.setup();
+  show();
+  const trigger = screen.getByRole('button', { name: '이미지팩 삭제' });
+  await user.click(trigger);
+  const dialog = screen.getByRole('dialog');
+  const cancel = screen.getByRole('button', { name: '취소' });
+  const confirm = screen.getByRole('button', { name: '삭제 확인' });
+  expect(cancel).toHaveFocus();
+
+  await user.tab({ shift: true });
+  expect(confirm).toHaveFocus();
+  await user.tab();
+  expect(cancel).toHaveFocus();
+  expect(dialog).toBeInTheDocument();
+
+  await user.keyboard('{Escape}');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(trigger).toHaveFocus();
+});
+
+test('keeps deletion dialog sane when the provider handles a failed delete', async () => {
+  const user = userEvent.setup();
+  show({ ...base, status: { ...base.status, notice: '이미지팩을 삭제하지 못했습니다.', noticeType: 'error' } });
+  await user.click(screen.getByRole('button', { name: '이미지팩 삭제' }));
+  await user.click(screen.getByRole('button', { name: '삭제 확인' }));
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.getByRole('alert')).toHaveTextContent('삭제하지 못했습니다');
+});

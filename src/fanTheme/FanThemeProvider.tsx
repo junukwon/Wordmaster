@@ -8,7 +8,7 @@ type Importer = (files: readonly File[], repository: FanThemeRepository, options
 
 const initialStatus: FanThemeStatus = {
   ready: false, enabled: false, imageCount: 0, totalBytes: 0,
-  importing: false, processed: 0, total: 0, notice: null,
+  importing: false, processed: 0, total: 0, notice: null, noticeType: 'status',
 };
 
 export function FanThemeProvider({ repository, importer = importFanThemePack, children }: PropsWithChildren<{ repository: FanThemeRepository; importer?: Importer }>) {
@@ -91,16 +91,23 @@ export function FanThemeProvider({ repository, importer = importFanThemePack, ch
     const generation = generationRef.current;
     const operation = ++operationRef.current;
     return enqueue(async () => {
-      await repository.setEnabled(enabled);
-      if (generationRef.current === generation && operationRef.current === operation) {
-        const pack = packRef.current;
-        setStatus(current => ({
-          ...current,
-          enabled: enabled && pack !== null,
-          imageCount: pack?.imageCount ?? 0,
-          totalBytes: pack?.totalBytes ?? 0,
-          importing: false,
-        }));
+      try {
+        await repository.setEnabled(enabled);
+        if (generationRef.current === generation && operationRef.current === operation) {
+          const pack = packRef.current;
+          setStatus(current => ({
+            ...current,
+            enabled: enabled && pack !== null,
+            imageCount: pack?.imageCount ?? 0,
+            totalBytes: pack?.totalBytes ?? 0,
+            importing: false,
+            notice: null, noticeType: 'status',
+          }));
+        }
+      } catch {
+        if (generationRef.current === generation && operationRef.current === operation) {
+          setStatus(current => ({ ...current, importing: false, notice: '팬테마 사용 설정을 저장하지 못했습니다.', noticeType: 'error' }));
+        }
       }
     });
   }, [enqueue, repository]);
@@ -109,10 +116,16 @@ export function FanThemeProvider({ repository, importer = importFanThemePack, ch
     const generation = generationRef.current;
     const operation = ++operationRef.current;
     return enqueue(async () => {
-      await repository.deleteActivePack();
-      if (generationRef.current !== generation || operationRef.current !== operation) return;
-      packRef.current = null;
-      setStatus(current => ({ ...current, enabled: false, imageCount: 0, totalBytes: 0, importing: false, notice: null }));
+      try {
+        await repository.deleteActivePack();
+        if (generationRef.current !== generation || operationRef.current !== operation) return;
+        packRef.current = null;
+        setStatus(current => ({ ...current, enabled: false, imageCount: 0, totalBytes: 0, importing: false, notice: null }));
+      } catch {
+        if (generationRef.current === generation && operationRef.current === operation) {
+          setStatus(current => ({ ...current, importing: false, notice: '이미지팩을 삭제하지 못했습니다.', noticeType: 'error' }));
+        }
+      }
     });
   }, [enqueue, repository]);
 
