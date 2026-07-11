@@ -87,7 +87,7 @@ a { color: inherit; }
 .reveal-stage { min-height: 52px; }
 .reveal-placeholder { display: block; width: 100%; min-height: 52px; }
 .rating-stage { display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; margin-top: 1rem; }
-.rating-stage [role="status"] { margin: 0; color: var(--color-text-muted); }
+.rating-stage [role="status"] { margin: 0; color: var(--color-muted); }
 .rating { min-height: 52px; border: 0; border-radius: 15px; font-weight: 900; cursor: pointer; }
 .rating--weak { background: #ffe8e1; color: #9f321c; }
 .rating--uncertain { background: #fff4cf; color: #795e0b; }

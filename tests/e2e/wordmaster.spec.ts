@@ -3,10 +3,70 @@ import { expect, test } from '@playwright/test';
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     Math.random = () => 0.999999;
+    const voices = [
+      { default: true, lang: 'en-US', localService: true, name: 'Samantha', voiceURI: 'mock-samantha' },
+      { default: false, lang: 'en-GB', localService: true, name: 'Daniel', voiceURI: 'mock-daniel' },
+    ] as SpeechSynthesisVoice[];
+    const voiceListeners = new Set<EventListenerOrEventListenerObject>();
+    const speechSynthesis = {
+      addEventListener: (_type: string, listener: EventListenerOrEventListenerObject) => voiceListeners.add(listener),
+      removeEventListener: (_type: string, listener: EventListenerOrEventListenerObject) => voiceListeners.delete(listener),
+      getVoices: () => voices,
+      speak: () => undefined,
+      cancel: () => undefined,
+    };
+    class MockSpeechSynthesisUtterance {
+      voice: SpeechSynthesisVoice | null = null;
+      lang = '';
+      rate = 1;
+      pitch = 1;
+      constructor(public text: string) {}
+    }
+    Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: speechSynthesis });
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', { configurable: true, value: MockSpeechSynthesisUtterance });
   });
   await page.goto('./');
   await page.evaluate(() => localStorage.clear());
   await page.reload();
+});
+
+test('keeps pronunciation and safe reveal usable on iPad Mini', async ({ page }, testInfo) => {
+  const isIPadMini = testInfo.project.name === 'iPad Mini portrait' || testInfo.project.name === 'iPad Mini landscape';
+  test.skip(!isIPadMini);
+
+  const settings = page.locator('.pronunciation-settings');
+  const settingsSummary = settings.locator('summary');
+  await settingsSummary.click();
+  const voiceSelector = page.getByLabel('영어 음성 선택');
+  const previewButton = page.getByRole('button', { name: '미리 듣기' });
+  await expect(voiceSelector.locator('option')).toContainText(['자동 선택', 'Samantha (en-US) · 기기 내장']);
+  for (const control of [settingsSummary, voiceSelector, previewButton]) {
+    const bounds = await control.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.height).toBeGreaterThanOrEqual(44);
+  }
+  await voiceSelector.selectOption('mock-samantha');
+  await previewButton.click();
+
+  await page.getByRole('button', { name: /DAY 01/ }).click();
+  await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
+  await expect(page.locator('.phonetic')).toHaveCount(0);
+  await page.getByRole('button', { name: '발음 듣기' }).click();
+  await expect(page.locator('.phonetic')).toBeVisible();
+
+  const problemLabel = await page.locator('.study-progress > strong').textContent();
+  await page.getByRole('button', { name: '정답 보기' }).click({ clickCount: 2, delay: 20 });
+  await expect(page.locator('.study-progress > strong')).toHaveText(problemLabel!);
+  const strongRating = page.getByRole('button', { name: '기억남' });
+  await expect(strongRating).toBeDisabled();
+  const safetyNotice = page.getByRole('status', { name: '' });
+  await expect(safetyNotice).toHaveText('정답을 확인한 뒤 평가해 주세요.');
+  const colors = await safetyNotice.evaluate((element) => ({
+    actual: getComputedStyle(element).color,
+    expected: getComputedStyle(document.documentElement).getPropertyValue('--color-muted').trim(),
+  }));
+  expect(colors.actual).toBe('rgb(97, 115, 132)');
+  expect(colors.expected).toBe('#617384');
 });
 
 test('completes the saved study and on-demand test journey', async ({ page }) => {
