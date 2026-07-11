@@ -9,8 +9,9 @@ const pack: FanThemePackMeta = { id: 'active', status: 'active', imageCount: 7, 
 
 function deferred<T>() {
   let resolve!: (value: T) => void;
-  const promise = new Promise<T>(done => { resolve = done; });
-  return { promise, resolve };
+  let reject!: (reason?: unknown) => void;
+  const promise = new Promise<T>((done, fail) => { resolve = done; reject = fail; });
+  return { promise, resolve, reject };
 }
 
 function repository(active: FanThemePackMeta | null = pack, enabled = true): FanThemeRepository {
@@ -161,5 +162,43 @@ describe('FanThemeProvider', () => {
     await waitFor(() => expect(importer).toHaveBeenCalledTimes(2));
     second.resolve({ imported: 2, skipped: 0, totalBytes: 20 });
     await waitFor(() => expect(api.status).toMatchObject({ imageCount: 2, totalBytes: 20, importing: false }));
+  });
+
+  test('reconciles imported pack metadata before a queued disable and later re-enable', async () => {
+    const repo = repository();
+    const importedPack = { ...pack, id: 'new-pack', imageCount: 4, totalBytes: 40 };
+    vi.mocked(repo.getActivePack).mockResolvedValueOnce(pack).mockResolvedValue(importedPack);
+    const gate = deferred<FanThemeImportResult>();
+    const importer = vi.fn(async () => gate.promise);
+    render(<FanThemeProvider repository={repo} importer={importer}><Probe /></FanThemeProvider>);
+    await waitFor(() => expect(api.status.ready).toBe(true));
+    act(() => { void api.importFiles([new File(['a'], 'a.jpg')]); void api.setEnabled(false); });
+    gate.resolve({ imported: 4, skipped: 0, totalBytes: 40 });
+    await waitFor(() => expect(api.status).toMatchObject({ enabled: false, imageCount: 4, totalBytes: 40, importing: false }));
+    await act(() => api.setEnabled(true));
+    await api.loadImageBlob('re-enabled');
+    expect(repo.getImage).toHaveBeenCalledWith('new-pack', selectFanImageIndex('re-enabled', 4));
+  });
+
+  test('preserves successful import A when queued import B fails', async () => {
+    const repo = repository();
+    const importedPack = { ...pack, id: 'pack-a', imageCount: 5, totalBytes: 50 };
+    vi.mocked(repo.getActivePack).mockResolvedValueOnce(pack).mockResolvedValue(importedPack);
+    const first = deferred<FanThemeImportResult>();
+    const second = deferred<FanThemeImportResult>();
+    const importer = vi.fn()
+      .mockImplementationOnce(async () => first.promise)
+      .mockImplementationOnce(async () => second.promise);
+    render(<FanThemeProvider repository={repo} importer={importer}><Probe /></FanThemeProvider>);
+    await waitFor(() => expect(api.status.ready).toBe(true));
+    act(() => { void api.importFiles([new File(['a'], 'a.jpg')]); void api.importFiles([new File(['b'], 'b.jpg')]); });
+    first.resolve({ imported: 5, skipped: 0, totalBytes: 50 });
+    await waitFor(() => expect(importer).toHaveBeenCalledTimes(2));
+    second.reject(new Error('B failed'));
+    await waitFor(() => expect(api.status.importing).toBe(false));
+    expect(api.status).toMatchObject({ enabled: true, imageCount: 5, totalBytes: 50 });
+    expect(api.status.notice).toMatch(/[가-힣]/);
+    await api.loadImageBlob('after-b');
+    expect(repo.getImage).toHaveBeenCalledWith('pack-a', selectFanImageIndex('after-b', 5));
   });
 });

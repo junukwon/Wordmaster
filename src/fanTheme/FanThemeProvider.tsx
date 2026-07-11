@@ -64,16 +64,24 @@ export function FanThemeProvider({ repository, importer = importFanThemePack, ch
         const pack = await repository.getActivePack();
         if (generationRef.current !== generation) return;
         await repository.setEnabled(true);
-        if (generationRef.current !== generation || operationRef.current !== operation) return;
+        if (generationRef.current !== generation) return;
         packRef.current = pack;
-        setStatus({
-          ready: true, enabled: pack !== null, imageCount: pack?.imageCount ?? 0, totalBytes: pack?.totalBytes ?? result.totalBytes,
-          importing: false, processed: files.length, total: files.length,
-          notice: `${result.imported}개를 가져왔고 ${result.skipped}개를 건너뛰었습니다.`,
-        });
+        setStatus(current => ({
+          ...current,
+          ready: true,
+          enabled: pack !== null,
+          imageCount: pack?.imageCount ?? 0,
+          totalBytes: pack?.totalBytes ?? result.totalBytes,
+          ...(operationRef.current === operation ? {
+            importing: false,
+            processed: files.length,
+            total: files.length,
+            notice: `${result.imported}개를 가져왔고 ${result.skipped}개를 건너뛰었습니다.`,
+          } : {}),
+        }));
       } catch {
         if (generationRef.current === generation && operationRef.current === operation) {
-          setStatus({ ...previous, importing: false, notice: '팬 테마를 가져오지 못했습니다.' });
+          setStatus(current => ({ ...current, importing: false, notice: '팬 테마를 가져오지 못했습니다.' }));
         }
       }
     });
@@ -85,7 +93,14 @@ export function FanThemeProvider({ repository, importer = importFanThemePack, ch
     return enqueue(async () => {
       await repository.setEnabled(enabled);
       if (generationRef.current === generation && operationRef.current === operation) {
-        setStatus(current => ({ ...current, enabled: enabled && packRef.current !== null }));
+        const pack = packRef.current;
+        setStatus(current => ({
+          ...current,
+          enabled: enabled && pack !== null,
+          imageCount: pack?.imageCount ?? 0,
+          totalBytes: pack?.totalBytes ?? 0,
+          importing: false,
+        }));
       }
     });
   }, [enqueue, repository]);
