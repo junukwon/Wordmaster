@@ -2,6 +2,10 @@ import { expect, test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
+    if (sessionStorage.getItem('wordmaster:e2e-initialized') !== 'true') {
+      localStorage.clear();
+      sessionStorage.setItem('wordmaster:e2e-initialized', 'true');
+    }
     Math.random = () => 0.999999;
     const voices = [
       { default: true, lang: 'en-US', localService: true, name: 'Samantha', voiceURI: 'mock-samantha' },
@@ -26,8 +30,6 @@ test.beforeEach(async ({ page }) => {
     Object.defineProperty(window, 'SpeechSynthesisUtterance', { configurable: true, value: MockSpeechSynthesisUtterance });
   });
   await page.goto('./');
-  await page.evaluate(() => localStorage.clear());
-  await page.reload();
 });
 
 test('keeps pronunciation and safe reveal usable on iPad Mini', async ({ page }, testInfo) => {
