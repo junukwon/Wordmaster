@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import words from '../../src/content/vocabulary.json';
@@ -7,9 +7,12 @@ import type { TestAttempt } from '../../src/domain/types';
 import { TestSetupPage } from '../../src/pages/TestSetupPage';
 import { TestPage } from '../../src/pages/TestPage';
 import { TestResultPage } from '../../src/pages/TestResultPage';
+import { LocalStorageProgressRepository } from '../../src/storage/LocalStorageProgressRepository';
 
 const now = new Date('2026-07-10T09:00:00.000Z');
 const identity = <T,>(items: T[]) => items;
+
+afterEach(() => vi.useRealTimers());
 
 function TestFlow() {
   const [attempt, setAttempt] = useState<TestAttempt | null>(null);
@@ -30,11 +33,15 @@ test('configures and completes a mixed 10-word test with result actions', async 
   await user.selectOptions(screen.getByLabelText('출제 순서'), 'number');
   expect(screen.getByText(/10문제/)).toBeInTheDocument();
   await user.click(screen.getByRole('button', { name: '테스트 시작하기' }));
+  vi.useFakeTimers();
 
   for (let index = 0; index < 10; index += 1) {
-    await user.click(screen.getByRole('button', { name: '정답 보기' }));
-    await user.click(screen.getByRole('button', { name: index === 0 ? '틀림' : '맞음' }));
+    fireEvent.click(screen.getByRole('button', { name: '정답 보기' }));
+    await act(() => vi.advanceTimersByTimeAsync(600));
+    fireEvent.click(screen.getByRole('button', { name: index === 0 ? '틀림' : '맞음' }));
   }
+
+  vi.useRealTimers();
 
   expect(screen.getByRole('heading', { name: '테스트 결과' })).toBeInTheDocument();
   expect(screen.getByText('90점')).toBeInTheDocument();
@@ -73,4 +80,35 @@ test('never exposes pronunciation in the test page, including after answer revea
   expect(revealButton).not.toBeNull();
   await userEvent.click(revealButton!);
   expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+});
+
+test('an immediate second tap after reveal cannot record a correct test answer', async () => {
+  vi.useFakeTimers();
+  const attempt: TestAttempt = {
+    id: 'test-double-tap', dayIds: [1], wordIds: ['0001', '0002'],
+    questions: [
+      { wordId: '0001', questionType: 'en_to_ko' },
+      { wordId: '0002', questionType: 'en_to_ko' },
+    ],
+    mode: 'en_to_ko', order: 'number', answers: [], startedAt: now.toISOString(), completedAt: null,
+  };
+  const onAttemptChange = vi.fn();
+  const repository = new LocalStorageProgressRepository(localStorage);
+  const saveWordProgress = vi.spyOn(repository, 'saveWordProgress');
+  render(<TestPage initialAttempt={attempt} words={words} repository={repository} onAttemptChange={onAttemptChange} onComplete={() => {}} now={() => now} />);
+
+  fireEvent.click(screen.getByRole('button', { name: '정답 보기' }));
+  const correctRating = screen.getByRole('button', { name: '맞음' });
+  fireEvent.click(correctRating);
+
+  expect(onAttemptChange).not.toHaveBeenCalled();
+  expect(saveWordProgress).not.toHaveBeenCalled();
+  expect(screen.getByText('knee')).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: '문제 1' })).toBeInTheDocument();
+
+  await act(() => vi.advanceTimersByTimeAsync(600));
+  fireEvent.click(correctRating);
+  expect(onAttemptChange).toHaveBeenCalledTimes(1);
+  expect(saveWordProgress).toHaveBeenCalledTimes(1);
+  expect(screen.getByRole('heading', { name: '문제 2' })).toBeInTheDocument();
 });

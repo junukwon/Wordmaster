@@ -8,6 +8,7 @@ import type { ProgressRepository } from '../storage/ProgressRepository';
 import type { SpeechPlayer } from '../speech/SpeechPlayer';
 import { ProgressBar } from '../components/ProgressBar';
 import { RatingButtons } from '../components/RatingButtons';
+import { useAnswerRevealGuard } from '../hooks/useAnswerRevealGuard';
 
 export type StudyScreenState = 'prompting' | 'revealed' | 'saving' | 'complete';
 
@@ -35,6 +36,7 @@ export function StudyPage({
   const [phoneticWordId, setPhoneticWordId] = useState<string | null>(null);
   const [, setVoiceRevision] = useState(0);
   const drawingRef = useRef<DrawingCanvasHandle>(null);
+  const { revealed, ratingReady, reveal, reset } = useAnswerRevealGuard();
   const item = session ? getNextStudyItem(session) : null;
   const word = item ? words.find((candidate) => candidate.id === item.wordId) : null;
 
@@ -59,14 +61,14 @@ export function StudyPage({
     (progress) => targetSet.has(progress.wordId) && progress.confidence !== 'unknown',
   ).length;
   const promptIsEnglish = item.questionType === 'en_to_ko';
-  const isRevealed = screenState === 'revealed' || screenState === 'saving';
+  const isRevealed = revealed || screenState === 'saving';
   const revealPronunciation = () => {
     setPhoneticWordId(word.id);
     speechPlayer.speak(word.term);
   };
 
   const rate = (rating: Rating) => {
-    if (screenState === 'saving' || (!isRevealed && rating !== 'weak')) return;
+    if (screenState === 'saving' || (isRevealed && !ratingReady) || (!isRevealed && rating !== 'weak')) return;
     setScreenState('saving');
     const timestamp = now();
     const currentProgress = repository.getWordProgress(word.id);
@@ -77,6 +79,7 @@ export function StudyPage({
     onProgressChange?.();
     drawingRef.current?.clear();
     setPhoneticWordId(null);
+    reset();
     setSession(updatedSession);
     setScreenState(updatedSession.completedAt ? 'complete' : 'prompting');
   };
@@ -136,16 +139,20 @@ export function StudyPage({
         </section>
       </div>
 
-      <div className="study-actions">
+      <div className="study-actions reveal-stage">
         {!isRevealed ? (
           <>
             <button className="button button--secondary" type="button" onClick={() => rate('weak')}>모르겠어요</button>
-            <button className="button button--primary" type="button" onClick={() => setScreenState('revealed')}>정답 보기</button>
+            <button className="button button--primary" type="button" onClick={() => { setScreenState('revealed'); reveal(); }}>정답 보기</button>
           </>
-        ) : (
-          <RatingButtons disabled={screenState === 'saving'} onRate={rate} />
-        )}
+        ) : <span className="reveal-placeholder" aria-hidden="true" />}
       </div>
+      {isRevealed && (
+        <div className="rating-stage">
+          {!ratingReady && <p role="status">정답을 확인한 뒤 평가해 주세요.</p>}
+          <RatingButtons disabled={!ratingReady || screenState === 'saving'} onRate={rate} />
+        </div>
+      )}
     </main>
   );
 }

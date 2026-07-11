@@ -4,6 +4,7 @@ import { applyTestAnswer, applyTestResultToProgress } from '../domain/testEngine
 import type { TestAttempt, TestResult, VocabularyWord } from '../domain/types';
 import type { ProgressRepository } from '../storage/ProgressRepository';
 import { ProgressBar } from '../components/ProgressBar';
+import { useAnswerRevealGuard } from '../hooks/useAnswerRevealGuard';
 
 type TestPageProps = {
   initialAttempt: TestAttempt;
@@ -16,7 +17,7 @@ type TestPageProps = {
 
 export function TestPage({ initialAttempt, words, repository, onAttemptChange, onComplete, now = () => new Date() }: TestPageProps) {
   const [attempt, setAttempt] = useState(initialAttempt);
-  const [revealed, setRevealed] = useState(false);
+  const { revealed, ratingReady, reveal, reset } = useAnswerRevealGuard();
   const drawingRef = useRef<DrawingCanvasHandle>(null);
   const question = attempt.questions[attempt.answers.length];
   const word = words.find((candidate) => candidate.id === question?.wordId);
@@ -24,7 +25,7 @@ export function TestPage({ initialAttempt, words, repository, onAttemptChange, o
 
   const promptIsEnglish = question.questionType === 'en_to_ko';
   const rate = (result: TestResult) => {
-    if (!revealed) return;
+    if (!ratingReady) return;
     const timestamp = now();
     const updated = applyTestAnswer(attempt, result, timestamp);
     if (repository) {
@@ -34,7 +35,7 @@ export function TestPage({ initialAttempt, words, repository, onAttemptChange, o
     drawingRef.current?.clear();
     setAttempt(updated);
     onAttemptChange(updated);
-    setRevealed(false);
+    reset();
     if (updated.completedAt) onComplete(updated);
   };
 
@@ -50,15 +51,17 @@ export function TestPage({ initialAttempt, words, repository, onAttemptChange, o
         {question.questionType === 'spelling' && <DrawingCanvas ref={drawingRef} />}
         {revealed && <div className="answer-panel"><span>정답</span><strong>{promptIsEnglish ? word.meanings.join(', ') : word.term}</strong></div>}
       </section>
-      <div className="test-answer-actions">
-        {!revealed ? <button className="button button--primary" type="button" onClick={() => setRevealed(true)}>정답 보기</button> : (
-          <>
-            <button className="rating rating--weak" type="button" onClick={() => rate('incorrect')}>틀림</button>
-            <button className="rating rating--uncertain" type="button" onClick={() => rate('uncertain')}>헷갈림</button>
-            <button className="rating rating--strong" type="button" onClick={() => rate('correct')}>맞음</button>
-          </>
-        )}
+      <div className="test-answer-actions reveal-stage">
+        {!revealed ? <button className="button button--primary" type="button" onClick={reveal}>정답 보기</button> : <span className="reveal-placeholder" aria-hidden="true" />}
       </div>
+      {revealed && <div className="rating-stage">
+        {!ratingReady && <p role="status">정답을 확인한 뒤 평가해 주세요.</p>}
+        <div className="rating-buttons">
+          <button className="rating rating--weak" type="button" disabled={!ratingReady} onClick={() => rate('incorrect')}>틀림</button>
+          <button className="rating rating--uncertain" type="button" disabled={!ratingReady} onClick={() => rate('uncertain')}>헷갈림</button>
+          <button className="rating rating--strong" type="button" disabled={!ratingReady} onClick={() => rate('correct')}>맞음</button>
+        </div>
+      </div>}
     </main>
   );
 }

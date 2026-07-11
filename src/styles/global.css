@@ -84,6 +84,10 @@ a { color: inherit; }
 .study-actions { display: flex; justify-content: flex-end; gap: .75rem; margin-top: 1rem; }
 .study-actions > .button { min-width: 180px; border: 0; }
 .rating-buttons { display: grid; grid-template-columns: repeat(3, minmax(130px, 1fr)); width: min(100%, 620px); gap: .75rem; }
+.reveal-stage { min-height: 52px; }
+.reveal-placeholder { display: block; width: 100%; min-height: 52px; }
+.rating-stage { display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; margin-top: 1rem; }
+.rating-stage [role="status"] { margin: 0; color: var(--color-text-muted); }
 .rating { min-height: 52px; border: 0; border-radius: 15px; font-weight: 900; cursor: pointer; }
 .rating--weak { background: #ffe8e1; color: #9f321c; }
 .rating--uncertain { background: #fff4cf; color: #795e0b; }
@@ -156,6 +160,7 @@ a { color: inherit; }
   .study-actions { flex-direction: column; }
   .study-actions > .button { width: 100%; }
   .rating-buttons { grid-template-columns: 1fr; width: 100%; }
+  .rating-stage { align-items: stretch; }
   .choice-grid--days { grid-template-columns: repeat(2, 1fr); }
   .setting-row, .test-summary { align-items: stretch; flex-direction: column; }
   .setting-row select { width: 100%; }
