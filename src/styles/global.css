@@ -45,6 +45,13 @@ a { color: inherit; }
 .status-card--weak { border-top-color: var(--color-weak); }
 .status-card--remaining { border-top-color: var(--color-primary); }
 .home-actions { display: grid; grid-template-columns: 2fr 1fr; gap: .8rem; }
+.pronunciation-settings { margin-top: 1rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: white; }
+.pronunciation-settings summary { min-height: 44px; padding: .75rem 1rem; font-weight: 800; cursor: pointer; }
+.pronunciation-settings__controls { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .75rem; padding: 0 1rem 1rem; }
+.pronunciation-settings__controls label { font-weight: 800; }
+.pronunciation-settings__controls select, .pronunciation-settings__controls button { min-height: 44px; padding: .55rem .75rem; border: 1px solid var(--color-line); border-radius: 10px; background: white; }
+.pronunciation-settings__controls button { color: var(--color-primary); font-weight: 800; cursor: pointer; }
+.pronunciation-settings__notice { margin: 0 1rem 1rem; color: var(--color-muted); }
 .button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; padding: .8rem 1.2rem; border: 2px solid transparent; border-radius: 15px; text-decoration: none; font-weight: 800; cursor: pointer; }
 .button--primary { background: var(--color-primary); color: white; }
 .button--primary:hover { background: var(--color-primary-strong); }
@@ -139,6 +146,7 @@ a { color: inherit; }
   .active-session-banner .button, .study-selection-summary .button, .home-actions .button { width: 100%; min-height: 44px; }
   .status-grid { grid-template-columns: 1fr; }
   .home-actions { grid-template-columns: 1fr; }
+  .pronunciation-settings__controls { grid-template-columns: 1fr; }
   .study-header { align-items: stretch; flex-direction: column; }
   .study-progress { min-width: 0; }
   .study-progress > strong { text-align: left; }

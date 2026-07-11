@@ -4,6 +4,7 @@ import { DaySelectionGrid } from '../components/DaySelectionGrid';
 import { SessionReplacementDialog } from '../components/SessionReplacementDialog';
 import type { DaySummary } from '../domain/daySelection';
 import type { StudySession } from '../domain/types';
+import { PronunciationSettings, type PronunciationSpeechPlayer } from '../speech/PronunciationSettings';
 
 export type HomeViewModel = {
   days: DaySummary[];
@@ -16,9 +17,10 @@ type HomePageProps = {
   viewModel: HomeViewModel;
   onStartStudy?: (dayIds: number[]) => boolean;
   onOpenTest?: () => void;
+  speechPlayer?: PronunciationSpeechPlayer;
 };
 
-export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps) {
+export function HomePage({ viewModel, onStartStudy, onOpenTest, speechPlayer }: HomePageProps) {
   const [selectedDayIds, setSelectedDayIds] = useState<number[]>([]);
   const [replacementOpen, setReplacementOpen] = useState(false);
   const storageAlertRef = useRef<HTMLParagraphElement>(null);
@@ -94,6 +96,8 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
           <Link className="button button--secondary" to="/test/setup" onClick={onOpenTest}>수시 단어 테스트</Link>
         </div>
       </section>
+
+      {speechPlayer && <PronunciationSettings speechPlayer={speechPlayer} />}
 
       {replacementOpen && activeSession && (
         <SessionReplacementDialog
