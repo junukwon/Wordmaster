@@ -47,7 +47,7 @@ function renderHome(model = viewModel, onStartStudy = vi.fn(() => true)) {
 test('renders pronunciation settings after the learning routine', () => {
   renderHome();
   const routine = screen.getByRole('heading', { name: /DAY/ }).closest('section');
-  const settings = screen.getByText('諛쒖쓬 ?ㅼ젙').closest('details');
+  const settings = screen.getByText('발음 설정').closest('details');
   expect(routine?.compareDocumentPosition(settings!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
 });
 

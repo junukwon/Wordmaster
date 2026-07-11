@@ -35,22 +35,22 @@ export function PronunciationSettings({ speechPlayer }: PronunciationSettingsPro
 
   return (
     <details className="pronunciation-settings">
-      <summary>諛쒖쓬 ?ㅼ젙</summary>
+      <summary>발음 설정</summary>
       <div className="pronunciation-settings__controls">
-        <label htmlFor="pronunciation-voice">?곸뼱 ?뚯꽦 ?좏깮</label>
+        <label htmlFor="pronunciation-voice">영어 음성 선택</label>
         <select
           id="pronunciation-voice"
           value={preference.mode === 'manual' ? preference.voiceURI : 'auto'}
           onChange={(event) => selectVoice(event.currentTarget.value)}
         >
-          <option value="auto">?먮룞 ?좏깮</option>
+          <option value="auto">자동 선택</option>
           {voices.map((voice) => (
             <option key={voice.voiceURI} value={voice.voiceURI}>
-              {voice.name} ({voice.lang}){voice.localService ? ' · 湲곌린 ?댁옣' : ''}
+              {voice.name} ({voice.lang}){voice.localService ? ' · 기기 내장' : ''}
             </option>
           ))}
         </select>
-        <button type="button" onClick={() => speechPlayer.preview()}>誘몃━ ?ｊ린</button>
+        <button type="button" onClick={() => speechPlayer.preview()}>미리 듣기</button>
       </div>
       {notice && <p className="pronunciation-settings__notice" role="status">{notice}</p>}
     </details>
