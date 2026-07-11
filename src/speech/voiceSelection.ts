@@ -6,29 +6,45 @@ export function rankEnglishVoices(
   voices: SpeechSynthesisVoice[],
   preference: VoicePreference,
 ): SpeechSynthesisVoice[] {
-  const manualVoiceInstalled = preference.mode === 'manual'
-    && voices.some((voice) => isEnglish(voice) && voice.voiceURI === preference.voiceURI);
+  const manualVoice = resolveManualVoice(voices, preference);
 
   return voices
     .filter(isEnglish)
-    .map((voice, index) => ({ voice, index, score: scoreVoice(voice, preference, manualVoiceInstalled) }))
+    .map((voice, index) => ({ voice, index, score: scoreVoice(voice, manualVoice) }))
     .sort((a, b) => a.score - b.score || a.index - b.index)
     .map(({ voice }) => voice);
 }
 
+export function resolveManualVoice(
+  voices: SpeechSynthesisVoice[],
+  preference: VoicePreference,
+): SpeechSynthesisVoice | null {
+  if (preference.mode !== 'manual') return null;
+  const englishVoices = voices.filter(isEnglish);
+  const uriMatch = englishVoices.find((voice) => voice.voiceURI === preference.voiceURI);
+  if (uriMatch) return uriMatch;
+
+  const identityMatches = englishVoices.filter((voice) => voice.name === preference.name
+    && normalizeLanguage(voice.lang) === normalizeLanguage(preference.lang));
+  return identityMatches.length === 1 ? identityMatches[0] : null;
+}
+
 function isEnglish(voice: SpeechSynthesisVoice): boolean {
-  return voice.lang.toLowerCase().startsWith('en');
+  return normalizeLanguage(voice.lang).startsWith('en');
 }
 
 function scoreVoice(
   voice: SpeechSynthesisVoice,
-  preference: VoicePreference,
-  manualVoiceInstalled: boolean,
+  manualVoice: SpeechSynthesisVoice | null,
 ): number {
-  if (manualVoiceInstalled && preference.mode === 'manual' && voice.voiceURI === preference.voiceURI) return -1;
-  if (!voice.localService) return voice.lang.toLowerCase() === 'en-us' ? 30 : 40;
-  if (voice.lang.toLowerCase() !== 'en-us') return 20;
+  if (voice === manualVoice) return -1;
+  if (!voice.localService) return normalizeLanguage(voice.lang) === 'en-us' ? 30 : 40;
+  if (normalizeLanguage(voice.lang) !== 'en-us') return 20;
   return isPreferredFemaleName(voice.name) ? 0 : 10;
+}
+
+function normalizeLanguage(language: string): string {
+  return language.trim().toLowerCase().replace(/_/g, '-');
 }
 
 function isPreferredFemaleName(name: string): boolean {

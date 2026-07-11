@@ -25,6 +25,31 @@ test('an installed manual voice wins automatic ranking', () => {
   })[0]).toBe(male);
 });
 
+test('a manual voice falls back to exact name and normalized language when its URI changes', () => {
+  const replacement = voice('Alex', 'EN_us', true, 'new-alex-uri');
+  const samantha = voice('Samantha', 'en-US', true, 'samantha-uri');
+  expect(rankEnglishVoices([samantha, replacement], {
+    mode: 'manual', voiceURI: 'old-alex-uri', name: 'Alex', lang: 'en-US',
+  })[0]).toBe(replacement);
+});
+
+test('manual fallback does not select a same-name voice in a different language', () => {
+  const wrongLanguage = voice('Alex', 'en-GB', true, 'new-alex-uk-uri');
+  const samantha = voice('Samantha', 'en-US', true, 'samantha-uri');
+  expect(rankEnglishVoices([wrongLanguage, samantha], {
+    mode: 'manual', voiceURI: 'old-alex-uri', name: 'Alex', lang: 'en-US',
+  })[0]).toBe(samantha);
+});
+
+test('manual fallback is ignored when exact name and normalized language are ambiguous', () => {
+  const firstAlex = voice('Alex', 'en-US', true, 'new-alex-1');
+  const secondAlex = voice('Alex', 'en_us', true, 'new-alex-2');
+  const samantha = voice('Samantha', 'en-US', true, 'samantha-uri');
+  expect(rankEnglishVoices([firstAlex, secondAlex, samantha], {
+    mode: 'manual', voiceURI: 'old-alex-uri', name: 'Alex', lang: 'en-US',
+  })[0]).toBe(samantha);
+});
+
 test.each([
   [voice('US local', 'en-US', true), voice('UK local', 'en-GB', true)],
   [voice('English local', 'en-GB', true), voice('English remote', 'en-US', false)],

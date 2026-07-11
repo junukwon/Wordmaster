@@ -5,6 +5,7 @@ import words from '../../src/content/vocabulary.json';
 import { createStudySession } from '../../src/domain/sessionEngine';
 import { LocalStorageProgressRepository } from '../../src/storage/LocalStorageProgressRepository';
 import { StudyPage } from '../../src/pages/StudyPage';
+import { SpeechPlayer } from '../../src/speech/SpeechPlayer';
 
 const fixedNow = new Date('2026-07-10T09:00:00.000Z');
 const identity = <T,>(items: T[]) => items;
@@ -86,6 +87,24 @@ test('reveals pronunciation when speech is unavailable and resets it after advan
   expect(skipButton).not.toBeNull();
   await userEvent.click(skipButton!);
   expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+});
+
+test('reveals pronunciation even when the playback implementation throws', async () => {
+  const repository = new LocalStorageProgressRepository(localStorage);
+  const synthesis = {
+    getVoices: () => [{ voiceURI: 'sam', name: 'Samantha', lang: 'en-US', localService: true }],
+    cancel: () => {},
+    speak: () => { throw new Error('platform speech failed'); },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  } as unknown as SpeechSynthesis;
+  class Utterance { constructor(public text: string) {} }
+  const host = { speechSynthesis: synthesis, SpeechSynthesisUtterance: Utterance } as unknown as Window;
+  const speechPlayer = new SpeechPlayer(host);
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  await expect(userEvent.click(screen.getByRole('button', { name: '발음 듣기' }))).resolves.toBeUndefined();
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
 });
 
 test('hides pronunciation when the same word returns in a later study item', async () => {
