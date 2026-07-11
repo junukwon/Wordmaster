@@ -36,6 +36,10 @@ async function expectInsideViewport(locator: import('@playwright/test').Locator,
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
+    if (sessionStorage.getItem('wordmaster:e2e-initialized') !== 'true') {
+      localStorage.clear();
+      sessionStorage.setItem('wordmaster:e2e-initialized', 'true');
+    }
     Math.random = () => 0.999999;
     if (!('createImageBitmap' in window)) {
       Object.defineProperty(window, 'createImageBitmap', { value: async (blob: Blob) => {
@@ -52,8 +56,6 @@ test.beforeEach(async ({ page }) => {
     }
   });
   await page.goto('./');
-  await page.evaluate(() => localStorage.clear());
-  await page.reload();
 });
 
 test('completes the saved study and on-demand test journey', async ({ page }) => {
