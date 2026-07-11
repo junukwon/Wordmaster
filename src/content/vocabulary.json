@@ -4,6 +4,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "knee",
+    "phonetic": "/niː/",
     "partOfSpeech": [
       "명"
     ],
@@ -16,6 +17,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "shoulder",
+    "phonetic": "/ˈʃoʊldər/",
     "partOfSpeech": [
       "명"
     ],
@@ -28,6 +30,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "slim",
+    "phonetic": "/slɪm/",
     "partOfSpeech": [
       "형"
     ],
@@ -40,6 +43,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "brain",
+    "phonetic": "/breɪn/",
     "partOfSpeech": [
       "명"
     ],
@@ -52,6 +56,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "weight",
+    "phonetic": "/weɪt/",
     "partOfSpeech": [
       "명"
     ],
@@ -64,6 +69,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "height",
+    "phonetic": "/haɪt/",
     "partOfSpeech": [
       "명"
     ],
@@ -76,6 +82,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "teenage",
+    "phonetic": "/ˈtiːneɪdʒ/",
     "partOfSpeech": [
       "형"
     ],
@@ -88,6 +95,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "elderly",
+    "phonetic": "/ˈɛldərli/",
     "partOfSpeech": [
       "형"
     ],
@@ -100,6 +108,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "adult",
+    "phonetic": "/əˈdʌlt/",
     "partOfSpeech": [
       "명",
       "형"
@@ -113,6 +122,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "curly",
+    "phonetic": "/ˈkɝːli/",
     "partOfSpeech": [
       "형"
     ],
@@ -125,6 +135,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "female",
+    "phonetic": "/ˈfiːmeɪl/",
     "partOfSpeech": [
       "형",
       "명"
@@ -138,6 +149,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "beauty",
+    "phonetic": "/ˈbjuːti/",
     "partOfSpeech": [
       "명"
     ],
@@ -150,6 +162,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "lovely",
+    "phonetic": "/ˈlʌvli/",
     "partOfSpeech": [
       "형"
     ],
@@ -162,6 +175,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "gorgeous",
+    "phonetic": "/ˈɡɔrdʒəs/",
     "partOfSpeech": [
       "형"
     ],
@@ -174,6 +188,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "thumb",
+    "phonetic": "/θʌm/",
     "partOfSpeech": [
       "명"
     ],
@@ -186,6 +201,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "tongue",
+    "phonetic": "/tʌŋ/",
     "partOfSpeech": [
       "명"
     ],
@@ -198,6 +214,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "beard",
+    "phonetic": "/bɪrd/",
     "partOfSpeech": [
       "명"
     ],
@@ -210,6 +227,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "blond/blonde",
+    "phonetic": "/blɑnd/",
     "partOfSpeech": [
       "형"
     ],
@@ -222,6 +240,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "jaw",
+    "phonetic": "/dʒɔ/",
     "partOfSpeech": [
       "명"
     ],
@@ -234,6 +253,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "cheek",
+    "phonetic": "/tʃiːk/",
     "partOfSpeech": [
       "명"
     ],
@@ -246,6 +266,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "wrist",
+    "phonetic": "/rɪst/",
     "partOfSpeech": [
       "명"
     ],
@@ -258,6 +279,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "ankle",
+    "phonetic": "/ˈæŋkəl/",
     "partOfSpeech": [
       "명"
     ],
@@ -270,6 +292,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "waist",
+    "phonetic": "/weɪst/",
     "partOfSpeech": [
       "명"
     ],
@@ -282,6 +305,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "heel",
+    "phonetic": "/hiːl/",
     "partOfSpeech": [
       "명"
     ],
@@ -294,6 +318,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "grow up",
+    "phonetic": "/ɡroʊ ʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -307,6 +332,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "mad",
+    "phonetic": "/mæd/",
     "partOfSpeech": [
       "형"
     ],
@@ -319,6 +345,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "weak",
+    "phonetic": "/wiːk/",
     "partOfSpeech": [
       "형"
     ],
@@ -331,6 +358,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "wise",
+    "phonetic": "/waɪz/",
     "partOfSpeech": [
       "형"
     ],
@@ -343,6 +371,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "clever",
+    "phonetic": "/ˈklɛvər/",
     "partOfSpeech": [
       "형"
     ],
@@ -355,6 +384,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "honest",
+    "phonetic": "/ˈɑnɪst/",
     "partOfSpeech": [
       "형"
     ],
@@ -367,6 +397,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "rude",
+    "phonetic": "/ruːd/",
     "partOfSpeech": [
       "형"
     ],
@@ -379,6 +410,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "polite",
+    "phonetic": "/pəˈlaɪt/",
     "partOfSpeech": [
       "형"
     ],
@@ -391,6 +423,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "asleep",
+    "phonetic": "/əˈsliːp/",
     "partOfSpeech": [
       "형"
     ],
@@ -403,6 +436,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "awake",
+    "phonetic": "/əˈweɪk/",
     "partOfSpeech": [
       "형"
     ],
@@ -415,6 +449,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "active",
+    "phonetic": "/ˈæktɪv/",
     "partOfSpeech": [
       "형"
     ],
@@ -427,6 +462,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "friendly",
+    "phonetic": "/ˈfrɛndli/",
     "partOfSpeech": [
       "형"
     ],
@@ -439,6 +475,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "familiar",
+    "phonetic": "/fəˈmɪljər/",
     "partOfSpeech": [
       "형"
     ],
@@ -451,6 +488,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "curious",
+    "phonetic": "/ˈkjʊriəs/",
     "partOfSpeech": [
       "형"
     ],
@@ -463,6 +501,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "creative",
+    "phonetic": "/kriˈeɪtɪv/",
     "partOfSpeech": [
       "형"
     ],
@@ -475,6 +514,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "caring",
+    "phonetic": "/ˈkɛrɪŋ/",
     "partOfSpeech": [
       "형"
     ],
@@ -487,6 +527,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "talent",
+    "phonetic": "/ˈtælənt/",
     "partOfSpeech": [
       "명"
     ],
@@ -499,6 +540,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "gentle",
+    "phonetic": "/ˈdʒɛntəl/",
     "partOfSpeech": [
       "형"
     ],
@@ -511,6 +553,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "silly",
+    "phonetic": "/ˈsɪli/",
     "partOfSpeech": [
       "형"
     ],
@@ -523,6 +566,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "silent",
+    "phonetic": "/ˈsaɪlənt/",
     "partOfSpeech": [
       "형"
     ],
@@ -535,6 +579,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "talkative",
+    "phonetic": "/ˈtɔkətɪv/",
     "partOfSpeech": [
       "형"
     ],
@@ -547,6 +592,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "outgoing",
+    "phonetic": "/ˈaʊtˌɡoʊɪŋ/",
     "partOfSpeech": [
       "형"
     ],
@@ -559,6 +605,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "personality",
+    "phonetic": "/ˌpɝːsəˈnæləti/",
     "partOfSpeech": [
       "명"
     ],
@@ -571,6 +618,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "be able to-v",
+    "phonetic": "/bi ˈeɪbəl tə/",
     "partOfSpeech": [
       "표현"
     ],
@@ -584,6 +632,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "be busy v-ing",
+    "phonetic": "/bi ˈbɪzi/",
     "partOfSpeech": [
       "표현"
     ],
@@ -597,6 +646,7 @@
     "day": 2,
     "topic": "사람 묘사 II",
     "term": "have ~ in common",
+    "phonetic": "/hæv ɪn ˈkɑmən/",
     "partOfSpeech": [
       "표현"
     ],
@@ -610,6 +660,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "alone",
+    "phonetic": "/əˈloʊn/",
     "partOfSpeech": [
       "형",
       "부"
@@ -623,6 +674,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "tear",
+    "phonetic": "/tɪr/",
     "partOfSpeech": [
       "명"
     ],
@@ -635,6 +687,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "fear",
+    "phonetic": "/fɪr/",
     "partOfSpeech": [
       "명"
     ],
@@ -647,6 +700,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "scared",
+    "phonetic": "/skɛrd/",
     "partOfSpeech": [
       "형"
     ],
@@ -659,6 +713,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "calm",
+    "phonetic": "/kɑm/",
     "partOfSpeech": [
       "형",
       "동"
@@ -672,6 +727,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "jealous",
+    "phonetic": "/ˈdʒɛləs/",
     "partOfSpeech": [
       "형"
     ],
@@ -684,6 +740,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "worried",
+    "phonetic": "/ˈwɝːid/",
     "partOfSpeech": [
       "형"
     ],
@@ -696,6 +753,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "surprise",
+    "phonetic": "/sərˈpraɪz/",
     "partOfSpeech": [
       "동",
       "명"
@@ -709,6 +767,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "terrible",
+    "phonetic": "/ˈtɛrəbəl/",
     "partOfSpeech": [
       "형"
     ],
@@ -721,6 +780,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "awesome",
+    "phonetic": "/ˈɔsəm/",
     "partOfSpeech": [
       "형"
     ],
@@ -733,6 +793,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "emotion",
+    "phonetic": "/ɪˈmoʊʃən/",
     "partOfSpeech": [
       "명"
     ],
@@ -745,6 +806,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "shock",
+    "phonetic": "/ʃɑk/",
     "partOfSpeech": [
       "명"
     ],
@@ -757,6 +819,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "scream",
+    "phonetic": "/skriːm/",
     "partOfSpeech": [
       "동",
       "명"
@@ -770,6 +833,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "horror",
+    "phonetic": "/ˈhɔrər/",
     "partOfSpeech": [
       "명"
     ],
@@ -782,6 +846,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "serious",
+    "phonetic": "/ˈsɪriəs/",
     "partOfSpeech": [
       "형"
     ],
@@ -794,6 +859,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "pity",
+    "phonetic": "/ˈpɪti/",
     "partOfSpeech": [
       "명"
     ],
@@ -806,6 +872,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "anger",
+    "phonetic": "/ˈæŋɡər/",
     "partOfSpeech": [
       "명"
     ],
@@ -818,6 +885,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "anxious",
+    "phonetic": "/ˈæŋkʃəs/",
     "partOfSpeech": [
       "형"
     ],
@@ -830,6 +898,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "pleased",
+    "phonetic": "/pliːzd/",
     "partOfSpeech": [
       "형"
     ],
@@ -842,6 +911,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "comfortable",
+    "phonetic": "/ˈkʌmftərbəl/",
     "partOfSpeech": [
       "형"
     ],
@@ -854,6 +924,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "touching",
+    "phonetic": "/ˈtʌtʃɪŋ/",
     "partOfSpeech": [
       "형"
     ],
@@ -866,6 +937,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "amusing",
+    "phonetic": "/əˈmjuːzɪŋ/",
     "partOfSpeech": [
       "형"
     ],
@@ -878,6 +950,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "be sorry to-v",
+    "phonetic": "/bi ˈsɑri tə/",
     "partOfSpeech": [
       "표현"
     ],
@@ -891,6 +964,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "be tired of",
+    "phonetic": "/bi ˈtaɪərd əv/",
     "partOfSpeech": [
       "표현"
     ],
@@ -904,6 +978,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "cheer up",
+    "phonetic": "/tʃɪr ʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -916,6 +991,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "health",
+    "phonetic": "/hɛlθ/",
     "partOfSpeech": [
       "명"
     ],
@@ -928,6 +1004,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "pain",
+    "phonetic": "/peɪn/",
     "partOfSpeech": [
       "명"
     ],
@@ -940,6 +1017,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "blood",
+    "phonetic": "/blʌd/",
     "partOfSpeech": [
       "명"
     ],
@@ -952,6 +1030,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "stress",
+    "phonetic": "/strɛs/",
     "partOfSpeech": [
       "명"
     ],
@@ -964,6 +1043,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "sense",
+    "phonetic": "/sɛns/",
     "partOfSpeech": [
       "명"
     ],
@@ -976,6 +1056,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "stomach",
+    "phonetic": "/ˈstʌmək/",
     "partOfSpeech": [
       "명"
     ],
@@ -988,6 +1069,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "throat",
+    "phonetic": "/θroʊt/",
     "partOfSpeech": [
       "명"
     ],
@@ -1000,6 +1082,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "diet",
+    "phonetic": "/ˈdaɪət/",
     "partOfSpeech": [
       "명"
     ],
@@ -1012,6 +1095,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "breath",
+    "phonetic": "/brɛθ/",
     "partOfSpeech": [
       "명"
     ],
@@ -1024,6 +1108,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "condition",
+    "phonetic": "/kənˈdɪʃən/",
     "partOfSpeech": [
       "명"
     ],
@@ -1036,6 +1121,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "blind",
+    "phonetic": "/blaɪnd/",
     "partOfSpeech": [
       "형"
     ],
@@ -1048,6 +1134,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "deaf",
+    "phonetic": "/dɛf/",
     "partOfSpeech": [
       "형"
     ],
@@ -1060,6 +1147,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "disease",
+    "phonetic": "/dɪˈziːz/",
     "partOfSpeech": [
       "명"
     ],
@@ -1072,6 +1160,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "ache",
+    "phonetic": "/eɪk/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1085,6 +1174,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "bump",
+    "phonetic": "/bʌmp/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1098,6 +1188,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "itchy",
+    "phonetic": "/ˈɪtʃi/",
     "partOfSpeech": [
       "형"
     ],
@@ -1110,6 +1201,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "sore",
+    "phonetic": "/sɔr/",
     "partOfSpeech": [
       "형"
     ],
@@ -1122,6 +1214,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "suffer",
+    "phonetic": "/ˈsʌfər/",
     "partOfSpeech": [
       "동"
     ],
@@ -1134,6 +1227,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "cure",
+    "phonetic": "/kjʊr/",
     "partOfSpeech": [
       "명",
       "동"
@@ -1147,6 +1241,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "pill",
+    "phonetic": "/pɪl/",
     "partOfSpeech": [
       "명"
     ],
@@ -1159,6 +1254,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "patient",
+    "phonetic": "/ˈpeɪʃənt/",
     "partOfSpeech": [
       "명",
       "형"
@@ -1172,6 +1268,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "appointment",
+    "phonetic": "/əˈpɔɪntmənt/",
     "partOfSpeech": [
       "명"
     ],
@@ -1184,6 +1281,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "be in the hospital",
+    "phonetic": "/bi ɪn ðə ˈhɑspɪtəl/",
     "partOfSpeech": [
       "표현"
     ],
@@ -1197,6 +1295,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "care for",
+    "phonetic": "/kɛr fɔr/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -1209,6 +1308,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "blow one's nose",
+    "phonetic": "/bloʊ wʌnz noʊz/",
     "partOfSpeech": [
       "표현"
     ],
@@ -1222,6 +1322,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "twin",
+    "phonetic": "/twɪn/",
     "partOfSpeech": [
       "명"
     ],
@@ -1234,6 +1335,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "grandparent",
+    "phonetic": "/ˈɡrændˌpɛrənt/",
     "partOfSpeech": [
       "명"
     ],
@@ -1246,6 +1348,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "enemy",
+    "phonetic": "/ˈɛnəmi/",
     "partOfSpeech": [
       "명"
     ],
@@ -1258,6 +1361,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "boss",
+    "phonetic": "/bɔs/",
     "partOfSpeech": [
       "명"
     ],
@@ -1270,6 +1374,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "chef",
+    "phonetic": "/ʃɛf/",
     "partOfSpeech": [
       "명"
     ],
@@ -1282,6 +1387,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "master",
+    "phonetic": "/ˈmæstər/",
     "partOfSpeech": [
       "명",
       "동"
@@ -1295,6 +1401,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "idol",
+    "phonetic": "/ˈaɪdəl/",
     "partOfSpeech": [
       "명"
     ],
@@ -1307,6 +1414,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "captain",
+    "phonetic": "/ˈkæptən/",
     "partOfSpeech": [
       "명"
     ],
@@ -1319,6 +1427,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "officer",
+    "phonetic": "/ˈɔfɪsər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1331,6 +1440,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "director",
+    "phonetic": "/dəˈrɛktər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1343,6 +1453,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "designer",
+    "phonetic": "/dɪˈzaɪnər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1355,6 +1466,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "staff",
+    "phonetic": "/stæf/",
     "partOfSpeech": [
       "명"
     ],
@@ -1367,6 +1479,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "senior",
+    "phonetic": "/ˈsiːnjər/",
     "partOfSpeech": [
       "형",
       "명"
@@ -1380,6 +1493,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "nephew",
+    "phonetic": "/ˈnɛfjuː/",
     "partOfSpeech": [
       "명"
     ],
@@ -1392,6 +1506,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "partner",
+    "phonetic": "/ˈpɑrtnər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1404,6 +1519,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "neighbor",
+    "phonetic": "/ˈneɪbər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1416,6 +1532,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "coworker",
+    "phonetic": "/ˈkoʊˌwɝːkər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1428,6 +1545,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "author",
+    "phonetic": "/ˈɔθər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1440,6 +1558,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "guard",
+    "phonetic": "/ɡɑrd/",
     "partOfSpeech": [
       "명",
       "동"
@@ -1453,6 +1572,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "engineer",
+    "phonetic": "/ˌɛndʒəˈnɪr/",
     "partOfSpeech": [
       "명"
     ],
@@ -1465,6 +1585,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "photographer",
+    "phonetic": "/fəˈtɑɡrəfər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1477,6 +1598,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "musician",
+    "phonetic": "/mjuˈzɪʃən/",
     "partOfSpeech": [
       "명"
     ],
@@ -1489,6 +1611,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "composer",
+    "phonetic": "/kəmˈpoʊzər/",
     "partOfSpeech": [
       "명"
     ],
@@ -1501,6 +1624,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "dream of",
+    "phonetic": "/driːm əv/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -1513,6 +1637,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "make a living",
+    "phonetic": "/meɪk ə ˈlɪvɪŋ/",
     "partOfSpeech": [
       "표현"
     ],
@@ -1526,6 +1651,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "fall",
+    "phonetic": "/fɔl/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1540,6 +1666,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "hide",
+    "phonetic": "/haɪd/",
     "partOfSpeech": [
       "동"
     ],
@@ -1553,6 +1680,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "push",
+    "phonetic": "/pʊʃ/",
     "partOfSpeech": [
       "동"
     ],
@@ -1565,6 +1693,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "pull",
+    "phonetic": "/pʊl/",
     "partOfSpeech": [
       "동"
     ],
@@ -1577,6 +1706,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "quickly",
+    "phonetic": "/ˈkwɪkli/",
     "partOfSpeech": [
       "부"
     ],
@@ -1589,6 +1719,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "break",
+    "phonetic": "/breɪk/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1603,6 +1734,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "blow",
+    "phonetic": "/bloʊ/",
     "partOfSpeech": [
       "동"
     ],
@@ -1616,6 +1748,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "lift",
+    "phonetic": "/lɪft/",
     "partOfSpeech": [
       "동"
     ],
@@ -1628,6 +1761,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "shake",
+    "phonetic": "/ʃeɪk/",
     "partOfSpeech": [
       "동"
     ],
@@ -1641,6 +1775,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "lie",
+    "phonetic": "/laɪ/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1655,6 +1790,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "action",
+    "phonetic": "/ˈækʃən/",
     "partOfSpeech": [
       "명"
     ],
@@ -1667,6 +1803,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "appear",
+    "phonetic": "/əˈpɪr/",
     "partOfSpeech": [
       "동"
     ],
@@ -1679,6 +1816,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "bend",
+    "phonetic": "/bɛnd/",
     "partOfSpeech": [
       "동"
     ],
@@ -1692,6 +1830,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "bite",
+    "phonetic": "/baɪt/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1706,6 +1845,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "chew",
+    "phonetic": "/tʃuː/",
     "partOfSpeech": [
       "동"
     ],
@@ -1718,6 +1858,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "grab",
+    "phonetic": "/ɡræb/",
     "partOfSpeech": [
       "동"
     ],
@@ -1730,6 +1871,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "bother",
+    "phonetic": "/ˈbɑðər/",
     "partOfSpeech": [
       "동"
     ],
@@ -1742,6 +1884,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "blink",
+    "phonetic": "/blɪŋk/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1755,6 +1898,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "tap",
+    "phonetic": "/tæp/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1768,6 +1912,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "treat",
+    "phonetic": "/triːt/",
     "partOfSpeech": [
       "동"
     ],
@@ -1780,6 +1925,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "pause",
+    "phonetic": "/pɔz/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1793,6 +1939,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "pretend",
+    "phonetic": "/prɪˈtɛnd/",
     "partOfSpeech": [
       "동"
     ],
@@ -1805,6 +1952,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "watch out (for)",
+    "phonetic": "/wɑtʃ aʊt (fɔr)/",
     "partOfSpeech": [
       "표현"
     ],
@@ -1817,6 +1965,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "be about to-v",
+    "phonetic": "/bi əˈbaʊt tə/",
     "partOfSpeech": [
       "표현"
     ],
@@ -1830,6 +1979,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "in a hurry",
+    "phonetic": "/ɪn ə ˈhɝːi/",
     "partOfSpeech": [
       "표현"
     ],
@@ -1842,6 +1992,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "agree",
+    "phonetic": "/əˈɡriː/",
     "partOfSpeech": [
       "동"
     ],
@@ -1854,6 +2005,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "decide",
+    "phonetic": "/dɪˈsaɪd/",
     "partOfSpeech": [
       "동"
     ],
@@ -1866,6 +2018,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "seem",
+    "phonetic": "/siːm/",
     "partOfSpeech": [
       "동"
     ],
@@ -1878,6 +2031,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "mind",
+    "phonetic": "/maɪnd/",
     "partOfSpeech": [
       "명",
       "동"
@@ -1891,6 +2045,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "allow",
+    "phonetic": "/əˈlaʊ/",
     "partOfSpeech": [
       "동"
     ],
@@ -1903,6 +2058,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "image",
+    "phonetic": "/ˈɪmɪdʒ/",
     "partOfSpeech": [
       "명"
     ],
@@ -1915,6 +2071,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "imagine",
+    "phonetic": "/ɪˈmædʒɪn/",
     "partOfSpeech": [
       "동"
     ],
@@ -1927,6 +2084,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "wonder",
+    "phonetic": "/ˈwʌndər/",
     "partOfSpeech": [
       "동",
       "명"
@@ -1940,6 +2098,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "clue",
+    "phonetic": "/kluː/",
     "partOfSpeech": [
       "명"
     ],
@@ -1952,6 +2111,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "point",
+    "phonetic": "/pɔɪnt/",
     "partOfSpeech": [
       "명",
       "동"
@@ -1965,6 +2125,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "expect",
+    "phonetic": "/ɪkˈspɛkt/",
     "partOfSpeech": [
       "동"
     ],
@@ -1977,6 +2138,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "prefer",
+    "phonetic": "/prɪˈfɝː/",
     "partOfSpeech": [
       "동"
     ],
@@ -1989,6 +2151,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "certain",
+    "phonetic": "/ˈsɝːtən/",
     "partOfSpeech": [
       "형"
     ],
@@ -2001,6 +2164,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "personal",
+    "phonetic": "/ˈpɝːsənəl/",
     "partOfSpeech": [
       "형"
     ],
@@ -2013,6 +2177,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "blame",
+    "phonetic": "/bleɪm/",
     "partOfSpeech": [
       "동"
     ],
@@ -2025,6 +2190,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "confuse",
+    "phonetic": "/kənˈfjuːz/",
     "partOfSpeech": [
       "동"
     ],
@@ -2037,6 +2203,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "attention",
+    "phonetic": "/əˈtɛnʃən/",
     "partOfSpeech": [
       "명"
     ],
@@ -2049,6 +2216,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "positive",
+    "phonetic": "/ˈpɑzətɪv/",
     "partOfSpeech": [
       "형"
     ],
@@ -2061,6 +2229,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "belief",
+    "phonetic": "/bɪˈliːf/",
     "partOfSpeech": [
       "명"
     ],
@@ -2073,6 +2242,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "admire",
+    "phonetic": "/ədˈmaɪər/",
     "partOfSpeech": [
       "동"
     ],
@@ -2085,6 +2255,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "hopefully",
+    "phonetic": "/ˈhoʊpfəli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2097,6 +2268,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "realize",
+    "phonetic": "/ˈriːəlaɪz/",
     "partOfSpeech": [
       "동"
     ],
@@ -2109,6 +2281,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "find out",
+    "phonetic": "/faɪnd aʊt/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2122,6 +2295,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "look forward to (v-ing)",
+    "phonetic": "/lʊk ˈfɔrwərd tə/",
     "partOfSpeech": [
       "표현"
     ],
@@ -2135,6 +2309,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "think of",
+    "phonetic": "/θɪŋk əv/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2148,6 +2323,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "tip",
+    "phonetic": "/tɪp/",
     "partOfSpeech": [
       "명"
     ],
@@ -2160,6 +2336,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "reason",
+    "phonetic": "/ˈriːzən/",
     "partOfSpeech": [
       "명"
     ],
@@ -2172,6 +2349,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "fact",
+    "phonetic": "/fækt/",
     "partOfSpeech": [
       "명"
     ],
@@ -2184,6 +2362,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "truth",
+    "phonetic": "/truθ/",
     "partOfSpeech": [
       "명"
     ],
@@ -2196,6 +2375,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "advise",
+    "phonetic": "/ədˈvaɪz/",
     "partOfSpeech": [
       "동"
     ],
@@ -2208,6 +2388,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "explain",
+    "phonetic": "/ɪkˈspleɪn/",
     "partOfSpeech": [
       "동"
     ],
@@ -2220,6 +2401,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "promise",
+    "phonetic": "/ˈprɑmɪs/",
     "partOfSpeech": [
       "동",
       "명"
@@ -2233,6 +2415,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "dialogue",
+    "phonetic": "/ˈdaɪəˌlɔɡ/",
     "partOfSpeech": [
       "명"
     ],
@@ -2245,6 +2428,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "excuse",
+    "phonetic": "/ɪkˈskjuːs, ɪkˈskjuːz/",
     "partOfSpeech": [
       "명",
       "동"
@@ -2258,6 +2442,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "text",
+    "phonetic": "/tɛkst/",
     "partOfSpeech": [
       "명",
       "동"
@@ -2271,6 +2456,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "message",
+    "phonetic": "/ˈmɛsɪdʒ/",
     "partOfSpeech": [
       "명"
     ],
@@ -2283,6 +2469,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "repeat",
+    "phonetic": "/rɪˈpiːt/",
     "partOfSpeech": [
       "동"
     ],
@@ -2295,6 +2482,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "express",
+    "phonetic": "/ɪkˈsprɛs/",
     "partOfSpeech": [
       "동"
     ],
@@ -2307,6 +2495,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "yell",
+    "phonetic": "/jɛl/",
     "partOfSpeech": [
       "동"
     ],
@@ -2319,6 +2508,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "complain",
+    "phonetic": "/kəmˈpleɪn/",
     "partOfSpeech": [
       "동"
     ],
@@ -2331,6 +2521,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "recommend",
+    "phonetic": "/ˌrɛkəˈmɛnd/",
     "partOfSpeech": [
       "동"
     ],
@@ -2343,6 +2534,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "communicate",
+    "phonetic": "/kəˈmjuːnəˌkeɪt/",
     "partOfSpeech": [
       "동"
     ],
@@ -2355,6 +2547,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "favor",
+    "phonetic": "/ˈfeɪvər/",
     "partOfSpeech": [
       "명"
     ],
@@ -2367,6 +2560,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "spread",
+    "phonetic": "/sprɛd/",
     "partOfSpeech": [
       "동",
       "명"
@@ -2381,6 +2575,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "detail",
+    "phonetic": "/ˈdiːteɪl/",
     "partOfSpeech": [
       "명"
     ],
@@ -2393,6 +2588,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "comment",
+    "phonetic": "/ˈkɑmɛnt/",
     "partOfSpeech": [
       "명",
       "동"
@@ -2406,6 +2602,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "respond",
+    "phonetic": "/rɪˈspɑnd/",
     "partOfSpeech": [
       "동"
     ],
@@ -2418,6 +2615,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "go on",
+    "phonetic": "/ɡoʊ ɑn/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2431,6 +2629,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "ask for",
+    "phonetic": "/æsk fɔr/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2443,6 +2642,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "in person",
+    "phonetic": "/ɪn ˈpɝːsən/",
     "partOfSpeech": [
       "표현"
     ],
@@ -2455,6 +2655,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "like",
+    "phonetic": "/laɪk/",
     "partOfSpeech": [
       "동",
       "전"
@@ -2468,6 +2669,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "please",
+    "phonetic": "/pliːz/",
     "partOfSpeech": [
       "감",
       "동"
@@ -2481,6 +2683,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "actually",
+    "phonetic": "/ˈæktʃuəli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2493,6 +2696,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "even",
+    "phonetic": "/ˈiːvən/",
     "partOfSpeech": [
       "부"
     ],
@@ -2505,6 +2709,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "anyway",
+    "phonetic": "/ˈɛniˌweɪ/",
     "partOfSpeech": [
       "부"
     ],
@@ -2517,6 +2722,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "instead",
+    "phonetic": "/ɪnˈstɛd/",
     "partOfSpeech": [
       "부"
     ],
@@ -2529,6 +2735,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "else",
+    "phonetic": "/ɛls/",
     "partOfSpeech": [
       "부"
     ],
@@ -2541,6 +2748,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "result",
+    "phonetic": "/rɪˈzʌlt/",
     "partOfSpeech": [
       "명"
     ],
@@ -2553,6 +2761,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "such",
+    "phonetic": "/sʌtʃ/",
     "partOfSpeech": [
       "형"
     ],
@@ -2565,6 +2774,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "surprisingly",
+    "phonetic": "/sərˈpraɪzɪŋli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2577,6 +2787,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "loudly",
+    "phonetic": "/ˈlaʊdli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2589,6 +2800,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "luckily",
+    "phonetic": "/ˈlʌkɪli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2601,6 +2813,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "easily",
+    "phonetic": "/ˈiːzɪli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2613,6 +2826,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "clearly",
+    "phonetic": "/ˈklɪrli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2625,6 +2839,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "especially",
+    "phonetic": "/ɪˈspɛʃəli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2637,6 +2852,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "completely",
+    "phonetic": "/kəmˈpliːtli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2649,6 +2865,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "recently",
+    "phonetic": "/ˈriːsəntli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2661,6 +2878,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "probably",
+    "phonetic": "/ˈprɑbəbli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2673,6 +2891,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "truly",
+    "phonetic": "/ˈtruːli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2685,6 +2904,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "yet",
+    "phonetic": "/jɛt/",
     "partOfSpeech": [
       "부"
     ],
@@ -2697,6 +2917,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "throughout",
+    "phonetic": "/θruˈaʊt/",
     "partOfSpeech": [
       "전"
     ],
@@ -2709,6 +2930,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "altogether",
+    "phonetic": "/ˌɔltəˈɡɛðər/",
     "partOfSpeech": [
       "부"
     ],
@@ -2721,6 +2943,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "for example",
+    "phonetic": "/fɔr ɪɡˈzæmpəl/",
     "partOfSpeech": [
       "표현"
     ],
@@ -2733,6 +2956,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "by the way",
+    "phonetic": "/baɪ ðə weɪ/",
     "partOfSpeech": [
       "표현"
     ],
@@ -2745,6 +2969,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "and so on",
+    "phonetic": "/ænd soʊ ɑn/",
     "partOfSpeech": [
       "표현"
     ],
@@ -2757,6 +2982,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "fix",
+    "phonetic": "/fɪks/",
     "partOfSpeech": [
       "동"
     ],
@@ -2769,6 +2995,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "leave",
+    "phonetic": "/liːv/",
     "partOfSpeech": [
       "동"
     ],
@@ -2782,6 +3009,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "spend",
+    "phonetic": "/spɛnd/",
     "partOfSpeech": [
       "동"
     ],
@@ -2795,6 +3023,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "cover",
+    "phonetic": "/ˈkʌvər/",
     "partOfSpeech": [
       "동",
       "명"
@@ -2808,6 +3037,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "rest",
+    "phonetic": "/rɛst/",
     "partOfSpeech": [
       "동",
       "명"
@@ -2821,6 +3051,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "relax",
+    "phonetic": "/rɪˈlæks/",
     "partOfSpeech": [
       "동"
     ],
@@ -2833,6 +3064,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "own",
+    "phonetic": "/oʊn/",
     "partOfSpeech": [
       "형",
       "동"
@@ -2846,6 +3078,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "feed",
+    "phonetic": "/fiːd/",
     "partOfSpeech": [
       "동"
     ],
@@ -2859,6 +3092,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "share",
+    "phonetic": "/ʃɛr/",
     "partOfSpeech": [
       "동",
       "명"
@@ -2872,6 +3106,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "place",
+    "phonetic": "/pleɪs/",
     "partOfSpeech": [
       "명",
       "동"
@@ -2885,6 +3120,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "set",
+    "phonetic": "/sɛt/",
     "partOfSpeech": [
       "동",
       "명"
@@ -2899,6 +3135,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "clear",
+    "phonetic": "/klɪr/",
     "partOfSpeech": [
       "형",
       "동"
@@ -2912,6 +3149,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "usually",
+    "phonetic": "/ˈjuːʒuəli/",
     "partOfSpeech": [
       "부"
     ],
@@ -2924,6 +3162,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "nap",
+    "phonetic": "/næp/",
     "partOfSpeech": [
       "명"
     ],
@@ -2936,6 +3175,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "press",
+    "phonetic": "/prɛs/",
     "partOfSpeech": [
       "동"
     ],
@@ -2948,6 +3188,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "remove",
+    "phonetic": "/rɪˈmuːv/",
     "partOfSpeech": [
       "동"
     ],
@@ -2960,6 +3201,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "contact",
+    "phonetic": "/ˈkɑnˌtækt/",
     "partOfSpeech": [
       "동",
       "명"
@@ -2973,6 +3215,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "wipe",
+    "phonetic": "/waɪp/",
     "partOfSpeech": [
       "동"
     ],
@@ -2985,6 +3228,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "daily",
+    "phonetic": "/ˈdeɪli/",
     "partOfSpeech": [
       "형",
       "부"
@@ -2998,6 +3242,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "regularly",
+    "phonetic": "/ˈrɛɡjələrli/",
     "partOfSpeech": [
       "부"
     ],
@@ -3010,6 +3255,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "ordinary",
+    "phonetic": "/ˈɔrdəˌnɛri/",
     "partOfSpeech": [
       "형"
     ],
@@ -3022,6 +3268,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "arrange",
+    "phonetic": "/əˈreɪndʒ/",
     "partOfSpeech": [
       "동"
     ],
@@ -3034,6 +3281,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "wake up",
+    "phonetic": "/weɪk ʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -3047,6 +3295,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "clean up",
+    "phonetic": "/kliːn ʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -3059,6 +3308,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "stay up (late)",
+    "phonetic": "/steɪ ʌp (leɪt)/",
     "partOfSpeech": [
       "표현"
     ],

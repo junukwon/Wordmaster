@@ -17,12 +17,13 @@ export function parseVocabularyMarkdown(markdown) {
 
     if (!/^\| \d{4} \|/.test(line) || currentDay === null) continue;
     const cells = line.slice(1, -1).split('|').map((cell) => cell.trim());
-    const [id, term, partOfSpeech, meaning, inflection] = cells;
+    const [id, term, phonetic, partOfSpeech, meaning, inflection] = cells;
     words.push({
       id,
       day: currentDay,
       topic: currentTopic,
       term,
+      phonetic,
       partOfSpeech: partOfSpeech.split('/').map((value) => value.trim()),
       meanings: [meaning],
       ...(inflection ? { inflection } : {}),
@@ -36,6 +37,7 @@ export function parseVocabularyMarkdown(markdown) {
     if (word.id !== expectedId) throw new Error(`Expected ${expectedId}, got ${word.id}`);
     if (ids.has(word.id)) throw new Error(`Duplicate id: ${word.id}`);
     if (!word.term || !word.meanings[0]) throw new Error(`Empty content: ${word.id}`);
+    if (!/^\/.+\/$/.test(word.phonetic)) throw new Error(`Invalid phonetic: ${word.id}`);
     ids.add(word.id);
   });
 
