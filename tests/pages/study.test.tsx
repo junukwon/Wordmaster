@@ -97,3 +97,12 @@ test('new-word progress counts rated target words instead of queue questions', (
   render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
   expect(screen.getByRole('progressbar', { name: '125개 신규 단어 진행률' })).toHaveAttribute('aria-valuenow', '1');
 });
+
+test('shows every selected DAY exactly and labels the selected word total', () => {
+  const { repository, speechPlayer } = services();
+  const session = createStudySession(words, [2, 7], [], fixedNow, identity);
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+  expect(screen.getByText('DAY 02 · DAY 07')).toBeInTheDocument();
+  expect(screen.getByRole('progressbar', { name: '50개 신규 단어 진행률' })).toBeInTheDocument();
+  expect(screen.queryByText(/DAY 02.*DAY 03/)).not.toBeInTheDocument();
+});

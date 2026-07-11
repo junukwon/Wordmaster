@@ -49,8 +49,10 @@ export function StudyPage({
     );
   }
 
-  const dayStart = Math.min(...session.targetDayIds);
-  const dayEnd = Math.max(...session.targetDayIds);
+  const selectedDaysLabel = session.targetDayIds
+    .map((day) => `DAY ${String(day).padStart(2, '0')}`)
+    .join(' · ');
+  const targetLabel = `${session.targetWordIds.length}개 신규 단어 진행률`;
   const targetSet = new Set(session.targetWordIds);
   const ratedTargetCount = repository.getAllWordProgress().filter(
     (progress) => targetSet.has(progress.wordId) && progress.confidence !== 'unknown',
@@ -78,12 +80,12 @@ export function StudyPage({
       <header className="study-header">
         <div>
           <Link className="back-link" to="/" aria-label="홈으로 돌아가기">← 홈</Link>
-          <p className="study-kicker">DAY {String(dayStart).padStart(2, '0')}–{String(dayEnd).padStart(2, '0')}</p>
+          <p className="study-kicker">{selectedDaysLabel}</p>
           <h1>집중 학습</h1>
         </div>
         <div className="study-progress" aria-live="polite">
           <strong>문제 {session.currentIndex + 1}</strong>
-          <ProgressBar value={ratedTargetCount} max={session.targetWordIds.length} label="125개 신규 단어 진행률" />
+          <ProgressBar value={ratedTargetCount} max={session.targetWordIds.length} label={targetLabel} />
         </div>
       </header>
 

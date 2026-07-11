@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
 import { HashRouter } from 'react-router-dom';
 import { loadVocabulary } from '../content/vocabulary';
-import { createStudySession, selectTargetDays } from '../domain/sessionEngine';
+import { buildDaySummaries } from '../domain/daySelection';
+import { createStudySession } from '../domain/sessionEngine';
 import { isReviewDue } from '../domain/reviewScheduler';
 import { LocalStorageProgressRepository } from '../storage/LocalStorageProgressRepository';
 import { SpeechPlayer } from '../speech/SpeechPlayer';
@@ -20,31 +21,29 @@ export function App() {
   const homeViewModel = useMemo<HomeViewModel>(() => {
     const activeSession = repository.loadActiveSession();
     const progress = repository.getAllWordProgress();
-    const targetDays = activeSession?.targetDayIds ?? selectTargetDays(vocabulary, progress);
-    const targetDaySet = new Set(targetDays);
-    const targetIds = activeSession?.targetWordIds ?? vocabulary.filter((word) => targetDaySet.has(word.day)).map((word) => word.id);
-    const targetSet = new Set(targetIds);
-    const targetProgress = progress.filter((item) => targetSet.has(item.wordId));
-    const strong = targetProgress.filter((item) => item.confidence === 'strong').length;
-    const uncertain = targetProgress.filter((item) => item.confidence === 'uncertain').length;
-    const weak = targetProgress.filter((item) => item.confidence === 'weak').length;
     return {
-      target: targetIds.length,
-      strong,
-      uncertain,
-      weak,
-      remaining: targetIds.length - strong - uncertain - weak,
+      days: buildDaySummaries(vocabulary, progress),
       dueReviews: progress.filter((item) => isReviewDue(item, new Date())).length,
       activeSession,
       storageError: repository.getLastError(),
     };
   }, [repository, revision]);
 
-  const startStudy = useCallback(() => {
-    if (!repository.loadActiveSession()) {
-      const progress = repository.getAllWordProgress();
-      repository.saveActiveSession(createStudySession(vocabulary, selectTargetDays(vocabulary, progress), progress, new Date()));
+  const startStudy = useCallback((targetDays: number[]): boolean => {
+    const previous = repository.loadActiveSession();
+    try {
+      const next = createStudySession(vocabulary, targetDays, repository.getAllWordProgress(), new Date());
+      repository.saveActiveSession(next);
+      if (repository.getLastError()) {
+        repository.saveActiveSession(previous);
+        refresh();
+        return false;
+      }
       refresh();
+      return true;
+    } catch {
+      refresh();
+      return false;
     }
   }, [repository, refresh]);
 
