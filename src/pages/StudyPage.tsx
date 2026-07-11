@@ -76,6 +76,7 @@ export function StudyPage({
     repository.saveActiveSession(updatedSession.completedAt ? null : updatedSession);
     onProgressChange?.();
     drawingRef.current?.clear();
+    setPhoneticWordId(null);
     setSession(updatedSession);
     setScreenState(updatedSession.completedAt ? 'complete' : 'prompting');
   };

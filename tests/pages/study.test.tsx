@@ -16,6 +16,13 @@ function spellingSession() {
   return session;
 }
 
+function repeatedWordSession() {
+  const session = createStudySession(words, [1], [], fixedNow, identity);
+  session.queue = [session.queue[0], session.queue[5]];
+  session.targetWordIds = ['0001'];
+  return session;
+}
+
 function services() {
   const repository = new LocalStorageProgressRepository(localStorage);
   const speechPlayer = { speak: vi.fn(() => true), isAvailable: () => true, getNotice: () => null };
@@ -76,6 +83,20 @@ test('reveals pronunciation when speech is unavailable and resets it after advan
   expect(skipButton).not.toBeNull();
   await userEvent.click(skipButton!);
   expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+});
+
+test('hides pronunciation when the same word returns in a later study item', async () => {
+  const { repository, speechPlayer } = services();
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={repeatedWordSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  await userEvent.click(screen.getByRole('button', { name: '발음 듣기' }));
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  const skipButton = document.querySelector<HTMLButtonElement>('.study-actions .button--secondary');
+  expect(skipButton).not.toBeNull();
+  await userEvent.click(skipButton!);
+
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+  expect(screen.getByText('무릎')).toBeInTheDocument();
 });
 
 test('answer reveal shows the term and rating buttons', async () => {
