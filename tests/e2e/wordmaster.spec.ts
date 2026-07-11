@@ -55,6 +55,10 @@ test('keeps pronunciation and safe reveal usable on iPad Mini', async ({ page },
   await expect(page.locator('.phonetic')).toBeVisible();
 
   const problemLabel = await page.locator('.study-progress > strong').textContent();
+  const prompt = page.locator('.prompt-meaning, .prompt-term');
+  const promptText = await prompt.textContent();
+  const progress = page.getByRole('progressbar', { name: '25개 신규 단어 진행률' });
+  await expect(progress).toHaveAttribute('aria-valuenow', '0');
   await page.getByRole('button', { name: '정답 보기' }).click({ clickCount: 2, delay: 20 });
   await expect(page.locator('.study-progress > strong')).toHaveText(problemLabel!);
   const strongRating = page.getByRole('button', { name: '기억남' });
@@ -67,6 +71,13 @@ test('keeps pronunciation and safe reveal usable on iPad Mini', async ({ page },
   }));
   expect(colors.actual).toBe('rgb(97, 115, 132)');
   expect(colors.expected).toBe('#617384');
+
+  await expect(strongRating).toBeEnabled();
+  await strongRating.click();
+  await expect(page.locator('.study-progress > strong')).toHaveText('문제 2');
+  await expect(progress).toHaveAttribute('aria-valuenow', '1');
+  await expect(prompt).not.toHaveText(promptText!);
+  await expect(page.getByRole('button', { name: '정답 보기' })).toBeVisible();
 });
 
 test('completes the saved study and on-demand test journey', async ({ page }) => {
