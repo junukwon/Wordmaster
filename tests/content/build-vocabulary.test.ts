@@ -36,7 +36,7 @@ test('contains the approved 250 words', () => {
   expect(words).toHaveLength(250);
   expect(words[0]).toMatchObject({ id: '0001', term: 'knee', phonetic: '/niː/', day: 1 });
   expect(words[249]).toMatchObject({
-    id: '0250', term: 'stay up (late)', phonetic: '/steɪ ʌp (leɪt)/', day: 10,
+    id: '0250', term: 'stay up (late)', phonetic: '/ˌsteɪ ˈʌp (ˈleɪt)/', day: 10,
   });
   expect(words.every((word) => /^\/.+\/$/.test(word.phonetic))).toBe(true);
   expect(new Set(words.map((word) => word.phonetic)).size).toBeGreaterThan(150);
@@ -50,9 +50,34 @@ test('contains reviewed American forms for phrases and meaning-sensitive entries
   expect(byTerm.get('excuse')).toBe('/ɪkˈskjuːs, ɪkˈskjuːz/');
   expect(byTerm.get('detail')).toBe('/ˈdiːteɪl/');
   expect(byTerm.get('be able to-v')).toBe('/bi ˈeɪbəl tə/');
-  expect(byTerm.get("blow one's nose")).toBe('/bloʊ wʌnz noʊz/');
+  expect(byTerm.get("blow one's nose")).toBe('/ˌbloʊ wʌnz ˈnoʊz/');
   expect(byTerm.get('look forward to (v-ing)')).toBe('/lʊk ˈfɔrwərd tə/');
-  expect(byTerm.get('by the way')).toBe('/baɪ ðə weɪ/');
+  expect(byTerm.get('by the way')).toBe('/baɪ ðə ˈweɪ/');
+});
+
+test('preserves reviewed citation stress for every affected multiword entry', () => {
+  const byId = new Map(words.map((word) => [word.id, word.phonetic]));
+  const expectedPhraseIpa = {
+    '0025': '/ɡroʊ ˈʌp/',
+    '0075': '/tʃɪr ˈʌp/',
+    '0099': '/ˈkɛr fɔr/',
+    '0100': '/ˌbloʊ wʌnz ˈnoʊz/',
+    '0124': '/ˈdriːm əv/',
+    '0148': '/ˌwɑtʃ ˈaʊt (fɔr)/',
+    '0173': '/ˌfaɪnd ˈaʊt/',
+    '0175': '/ˈθɪŋk əv/',
+    '0198': '/ˌɡoʊ ˈɑn/',
+    '0199': '/ˈæsk fɔr/',
+    '0224': '/baɪ ðə ˈweɪ/',
+    '0225': '/ænd ˌsoʊ ˈɑn/',
+    '0248': '/ˌweɪk ˈʌp/',
+    '0249': '/ˌkliːn ˈʌp/',
+    '0250': '/ˌsteɪ ˈʌp (ˈleɪt)/',
+  };
+
+  expect(Object.fromEntries(
+    Object.keys(expectedPhraseIpa).map((id) => [id, byId.get(id)]),
+  )).toEqual(expectedPhraseIpa);
 });
 
 test('publishes the same DAY data as an offline-cacheable asset', () => {

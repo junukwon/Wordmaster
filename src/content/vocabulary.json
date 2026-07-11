@@ -318,7 +318,7 @@
     "day": 1,
     "topic": "사람 묘사 I",
     "term": "grow up",
-    "phonetic": "/ɡroʊ ʌp/",
+    "phonetic": "/ɡroʊ ˈʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -978,7 +978,7 @@
     "day": 3,
     "topic": "기분, 감정",
     "term": "cheer up",
-    "phonetic": "/tʃɪr ʌp/",
+    "phonetic": "/tʃɪr ˈʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -1295,7 +1295,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "care for",
-    "phonetic": "/kɛr fɔr/",
+    "phonetic": "/ˈkɛr fɔr/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -1308,7 +1308,7 @@
     "day": 4,
     "topic": "건강, 질병",
     "term": "blow one's nose",
-    "phonetic": "/bloʊ wʌnz noʊz/",
+    "phonetic": "/ˌbloʊ wʌnz ˈnoʊz/",
     "partOfSpeech": [
       "표현"
     ],
@@ -1624,7 +1624,7 @@
     "day": 5,
     "topic": "관계, 직업",
     "term": "dream of",
-    "phonetic": "/driːm əv/",
+    "phonetic": "/ˈdriːm əv/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -1952,7 +1952,7 @@
     "day": 6,
     "topic": "행동, 동작",
     "term": "watch out (for)",
-    "phonetic": "/wɑtʃ aʊt (fɔr)/",
+    "phonetic": "/ˌwɑtʃ ˈaʊt (fɔr)/",
     "partOfSpeech": [
       "표현"
     ],
@@ -2281,7 +2281,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "find out",
-    "phonetic": "/faɪnd aʊt/",
+    "phonetic": "/ˌfaɪnd ˈaʊt/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2309,7 +2309,7 @@
     "day": 7,
     "topic": "사고, 생각",
     "term": "think of",
-    "phonetic": "/θɪŋk əv/",
+    "phonetic": "/ˈθɪŋk əv/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2615,7 +2615,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "go on",
-    "phonetic": "/ɡoʊ ɑn/",
+    "phonetic": "/ˌɡoʊ ˈɑn/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2629,7 +2629,7 @@
     "day": 8,
     "topic": "의사소통",
     "term": "ask for",
-    "phonetic": "/æsk fɔr/",
+    "phonetic": "/ˈæsk fɔr/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -2956,7 +2956,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "by the way",
-    "phonetic": "/baɪ ðə weɪ/",
+    "phonetic": "/baɪ ðə ˈweɪ/",
     "partOfSpeech": [
       "표현"
     ],
@@ -2969,7 +2969,7 @@
     "day": 9,
     "topic": "의미를 더해주는 어휘",
     "term": "and so on",
-    "phonetic": "/ænd soʊ ɑn/",
+    "phonetic": "/ænd ˌsoʊ ˈɑn/",
     "partOfSpeech": [
       "표현"
     ],
@@ -3281,7 +3281,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "wake up",
-    "phonetic": "/weɪk ʌp/",
+    "phonetic": "/ˌweɪk ˈʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -3295,7 +3295,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "clean up",
-    "phonetic": "/kliːn ʌp/",
+    "phonetic": "/ˌkliːn ˈʌp/",
     "partOfSpeech": [
       "구동사"
     ],
@@ -3308,7 +3308,7 @@
     "day": 10,
     "topic": "일상, 집안일",
     "term": "stay up (late)",
-    "phonetic": "/steɪ ʌp (leɪt)/",
+    "phonetic": "/ˌsteɪ ˈʌp (ˈleɪt)/",
     "partOfSpeech": [
       "표현"
     ],
