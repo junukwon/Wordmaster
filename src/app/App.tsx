@@ -8,6 +8,8 @@ import { LocalStorageProgressRepository } from '../storage/LocalStorageProgressR
 import { SpeechPlayer } from '../speech/SpeechPlayer';
 import type { HomeViewModel } from '../pages/HomePage';
 import { AppRouter } from './AppRouter';
+import { IndexedDbFanThemeRepository } from '../fanTheme/IndexedDbFanThemeRepository';
+import { FanThemeProvider } from '../fanTheme/FanThemeProvider';
 import '../styles/global.css';
 
 const vocabulary = loadVocabulary();
@@ -15,6 +17,7 @@ const vocabulary = loadVocabulary();
 export function App() {
   const [repository] = useState(() => new LocalStorageProgressRepository());
   const [speechPlayer] = useState(() => new SpeechPlayer());
+  const [fanThemeRepository] = useState(() => new IndexedDbFanThemeRepository(globalThis.indexedDB ?? ({} as IDBFactory)));
   const [startError, setStartError] = useState<string | null>(null);
   const [revision, setRevision] = useState(0);
   const refresh = useCallback(() => setRevision((value) => value + 1), []);
@@ -52,6 +55,7 @@ export function App() {
   }, [repository, refresh]);
 
   return (
+    <FanThemeProvider repository={fanThemeRepository}>
     <HashRouter>
       <AppRouter
         homeViewModel={homeViewModel}
@@ -62,5 +66,6 @@ export function App() {
         onDataChanged={refresh}
       />
     </HashRouter>
+    </FanThemeProvider>
   );
 }

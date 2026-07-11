@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { DaySelectionGrid } from '../components/DaySelectionGrid';
 import { SessionReplacementDialog } from '../components/SessionReplacementDialog';
+import { FanThemeImage } from '../components/FanThemeImage';
+import { FanThemeSettings } from '../components/FanThemeSettings';
+import { localDateThemeKey } from '../fanTheme/selection';
+import { useOptionalFanTheme } from '../fanTheme/useFanTheme';
 import type { DaySummary } from '../domain/daySelection';
 import type { StudySession } from '../domain/types';
 
@@ -16,14 +20,17 @@ type HomePageProps = {
   viewModel: HomeViewModel;
   onStartStudy?: (dayIds: number[]) => boolean;
   onOpenTest?: () => void;
+  now?: () => Date;
 };
 
-export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps) {
+export function HomePage({ viewModel, onStartStudy, onOpenTest, now = () => new Date() }: HomePageProps) {
   const [selectedDayIds, setSelectedDayIds] = useState<number[]>([]);
   const [replacementOpen, setReplacementOpen] = useState(false);
   const storageAlertRef = useRef<HTMLParagraphElement>(null);
   const previousStorageErrorRef = useRef<string | null | undefined>(undefined);
   const navigate = useNavigate();
+  const fanTheme = useOptionalFanTheme();
+  const [themeKey] = useState(() => localDateThemeKey(now()));
   const activeSession = viewModel.activeSession?.completedAt === null ? viewModel.activeSession : null;
   const selectedWordCount = selectedDayIds.reduce((total, day) =>
     total + (viewModel.days.find((summary) => summary.day === day)?.total ?? 0), 0);
@@ -77,6 +84,7 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
       )}
 
       <section className="routine-card" aria-labelledby="today-heading">
+        {fanTheme && <FanThemeImage contextKey={themeKey} className="home-theme-hero" ariaLabel="오늘의 팬테마" />}
         <div className="routine-card__eyebrow">오늘의 집중 학습</div>
         <div className="routine-card__title-row">
           <div>
@@ -93,6 +101,10 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
           </button>
           <Link className="button button--secondary" to="/test/setup" onClick={onOpenTest}>수시 단어 테스트</Link>
         </div>
+        {fanTheme && <details className="fan-theme-details">
+          <summary>팬테마 설정</summary>
+          <FanThemeSettings />
+        </details>}
       </section>
 
       {replacementOpen && activeSession && (

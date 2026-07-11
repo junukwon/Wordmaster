@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type { HomeViewModel } from '../../src/pages/HomePage';
 import { HomePage } from '../../src/pages/HomePage';
+import { FanThemeContext, type FanThemeContextValue } from '../../src/fanTheme/useFanTheme';
 
 const days = Array.from({ length: 10 }, (_, index) => ({
   day: index + 1,
@@ -34,6 +35,20 @@ function renderHome(model = viewModel, onStartStudy = vi.fn(() => true)) {
   );
   return onStartStudy;
 }
+
+test('renders one date-stable fan image only in the home hero and keeps settings local', async () => {
+  const value: FanThemeContextValue = {
+    status: { ready: true, enabled: true, imageCount: 1, totalBytes: 10, importing: false, processed: 0, total: 0, notice: null },
+    importFiles: vi.fn(async () => undefined), setEnabled: vi.fn(async () => undefined), deletePack: vi.fn(async () => undefined),
+    loadImageBlob: vi.fn(async () => new Blob(['x'])),
+  };
+  render(<FanThemeContext.Provider value={value}><MemoryRouter><HomePage viewModel={viewModel} now={() => new Date(2026, 6, 11)} /></MemoryRouter></FanThemeContext.Provider>);
+  expect(value.loadImageBlob).toHaveBeenCalledWith('home:2026-07-11');
+  await waitFor(() => expect(screen.getAllByTestId('fan-theme-foreground')).toHaveLength(1));
+  expect(screen.getAllByRole('button', { name: /DAY \d{2}/ })).toHaveLength(10);
+  expect(screen.getByText('팬테마 설정').closest('details')).not.toHaveAttribute('open');
+  expect(screen.queryByRole('link', { name: /갤러리/ })).not.toBeInTheDocument();
+});
 
 test('selects any DAY cards and starts the exact selection', async () => {
   const user = userEvent.setup();

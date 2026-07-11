@@ -16,6 +16,15 @@ a { color: inherit; }
 .routine-card__title-row { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin: .5rem 0 1.75rem; }
 .routine-card h2 { margin: 0 0 .4rem; font-size: clamp(2rem, 6vw, 3.5rem); letter-spacing: -.06em; }
 .routine-card p { margin: 0; color: var(--color-muted); line-height: 1.65; }
+.home-theme-hero { width: 100%; height: clamp(180px, 32vw, 340px); margin-bottom: 1.25rem; border-radius: var(--radius-md); background: #eef2f4; }
+.fan-theme-details { margin-top: 1rem; padding: 1rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: white; }
+.fan-theme-details > summary { min-height: 44px; font-weight: 900; cursor: pointer; }
+.fan-theme-settings { display: grid; gap: .9rem; padding-top: .75rem; }
+.fan-theme-settings__import, .fan-theme-settings__toggle { display: flex; min-height: 44px; align-items: center; gap: .75rem; }
+.fan-theme-settings__import { align-items: stretch; flex-direction: column; }
+.fan-theme-settings__import input { min-height: 44px; }
+.fan-theme-settings .button { width: fit-content; }
+.fan-theme-settings__notice { font-size: .9rem; }
 .review-pill { flex: none; padding: .75rem 1rem; border-radius: 999px; background: #fff4e7; color: #9a4d1b; font-weight: 800; }
 .active-session-card, .active-session-banner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; padding: 1rem 1.25rem; border-radius: var(--radius-md); background: var(--color-primary); color: white; }
 .active-session-banner > div { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }

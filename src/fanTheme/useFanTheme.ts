@@ -11,6 +11,10 @@ export type FanThemeContextValue = {
 
 export const FanThemeContext = createContext<FanThemeContextValue | null>(null);
 
+export function useOptionalFanTheme(): FanThemeContextValue | null {
+  return useContext(FanThemeContext);
+}
+
 export function useFanTheme(): FanThemeContextValue {
   const value = useContext(FanThemeContext);
   if (!value) throw new Error('useFanTheme must be used inside FanThemeProvider');
