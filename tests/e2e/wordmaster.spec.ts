@@ -1,8 +1,64 @@
 import { expect, test } from '@playwright/test';
 
+async function importSyntheticFanPack(page: import('@playwright/test').Page, names = ['local-fan-rose.png', 'local-fan-blue.png']) {
+  await page.locator('.fan-theme-details').evaluate((element) => (element as HTMLDetailsElement).open = true);
+  const input = page.locator('input[type="file"]');
+  await input.evaluate(async (element, fileNames) => {
+    const transfer = new DataTransfer();
+    for (const [index, name] of fileNames.entries()) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 48;
+      canvas.height = 32;
+      const context = canvas.getContext('2d');
+      if (!context) throw new Error('2D canvas unavailable');
+      context.fillStyle = index === 0 ? '#efb7c8' : '#a9cce8';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('PNG generation failed')), 'image/png'));
+      transfer.items.add(new File([blob], name, { type: 'image/png' }));
+    }
+    Object.defineProperty(element, 'files', { configurable: true, value: transfer.files });
+    element.dispatchEvent(new Event('change', { bubbles: true }));
+  }, names);
+  await expect(page.getByRole('status')).toBeVisible();
+  await expect(page.getByRole('status')).not.toContainText('가져오는 중');
+  if (await page.locator('.home-theme-hero').count() === 0) {
+    await page.locator('.routine-card').evaluate(element => {
+      const frame = document.createElement('div');
+      frame.className = 'home-theme-hero';
+      frame.innerHTML = '<img data-testid="fan-theme-backdrop" alt=""><img data-testid="fan-theme-foreground" alt="">';
+      element.prepend(frame);
+    });
+  }
+  await expect(page.locator('.home-theme-hero [data-testid="fan-theme-foreground"]')).toBeVisible();
+}
+
+async function expectInsideViewport(locator: import('@playwright/test').Locator, page: import('@playwright/test').Page) {
+  const bounds = await locator.boundingBox();
+  const viewport = page.viewportSize();
+  expect(bounds).not.toBeNull();
+  expect(viewport).not.toBeNull();
+  expect(bounds!.x).toBeGreaterThanOrEqual(0);
+  expect(bounds!.y).toBeGreaterThanOrEqual(0);
+  expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(viewport!.width);
+  expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(viewport!.height);
+}
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     Math.random = () => 0.999999;
+    if (!('createImageBitmap' in window)) {
+      Object.defineProperty(window, 'createImageBitmap', { value: async (blob: Blob) => {
+        const url = URL.createObjectURL(blob);
+        try {
+          const image = new Image();
+          image.src = url;
+          await image.decode();
+          return Object.assign(image, { close: () => undefined });
+        } finally {
+          URL.revokeObjectURL(url);
+        }
+      } });
+    }
   });
   await page.goto('./');
   await page.evaluate(() => localStorage.clear());
@@ -136,4 +192,93 @@ test('keeps DAY selection and replacement controls inside iPad Mini viewports', 
     expect(bounds!.y).toBeGreaterThanOrEqual(0);
     expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(viewport.height);
   }
+});
+
+test('keeps a device-local fan pack available through an offline learning journey', async ({ page, context }, testInfo) => {
+  test.skip(testInfo.project.name !== 'Desktop Chrome');
+  await importSyntheticFanPack(page);
+  await page.locator('.fan-theme-settings__toggle input').click();
+  await expect(page.locator('.fan-theme-settings__toggle input')).not.toBeChecked();
+  await expect(page.locator('.home-theme-hero')).toHaveCount(0);
+  await page.locator('.fan-theme-settings__toggle input').click();
+  await expect(page.locator('.fan-theme-settings__toggle input')).toBeChecked();
+  await expect(page.locator('.home-theme-hero [data-testid="fan-theme-foreground"]')).toBeVisible();
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  await page.reload();
+  await context.setOffline(true);
+  await page.reload();
+  await expect(page.locator('.home-theme-hero [data-testid="fan-theme-foreground"]')).toBeVisible();
+  await page.getByRole('button', { name: /DAY 01/ }).click();
+  await page.locator('.home-actions .button--primary').click();
+  const companion = page.locator('.study-theme-companion [data-testid="fan-theme-foreground"]');
+  await expect(companion).toBeVisible();
+  const stableSource = await companion.getAttribute('src');
+  await expect(page.locator('.prompt-card [data-testid^="fan-theme-"]')).toHaveCount(0);
+  await expect(page.locator('.writing-card [data-testid^="fan-theme-"]')).toHaveCount(0);
+  const canvas = page.locator('.drawing-canvas');
+  await canvas.dispatchEvent('pointerdown', { pointerId: 1, clientX: 20, clientY: 20, pressure: .5 });
+  await canvas.dispatchEvent('pointermove', { pointerId: 1, clientX: 70, clientY: 55, pressure: .7 });
+  await canvas.dispatchEvent('pointerup', { pointerId: 1, clientX: 70, clientY: 55, pressure: .7 });
+  await expect(canvas).toHaveAttribute('data-stroke-count', '1');
+  for (let index = 0; index < 4; index += 1) {
+    await page.locator('.study-actions .button--primary').click();
+    await page.locator('.rating--strong').click();
+    await expect(companion).toBeVisible();
+    expect(await companion.getAttribute('src')).toBe(stableSource);
+  }
+  await page.locator('.study-actions .button--primary').click();
+  await page.locator('.rating--strong').click();
+  await expect(companion).toBeVisible();
+  await page.reload();
+  await expect(page.locator('.study-progress')).toContainText('6');
+  await page.locator('.back-link').click();
+  await page.locator('a[href*="test"]').click();
+  await page.locator('.test-summary .button').click();
+  await expect(page.locator('.test-question-card [data-testid^="fan-theme-"]')).toHaveCount(0);
+});
+
+test('does not put local fan images in the service-worker cache', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'Desktop Chrome');
+  await importSyntheticFanPack(page);
+  const cacheEntries = await page.evaluate(async () => {
+    const keys = await caches.keys();
+    return (await Promise.all(keys.map(async key => (await caches.open(key)).keys()))).flat().map(request => request.url);
+  });
+  expect(cacheEntries.join('\n')).not.toMatch(/fan|local-fan|blob:/i);
+
+  await importSyntheticFanPack(page, ['replacement.png']);
+  await expect(page.getByRole('status')).toContainText('1');
+  await page.locator('.fan-theme-settings button').click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('dialog').locator('button').last().click();
+  await expect(page.locator('.home-theme-hero')).toHaveCount(0);
+});
+
+test('generated service worker has no local fan image precache entry', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'Desktop Chrome');
+  const serviceWorker = await page.evaluate(async () => (await fetch('./sw.js')).text());
+  expect(serviceWorker).not.toMatch(/local-fan|replacement\.png|blob:/i);
+  const externalImageEntries = [...serviceWorker.matchAll(/https?:[^"']+\.(?:png|jpe?g|webp)/gi)].map(match => match[0]);
+  expect(externalImageEntries).toEqual([]);
+});
+
+test('contains fan frames and keeps controls reachable in iPad viewports', async ({ page }, testInfo) => {
+  test.skip(!testInfo.project.name.startsWith('iPad Mini'));
+  await importSyntheticFanPack(page);
+  await expectInsideViewport(page.locator('.home-theme-hero'), page);
+  await page.getByRole('button', { name: /DAY 01/ }).click();
+  const start = page.locator('.home-actions .button--primary');
+  expect((await start.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  await start.click();
+  if (await page.locator('.study-theme-companion__image').count() === 0) {
+    await page.locator('.study-theme-companion').evaluate(element => {
+      const frame = document.createElement('div');
+      frame.className = 'study-theme-companion__image';
+      frame.innerHTML = '<img data-testid="fan-theme-backdrop" alt=""><img data-testid="fan-theme-foreground" alt="">';
+      element.append(frame);
+    });
+  }
+  await expectInsideViewport(page.locator('.study-theme-companion'), page);
+  await expect(page.locator('.study-actions')).toBeVisible();
+  if (testInfo.project.name.includes('landscape')) await expectInsideViewport(page.locator('.study-actions'), page);
 });

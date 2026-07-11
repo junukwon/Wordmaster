@@ -16,7 +16,7 @@ export default defineConfig({
       manifest: {
         name: 'WordMaster 영어 단어 학습',
         short_name: 'WordMaster',
-        description: 'Apple Pencil로 하루 125개 영어 단어를 집중 학습합니다.',
+        description: '원하는 DAY를 골라 Apple Pencil로 영어 단어를 집중 학습합니다.',
         theme_color: '#284b63',
         background_color: '#eef3f6',
         display: 'standalone',
@@ -42,7 +42,7 @@ export default defineConfig({
             options: { cacheName: 'wordmaster-pages', networkTimeoutSeconds: 3 },
           },
           {
-            urlPattern: ({ request }) => ['script', 'style', 'image', 'font', 'worker'].includes(request.destination),
+            urlPattern: ({ request, url }) => url.protocol.startsWith('http') && ['script', 'style', 'image', 'font', 'worker'].includes(request.destination),
             handler: 'CacheFirst',
             options: {
               cacheName: 'wordmaster-static',
