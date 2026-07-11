@@ -60,11 +60,11 @@ export async function optimizeFanImage(file: File, codec: FanImageCodec = browse
     const height = Math.max(1, Math.round(decoded.height * scale));
     let blob = await codec.encode(decoded.source, width, height, 'image/webp', 0.70);
     let mimeType: OptimizedFanImage['mimeType'] = 'image/webp';
-    if (!blob) {
+    if (blob?.type !== 'image/webp') {
       blob = await codec.encode(decoded.source, width, height, 'image/jpeg', 0.72);
       mimeType = 'image/jpeg';
     }
-    if (!blob) throw new Error('Image encoding failed');
+    if (!blob || blob.type !== mimeType) throw new Error('Image encoding failed');
     return { blob, width, height, mimeType };
   } finally {
     decoded.dispose();

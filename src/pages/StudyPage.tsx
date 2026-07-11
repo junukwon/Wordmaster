@@ -43,7 +43,7 @@ export function StudyPage({
   if (!session || !item || !word || screenState === 'complete') {
     return (
       <main className="page study-page study-page--complete">
-        {session && <FanThemeImage contextKey={`study-result:${session.id}`} className="study-result-theme" ariaLabel="학습 완료 팬테마" />}
+        {session && <FanThemeImage contextKey={`study-result:${session.id}`} className="study-result-theme" />}
         <h1>집중 학습</h1>
         <p>{session?.completedAt ? '오늘의 학습을 마쳤어요.' : '이어갈 학습 세션이 없습니다.'}</p>
         <Link className="button button--primary" to="/">홈으로 돌아가기</Link>
@@ -92,7 +92,7 @@ export function StudyPage({
       </header>
 
       <div className="study-layout">
-        <aside className="study-theme-companion" aria-label="학습 팬테마">
+        <aside className="study-theme-companion" aria-hidden="true">
           <FanThemeImage contextKey={`study:${session.id}:${item.blockId}`} className="study-theme-companion__image" />
         </aside>
         <section className="prompt-card" aria-label="현재 문제">

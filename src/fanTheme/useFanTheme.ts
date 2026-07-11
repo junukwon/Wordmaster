@@ -3,6 +3,7 @@ import type { FanThemeStatus } from './types';
 
 export type FanThemeContextValue = {
   status: FanThemeStatus;
+  packRevision: string | null;
   importFiles(files: readonly File[]): Promise<void>;
   setEnabled(enabled: boolean): Promise<void>;
   deletePack(): Promise<void>;

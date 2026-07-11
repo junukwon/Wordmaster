@@ -4,10 +4,10 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 import { FanThemeContext, type FanThemeContextValue } from '../../src/fanTheme/useFanTheme';
 import { FanThemeImage } from '../../src/components/FanThemeImage';
 
-function Provider({ blob, enabled = true, children }: PropsWithChildren<{ blob: Blob | null | Promise<Blob | null>; enabled?: boolean }>) {
+function Provider({ blob, enabled = true, packRevision = 'pack-1', children }: PropsWithChildren<{ blob: Blob | null | Promise<Blob | null>; enabled?: boolean; packRevision?: string }>) {
   const value: FanThemeContextValue = {
     status: { ready: true, enabled, imageCount: blob ? 1 : 0, totalBytes: 1, importing: false, processed: 0, total: 0, notice: null },
-    importFiles: vi.fn(), setEnabled: vi.fn(), deletePack: vi.fn(), loadImageBlob: vi.fn(async () => blob),
+    packRevision, importFiles: vi.fn(), setEnabled: vi.fn(), deletePack: vi.fn(), loadImageBlob: vi.fn(async () => blob),
   };
   return <FanThemeContext.Provider value={value}>{children}</FanThemeContext.Provider>;
 }
@@ -66,7 +66,7 @@ describe('FanThemeImage', () => {
     vi.spyOn(URL, 'createObjectURL').mockImplementation(blob => blob === newBlob ? 'blob:new' : 'blob:old');
     const value: FanThemeContextValue = {
       status: { ready: true, enabled: true, imageCount: 2, totalBytes: 2, importing: false, processed: 0, total: 0, notice: null },
-      importFiles: vi.fn(), setEnabled: vi.fn(), deletePack: vi.fn(), loadImageBlob,
+      packRevision: 'pack-1', importFiles: vi.fn(), setEnabled: vi.fn(), deletePack: vi.fn(), loadImageBlob,
     };
     function Harness() {
       const [key, setKey] = useState('old');
@@ -79,5 +79,25 @@ describe('FanThemeImage', () => {
     resolveOld(oldBlob);
     await waitFor(() => expect(URL.createObjectURL).toHaveBeenCalledTimes(1));
     expect(screen.getByTestId('fan-theme-foreground')).toHaveAttribute('src', 'blob:new');
+  });
+
+  test('reloads and revokes the old URL when a same-count pack replaces the active pack', async () => {
+    const oldBlob = new Blob(['old']);
+    const newBlob = new Blob(['new']);
+    vi.spyOn(URL, 'createObjectURL').mockImplementation(blob => blob === oldBlob ? 'blob:old' : 'blob:new');
+    const revoke = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined);
+    const view = render(<Provider blob={oldBlob} packRevision="pack-old"><FanThemeImage contextKey="home:key" /></Provider>);
+    expect(await screen.findByTestId('fan-theme-foreground')).toHaveAttribute('src', 'blob:old');
+    view.rerender(<Provider blob={newBlob} packRevision="pack-new"><FanThemeImage contextKey="home:key" /></Provider>);
+    expect(await screen.findByTestId('fan-theme-foreground')).toHaveAttribute('src', 'blob:new');
+    expect(revoke).toHaveBeenCalledWith('blob:old');
+  });
+
+  test('keeps both rendered images out of the accessibility tree', async () => {
+    vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:fan');
+    render(<Provider blob={new Blob(['x'])}><FanThemeImage contextKey="home:key" /></Provider>);
+    expect(await screen.findByTestId('fan-theme-foreground')).toHaveAttribute('alt', '');
+    expect(screen.getByTestId('fan-theme-foreground')).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 });

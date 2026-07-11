@@ -135,9 +135,11 @@ export function FanThemeProvider({ repository, importer = importFanThemePack, ch
     if (!current.ready || !current.enabled || !pack) return null;
     const index = selectFanImageIndex(contextKey, pack.imageCount);
     if (index === null) return null;
-    return (await repository.getImage(pack.id, index))?.blob ?? null;
+    const record = await repository.getImage(pack.id, index);
+    if (packRef.current?.id !== pack.id) return null;
+    return record?.blob ?? null;
   }, [repository]);
 
-  const value = useMemo(() => ({ status, importFiles, setEnabled, deletePack, loadImageBlob }), [status, importFiles, setEnabled, deletePack, loadImageBlob]);
+  const value = useMemo(() => ({ status, packRevision: packRef.current?.id ?? null, importFiles, setEnabled, deletePack, loadImageBlob }), [status, importFiles, setEnabled, deletePack, loadImageBlob]);
   return <FanThemeContext.Provider value={value}>{children}</FanThemeContext.Provider>;
 }

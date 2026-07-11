@@ -4,6 +4,7 @@ import { FanThemeSettings } from '../../src/components/FanThemeSettings';
 import { FanThemeContext, type FanThemeContextValue } from '../../src/fanTheme/useFanTheme';
 
 const base: FanThemeContextValue = {
+  packRevision: null,
   status: { ready: true, enabled: true, imageCount: 2, totalBytes: 1_500_000, importing: false, processed: 0, total: 0, notice: null },
   importFiles: vi.fn(async () => undefined), setEnabled: vi.fn(async () => undefined),
   deletePack: vi.fn(async () => undefined), loadImageBlob: vi.fn(async () => null),

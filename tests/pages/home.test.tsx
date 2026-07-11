@@ -38,6 +38,7 @@ function renderHome(model = viewModel, onStartStudy = vi.fn(() => true)) {
 
 test('renders one date-stable fan image only in the home hero and keeps settings local', async () => {
   const value: FanThemeContextValue = {
+    packRevision: 'active',
     status: { ready: true, enabled: true, imageCount: 1, totalBytes: 10, importing: false, processed: 0, total: 0, notice: null },
     importFiles: vi.fn(async () => undefined), setEnabled: vi.fn(async () => undefined), deletePack: vi.fn(async () => undefined),
     loadImageBlob: vi.fn(async () => new Blob(['x'])),

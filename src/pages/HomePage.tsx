@@ -84,7 +84,7 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest, now = () => new 
       )}
 
       <section className="routine-card" aria-labelledby="today-heading">
-        {fanTheme && <FanThemeImage contextKey={themeKey} className="home-theme-hero" ariaLabel="오늘의 팬테마" />}
+        {fanTheme && <FanThemeImage contextKey={themeKey} className="home-theme-hero" />}
         <div className="routine-card__eyebrow">오늘의 집중 학습</div>
         <div className="routine-card__title-row">
           <div>

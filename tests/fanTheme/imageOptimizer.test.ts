@@ -48,6 +48,20 @@ describe('fan image optimizer', () => {
     expect(value.encode).toHaveBeenLastCalledWith(expect.anything(), 100, 50, 'image/jpeg', 0.72);
   });
 
+  test('falls back to JPEG when a WebP request returns a non-WebP blob', async () => {
+    const { value } = codec(100, 50, new Blob(['png'], { type: 'image/png' }));
+    const optimized = await optimizeFanImage(new File([bytes(0xff, 0xd8, 0xff)], 'photo.jpg'), value);
+    expect(optimized.mimeType).toBe('image/jpeg');
+    expect(value.encode).toHaveBeenLastCalledWith(expect.anything(), 100, 50, 'image/jpeg', 0.72);
+  });
+
+  test('rejects output when neither encoder returns its requested MIME type', async () => {
+    const { value } = codec(100, 50, new Blob(['png'], { type: 'image/png' }));
+    vi.mocked(value.encode).mockImplementation(async (_source, _width, _height, mime) =>
+      new Blob(['wrong'], { type: mime === 'image/webp' ? 'image/png' : 'image/webp' }));
+    await expect(optimizeFanImage(new File([bytes(0xff, 0xd8, 0xff)], 'photo.jpg'), value)).rejects.toThrow('Image encoding failed');
+  });
+
   test('disposes a decoded image when encoding fails', async () => {
     const { value, dispose } = codec(100, 50);
     vi.mocked(value.encode).mockRejectedValue(new Error('encode failed'));

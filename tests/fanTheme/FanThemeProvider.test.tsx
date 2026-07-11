@@ -47,6 +47,22 @@ describe('FanThemeProvider', () => {
     expect(repo.getImage).toHaveBeenCalledWith('active', selectFanImageIndex('home:2026-07-11', pack.imageCount));
   });
 
+  test('rejects an image read that finishes after the active pack is replaced', async () => {
+    const repo = repository();
+    const staleRead = deferred<Awaited<ReturnType<FanThemeRepository['getImage']>>>();
+    vi.mocked(repo.getImage).mockImplementationOnce(async () => staleRead.promise);
+    const replacement = { ...pack, id: 'replacement', imageCount: pack.imageCount };
+    vi.mocked(repo.getActivePack).mockResolvedValueOnce(pack).mockResolvedValue(replacement);
+    const importer = vi.fn(async () => ({ imported: replacement.imageCount, skipped: 0, totalBytes: replacement.totalBytes }));
+    render(<FanThemeProvider repository={repo} importer={importer}><Probe /></FanThemeProvider>);
+    await waitFor(() => expect(api.status.ready).toBe(true));
+    const read = api.loadImageBlob('home:key');
+    await act(() => api.importFiles([new File(['x'], 'x.jpg')]));
+    staleRead.resolve({ packId: pack.id, index: 0, blob: new Blob(['stale']), width: 1, height: 1 });
+    await expect(read).resolves.toBeNull();
+    expect(api.packRevision).toBe('replacement');
+  });
+
   test('reports import progress then refreshes metadata and enables the theme', async () => {
     const repo = repository(null, false);
     const importedPack = { ...pack, imageCount: 2, totalBytes: 20 };

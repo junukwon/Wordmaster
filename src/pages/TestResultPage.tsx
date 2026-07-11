@@ -22,7 +22,7 @@ export function TestResultPage({ attempt, words, onRetryWrong, onPracticeWrong }
         <strong>{summary.score}점</strong>
         <span>{summary.correct} 맞음 · {summary.uncertain} 헷갈림 · {summary.incorrect} 틀림</span>
       </header>
-      <FanThemeImage contextKey={`test-result:${attempt.id}`} className="test-result-theme" ariaLabel="테스트 결과 팬테마" />
+      <FanThemeImage contextKey={`test-result:${attempt.id}`} className="test-result-theme" />
       <div className="result-breakdowns">
         <section><h2>DAY별 결과</h2>{Object.entries(summary.byDay).map(([day, value]) => <p key={day}>DAY {String(day).padStart(2, '0')} <strong>{value.correct}/{value.total}</strong></p>)}</section>
         <section><h2>유형별 결과</h2>{Object.entries(summary.byType).filter(([, value]) => value.total > 0).map(([type, value]) => <p key={type}>{typeLabels[type as QuestionType]} <strong>{value.correct}/{value.total}</strong></p>)}</section>
