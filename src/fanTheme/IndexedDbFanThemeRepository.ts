@@ -60,63 +60,84 @@ export class IndexedDbFanThemeRepository implements FanThemeRepository {
 
   async initialize(): Promise<void> {
     const database = await this.openDatabase();
-    const transaction = database.transaction([PACKS_STORE, IMAGES_STORE], 'readwrite');
-    const packs = transaction.objectStore(PACKS_STORE);
-    const images = transaction.objectStore(IMAGES_STORE);
-    const request = packs.openCursor();
-    request.onsuccess = () => {
-      const cursor = request.result;
-      if (!cursor) return;
-      const pack = cursor.value as FanThemePackMeta;
-      if (pack.status === 'staging') {
-        cursor.delete();
-        deleteImagesForPack(images, pack.id);
-      }
-      cursor.continue();
-    };
-    await transactionDone(transaction);
-    database.close();
+    try {
+      const transaction = database.transaction([PACKS_STORE, IMAGES_STORE], 'readwrite');
+      const packs = transaction.objectStore(PACKS_STORE);
+      const images = transaction.objectStore(IMAGES_STORE);
+      const request = packs.openCursor();
+      request.onsuccess = () => {
+        const cursor = request.result;
+        if (!cursor) return;
+        const pack = cursor.value as FanThemePackMeta;
+        if (pack.status === 'staging') {
+          cursor.delete();
+          deleteImagesForPack(images, pack.id);
+        }
+        cursor.continue();
+      };
+      await transactionDone(transaction);
+    } finally {
+      database.close();
+    }
   }
 
   async beginPack(packId: string, createdAt: string): Promise<void> {
     const database = await this.openDatabase();
-    const transaction = database.transaction(PACKS_STORE, 'readwrite');
-    transaction.objectStore(PACKS_STORE).put({
-      id: packId,
-      status: 'staging',
-      imageCount: 0,
-      totalBytes: 0,
-      createdAt,
-      mimeType: 'mixed',
-    } satisfies FanThemePackMeta);
-    await transactionDone(transaction);
-    database.close();
+    const transaction = database.transaction([PACKS_STORE, SETTINGS_STORE], 'readwrite');
+    let collisionError: Error | null = null;
+    const activeRequest = transaction.objectStore(SETTINGS_STORE).get(ACTIVE_PACK_KEY);
+    activeRequest.onsuccess = () => {
+      const activeId = (activeRequest.result as SettingRecord | undefined)?.value;
+      if (activeId === packId) {
+        collisionError = new Error('Cannot stage a pack using the active pack id');
+        transaction.abort();
+        return;
+      }
+      transaction.objectStore(PACKS_STORE).put({
+        id: packId,
+        status: 'staging',
+        imageCount: 0,
+        totalBytes: 0,
+        createdAt,
+        mimeType: 'mixed',
+      } satisfies FanThemePackMeta);
+    };
+    try {
+      await transactionDone(transaction);
+    } catch (error) {
+      throw collisionError ?? error;
+    } finally {
+      database.close();
+    }
   }
 
   async addStagedImage(record: FanThemeImageRecord): Promise<void> {
     const database = await this.openDatabase();
-    const transaction = database.transaction([PACKS_STORE, IMAGES_STORE], 'readwrite');
-    const packRequest = transaction.objectStore(PACKS_STORE).get(record.packId);
-    packRequest.onsuccess = () => {
-      const pack = packRequest.result as FanThemePackMeta | undefined;
-      if (!pack || pack.status !== 'staging') {
-        transaction.abort();
-        return;
-      }
-      const images = transaction.objectStore(IMAGES_STORE);
-      const previousRequest = images.get([record.packId, record.index]);
-      previousRequest.onsuccess = () => {
-        const previous = previousRequest.result as FanThemeImageRecord | undefined;
-        images.put(record);
-        transaction.objectStore(PACKS_STORE).put({
-          ...pack,
-          imageCount: pack.imageCount + (previous ? 0 : 1),
-          totalBytes: pack.totalBytes - (previous?.blob.size ?? 0) + record.blob.size,
-        } satisfies FanThemePackMeta);
+    try {
+      const transaction = database.transaction([PACKS_STORE, IMAGES_STORE], 'readwrite');
+      const packRequest = transaction.objectStore(PACKS_STORE).get(record.packId);
+      packRequest.onsuccess = () => {
+        const pack = packRequest.result as FanThemePackMeta | undefined;
+        if (!pack || pack.status !== 'staging') {
+          transaction.abort();
+          return;
+        }
+        const images = transaction.objectStore(IMAGES_STORE);
+        const previousRequest = images.get([record.packId, record.index]);
+        previousRequest.onsuccess = () => {
+          const previous = previousRequest.result as FanThemeImageRecord | undefined;
+          images.put(record);
+          transaction.objectStore(PACKS_STORE).put({
+            ...pack,
+            imageCount: pack.imageCount + (previous ? 0 : 1),
+            totalBytes: pack.totalBytes - (previous?.blob.size ?? 0) + record.blob.size,
+          } satisfies FanThemePackMeta);
+        };
       };
-    };
-    await transactionDone(transaction);
-    database.close();
+      await transactionDone(transaction);
+    } finally {
+      database.close();
+    }
   }
 
   async activatePack(meta: FanThemePackMeta): Promise<void> {
@@ -179,68 +200,98 @@ export class IndexedDbFanThemeRepository implements FanThemeRepository {
 
   async abortPack(packId: string): Promise<void> {
     const database = await this.openDatabase();
-    const transaction = database.transaction([PACKS_STORE, IMAGES_STORE], 'readwrite');
-    transaction.objectStore(PACKS_STORE).delete(packId);
-    deleteImagesForPack(transaction.objectStore(IMAGES_STORE), packId);
-    await transactionDone(transaction);
-    database.close();
+    const transaction = database.transaction([PACKS_STORE, IMAGES_STORE, SETTINGS_STORE], 'readwrite');
+    const packs = transaction.objectStore(PACKS_STORE);
+    const images = transaction.objectStore(IMAGES_STORE);
+    const activeRequest = transaction.objectStore(SETTINGS_STORE).get(ACTIVE_PACK_KEY);
+    activeRequest.onsuccess = () => {
+      const activeId = (activeRequest.result as SettingRecord | undefined)?.value;
+      if (activeId === packId) return;
+      const packRequest = packs.get(packId);
+      packRequest.onsuccess = () => {
+        const pack = packRequest.result as FanThemePackMeta | undefined;
+        if (pack?.status !== 'staging') return;
+        packs.delete(packId);
+        deleteImagesForPack(images, packId);
+      };
+    };
+    try {
+      await transactionDone(transaction);
+    } finally {
+      database.close();
+    }
   }
 
   async getActivePack(): Promise<FanThemePackMeta | null> {
     const database = await this.openDatabase();
-    const transaction = database.transaction([PACKS_STORE, SETTINGS_STORE]);
-    const active = await requestResult(transaction.objectStore(SETTINGS_STORE).get(ACTIVE_PACK_KEY)) as SettingRecord | undefined;
-    const pack = typeof active?.value === 'string'
-      ? await requestResult(transaction.objectStore(PACKS_STORE).get(active.value)) as FanThemePackMeta | undefined
-      : undefined;
-    await transactionDone(transaction);
-    database.close();
-    return pack ?? null;
+    try {
+      const transaction = database.transaction([PACKS_STORE, SETTINGS_STORE]);
+      const active = await requestResult(transaction.objectStore(SETTINGS_STORE).get(ACTIVE_PACK_KEY)) as SettingRecord | undefined;
+      const pack = typeof active?.value === 'string'
+        ? await requestResult(transaction.objectStore(PACKS_STORE).get(active.value)) as FanThemePackMeta | undefined
+        : undefined;
+      await transactionDone(transaction);
+      return pack ?? null;
+    } finally {
+      database.close();
+    }
   }
 
   async getImage(packId: string, index: number): Promise<FanThemeImageRecord | null> {
     const database = await this.openDatabase();
-    const transaction = database.transaction(IMAGES_STORE);
-    const image = await requestResult(transaction.objectStore(IMAGES_STORE).get([packId, index])) as FanThemeImageRecord | undefined;
-    await transactionDone(transaction);
-    database.close();
-    return image ?? null;
+    try {
+      const transaction = database.transaction(IMAGES_STORE);
+      const image = await requestResult(transaction.objectStore(IMAGES_STORE).get([packId, index])) as FanThemeImageRecord | undefined;
+      await transactionDone(transaction);
+      return image ?? null;
+    } finally {
+      database.close();
+    }
   }
 
   async getEnabled(): Promise<boolean> {
     const database = await this.openDatabase();
-    const transaction = database.transaction(SETTINGS_STORE);
-    const setting = await requestResult(transaction.objectStore(SETTINGS_STORE).get(ENABLED_KEY)) as SettingRecord | undefined;
-    await transactionDone(transaction);
-    database.close();
-    return setting?.value === true;
+    try {
+      const transaction = database.transaction(SETTINGS_STORE);
+      const setting = await requestResult(transaction.objectStore(SETTINGS_STORE).get(ENABLED_KEY)) as SettingRecord | undefined;
+      await transactionDone(transaction);
+      return setting?.value === true;
+    } finally {
+      database.close();
+    }
   }
 
   async setEnabled(enabled: boolean): Promise<void> {
     const database = await this.openDatabase();
-    const transaction = database.transaction(SETTINGS_STORE, 'readwrite');
-    transaction.objectStore(SETTINGS_STORE).put({ key: ENABLED_KEY, value: enabled } satisfies SettingRecord);
-    await transactionDone(transaction);
-    database.close();
+    try {
+      const transaction = database.transaction(SETTINGS_STORE, 'readwrite');
+      transaction.objectStore(SETTINGS_STORE).put({ key: ENABLED_KEY, value: enabled } satisfies SettingRecord);
+      await transactionDone(transaction);
+    } finally {
+      database.close();
+    }
   }
 
   async deleteActivePack(): Promise<void> {
     const database = await this.openDatabase();
-    const transaction = database.transaction([PACKS_STORE, IMAGES_STORE, SETTINGS_STORE], 'readwrite');
-    const packs = transaction.objectStore(PACKS_STORE);
-    const images = transaction.objectStore(IMAGES_STORE);
-    const settings = transaction.objectStore(SETTINGS_STORE);
-    const activeRequest = settings.get(ACTIVE_PACK_KEY);
-    activeRequest.onsuccess = () => {
-      const activeId = (activeRequest.result as SettingRecord | undefined)?.value;
-      if (typeof activeId === 'string') {
-        packs.delete(activeId);
-        deleteImagesForPack(images, activeId);
-      }
-      settings.delete(ACTIVE_PACK_KEY);
-      settings.put({ key: ENABLED_KEY, value: false } satisfies SettingRecord);
-    };
-    await transactionDone(transaction);
-    database.close();
+    try {
+      const transaction = database.transaction([PACKS_STORE, IMAGES_STORE, SETTINGS_STORE], 'readwrite');
+      const packs = transaction.objectStore(PACKS_STORE);
+      const images = transaction.objectStore(IMAGES_STORE);
+      const settings = transaction.objectStore(SETTINGS_STORE);
+      const activeRequest = settings.get(ACTIVE_PACK_KEY);
+      activeRequest.onsuccess = () => {
+        const activeId = (activeRequest.result as SettingRecord | undefined)?.value;
+        if (typeof activeId === 'string') {
+          packs.delete(activeId);
+          deleteImagesForPack(images, activeId);
+        }
+        settings.delete(ACTIVE_PACK_KEY);
+        settings.put({ key: ENABLED_KEY, value: false } satisfies SettingRecord);
+      };
+      await transactionDone(transaction);
+    } finally {
+      database.close();
+    }
   }
 }

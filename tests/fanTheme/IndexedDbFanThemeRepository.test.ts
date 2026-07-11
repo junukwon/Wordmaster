@@ -60,6 +60,16 @@ describe('IndexedDbFanThemeRepository', () => {
     expect(await repository.getImage('failed', 0)).toBeNull();
   });
 
+  test('preserves the active pack when an incoming pack reuses its id', async () => {
+    const repository = await repositoryWithActivePack('same');
+
+    await expect(repository.beginPack('same', now)).rejects.toThrow();
+    await repository.abortPack('same');
+
+    expect(await repository.getActivePack()).toMatchObject({ id: 'same', status: 'active' });
+    expect(await repository.getImage('same', 0)).toMatchObject({ width: 10, height: 8 });
+  });
+
   test('cleans incomplete staging packs during initialization', async () => {
     const repository = await repositoryWithActivePack('old');
     await repository.beginPack('orphan', now);
