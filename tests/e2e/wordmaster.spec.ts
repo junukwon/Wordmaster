@@ -66,7 +66,8 @@ test('keeps core learning available offline after the first visit', async ({ pag
   await page.getByRole('button', { name: /DAY 01/ }).click();
   await expect(page.getByText('1개 선택 · 신규 25개 · 복습 0개')).toBeVisible();
   await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
-  await expect(page.getByText('DAY 01')).toBeVisible();
+  await expect(page.getByRole('heading', { name: '집중 학습' })).toBeVisible();
+  await expect(page.locator('.study-kicker')).toHaveText('DAY 01');
   const canvas = page.getByRole('img', { name: /Apple Pencil 필기장/ });
   await canvas.dispatchEvent('pointerdown', { pointerId: 1, clientX: 20, clientY: 20, pressure: .5 });
   await canvas.dispatchEvent('pointermove', { pointerId: 1, clientX: 70, clientY: 55, pressure: .7 });
