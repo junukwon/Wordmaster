@@ -4,6 +4,58 @@ import { describe, expect, test, vi } from 'vitest';
 import { SessionReplacementDialog } from '../../src/components/SessionReplacementDialog';
 
 describe('SessionReplacementDialog', () => {
+  test('wraps focus forward from the last action to the first action', async () => {
+    const user = userEvent.setup();
+    render(
+      <SessionReplacementDialog
+        activeDayIds={[1]}
+        newDayIds={[2]}
+        onCancel={vi.fn()}
+        onContinue={vi.fn()}
+        onReplace={vi.fn()}
+      />,
+    );
+    const actions = screen.getAllByRole('button');
+    actions[2].focus();
+    await user.tab();
+    expect(actions[0]).toHaveFocus();
+  });
+
+  test('wraps focus backward from the first action to the last action', async () => {
+    const user = userEvent.setup();
+    render(
+      <SessionReplacementDialog
+        activeDayIds={[1]}
+        newDayIds={[2]}
+        onCancel={vi.fn()}
+        onContinue={vi.fn()}
+        onReplace={vi.fn()}
+      />,
+    );
+    const actions = screen.getAllByRole('button');
+    expect(actions[0]).toHaveFocus();
+    await user.tab({ shift: true });
+    expect(actions[2]).toHaveFocus();
+  });
+
+  test('restores focus to the previously focused element when unmounted', () => {
+    const trigger = document.createElement('button');
+    document.body.append(trigger);
+    trigger.focus();
+    const { unmount } = render(
+      <SessionReplacementDialog
+        activeDayIds={[1]}
+        newDayIds={[2]}
+        onCancel={vi.fn()}
+        onContinue={vi.fn()}
+        onReplace={vi.fn()}
+      />,
+    );
+    unmount();
+    expect(trigger).toHaveFocus();
+    trigger.remove();
+  });
+
   test('describes both sessions and exposes all three safe actions', async () => {
     const onCancel = vi.fn();
     const onContinue = vi.fn();

@@ -65,5 +65,8 @@ test('a one-shot storage failure restores the previous session and keeps the fir
   await user.click(screen.getByRole('button', { name: '새 학습으로 교체' }));
   expect(screen.getByRole('heading', { name: 'WordMaster' })).toBeInTheDocument();
   expect(screen.getByRole('alert')).toHaveTextContent('학습 기록을 저장하지 못했습니다.');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.getByRole('alert')).toHaveFocus();
+  expect(screen.getByRole('button', { name: /DAY 02/ })).toHaveAttribute('aria-pressed', 'true');
   expect(JSON.parse(localStorage.getItem('wordmaster:v1')!).activeSession).toEqual(previousSession);
 });

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { DaySelectionGrid } from '../components/DaySelectionGrid';
 import { SessionReplacementDialog } from '../components/SessionReplacementDialog';
@@ -21,6 +21,8 @@ type HomePageProps = {
 export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps) {
   const [selectedDayIds, setSelectedDayIds] = useState<number[]>([]);
   const [replacementOpen, setReplacementOpen] = useState(false);
+  const storageAlertRef = useRef<HTMLParagraphElement>(null);
+  const previousStorageErrorRef = useRef<string | null | undefined>(undefined);
   const navigate = useNavigate();
   const activeSession = viewModel.activeSession?.completedAt === null ? viewModel.activeSession : null;
   const selectedWordCount = selectedDayIds.reduce((total, day) =>
@@ -28,8 +30,19 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
   const selectionText = `${selectedDayIds.length}개 선택 · 신규 ${selectedWordCount}개 · 복습 ${viewModel.dueReviews}개`;
 
   const replace = () => {
-    if (onStartStudy?.(selectedDayIds)) navigate('/study');
+    if (onStartStudy?.(selectedDayIds)) {
+      navigate('/study');
+    } else {
+      setReplacementOpen(false);
+    }
   };
+
+  useEffect(() => {
+    if (viewModel.storageError && viewModel.storageError !== previousStorageErrorRef.current) {
+      storageAlertRef.current?.focus();
+    }
+    previousStorageErrorRef.current = viewModel.storageError;
+  }, [viewModel.storageError]);
 
   const start = () => {
     if (activeSession) setReplacementOpen(true);
@@ -46,7 +59,11 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
         <h1 className="brand">WordMaster</h1>
         <p>오늘 외운 단어가 오래 남도록</p>
       </header>
-      {viewModel.storageError && <p className="storage-alert" role="alert">{viewModel.storageError}</p>}
+      {viewModel.storageError && (
+        <p ref={storageAlertRef} className="storage-alert" role="alert" tabIndex={-1}>
+          {viewModel.storageError}
+        </p>
+      )}
 
       {activeSession && (
         <section className="active-session-banner" aria-label="진행 중인 학습">

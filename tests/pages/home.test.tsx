@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type { HomeViewModel } from '../../src/pages/HomePage';
@@ -113,6 +114,34 @@ test('replaces an unfinished session with the exact selected DAYs', async () => 
   expect(onStartStudy).toHaveBeenCalledOnce();
   expect(onStartStudy).toHaveBeenCalledWith([2, 7]);
   expect(screen.getByRole('heading', { name: '집중 학습' })).toBeInTheDocument();
+});
+
+test('closes replacement confirmation and focuses a newly reported storage error after replacement fails', async () => {
+  const user = userEvent.setup();
+  function FailedReplacementHome() {
+    const [storageError, setStorageError] = useState<string | null>(null);
+    return (
+      <MemoryRouter>
+        <HomePage
+          viewModel={{ ...viewModel, activeSession, storageError }}
+          onStartStudy={() => {
+            setStorageError('save failed');
+            return false;
+          }}
+        />
+      </MemoryRouter>
+    );
+  }
+  render(<FailedReplacementHome />);
+  await user.click(screen.getByRole('button', { name: /DAY 02/ }));
+  await user.click(screen.getByRole('button', { name: /25/ }));
+  await user.click(screen.getAllByRole('button').at(-1)!);
+
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /DAY 02/ })).toHaveAttribute('aria-pressed', 'true');
+  const alert = screen.getByRole('alert');
+  expect(alert).toHaveTextContent('save failed');
+  expect(alert).toHaveFocus();
 });
 
 test('navigates to on-demand test setup', async () => {
