@@ -18,7 +18,7 @@ describe('SessionReplacementDialog', () => {
       />,
     );
 
-    const dialog = screen.getByRole('dialog');
+    const dialog = screen.getByRole('dialog', { name: '진행 중인 학습이 있어요' });
     expect(dialog).toHaveAttribute('aria-modal', 'true');
     expect(dialog).toHaveTextContent('DAY 02 · DAY 07');
     expect(dialog).toHaveTextContent('DAY 01 · DAY 04 · DAY 10');
@@ -47,5 +47,28 @@ describe('SessionReplacementDialog', () => {
     unmount();
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(onCancel).not.toHaveBeenCalled();
+  });
+
+  test('gives each dialog a distinct title id and the correct accessible name', () => {
+    const callbacks = {
+      onCancel: vi.fn(),
+      onContinue: vi.fn(),
+      onReplace: vi.fn(),
+    };
+    render(
+      <>
+        <SessionReplacementDialog activeDayIds={[1]} newDayIds={[2]} {...callbacks} />
+        <SessionReplacementDialog activeDayIds={[3]} newDayIds={[4]} {...callbacks} />
+      </>,
+    );
+
+    const dialogs = screen.getAllByRole('dialog', { name: '진행 중인 학습이 있어요' });
+    const titleIds = dialogs.map((dialog) => dialog.getAttribute('aria-labelledby'));
+
+    expect(titleIds[0]).toBeTruthy();
+    expect(titleIds[1]).toBeTruthy();
+    expect(titleIds[0]).not.toBe(titleIds[1]);
+    expect(document.getElementById(titleIds[0]!)).toHaveTextContent('진행 중인 학습이 있어요');
+    expect(document.getElementById(titleIds[1]!)).toHaveTextContent('진행 중인 학습이 있어요');
   });
 });

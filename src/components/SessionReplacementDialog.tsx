@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
 interface SessionReplacementDialogProps {
   activeDayIds: number[];
@@ -23,6 +23,7 @@ export function SessionReplacementDialog({
   onReplace,
 }: SessionReplacementDialogProps) {
   const cancelRef = useRef<HTMLButtonElement>(null);
+  const titleId = useId();
 
   useEffect(() => {
     cancelRef.current?.focus();
@@ -43,9 +44,9 @@ export function SessionReplacementDialog({
         className="session-dialog"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="replace-title"
+        aria-labelledby={titleId}
       >
-        <h2 id="replace-title">진행 중인 학습이 있어요</h2>
+        <h2 id={titleId}>진행 중인 학습이 있어요</h2>
         <p>
           기존 {formatDays(activeDayIds)} 학습을 이어가거나 새 {formatDays(newDayIds)} 학습으로
           교체할 수 있어요.
