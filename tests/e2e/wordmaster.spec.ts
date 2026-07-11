@@ -61,14 +61,8 @@ test('keeps core learning available offline after the first visit', async ({ pag
   });
   await page.reload();
   await page.evaluate(() => navigator.serviceWorker.ready);
-  if (browserName === 'webkit') {
-    await context.route('**/*', (route) => route.abort('internetdisconnected'));
-    const cachedHtml = await page.evaluate(() => fetch(location.href).then((response) => response.text()));
-    expect(cachedHtml).toContain('WordMaster');
-  } else {
-    await context.setOffline(true);
-    await page.reload();
-  }
+  await context.setOffline(true);
+  await page.reload();
   await page.getByRole('button', { name: /DAY 01/ }).click();
   await expect(page.getByText('1개 선택 · 신규 25개 · 복습 0개')).toBeVisible();
   await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
@@ -80,7 +74,7 @@ test('keeps core learning available offline after the first visit', async ({ pag
   await expect(canvas).toHaveAttribute('data-stroke-count', '1');
   await page.getByRole('button', { name: '정답 보기' }).click();
   await page.getByRole('button', { name: '기억남' }).click();
-  if (browserName !== 'webkit') await page.reload();
+  await page.reload();
   await expect(page.getByText(/문제 2/)).toBeVisible();
   await page.getByRole('link', { name: '홈으로 돌아가기' }).click();
   await page.getByRole('link', { name: '수시 단어 테스트' }).click();
@@ -88,40 +82,57 @@ test('keeps core learning available offline after the first visit', async ({ pag
   await expect(page.getByText('수시 테스트')).toBeVisible();
 });
 
-test('keeps study actions inside the initial iPad Mini landscape viewport', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'iPad Mini landscape');
-  const dayGrid = page.locator('.day-grid');
-  const selectionSummary = page.locator('.selection-summary');
-  const homeGeometry = await page.locator('.home-page').evaluate((element) => ({
-    pageRight: element.getBoundingClientRect().right,
+test('keeps DAY selection and replacement controls inside iPad Mini viewports', async ({ page }, testInfo) => {
+  const isIPadMini = testInfo.project.name === 'iPad Mini portrait' || testInfo.project.name === 'iPad Mini landscape';
+  test.skip(!isIPadMini);
+  const dayGrid = page.getByLabel('학습할 DAY 선택');
+  await expect(dayGrid).toBeVisible();
+  const firstDayCard = page.getByRole('button', { name: /DAY 01/ });
+  await firstDayCard.click();
+  const startButton = page.getByRole('button', { name: '25개 학습 시작하기' });
+  const stickyActions = startButton.locator('..');
+  const homeGeometry = await page.evaluate(() => ({
     viewportWidth: window.innerWidth,
     documentWidth: document.documentElement.scrollWidth,
   }));
-  await expect(dayGrid).toBeVisible();
-  await expect(selectionSummary).toBeVisible();
-  const firstDayCard = page.getByRole('button', { name: /DAY 01/ });
-  const firstDayCardGeometry = await firstDayCard.evaluate((element) => ({
-    height: element.getBoundingClientRect().height,
-    right: element.getBoundingClientRect().right,
-  }));
+  for (const locator of [dayGrid, firstDayCard, stickyActions, startButton]) {
+    const bounds = await locator.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.x).toBeGreaterThanOrEqual(0);
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(homeGeometry.viewportWidth);
+  }
   expect(homeGeometry.documentWidth).toBeLessThanOrEqual(homeGeometry.viewportWidth);
-  expect(homeGeometry.pageRight).toBeLessThanOrEqual(homeGeometry.viewportWidth);
-  expect(firstDayCardGeometry.height).toBeGreaterThanOrEqual(176);
-  expect(firstDayCardGeometry.right).toBeLessThanOrEqual(homeGeometry.viewportWidth);
+  const startBounds = await startButton.boundingBox();
+  expect(startBounds!.height).toBeGreaterThanOrEqual(44);
 
-  await firstDayCard.click();
-  await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
+  await startButton.click();
 
-  const actions = page.locator('.study-actions');
-  await expect(actions).toBeVisible();
-  const geometry = await actions.evaluate((element) => {
-    return {
+  if (testInfo.project.name === 'iPad Mini landscape') {
+    const actions = page.locator('.study-actions');
+    await expect(actions).toBeVisible();
+    const geometry = await actions.evaluate((element) => ({
       actionsBottom: element.getBoundingClientRect().bottom,
       viewportHeight: window.innerHeight,
       scrollY: window.scrollY,
-    };
-  });
+    }));
+    expect(geometry.scrollY).toBe(0);
+    expect(geometry.actionsBottom).toBeLessThanOrEqual(geometry.viewportHeight);
+  }
 
-  expect(geometry.scrollY).toBe(0);
-  expect(geometry.actionsBottom).toBeLessThanOrEqual(geometry.viewportHeight);
+  await page.getByRole('link', { name: '홈으로 돌아가기' }).click();
+  await page.getByRole('button', { name: /DAY 02/ }).click();
+  await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  const viewport = page.viewportSize()!;
+  for (const name of ['취소', '기존 학습 이어하기', '새 학습으로 교체']) {
+    const action = dialog.getByRole('button', { name });
+    const bounds = await action.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.height).toBeGreaterThanOrEqual(44);
+    expect(bounds!.x).toBeGreaterThanOrEqual(0);
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(viewport.width);
+    expect(bounds!.y).toBeGreaterThanOrEqual(0);
+    expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(viewport.height);
+  }
 });
