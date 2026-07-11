@@ -67,6 +67,7 @@ a { color: inherit; }
 .prompt-card, .writing-card { min-width: 0; padding: 1.25rem; border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-card); }
 .question-type { display: block; color: var(--color-muted); font-weight: 700; }
 .prompt-meaning, .prompt-term { margin: 2rem 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -.05em; line-height: 1.2; }
+.phonetic { margin: -.35rem 0 .75rem; color: var(--color-muted); font-family: "Noto Sans", "Segoe UI", "Arial Unicode MS", sans-serif; font-size: 1.05rem; line-height: 1.35; }
 .part-of-speech { display: flex; gap: .4rem; margin-bottom: 1.5rem; }
 .part-of-speech span { padding: .35rem .65rem; border-radius: 999px; background: #eaf1f5; color: var(--color-primary); font-weight: 800; }
 .speech-button, .canvas-actions button { min-height: 44px; padding: .55rem .8rem; border: 1px solid var(--color-line); border-radius: 12px; background: white; color: var(--color-primary); font-weight: 800; }

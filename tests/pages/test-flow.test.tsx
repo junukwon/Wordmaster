@@ -53,3 +53,24 @@ test('preselects the DAYs that contain retry-only words', () => {
   expect(screen.getByText(/1문제/)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: '테스트 시작하기' })).toBeEnabled();
 });
+
+test('never exposes pronunciation in the test page, including after answer reveal', async () => {
+  const attempt: TestAttempt = {
+    id: 'test-ipa-safety',
+    dayIds: [1],
+    wordIds: ['0001'],
+    questions: [{ wordId: '0001', questionType: 'en_to_ko' }],
+    mode: 'en_to_ko',
+    order: 'number',
+    answers: [],
+    startedAt: now.toISOString(),
+    completedAt: null,
+  };
+  render(<TestPage initialAttempt={attempt} words={words} onAttemptChange={() => {}} onComplete={() => {}} now={() => now} />);
+
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+  const revealButton = document.querySelector<HTMLButtonElement>('.test-answer-actions .button--primary');
+  expect(revealButton).not.toBeNull();
+  await userEvent.click(revealButton!);
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+});

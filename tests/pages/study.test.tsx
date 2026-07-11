@@ -44,6 +44,40 @@ test('shows meaning and part of speech while keeping spelling out of the DOM', a
   expect(speechPlayer.speak).toHaveBeenCalledWith('knee');
 });
 
+test('reveals pronunciation only after its button is pressed and keeps it visible on repeat', async () => {
+  const { repository, speechPlayer } = services();
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+  const pronunciationButton = screen.getByRole('button', { name: '발음 듣기' });
+  await userEvent.click(pronunciationButton);
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  await userEvent.click(pronunciationButton);
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  expect(speechPlayer.speak).toHaveBeenCalledTimes(2);
+});
+
+test('reveals pronunciation when speech is unavailable and resets it after advancing', async () => {
+  const repository = new LocalStorageProgressRepository(localStorage);
+  const speechPlayer = {
+    speak: vi.fn(() => false),
+    isAvailable: () => false,
+    getNotice: () => '이 기기에서는 음성을 사용할 수 없어요.',
+  };
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  const pronunciationButton = screen.getByRole('button', { name: '발음 듣기' });
+  expect(pronunciationButton).toBeEnabled();
+  await userEvent.click(pronunciationButton);
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  expect(speechPlayer.speak).toHaveBeenCalledWith('knee');
+
+  const skipButton = document.querySelector<HTMLButtonElement>('.study-actions .button--secondary');
+  expect(skipButton).not.toBeNull();
+  await userEvent.click(skipButton!);
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+});
+
 test('answer reveal shows the term and rating buttons', async () => {
   const { repository, speechPlayer } = services();
   render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);

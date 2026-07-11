@@ -32,6 +32,7 @@ export function StudyPage({
     () => initialSession ?? repository.loadActiveSession(),
   );
   const [screenState, setScreenState] = useState<StudyScreenState>(session ? 'prompting' : 'complete');
+  const [phoneticWordId, setPhoneticWordId] = useState<string | null>(null);
   const [, setVoiceRevision] = useState(0);
   const drawingRef = useRef<DrawingCanvasHandle>(null);
   const item = session ? getNextStudyItem(session) : null;
@@ -59,6 +60,10 @@ export function StudyPage({
   ).length;
   const promptIsEnglish = item.questionType === 'en_to_ko';
   const isRevealed = screenState === 'revealed' || screenState === 'saving';
+  const revealPronunciation = () => {
+    setPhoneticWordId(word.id);
+    speechPlayer.speak(word.term);
+  };
 
   const rate = (rating: Rating) => {
     if (screenState === 'saving' || (!isRevealed && rating !== 'weak')) return;
@@ -103,7 +108,8 @@ export function StudyPage({
             </>
           )}
 
-          <button className="speech-button" type="button" onClick={() => speechPlayer.speak(word.term)} disabled={!speechPlayer.isAvailable()} aria-label="발음 듣기">
+          {phoneticWordId === word.id && <p className="phonetic" lang="en-US">{word.phonetic}</p>}
+          <button className="speech-button" type="button" onClick={revealPronunciation} disabled={!word.phonetic} aria-label="발음 듣기">
             <span aria-hidden="true">🔊</span> 발음 듣기
           </button>
           {speechPlayer.getNotice() && <p className="inline-notice">{speechPlayer.getNotice()}</p>}
