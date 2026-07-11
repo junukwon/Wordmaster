@@ -6,6 +6,12 @@ import { createStudySession } from '../../src/domain/sessionEngine';
 import { LocalStorageProgressRepository } from '../../src/storage/LocalStorageProgressRepository';
 import { StudyPage } from '../../src/pages/StudyPage';
 
+vi.mock('../../src/components/FanThemeImage', () => ({
+  FanThemeImage: ({ contextKey, className }: { contextKey: string; className?: string }) => (
+    <div data-testid="fan-theme-frame" data-context-key={contextKey} className={className} />
+  ),
+}));
+
 const fixedNow = new Date('2026-07-10T09:00:00.000Z');
 const identity = <T,>(items: T[]) => items;
 
@@ -105,4 +111,47 @@ test('shows every selected DAY exactly and labels the selected word total', () =
   expect(screen.getByText('DAY 02 · DAY 07')).toBeInTheDocument();
   expect(screen.getByRole('progressbar', { name: '50개 신규 단어 진행률' })).toBeInTheDocument();
   expect(screen.queryByText(/DAY 02.*DAY 03/)).not.toBeInTheDocument();
+});
+
+test('keeps one ambient image outside prompt, writing, and Pencil content for an exact five-word block', async () => {
+  const { repository, speechPlayer } = services();
+  const session = spellingSession();
+  session.currentIndex = 13;
+  const { container } = render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+  const frame = screen.getByTestId('fan-theme-frame');
+  const initialKey = `study:${session.id}:day-1-block-0`;
+  expect(frame).toHaveAttribute('data-context-key', initialKey);
+  expect(frame.closest('.prompt-card')).toBeNull();
+  expect(frame.closest('.writing-card')).toBeNull();
+  expect(container.querySelector('canvas')?.contains(frame)).toBe(false);
+  await userEvent.click(screen.getByRole('button', { name: '정답 보기' }));
+  await userEvent.click(screen.getByRole('button', { name: '기억남' }));
+  expect(screen.getByTestId('fan-theme-frame')).toHaveAttribute('data-context-key', initialKey);
+  await userEvent.click(screen.getByRole('button', { name: '정답 보기' }));
+  await userEvent.click(screen.getByRole('button', { name: '기억남' }));
+  expect(screen.getByTestId('fan-theme-frame')).toHaveAttribute('data-context-key', `study:${session.id}:day-1-block-1`);
+});
+
+test('does not couple the study image key to strong or weak outcomes', async () => {
+  const strong = services();
+  const session = spellingSession();
+  const first = render(<MemoryRouter><StudyPage words={words} repository={strong.repository} speechPlayer={strong.speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+  const key = screen.getByTestId('fan-theme-frame').getAttribute('data-context-key');
+  await userEvent.click(screen.getByRole('button', { name: '정답 보기' }));
+  await userEvent.click(screen.getByRole('button', { name: '기억남' }));
+  expect(screen.getByTestId('fan-theme-frame')).toHaveAttribute('data-context-key', key);
+  first.unmount();
+  const weak = services();
+  render(<MemoryRouter><StudyPage words={words} repository={weak.repository} speechPlayer={weak.speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+  await userEvent.click(screen.getByRole('button', { name: '모르겠어요' }));
+  expect(screen.getByTestId('fan-theme-frame')).toHaveAttribute('data-context-key', key);
+});
+
+test('uses only the session id for the larger completion image', () => {
+  const { repository, speechPlayer } = services();
+  const session = spellingSession();
+  session.currentIndex = session.queue.length;
+  session.completedAt = fixedNow.toISOString();
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+  expect(screen.getByTestId('fan-theme-frame')).toHaveAttribute('data-context-key', `study-result:${session.id}`);
 });
