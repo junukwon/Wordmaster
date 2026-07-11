@@ -52,4 +52,32 @@ describe('FanThemeImage', () => {
     expect(revoke).toHaveBeenCalledWith('blob:one');
     view.unmount();
   });
+
+  test('ignores an older blob promise that resolves after a newer context key', async () => {
+    let resolveOld!: (blob: Blob) => void;
+    let resolveNew!: (blob: Blob) => void;
+    const oldBlob = new Blob(['old']);
+    const newBlob = new Blob(['new']);
+    const promises = {
+      old: new Promise<Blob>(resolve => { resolveOld = resolve; }),
+      new: new Promise<Blob>(resolve => { resolveNew = resolve; }),
+    };
+    const loadImageBlob = vi.fn(async (key: string) => promises[key as keyof typeof promises]);
+    vi.spyOn(URL, 'createObjectURL').mockImplementation(blob => blob === newBlob ? 'blob:new' : 'blob:old');
+    const value: FanThemeContextValue = {
+      status: { ready: true, enabled: true, imageCount: 2, totalBytes: 2, importing: false, processed: 0, total: 0, notice: null },
+      importFiles: vi.fn(), setEnabled: vi.fn(), deletePack: vi.fn(), loadImageBlob,
+    };
+    function Harness() {
+      const [key, setKey] = useState('old');
+      return <FanThemeContext.Provider value={value}><button onClick={() => setKey('new')}>next</button><FanThemeImage contextKey={key} /></FanThemeContext.Provider>;
+    }
+    render(<Harness />);
+    screen.getByRole('button').click();
+    resolveNew(newBlob);
+    expect(await screen.findByTestId('fan-theme-foreground')).toHaveAttribute('src', 'blob:new');
+    resolveOld(oldBlob);
+    await waitFor(() => expect(URL.createObjectURL).toHaveBeenCalledTimes(1));
+    expect(screen.getByTestId('fan-theme-foreground')).toHaveAttribute('src', 'blob:new');
+  });
 });
