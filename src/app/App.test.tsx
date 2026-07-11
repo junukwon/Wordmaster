@@ -43,12 +43,27 @@ test('replacing a session preserves word progress and test attempts', async () =
   expect(saved.testAttempts).toEqual(state.testAttempts);
 });
 
-test('a storage failure stays on home and displays an error', async () => {
+test('a one-shot storage failure restores the previous session and keeps the first error visible', async () => {
+  const previousSession = {
+    id: 'old', date: '2026-07-10', targetDayIds: [1], targetWordIds: ['0001'], queue: ['saved'],
+    currentIndex: 0, phase: 'recall', startedAt: '', updatedAt: '', completedAt: null,
+  };
+  localStorage.setItem('wordmaster:v1', JSON.stringify({
+    version: 1, progress: {}, activeSession: previousSession, testAttempts: [],
+  }));
   const user = userEvent.setup();
   render(<App />);
-  vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('quota'); });
+  const originalSetItem = Storage.prototype.setItem;
+  let writes = 0;
+  vi.spyOn(Storage.prototype, 'setItem').mockImplementation(function (this: Storage, key, value) {
+    writes += 1;
+    if (writes === 1) throw new Error('quota');
+    return originalSetItem.call(this, key, value);
+  });
   await user.click(screen.getByRole('button', { name: /DAY 02/ }));
   await user.click(screen.getByRole('button', { name: '25개 학습 시작하기' }));
+  await user.click(screen.getByRole('button', { name: '새 학습으로 교체' }));
   expect(screen.getByRole('heading', { name: 'WordMaster' })).toBeInTheDocument();
-  expect(screen.getByRole('alert')).toBeInTheDocument();
+  expect(screen.getByRole('alert')).toHaveTextContent('학습 기록을 저장하지 못했습니다.');
+  expect(JSON.parse(localStorage.getItem('wordmaster:v1')!).activeSession).toEqual(previousSession);
 });

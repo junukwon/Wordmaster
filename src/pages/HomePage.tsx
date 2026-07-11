@@ -22,6 +22,7 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
   const [selectedDayIds, setSelectedDayIds] = useState<number[]>([]);
   const [replacementOpen, setReplacementOpen] = useState(false);
   const navigate = useNavigate();
+  const activeSession = viewModel.activeSession?.completedAt === null ? viewModel.activeSession : null;
   const selectedWordCount = selectedDayIds.reduce((total, day) =>
     total + (viewModel.days.find((summary) => summary.day === day)?.total ?? 0), 0);
   const selectionText = `${selectedDayIds.length}개 선택 · 신규 ${selectedWordCount}개 · 복습 ${viewModel.dueReviews}개`;
@@ -31,9 +32,13 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
   };
 
   const start = () => {
-    if (viewModel.activeSession) setReplacementOpen(true);
+    if (activeSession) setReplacementOpen(true);
     else replace();
   };
+
+  const activeDaysLabel = activeSession?.targetDayIds
+    .map((day) => `DAY ${String(day).padStart(2, '0')}`)
+    .join(' · ');
 
   return (
     <main className="page home-page">
@@ -42,6 +47,17 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
         <p>오늘 외운 단어가 오래 남도록</p>
       </header>
       {viewModel.storageError && <p className="storage-alert" role="alert">{viewModel.storageError}</p>}
+
+      {activeSession && (
+        <section className="active-session-banner" aria-label="진행 중인 학습">
+          <div>
+            <strong>{activeDaysLabel}</strong>
+            <span>신규 {activeSession.targetWordIds.length}개</span>
+            <span>현재 진행 {activeSession.currentIndex} / {activeSession.queue.length}</span>
+          </div>
+          <Link className="button button--primary" to="/study">이어서 학습하기</Link>
+        </section>
+      )}
 
       <section className="routine-card" aria-labelledby="today-heading">
         <div className="routine-card__eyebrow">오늘의 집중 학습</div>
@@ -62,9 +78,9 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
         </div>
       </section>
 
-      {replacementOpen && viewModel.activeSession && (
+      {replacementOpen && activeSession && (
         <SessionReplacementDialog
-          activeDayIds={viewModel.activeSession.targetDayIds}
+          activeDayIds={activeSession.targetDayIds}
           newDayIds={selectedDayIds}
           onCancel={() => setReplacementOpen(false)}
           onContinue={() => navigate('/study')}

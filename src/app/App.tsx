@@ -15,6 +15,7 @@ const vocabulary = loadVocabulary();
 export function App() {
   const [repository] = useState(() => new LocalStorageProgressRepository());
   const [speechPlayer] = useState(() => new SpeechPlayer());
+  const [startError, setStartError] = useState<string | null>(null);
   const [revision, setRevision] = useState(0);
   const refresh = useCallback(() => setRevision((value) => value + 1), []);
 
@@ -25,20 +26,23 @@ export function App() {
       days: buildDaySummaries(vocabulary, progress),
       dueReviews: progress.filter((item) => isReviewDue(item, new Date())).length,
       activeSession,
-      storageError: repository.getLastError(),
+      storageError: startError ?? repository.getLastError(),
     };
-  }, [repository, revision]);
+  }, [repository, revision, startError]);
 
   const startStudy = useCallback((targetDays: number[]): boolean => {
     const previous = repository.loadActiveSession();
     try {
       const next = createStudySession(vocabulary, targetDays, repository.getAllWordProgress(), new Date());
       repository.saveActiveSession(next);
-      if (repository.getLastError()) {
+      const saveError = repository.getLastError();
+      if (saveError) {
         repository.saveActiveSession(previous);
+        setStartError(saveError);
         refresh();
         return false;
       }
+      setStartError(null);
       refresh();
       return true;
     } catch {

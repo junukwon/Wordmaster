@@ -14,8 +14,8 @@ const days = Array.from({ length: 10 }, (_, index) => ({
 }));
 
 const activeSession = {
-  id: 'active', date: '2026-07-10', targetDayIds: [1, 3], targetWordIds: ['0001'],
-  queue: ['saved-queue'], currentIndex: 20, phase: 'recall' as const,
+  id: 'active', date: '2026-07-10', targetDayIds: [1, 3], targetWordIds: ['0001', '0002'],
+  queue: ['one', 'two', 'three', 'four'], currentIndex: 2, phase: 'recall' as const,
   startedAt: '', updatedAt: '', completedAt: null,
 };
 
@@ -45,6 +45,30 @@ test('selects any DAY cards and starts the exact selection', async () => {
   await user.click(screen.getByRole('button', { name: '50개 학습 시작하기' }));
   expect(onStartStudy).toHaveBeenCalledOnce();
   expect(onStartStudy).toHaveBeenCalledWith([2, 7]);
+  expect(screen.getByRole('heading', { name: '집중 학습' })).toBeInTheDocument();
+});
+
+test('shows an unfinished session summary with a direct resume link', async () => {
+  renderHome({ ...viewModel, activeSession });
+  const banner = screen.getByRole('region', { name: '진행 중인 학습' });
+  expect(banner).toHaveTextContent('DAY 01 · DAY 03');
+  expect(banner).toHaveTextContent('신규 2개');
+  expect(banner).toHaveTextContent('현재 진행 2 / 4');
+  await userEvent.click(screen.getByRole('link', { name: '이어서 학습하기' }));
+  expect(screen.getByRole('heading', { name: '집중 학습' })).toBeInTheDocument();
+});
+
+test('a completed saved session is stale and does not require replacement confirmation', async () => {
+  const user = userEvent.setup();
+  const onStartStudy = renderHome({
+    ...viewModel,
+    activeSession: { ...activeSession, completedAt: '2026-07-10T10:00:00.000Z' },
+  });
+  expect(screen.queryByRole('region', { name: '진행 중인 학습' })).not.toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: /DAY 02/ }));
+  await user.click(screen.getByRole('button', { name: '25개 학습 시작하기' }));
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(onStartStudy).toHaveBeenCalledWith([2]);
   expect(screen.getByRole('heading', { name: '집중 학습' })).toBeInTheDocument();
 });
 
