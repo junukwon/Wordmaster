@@ -15,7 +15,7 @@ type AppRouterProps = {
   words: VocabularyWord[];
   repository: ProgressRepository;
   speechPlayer: SpeechPlayer;
-  onStartStudy: () => void;
+  onStartStudy: (dayIds: number[]) => boolean;
   onDataChanged: () => void;
 };
 

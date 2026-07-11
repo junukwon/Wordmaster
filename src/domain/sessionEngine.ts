@@ -76,17 +76,14 @@ export const fisherYatesShuffle: Shuffle = <T,>(items: T[]): T[] => {
   return result;
 };
 
-export function selectTargetDays(words: VocabularyWord[], progressList: WordProgress[]): number[] {
-  const days = [...new Set(words.map((word) => word.day))].sort((a, b) => a - b);
-  const progressById = new Map(progressList.map((progress) => [progress.wordId, progress]));
-  const groups: number[][] = [];
-  for (let index = 0; index < days.length; index += 5) groups.push(days.slice(index, index + 5));
-  return groups.find((group) => group.some((day) =>
-    words.filter((word) => word.day === day).some((word) => {
-      const stage = progressById.get(word.id)?.stage;
-      return stage !== 'mastered_today' && stage !== 'long_term';
-    }),
-  )) ?? groups[0] ?? [];
+export function normalizeTargetDays(
+  words: VocabularyWord[],
+  requestedDayIds: number[],
+): number[] {
+  const availableDays = new Set(words.map((word) => word.day));
+  return [...new Set(requestedDayIds)]
+    .filter((day) => Number.isInteger(day) && availableDays.has(day))
+    .sort((left, right) => left - right);
 }
 
 export function createStudySession(
@@ -96,7 +93,10 @@ export function createStudySession(
   now: Date,
   shuffle: Shuffle = fisherYatesShuffle,
 ): StudySession {
-  const selectedDays = [...new Set(targetDayIds)].sort((a, b) => a - b);
+  const selectedDays = normalizeTargetDays(words, targetDayIds);
+  if (selectedDays.length === 0) {
+    throw new RangeError('하나 이상의 유효한 DAY를 선택해 주세요.');
+  }
   const wordsById = new Map(words.map((word) => [word.id, word]));
   const targetWords = selectedDays.flatMap((day) =>
     shuffle(words.filter((word) => word.day === day)),
