@@ -1,6 +1,6 @@
 import { SpeechPlayer } from './SpeechPlayer';
 
-type MockUtterance = { text: string; voice?: SpeechSynthesisVoice; lang?: string; rate?: number };
+type MockUtterance = { text: string; voice?: SpeechSynthesisVoice; lang?: string; rate?: number; pitch?: number };
 
 function installSpeech(voices: Partial<SpeechSynthesisVoice>[]) {
   const calls: string[] = [];
@@ -17,6 +17,7 @@ function installSpeech(voices: Partial<SpeechSynthesisVoice>[]) {
     voice?: SpeechSynthesisVoice;
     lang?: string;
     rate?: number;
+    pitch?: number;
     constructor(public text: string) {}
   }
   Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: synthesis });
@@ -26,6 +27,7 @@ function installSpeech(voices: Partial<SpeechSynthesisVoice>[]) {
 }
 
 afterEach(() => {
+  window.localStorage.removeItem('wordmaster-speech-preference-v1');
   Reflect.deleteProperty(window, 'speechSynthesis');
   Reflect.deleteProperty(window, 'SpeechSynthesisUtterance');
   Reflect.deleteProperty(globalThis, 'SpeechSynthesisUtterance');
@@ -38,8 +40,30 @@ test('prefers a local English voice and uses a beginner-friendly rate', () => {
   const player = new SpeechPlayer(window);
   expect(player.speak('knee')).toBe(true);
   expect(calls).toEqual(['cancel', 'speak']);
-  expect(spoken[0]).toMatchObject({ text: 'knee', voice: localEnglish, lang: 'en-US', rate: 0.8 });
+  expect(spoken[0]).toMatchObject({ text: 'knee', voice: localEnglish, lang: 'en-US', rate: 0.85, pitch: 1.05 });
   expect(player.getNotice()).toBeNull();
+});
+
+test('exposes voices and preference selection and previews through normal playback', () => {
+  const alex = { voiceURI: 'alex', name: 'Alex', lang: 'en-US', localService: true } as SpeechSynthesisVoice;
+  const samantha = { voiceURI: 'sam', name: 'Samantha', lang: 'en-US', localService: true } as SpeechSynthesisVoice;
+  const { spoken } = installSpeech([alex, samantha]);
+  const player = new SpeechPlayer(window);
+  expect(player.getVoices()).toEqual([samantha, alex]);
+  expect(player.getSelectedVoice()).toBe(samantha);
+  player.setPreference({ mode: 'manual', voiceURI: alex.voiceURI, name: alex.name, lang: alex.lang });
+  expect(player.getPreference()).toEqual({ mode: 'manual', voiceURI: 'alex', name: 'Alex', lang: 'en-US' });
+  expect(player.getSelectedVoice()).toBe(alex);
+  expect(player.preview()).toBe(true);
+  expect(spoken.at(-1)).toMatchObject({ text: "Hello, let's study English.", voice: alex });
+});
+
+test('a missing saved voice reports a notice while fallback playback remains available', () => {
+  installSpeech([{ voiceURI: 'sam', name: 'Samantha', lang: 'en-US', localService: true }]);
+  const player = new SpeechPlayer(window);
+  player.setPreference({ mode: 'manual', voiceURI: 'missing', name: 'Missing', lang: 'en-US' });
+  expect(player.getNotice()).not.toBeNull();
+  expect(player.speak('knee')).toBe(true);
 });
 
 test('warns when only a non-local English voice is available', () => {
