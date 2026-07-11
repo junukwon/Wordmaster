@@ -10,22 +10,32 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('completes the saved study and on-demand test journey', async ({ page }) => {
-  await expect(page.getByRole('heading', { name: '125개 단어 도전' })).toBeVisible();
-  await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
+  await page.getByRole('button', { name: /DAY 02/ }).click();
+  await page.getByRole('button', { name: /DAY 07/ }).click();
+  await expect(page.getByText('2개 선택 · 신규 50개 · 복습 0개')).toBeVisible();
+  await page.getByRole('button', { name: '50개 학습 시작하기' }).click();
   await expect(page.getByRole('heading', { name: '집중 학습' })).toBeVisible();
+  await expect(page.getByText('DAY 02 · DAY 07')).toBeVisible();
 
   for (let index = 0; index < 10; index += 1) {
     await page.getByRole('button', { name: '정답 보기' }).click();
     await page.getByRole('button', { name: '기억남' }).click();
   }
-  await expect(page.getByText('knee', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('mad', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: '정답 보기' }).click();
-  await expect(page.getByText('knee', { exact: true })).toBeVisible();
+  await expect(page.getByText('mad', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: '기억남' }).click();
   await page.reload();
   await expect(page.getByText(/문제 12/)).toBeVisible();
 
   await page.getByRole('link', { name: '홈으로 돌아가기' }).click();
+  await page.getByRole('button', { name: /DAY 01/ }).click();
+  await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: '취소' }).click();
+  await expect(page.getByRole('link', { name: '이어서 학습하기' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /DAY 01/ })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByText('DAY 02 · DAY 07')).toBeVisible();
   await page.getByRole('link', { name: '수시 단어 테스트' }).click();
   await page.getByLabel('문제 유형').selectOption('mixed');
   await page.getByLabel('문제 수').selectOption('10');
@@ -59,8 +69,10 @@ test('keeps core learning available offline after the first visit', async ({ pag
     await context.setOffline(true);
     await page.reload();
   }
-  await expect(page.getByRole('heading', { name: '125개 단어 도전' })).toBeVisible();
-  await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
+  await page.getByRole('button', { name: /DAY 01/ }).click();
+  await expect(page.getByText('1개 선택 · 신규 25개 · 복습 0개')).toBeVisible();
+  await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
+  await expect(page.getByText('DAY 01')).toBeVisible();
   const canvas = page.getByRole('img', { name: /Apple Pencil 필기장/ });
   await canvas.dispatchEvent('pointerdown', { pointerId: 1, clientX: 20, clientY: 20, pressure: .5 });
   await canvas.dispatchEvent('pointermove', { pointerId: 1, clientX: 70, clientY: 55, pressure: .7 });
@@ -78,7 +90,27 @@ test('keeps core learning available offline after the first visit', async ({ pag
 
 test('keeps study actions inside the initial iPad Mini landscape viewport', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'iPad Mini landscape');
-  await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
+  const dayGrid = page.locator('.day-grid');
+  const selectionSummary = page.locator('.selection-summary');
+  const homeGeometry = await page.locator('.home-page').evaluate((element) => ({
+    pageRight: element.getBoundingClientRect().right,
+    viewportWidth: window.innerWidth,
+    documentWidth: document.documentElement.scrollWidth,
+  }));
+  await expect(dayGrid).toBeVisible();
+  await expect(selectionSummary).toBeVisible();
+  const firstDayCard = page.getByRole('button', { name: /DAY 01/ });
+  const firstDayCardGeometry = await firstDayCard.evaluate((element) => ({
+    height: element.getBoundingClientRect().height,
+    right: element.getBoundingClientRect().right,
+  }));
+  expect(homeGeometry.documentWidth).toBeLessThanOrEqual(homeGeometry.viewportWidth);
+  expect(homeGeometry.pageRight).toBeLessThanOrEqual(homeGeometry.viewportWidth);
+  expect(firstDayCardGeometry.height).toBeGreaterThanOrEqual(176);
+  expect(firstDayCardGeometry.right).toBeLessThanOrEqual(homeGeometry.viewportWidth);
+
+  await firstDayCard.click();
+  await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
 
   const actions = page.locator('.study-actions');
   await expect(actions).toBeVisible();
