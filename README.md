@@ -83,4 +83,4 @@ git push -u origin main
 - 정답 보기 전 답이 DOM과 화면에 없는지 확인합니다.
 - 오프라인 재실행, 진도 유지, 팬테마 유지, 새 배포 뒤 학습 기록 유지를 확인합니다.
 
-Windows Playwright WebKit의 서비스 워커 준비는 비결정적이므로 자동화에서는 해당 오프라인 재로딩만 건너뛰고 실제 iPad Safari 체크리스트로 별도 확인합니다.
+Windows Playwright WebKit은 서비스 워커 준비가 비결정적이고 브라우저에서 생성한 이미지 Blob의 IndexedDB 저장을 지원하지 않아 WebKit 프로젝트에서는 해당 오프라인 재로딩과 팬팩 Blob 가져오기만 명시적으로 건너뜁니다. 자동화는 Desktop Chrome에서 실제 파일 가져오기·IndexedDB·오프라인 여정을 실행하고, Chromium을 iPad mini 세로/가로 크기로 바꿔 앱이 실제로 렌더링한 홈·학습·완료·테스트 결과 프레임과 44px 컨트롤을 검사합니다. 실제 iPad Safari의 가져오기와 오프라인 재실행은 위 체크리스트로 별도 확인합니다.
