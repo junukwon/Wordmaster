@@ -3,6 +3,7 @@ export type VocabularyWord = {
   day: number;
   topic: string;
   term: string;
+  phonetic: string;
   partOfSpeech: string[];
   meanings: string[];
   inflection?: string;

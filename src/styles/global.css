@@ -45,6 +45,13 @@ a { color: inherit; }
 .status-card--weak { border-top-color: var(--color-weak); }
 .status-card--remaining { border-top-color: var(--color-primary); }
 .home-actions { display: grid; grid-template-columns: 2fr 1fr; gap: .8rem; }
+.pronunciation-settings { margin-top: 1rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: white; }
+.pronunciation-settings summary { min-height: 44px; padding: .75rem 1rem; font-weight: 800; cursor: pointer; }
+.pronunciation-settings__controls { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .75rem; padding: 0 1rem 1rem; }
+.pronunciation-settings__controls label { font-weight: 800; }
+.pronunciation-settings__controls select, .pronunciation-settings__controls button { min-height: 44px; padding: .55rem .75rem; border: 1px solid var(--color-line); border-radius: 10px; background: white; }
+.pronunciation-settings__controls button { color: var(--color-primary); font-weight: 800; cursor: pointer; }
+.pronunciation-settings__notice { margin: 0 1rem 1rem; color: var(--color-muted); }
 .button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; padding: .8rem 1.2rem; border: 2px solid transparent; border-radius: 15px; text-decoration: none; font-weight: 800; cursor: pointer; }
 .button--primary { background: var(--color-primary); color: white; }
 .button--primary:hover { background: var(--color-primary-strong); }
@@ -60,6 +67,7 @@ a { color: inherit; }
 .prompt-card, .writing-card { min-width: 0; padding: 1.25rem; border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-card); }
 .question-type { display: block; color: var(--color-muted); font-weight: 700; }
 .prompt-meaning, .prompt-term { margin: 2rem 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -.05em; line-height: 1.2; }
+.phonetic { margin: -.35rem 0 .75rem; color: var(--color-muted); font-family: "Noto Sans", "Segoe UI", "Arial Unicode MS", sans-serif; font-size: 1.05rem; line-height: 1.35; }
 .part-of-speech { display: flex; gap: .4rem; margin-bottom: 1.5rem; }
 .part-of-speech span { padding: .35rem .65rem; border-radius: 999px; background: #eaf1f5; color: var(--color-primary); font-weight: 800; }
 .speech-button, .canvas-actions button { min-height: 44px; padding: .55rem .8rem; border: 1px solid var(--color-line); border-radius: 12px; background: white; color: var(--color-primary); font-weight: 800; }
@@ -76,6 +84,10 @@ a { color: inherit; }
 .study-actions { display: flex; justify-content: flex-end; gap: .75rem; margin-top: 1rem; }
 .study-actions > .button { min-width: 180px; border: 0; }
 .rating-buttons { display: grid; grid-template-columns: repeat(3, minmax(130px, 1fr)); width: min(100%, 620px); gap: .75rem; }
+.reveal-stage { min-height: 52px; }
+.reveal-placeholder { display: block; width: 100%; min-height: 52px; }
+.rating-stage { display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; margin-top: 1rem; }
+.rating-stage [role="status"] { margin: 0; color: var(--color-muted); }
 .rating { min-height: 52px; border: 0; border-radius: 15px; font-weight: 900; cursor: pointer; }
 .rating--weak { background: #ffe8e1; color: #9f321c; }
 .rating--uncertain { background: #fff4cf; color: #795e0b; }
@@ -139,6 +151,7 @@ a { color: inherit; }
   .active-session-banner .button, .study-selection-summary .button, .home-actions .button { width: 100%; min-height: 44px; }
   .status-grid { grid-template-columns: 1fr; }
   .home-actions { grid-template-columns: 1fr; }
+  .pronunciation-settings__controls { grid-template-columns: 1fr; }
   .study-header { align-items: stretch; flex-direction: column; }
   .study-progress { min-width: 0; }
   .study-progress > strong { text-align: left; }
@@ -147,6 +160,7 @@ a { color: inherit; }
   .study-actions { flex-direction: column; }
   .study-actions > .button { width: 100%; }
   .rating-buttons { grid-template-columns: 1fr; width: 100%; }
+  .rating-stage { align-items: stretch; }
   .choice-grid--days { grid-template-columns: repeat(2, 1fr); }
   .setting-row, .test-summary { align-items: stretch; flex-direction: column; }
   .setting-row select { width: 100%; }

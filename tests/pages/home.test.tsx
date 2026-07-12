@@ -22,11 +22,20 @@ const activeSession = {
 
 const viewModel: HomeViewModel = { days, dueReviews: 9, activeSession: null };
 
+const speechPlayer = {
+  getVoices: vi.fn(() => []),
+  getPreference: vi.fn(() => ({ mode: 'auto' as const })),
+  setPreference: vi.fn(),
+  preview: vi.fn(() => false),
+  getNotice: vi.fn(() => null),
+  subscribe: vi.fn(() => () => {}),
+};
+
 function renderHome(model = viewModel, onStartStudy = vi.fn(() => true)) {
   render(
     <MemoryRouter initialEntries={['/']}>
       <Routes>
-        <Route path="/" element={<HomePage viewModel={model} onStartStudy={onStartStudy} />} />
+        <Route path="/" element={<HomePage viewModel={model} speechPlayer={speechPlayer} onStartStudy={onStartStudy} />} />
         <Route path="/study" element={<h2>집중 학습</h2>} />
         <Route path="/test/setup" element={<h2>테스트 설정 화면</h2>} />
       </Routes>
@@ -34,6 +43,13 @@ function renderHome(model = viewModel, onStartStudy = vi.fn(() => true)) {
   );
   return onStartStudy;
 }
+
+test('renders pronunciation settings after the learning routine', () => {
+  renderHome();
+  const routine = screen.getByRole('heading', { name: /DAY/ }).closest('section');
+  const settings = screen.getByText('발음 설정').closest('details');
+  expect(routine?.compareDocumentPosition(settings!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+});
 
 test('selects any DAY cards and starts the exact selection', async () => {
   const user = userEvent.setup();
