@@ -247,3 +247,23 @@ test('random word mode starts with 25 unique words', async ({ page }) => {
   await expect(page.getByText(/문제 1/)).toBeVisible();
   await expect(page.getByRole('progressbar', { name: '25개 신규 단어 진행률' })).toBeVisible();
 });
+
+test('finds a DAY bundle by topic and protects an existing session on setup', async ({ page }) => {
+  await page.getByRole('link', { name: '학습 범위 선택하기' }).click();
+  const search = page.getByRole('searchbox', { name: 'DAY 번호 또는 주제 검색' });
+  await search.fill('음식');
+  await expect(page.getByRole('button', { name: /DAY 11–15/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /DAY 01–05/ })).toHaveCount(0);
+
+  await search.fill('1');
+  await page.getByRole('button', { name: /DAY 01–05/ }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByRole('heading', { name: '집중 학습' })).toBeVisible();
+
+  await page.goto('./#/study/setup');
+  await page.getByRole('button', { name: /DAY 06–10/ }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: '취소' }).click();
+  await expect(page.getByRole('heading', { name: '학습 범위 설정' })).toBeVisible();
+});

@@ -42,6 +42,27 @@ test('random target session keeps exactly the selected word ids', () => {
   expect(session.selection).toEqual(target.selection);
 });
 
+test('random 25 target excludes due-review words outside the resolved target', () => {
+  const targetIds = words.slice(0, 25).map((word) => word.id);
+  const due = {
+    ...progress('0201', 'strong'),
+    nextReviewAt: '2026-07-09T09:00:00.000Z',
+    reviewStep: 1 as const,
+  };
+  const target = {
+    targetDayIds: [1],
+    targetWordIds: targetIds,
+    selection: { mode: 'random-words' as const, wordCount: 25 },
+  };
+
+  const session = createStudySessionFromTarget(words, target, [due], now, identity);
+  const queuedIds = getSessionQueueItems(session).map((item) => item.wordId);
+
+  expect(new Set(queuedIds)).toEqual(new Set(targetIds));
+  expect(queuedIds).not.toContain(due.wordId);
+  expect(session.dueReviewIds).toEqual([]);
+});
+
 test('legacy DAY filtering tolerates sparse or missing DAY ids', () => {
   const sparseTarget = createStudySession(sparseWords, [1, 2], [], now, identity);
   expect(sparseTarget.targetDayIds).toEqual([1, 2]);

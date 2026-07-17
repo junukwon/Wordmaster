@@ -70,3 +70,23 @@ test('a one-shot storage failure restores the previous session and keeps the fir
   expect(screen.getByRole('button', { name: /DAY 02/ })).toHaveAttribute('aria-pressed', 'true');
   expect(JSON.parse(localStorage.getItem('wordmaster:v1')!).activeSession).toEqual(previousSession);
 });
+
+test('opening setup through browser history does not replace an active session without confirmation', async () => {
+  const previousSession = {
+    id: 'old', date: '2026-07-10', targetDayIds: [1], targetWordIds: ['0001'], queue: ['saved'],
+    currentIndex: 0, phase: 'recall', startedAt: '', updatedAt: '', completedAt: null,
+  };
+  localStorage.setItem('wordmaster:v1', JSON.stringify({
+    version: 1, progress: {}, activeSession: previousSession, testAttempts: [],
+  }));
+  window.location.hash = '#/study/setup';
+  const user = userEvent.setup();
+  render(<App />);
+
+  await user.click(screen.getByRole('button', { name: '선택한 범위로 학습 시작' }));
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
+  expect(JSON.parse(localStorage.getItem('wordmaster:v1')!).activeSession).toEqual(previousSession);
+  await user.click(screen.getByRole('button', { name: '취소' }));
+  expect(screen.getByRole('heading', { name: '학습 범위 설정' })).toBeInTheDocument();
+  expect(JSON.parse(localStorage.getItem('wordmaster:v1')!).activeSession).toEqual(previousSession);
+});

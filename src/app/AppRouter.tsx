@@ -75,7 +75,16 @@ export function AppRouter({
   return (
     <Routes>
       <Route path="/" element={<HomePage viewModel={homeViewModel} speechPlayer={speechPlayer} onStartStudy={onStartStudy} onOpenTest={openRegularTest} />} />
-      <Route path="/study/setup" element={<StudySetupPage words={words} progress={repository.getAllWordProgress()} dayCatalog={dayCatalog} onStart={startStudyTarget} />} />
+      <Route path="/study/setup" element={(
+        <StudySetupPage
+          words={words}
+          progress={repository.getAllWordProgress()}
+          dayCatalog={dayCatalog}
+          activeSession={homeViewModel.activeSession}
+          onContinue={() => navigate('/study')}
+          onStart={startStudyTarget}
+        />
+      )} />
       <Route path="/study" element={<StudyPage words={words} repository={repository} speechPlayer={speechPlayer} onProgressChange={onDataChanged} />} />
       <Route path="/test/setup" element={<TestSetupPage words={words} progress={repository.getAllWordProgress()} shuffle={fisherYatesShuffle} onStart={startTest} initialWordIds={limitedWordIds} initialMode={setupMode} />} />
       <Route path="/test/run" element={attempt ? <TestPage initialAttempt={attempt} words={words} repository={repository} onAttemptChange={setAttempt} onComplete={completeTest} /> : <Navigate to="/test/setup" replace />} />

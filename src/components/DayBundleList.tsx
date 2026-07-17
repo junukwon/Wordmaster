@@ -13,6 +13,7 @@ export function DayBundleList({ bundles, value, onChange }: DayBundleListProps) 
         const first = bundle.dayNumbers[0];
         const last = bundle.dayNumbers[bundle.dayNumbers.length - 1];
         const label = `DAY ${String(first).padStart(2, '0')}–${String(last).padStart(2, '0')} · ${bundle.wordCount}단어`;
+        const topics = [...new Set(bundle.days.map((day) => day.title).filter(Boolean))].join(' · ');
         return (
           <button
             className={`button button--secondary day-bundle ${value === first ? 'is-selected' : ''}`}
@@ -21,7 +22,8 @@ export function DayBundleList({ bundles, value, onChange }: DayBundleListProps) 
             aria-pressed={value === first}
             onClick={() => onChange(first)}
           >
-            {label}
+            <strong>{label}</strong>
+            {topics && <span>{topics}</span>}
           </button>
         );
       })}

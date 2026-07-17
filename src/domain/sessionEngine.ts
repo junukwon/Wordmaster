@@ -11,6 +11,10 @@ import type { StudyTarget } from './studySelection';
 
 export type Shuffle = <T>(items: T[]) => T[];
 
+export type StudySessionCreationOptions = {
+  includeDueReviews?: boolean;
+};
+
 export type StudyQueueItem = {
   wordId: string;
   questionType: QuestionType;
@@ -110,7 +114,14 @@ export function createStudySession(
     targetWordIds: words.filter((word) => selectedDays.includes(word.day)).map((word) => word.id),
     selection,
   };
-  return createStudySessionFromTarget(words, compatibilityTarget, progressList, now, shuffle);
+  return createStudySessionFromTarget(
+    words,
+    compatibilityTarget,
+    progressList,
+    now,
+    shuffle,
+    { includeDueReviews: true },
+  );
 }
 
 export function createStudySessionFromTarget(
@@ -119,6 +130,7 @@ export function createStudySessionFromTarget(
   progressList: WordProgress[],
   now: Date,
   shuffle: Shuffle = fisherYatesShuffle,
+  options: StudySessionCreationOptions = {},
 ): StudySession {
   const selectedDays = [...new Set(target.targetDayIds)].sort((a, b) => a - b);
   const wordsById = new Map(words.map((word) => [word.id, word]));
@@ -134,9 +146,11 @@ export function createStudySessionFromTarget(
   const targetSet = new Set(targetWordIds);
   const queue: StudyQueueItem[] = [];
 
-  const dueProgress = progressList.filter(
-    (progress) => isReviewDue(progress, now) && wordsById.has(progress.wordId) && !targetSet.has(progress.wordId),
-  );
+  const dueProgress = options.includeDueReviews
+    ? progressList.filter(
+      (progress) => isReviewDue(progress, now) && wordsById.has(progress.wordId) && !targetSet.has(progress.wordId),
+    )
+    : [];
   shuffle(dueProgress).forEach((progress) => {
     const word = wordsById.get(progress.wordId)!;
     queue.push({

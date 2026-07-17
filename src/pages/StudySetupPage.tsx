@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import {
   buildDaySummaries,
@@ -13,12 +13,16 @@ import type { VocabularyWord, WordProgress } from '../domain/types';
 import { DayBundleList } from '../components/DayBundleList';
 import { DayRangePicker } from '../components/DayRangePicker';
 import { RandomStudyPicker, type RandomStudyMode } from '../components/RandomStudyPicker';
+import { SessionReplacementDialog } from '../components/SessionReplacementDialog';
+import type { StudySession } from '../domain/types';
 
 export type StudySetupPageProps = {
   words: VocabularyWord[];
   progress: WordProgress[];
   dayCatalog: DaySummary[];
   onStart: (target: StudyTarget) => void;
+  activeSession?: StudySession | null;
+  onContinue?: () => void;
 };
 
 type SetupMode = 'bundle' | 'range' | 'random';
@@ -38,7 +42,14 @@ function seededRandom(seed: string) {
   };
 }
 
-export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySetupPageProps) {
+export function StudySetupPage({
+  words,
+  progress,
+  dayCatalog,
+  onStart,
+  activeSession = null,
+  onContinue,
+}: StudySetupPageProps) {
   const days = dayCatalog.length ? dayCatalog : buildDaySummaries(words, progress);
   const bundles = useMemo(() => buildFiveDayBundles(days), [days]);
   const firstDay = days[0]?.dayNumber ?? null;
@@ -50,6 +61,21 @@ export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySe
   const [dayCount, setDayCount] = useState(1);
   const [wordCount, setWordCount] = useState(defaultRandomWordCount(words.length));
   const [seed, setSeed] = useState('initial');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [replacementOpen, setReplacementOpen] = useState(false);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const filteredBundles = useMemo(() => {
+    const query = searchQuery.trim().toLocaleLowerCase('ko');
+    if (!query) return bundles;
+    const numericMatch = query.match(/^(?:day\s*)?0*(\d+)$/i);
+    const requestedDay = numericMatch ? Number(numericMatch[1]) : null;
+    return bundles.filter((bundle) => (
+      requestedDay !== null
+        ? bundle.dayNumbers.includes(requestedDay)
+        : bundle.days.some((day) => day.title?.toLocaleLowerCase('ko').includes(query))
+    ));
+  }, [bundles, searchQuery]);
 
   const selection = useMemo<StudySelection | null>(() => {
     if (mode === 'bundle' && bundleStartDay !== null) return { mode: 'bundle', bundleStartDay };
@@ -68,9 +94,36 @@ export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySe
     }
   }, [selection, words, seed]);
 
-  const startStudy = () => { if (target) onStart(target); };
+  const startStudy = () => {
+    if (!target) return;
+    if (activeSession?.completedAt === null) {
+      setReplacementOpen(true);
+      return;
+    }
+    onStart(target);
+  };
   const reroll = () => setSeed((current) => `${current}-${Date.now()}-${Math.random()}`);
   const startLabel = '선택한 범위로 학습 시작';
+  const modes: Array<{ value: SetupMode; label: string }> = [
+    { value: 'bundle', label: '묶음으로 선택' },
+    { value: 'range', label: '범위로 선택' },
+    { value: 'random', label: '랜덤으로 선택' },
+  ];
+  const selectTab = (nextIndex: number) => {
+    const next = modes[nextIndex];
+    setMode(next.value);
+    tabRefs.current[nextIndex]?.focus();
+  };
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex: number | null = null;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % modes.length;
+    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + modes.length) % modes.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = modes.length - 1;
+    if (nextIndex === null) return;
+    event.preventDefault();
+    selectTab(nextIndex);
+  };
 
   return (
     <main className="page study-setup-page">
@@ -80,10 +133,21 @@ export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySe
         <h1>학습 범위 설정</h1>
         <p>DAY 묶음, 원하는 범위, 또는 무작위 단어로 시작할 수 있어요.</p>
       </header>
+      <label className="study-day-search">
+        <span>DAY 번호 또는 주제 검색</span>
+        <input
+          type="search"
+          aria-label="DAY 번호 또는 주제 검색"
+          placeholder="예: 12, 여행"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
+      </label>
       <div className="choice-grid study-mode-tabs" role="tablist" aria-label="학습 범위 선택 방식">
-        {([['bundle', '묶음으로 선택'], ['range', '범위로 선택'], ['random', '랜덤으로 선택']] as const).map(([value, label]) => (
+        {modes.map(({ value, label }, index) => (
           <button
             key={value}
+            ref={(element) => { tabRefs.current[index] = element; }}
             id={`study-setup-tab-${value}`}
             role="tab"
             type="button"
@@ -92,6 +156,7 @@ export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySe
             tabIndex={mode === value ? 0 : -1}
             className="button button--secondary"
             onClick={() => setMode(value)}
+            onKeyDown={(event) => handleTabKeyDown(event, index)}
           >
             {label}
           </button>
@@ -105,7 +170,7 @@ export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySe
         aria-labelledby={`study-setup-tab-${mode}`}
         aria-live="polite"
       >
-        {mode === 'bundle' && <DayBundleList bundles={bundles} value={bundleStartDay} onChange={setBundleStartDay} />}
+        {mode === 'bundle' && <DayBundleList bundles={filteredBundles} value={bundleStartDay} onChange={setBundleStartDay} />}
         {mode === 'range' && <DayRangePicker days={days} startDay={startDay} endDay={endDay} onStartChange={setStartDay} onEndChange={setEndDay} />}
         {mode === 'random' && <RandomStudyPicker mode={randomMode} dayCount={dayCount} wordCount={wordCount} availableDayCount={days.length} availableWordCount={words.length} onModeChange={setRandomMode} onDayCountChange={setDayCount} onWordCountChange={setWordCount} onReroll={reroll} />}
       </section>
@@ -114,6 +179,21 @@ export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySe
         <div><strong>{target ? formatSelectionSummary(target) : '학습 범위를 선택하세요'}</strong>{target && <span>{target.targetWordIds.length}단어를 학습합니다.</span>}</div>
         <button className="button button--primary" type="button" aria-describedby="study-selection-summary" disabled={!target} onClick={startStudy}>{startLabel}</button>
       </section>
+      {replacementOpen && target && activeSession?.completedAt === null && (
+        <SessionReplacementDialog
+          activeDayIds={activeSession.targetDayIds}
+          newDayIds={target.targetDayIds}
+          onCancel={() => setReplacementOpen(false)}
+          onContinue={() => {
+            setReplacementOpen(false);
+            onContinue?.();
+          }}
+          onReplace={() => {
+            setReplacementOpen(false);
+            onStart(target);
+          }}
+        />
+      )}
     </main>
   );
 }

@@ -47,7 +47,7 @@
 - Produces `parseVocabularyMarkdown(markdown: string): VocabularyWord[]` compatibility and `buildVocabularySources(markdowns: Array<{fileName: string; markdown: string}>): VocabularyWord[]`.
 - Produces `day-catalog.json` records `{ day, topic, wordCount }[]` sorted by day.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```ts
 test('build input includes DAY 01 through DAY 20 with 500 words', () => {
@@ -66,23 +66,23 @@ test('publishes a DAY catalog matching vocabulary', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify failure**
+- [x] **Step 2: Run tests to verify failure**
 
 Run: `npm test -- tests/content/build-vocabulary.test.ts`
 
 Expected: FAIL because the current script reads only `영어_단어_DAY01-10.md` and produces 250 records.
 
-- [ ] **Step 3: Implement the minimal builder change**
+- [x] **Step 3: Implement the minimal builder change**
 
 Discover `content/source/영어_단어_DAY*.md` with `fs.readdirSync`, sort by the numeric DAY suffix, parse each file with the existing parser, concatenate, then validate IDs from `0001` through the final row and exactly 25 words per discovered DAY. Write both vocabulary JSON files plus `src/content/day-catalog.json` and `public/data/day-catalog.json`; preserve the exported parser for existing unit tests.
 
-- [ ] **Step 4: Run content tests and build**
+- [x] **Step 4: Run content tests and build**
 
 Run: `npm run content:build; npm test -- tests/content/build-vocabulary.test.ts`
 
 Expected: output `Generated 500 vocabulary records`, followed by PASS for all content tests.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add scripts/build-vocabulary.mjs tests/content/build-vocabulary.test.ts src/content/vocabulary.json public/data/vocabulary.json public/data/day-catalog.json
@@ -103,7 +103,7 @@ git commit -m "feat: build vocabulary through day 20"
 - `function resolveStudySelection(selection: StudySelection, words: VocabularyWord[], random?: SelectionRandom): StudyTarget`
 - `function formatSelectionSummary(target: StudyTarget): string`
 
-- [ ] **Step 1: Write failing domain tests**
+- [x] **Step 1: Write failing domain tests**
 
 ```ts
 function makeWords(dayCount: number): VocabularyWord[] {
@@ -140,23 +140,23 @@ test('rejects invalid random counts and missing days', () => {
 });
 ```
 
-- [ ] **Step 2: Run the focused test and confirm failure**
+- [x] **Step 2: Run the focused test and confirm failure**
 
 Run: `npm test -- tests/domain/studySelection.test.ts`
 
 Expected: FAIL because the new module and selection types do not exist.
 
-- [ ] **Step 3: Implement selection resolution**
+- [x] **Step 3: Implement selection resolution**
 
 Use sorted unique DAY numbers for catalogs and bundles. Normalize ranges with `Math.min/Math.max`; for random DAY use a partial Fisher–Yates selection of unique available days; for random words shuffle a copy of all words and slice the validated count. Always return sorted `targetDayIds` and word IDs in the chosen order, and never mutate the input vocabulary or progress arrays.
 
-- [ ] **Step 4: Run focused tests**
+- [x] **Step 4: Run focused tests**
 
 Run: `npm test -- tests/domain/studySelection.test.ts`
 
 Expected: PASS, including 20- and 100-DAY fixture coverage and deterministic RNG checks.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/domain/studySelection.ts src/domain/types.ts tests/domain/studySelection.test.ts
@@ -177,7 +177,7 @@ git commit -m "feat: add scalable study selection engine"
 - Add `createStudySessionFromTarget(words, target, progress, now, shuffle?): StudySession`.
 - Keep `createStudySession(words, targetDayIds, progress, now, shuffle?)` as a compatibility wrapper that resolves a range target.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 test('random target session keeps exactly the selected word ids', () => {
@@ -195,23 +195,23 @@ test('legacy stored sessions without selection still load', () => {
 });
 ```
 
-- [ ] **Step 2: Run focused tests and confirm failure**
+- [x] **Step 2: Run focused tests and confirm failure**
 
 Run: `npm test -- tests/domain/sessionEngine.test.ts tests/storage/localStorageRepository.test.ts`
 
 Expected: FAIL because random target creation and optional metadata are not implemented.
 
-- [ ] **Step 3: Implement target-aware session creation**
+- [x] **Step 3: Implement target-aware session creation**
 
 Refactor queue construction to accept an explicit `targetWordIds` set and preserve its order before applying the existing per-block shuffle behavior. Keep due-review insertion unchanged and continue excluding due-review IDs from the target set. Store `selection` when provided. Update session validation to accept its absence and validate known mode/count fields when present.
 
-- [ ] **Step 4: Run focused tests and all domain/storage tests**
+- [x] **Step 4: Run focused tests and all domain/storage tests**
 
 Run: `npm test -- tests/domain/sessionEngine.test.ts tests/storage/localStorageRepository.test.ts tests/domain/reviewScheduler.test.ts`
 
 Expected: PASS with all existing 125-word behavior preserved.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/domain/types.ts src/domain/sessionEngine.ts tests/domain/sessionEngine.test.ts src/storage/LocalStorageProgressRepository.ts tests/storage/localStorageRepository.test.ts
@@ -231,7 +231,7 @@ git commit -m "feat: persist resolved study targets in sessions"
 - `StudySetupPageProps = { words, progress, dayCatalog, onStart(target: StudyTarget): void }`.
 - Child components receive controlled values and callbacks; they do not write localStorage or create sessions.
 
-- [ ] **Step 1: Write failing component tests**
+- [x] **Step 1: Write failing component tests**
 
 ```tsx
 function makeWords(dayCount: number): VocabularyWord[] {
@@ -269,23 +269,23 @@ test('displays a clear summary and passes a target on start', async () => {
 });
 ```
 
-- [ ] **Step 2: Run component tests and confirm failure**
+- [x] **Step 2: Run component tests and confirm failure**
 
 Run: `npm test -- tests/pages/studySetup.test.tsx`
 
 Expected: FAIL because the setup page and components do not exist.
 
-- [ ] **Step 3: Implement controlled setup UI**
+- [x] **Step 3: Implement controlled setup UI**
 
 Default to the first available five-DAY bundle. The range tab uses two selects populated from `dayCatalog`; the random tab offers `random-days` with a numeric count from 1 to available DAY count and `random-words` with 10/25/50/125 capped at total words. Resolve the command through `resolveStudySelection`, render the summary, and disable start for empty/invalid targets. Add a `다시 뽑기` button that changes the random seed before start without changing an active session.
 
-- [ ] **Step 4: Run page tests**
+- [x] **Step 4: Run page tests**
 
 Run: `npm test -- tests/pages/studySetup.test.tsx tests/pages/home.test.tsx`
 
 Expected: PASS for mode switching, summary, accessible controls, and existing home behavior.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/pages/StudySetupPage.tsx src/components/DayBundleList.tsx src/components/DayRangePicker.tsx src/components/RandomStudyPicker.tsx tests/pages/studySetup.test.tsx
@@ -305,7 +305,7 @@ git commit -m "feat: add scalable study setup screen"
 - `AppRouter` adds `dayCatalog: DaySummary[]` and `onStartStudyTarget(target: StudyTarget): void`.
 - Home links to `/study/setup` for a new selection; an existing active session keeps the `이어서 학습하기` link to `/study`.
 
-- [ ] **Step 1: Write failing integration tests**
+- [x] **Step 1: Write failing integration tests**
 
 ```tsx
 test('new study action opens the scalable setup screen', async () => {
@@ -315,23 +315,23 @@ test('new study action opens the scalable setup screen', async () => {
 });
 ```
 
-- [ ] **Step 2: Run the integration test and confirm failure**
+- [x] **Step 2: Run the integration test and confirm failure**
 
 Run: `npm test -- tests/pages/home.test.tsx`
 
 Expected: FAIL because the home action and `/study/setup` route are not wired.
 
-- [ ] **Step 3: Implement router and app callbacks**
+- [x] **Step 3: Implement router and app callbacks**
 
 Load the generated day catalog beside vocabulary. On setup start, call `createStudySessionFromTarget`, save it, refresh, and navigate to `/study`. Keep `onStartStudy` as a compatibility callback for existing active-session resume. The home view model uses `activeSession.targetWordIds` when present and otherwise retains the recommended five-DAY selection.
 
-- [ ] **Step 4: Run app/page tests**
+- [x] **Step 4: Run app/page tests**
 
 Run: `npm test -- tests/pages/home.test.tsx tests/pages/study.test.tsx tests/app/App.test.tsx`
 
 Expected: PASS with new setup navigation and existing study route behavior.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/app/App.tsx src/app/AppRouter.tsx src/pages/HomePage.tsx src/pages/StudyPage.tsx tests/pages/home.test.tsx
@@ -348,7 +348,7 @@ git commit -m "feat: connect study selection to app routing"
 - Preserve existing `.page`, `.button`, `.choice-grid`, focus ring, and iPad study action styles.
 - Add `.study-setup-page`, `.study-mode-tabs`, `.day-bundle-list`, `.day-bundle`, `.range-picker`, `.random-picker`, `.selection-summary`.
 
-- [ ] **Step 1: Add a failing geometry/accessibility assertion**
+- [x] **Step 1: Add a failing geometry/accessibility assertion**
 
 ```ts
 test('setup controls expose pressed state and a visible start action', () => {
@@ -358,23 +358,23 @@ test('setup controls expose pressed state and a visible start action', () => {
 });
 ```
 
-- [ ] **Step 2: Run the focused test and confirm the semantic/style gap**
+- [x] **Step 2: Run the focused test and confirm the semantic/style gap**
 
 Run: `npm test -- tests/pages/studySetup.test.tsx`
 
 Expected: FAIL until tab semantics and the setup layout are present.
 
-- [ ] **Step 3: Implement responsive styles and semantics**
+- [x] **Step 3: Implement responsive styles and semantics**
 
 Use a single-column layout below 700px, two-column settings above it, minimum 44px controls, visible `:focus-visible` outlines, and `aria-selected`/`aria-controls` on tabs. Keep start summary sticky only inside the setup page; do not alter the study canvas touch behavior.
 
-- [ ] **Step 4: Run page tests and build type-check**
+- [x] **Step 4: Run page tests and build type-check**
 
 Run: `npm test -- tests/pages/studySetup.test.tsx; npm run build`
 
 Expected: PASS and a successful TypeScript/Vite build.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/styles/global.css src/pages/StudySetupPage.tsx src/components
@@ -392,7 +392,7 @@ git commit -m "style: make study setup responsive and accessible"
 - E2E starts from `/study/setup`, selects a bundle/range/random mode, and verifies the study session target count.
 - Existing offline test remains authoritative for service-worker cached app, vocabulary, drawing, progress, and on-demand test.
 
-- [ ] **Step 1: Write failing E2E scenarios**
+- [x] **Step 1: Write failing E2E scenarios**
 
 ```ts
 test('selects DAY 11–15 from the bundle setup', async ({ page }) => {
@@ -412,17 +412,17 @@ test('random word mode starts with 25 unique words', async ({ page }) => {
 });
 ```
 
-- [ ] **Step 2: Run E2E to confirm the new scenarios fail**
+- [x] **Step 2: Run E2E to confirm the new scenarios fail**
 
 Run: `npm run test:e2e`
 
 Expected: FAIL only at the new setup selectors before implementation; existing offline and Pencil scenarios remain runnable.
 
-- [ ] **Step 3: Implement stable labels and session summary assertions**
+- [x] **Step 3: Implement stable labels and session summary assertions**
 
 Use visible Korean labels from the setup page, avoid CSS-only selectors, and expose the selected target count in the study header so E2E can verify 125 or 25 without inspecting implementation state.
 
-- [ ] **Step 4: Run the complete required verification**
+- [x] **Step 4: Run the complete required verification**
 
 Run in order:
 
@@ -435,7 +435,7 @@ npm run test:e2e
 
 Expected: all commands exit with code 0; unit/component tests include 500 words and all previous drawing/speech/session tests.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add tests/e2e/wordmaster.spec.ts tests/content/build-vocabulary.test.ts README.md
@@ -448,18 +448,18 @@ git commit -m "test: verify scalable study selection and offline flow"
 - No product code changes unless a verification failure identifies a concrete regression.
 - Review: all files changed by Tasks 1–7 and `docs/superpowers/specs/2026-07-17-scalable-study-selection-design.md`.
 
-- [ ] **Step 1: Inspect the diff and repository state**
+- [x] **Step 1: Inspect the diff and repository state**
 
 Run: `git diff --stat; git status --short; git diff --check`
 
 Expected: only planned files are committed; unrelated user files such as `seventeen/` and source images remain untouched.
 
-- [ ] **Step 2: Re-run the four required commands after the final diff review**
+- [x] **Step 2: Re-run the four required commands after the final diff review**
 
 Run: `npm run content:build; npm test; npm run build; npm run test:e2e`
 
 Expected: all four pass on the final working tree.
 
-- [ ] **Step 3: Record completion evidence**
+- [x] **Step 3: Record completion evidence**
 
 Record generated word/day counts, test totals, E2E browser results, and any physical iPad checks still required in the final handoff. Do not claim iPad hardware verification from Playwright alone.
