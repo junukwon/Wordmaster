@@ -50,7 +50,7 @@ test('keeps pronunciation and safe reveal usable on iPad Mini', async ({ page },
   await voiceSelector.selectOption('mock-samantha');
   await previewButton.click();
 
-  await page.getByRole('button', { name: /DAY 01/ }).click();
+  await page.getByRole('button', { name: /DAY 01 / }).click();
   await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
   await expect(page.locator('.phonetic')).toHaveCount(0);
   await page.getByRole('button', { name: '발음 듣기' }).click();
@@ -102,12 +102,12 @@ test('completes the saved study and on-demand test journey', async ({ page }) =>
   await expect(page.getByText(/문제 12/)).toBeVisible();
 
   await page.getByRole('link', { name: '홈으로 돌아가기' }).click();
-  await page.getByRole('button', { name: /DAY 01/ }).click();
+  await page.getByRole('button', { name: /DAY 01 / }).click();
   await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.getByRole('button', { name: '취소' }).click();
   await expect(page.getByRole('link', { name: '이어서 학습하기' })).toBeVisible();
-  await expect(page.getByRole('button', { name: /DAY 01/ })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('button', { name: /DAY 01 / })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByText('DAY 02 · DAY 07')).toBeVisible();
   await page.getByRole('link', { name: '수시 단어 테스트' }).click();
   await page.getByLabel('문제 유형').selectOption('mixed');
@@ -136,7 +136,7 @@ test('keeps core learning available offline after the first visit', async ({ pag
   await page.evaluate(() => navigator.serviceWorker.ready);
   await context.setOffline(true);
   await page.reload();
-  await page.getByRole('button', { name: /DAY 01/ }).click();
+  await page.getByRole('button', { name: /DAY 01 / }).click();
   await expect(page.getByText('1개 선택 · 신규 25개 · 복습 0개')).toBeVisible();
   await page.getByRole('button', { name: '25개 학습 시작하기' }).click();
   await expect(page.getByRole('heading', { name: '집중 학습' })).toBeVisible();
@@ -161,7 +161,19 @@ test('keeps DAY selection and replacement controls inside iPad Mini viewports', 
   test.skip(!isIPadMini);
   const dayGrid = page.getByLabel('학습할 DAY 선택');
   await expect(dayGrid).toBeVisible();
-  const firstDayCard = page.getByRole('button', { name: /DAY 01/ });
+  const firstDayCard = page.getByRole('button', { name: /DAY 01 / });
+  if (testInfo.project.name === 'iPad Mini landscape') {
+    const cards = dayGrid.locator('.day-card');
+    await expect(cards).toHaveCount(20);
+    const cardBounds = await Promise.all(
+      Array.from({ length: 6 }, (_, index) => cards.nth(index).boundingBox()),
+    );
+    expect(cardBounds.every(Boolean)).toBe(true);
+    for (let index = 1; index < 5; index += 1) {
+      expect(Math.abs(cardBounds[index]!.y - cardBounds[0]!.y)).toBeLessThanOrEqual(1);
+    }
+    expect(cardBounds[5]!.y).toBeGreaterThan(cardBounds[0]!.y);
+  }
   await firstDayCard.click();
   const startButton = page.getByRole('button', { name: '25개 학습 시작하기' });
   const stickyActions = startButton.locator('..');
@@ -209,4 +221,79 @@ test('keeps DAY selection and replacement controls inside iPad Mini viewports', 
     expect(bounds!.y).toBeGreaterThanOrEqual(0);
     expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(viewport.height);
   }
+});
+
+test('keeps scalable study actions inside the initial iPad Mini landscape viewport', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'iPad Mini landscape');
+  await page.getByRole('link', { name: '학습 범위 설정' }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+
+  const actions = page.locator('.study-actions');
+  await expect(actions).toBeVisible();
+  const geometry = await actions.evaluate((element) => ({
+    actionsBottom: element.getBoundingClientRect().bottom,
+    viewportHeight: window.innerHeight,
+    scrollY: window.scrollY,
+  }));
+
+  expect(geometry.scrollY).toBe(0);
+  expect(geometry.actionsBottom).toBeLessThanOrEqual(geometry.viewportHeight);
+});
+
+test('selects DAY 11–15 from the bundle setup', async ({ page }) => {
+  await page.getByRole('link', { name: '학습 범위 설정' }).click();
+  await expect(page.getByRole('heading', { name: '학습 범위 설정' })).toBeVisible();
+  await page.getByRole('button', { name: /DAY 11–15/ }).click();
+  await expect(page.getByText('125단어를 학습합니다.')).toBeVisible();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByText(/문제 1/)).toBeVisible();
+  await expect(page.getByRole('progressbar', { name: '125개 신규 단어 진행률' })).toBeVisible();
+});
+
+test('random word mode starts with 25 unique words', async ({ page }) => {
+  await page.getByRole('link', { name: '학습 범위 설정' }).click();
+  await page.getByRole('tab', { name: '랜덤으로 선택' }).click();
+  await page.getByRole('radio', { name: '랜덤 단어 세트' }).check();
+  await expect(page.getByLabel('랜덤 단어 수')).toHaveValue('25');
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByText(/문제 1/)).toBeVisible();
+  await expect(page.getByRole('progressbar', { name: '25개 신규 단어 진행률' })).toBeVisible();
+});
+
+test('finds a DAY bundle by topic and protects an existing session on setup', async ({ page }) => {
+  await page.getByRole('link', { name: '학습 범위 설정' }).click();
+  const search = page.getByRole('searchbox', { name: 'DAY 번호 또는 주제 검색' });
+  await search.fill('음식');
+  await expect(page.getByRole('button', { name: /DAY 11–15/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /DAY 01–05/ })).toHaveCount(0);
+
+  await search.fill('1');
+  await page.getByRole('button', { name: /DAY 01–05/ }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByRole('heading', { name: '집중 학습' })).toBeVisible();
+
+  await page.goto('./#/study/setup');
+  await expect(page.getByRole('searchbox', { name: 'DAY 번호 또는 주제 검색' })).toHaveValue('1');
+  await page.getByRole('searchbox', { name: 'DAY 번호 또는 주제 검색' }).fill('');
+  await page.getByRole('button', { name: /DAY 06–10/ }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: '취소' }).click();
+  await expect(page.getByRole('heading', { name: '학습 범위 설정' })).toBeVisible();
+});
+
+test('keeps setup access prominent and restores a range after a home round trip', async ({ page }) => {
+  const setupLink = page.getByRole('link', { name: '학습 범위 설정' });
+  await expect(setupLink).toBeVisible();
+
+  await setupLink.click();
+  await page.getByRole('tab', { name: '범위로 선택' }).click();
+  await page.getByLabel('시작 DAY').selectOption('4');
+  await page.getByLabel('종료 DAY').selectOption('7');
+  await page.getByRole('link', { name: '홈' }).click();
+  await page.getByRole('link', { name: '학습 범위 설정' }).click();
+
+  await expect(page.getByRole('tab', { name: '범위로 선택' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByLabel('시작 DAY')).toHaveValue('4');
+  await expect(page.getByLabel('종료 DAY')).toHaveValue('7');
 });

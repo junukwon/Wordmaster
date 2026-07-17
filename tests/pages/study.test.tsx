@@ -68,6 +68,18 @@ test('reveals pronunciation only after its button is pressed and keeps it visibl
   expect(speechPlayer.speak).toHaveBeenCalledTimes(2);
 });
 
+test('plays speech for legacy words even when no IPA is available', async () => {
+  const { repository, speechPlayer } = services();
+  const session = createStudySession(words, [11], [], fixedNow, identity);
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+
+  const pronunciationButton = screen.getByRole('button', { name: '발음 듣기' });
+  expect(pronunciationButton).toBeEnabled();
+  await userEvent.click(pronunciationButton);
+  expect(speechPlayer.speak).toHaveBeenCalledWith(words.find((word) => word.day === 11)?.term);
+  expect(document.querySelector('.phonetic')).not.toBeInTheDocument();
+});
+
 test('reveals pronunciation when speech is unavailable and resets it after advancing', async () => {
   const repository = new LocalStorageProgressRepository(localStorage);
   const speechPlayer = {

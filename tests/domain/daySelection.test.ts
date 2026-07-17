@@ -21,7 +21,7 @@ test('builds ordered 25-word summaries with mastered, learning and unseen counts
     base('0003'),
   ];
   const summaries = buildDaySummaries(words, progress);
-  expect(summaries).toHaveLength(10);
+  expect(summaries).toHaveLength(20);
   expect(summaries[0]).toEqual({
     day: 1,
     topic: '사람 묘사 I',
@@ -30,5 +30,5 @@ test('builds ordered 25-word summaries with mastered, learning and unseen counts
     learning: 1,
     unseen: 22,
   });
-  expect(summaries.map((summary) => summary.day)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  expect(summaries.map((summary) => summary.day)).toEqual(Array.from({ length: 20 }, (_, index) => index + 1));
 });

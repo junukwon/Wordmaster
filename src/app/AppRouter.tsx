@@ -1,25 +1,38 @@
 import { useState } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { fisherYatesShuffle } from '../domain/sessionEngine';
+import type { DaySummary, StudyTarget } from '../domain/studySelection';
+import type { QuestionType, TestAttempt, VocabularyWord } from '../domain/types';
 import { HomePage, type HomeViewModel } from '../pages/HomePage';
 import { StudyPage } from '../pages/StudyPage';
+import { StudySetupPage } from '../pages/StudySetupPage';
 import { TestPage } from '../pages/TestPage';
 import { TestResultPage } from '../pages/TestResultPage';
 import { TestSetupPage } from '../pages/TestSetupPage';
-import { fisherYatesShuffle } from '../domain/sessionEngine';
-import type { QuestionType, TestAttempt, VocabularyWord } from '../domain/types';
-import type { ProgressRepository } from '../storage/ProgressRepository';
 import type { SpeechPlayer } from '../speech/SpeechPlayer';
+import type { ProgressRepository } from '../storage/ProgressRepository';
 
 type AppRouterProps = {
   homeViewModel: HomeViewModel;
   words: VocabularyWord[];
+  dayCatalog: DaySummary[];
   repository: ProgressRepository;
   speechPlayer: SpeechPlayer;
   onStartStudy: (dayIds: number[]) => boolean;
+  onStartStudyTarget: (target: StudyTarget) => boolean;
   onDataChanged: () => void;
 };
 
-export function AppRouter({ homeViewModel, words, repository, speechPlayer, onStartStudy, onDataChanged }: AppRouterProps) {
+export function AppRouter({
+  homeViewModel,
+  words,
+  dayCatalog,
+  repository,
+  speechPlayer,
+  onStartStudy,
+  onStartStudyTarget,
+  onDataChanged,
+}: AppRouterProps) {
   const navigate = useNavigate();
   const [attempt, setAttempt] = useState<TestAttempt | null>(null);
   const [result, setResult] = useState<TestAttempt | null>(null);
@@ -55,9 +68,23 @@ export function AppRouter({ homeViewModel, words, repository, speechPlayer, onSt
     setResult(null);
   };
 
+  const startStudyTarget = (target: StudyTarget) => {
+    if (onStartStudyTarget(target)) navigate('/study');
+  };
+
   return (
     <Routes>
       <Route path="/" element={<HomePage viewModel={homeViewModel} speechPlayer={speechPlayer} onStartStudy={onStartStudy} onOpenTest={openRegularTest} />} />
+      <Route path="/study/setup" element={(
+        <StudySetupPage
+          words={words}
+          progress={repository.getAllWordProgress()}
+          dayCatalog={dayCatalog}
+          activeSession={homeViewModel.activeSession}
+          onContinue={() => navigate('/study')}
+          onStart={startStudyTarget}
+        />
+      )} />
       <Route path="/study" element={<StudyPage words={words} repository={repository} speechPlayer={speechPlayer} onProgressChange={onDataChanged} />} />
       <Route path="/test/setup" element={<TestSetupPage words={words} progress={repository.getAllWordProgress()} shuffle={fisherYatesShuffle} onStart={startTest} initialWordIds={limitedWordIds} initialMode={setupMode} />} />
       <Route path="/test/run" element={attempt ? <TestPage initialAttempt={attempt} words={words} repository={repository} onAttemptChange={setAttempt} onComplete={completeTest} /> : <Navigate to="/test/setup" replace />} />

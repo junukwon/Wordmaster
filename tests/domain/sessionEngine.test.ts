@@ -1,9 +1,10 @@
 import words from '../../src/content/vocabulary.json';
 import type { LearningOutcome } from '../../src/domain/masteryEngine';
-import type { WordProgress } from '../../src/domain/types';
+import type { VocabularyWord, WordProgress } from '../../src/domain/types';
 import {
   applySessionOutcome,
   createStudySession,
+  createStudySessionFromTarget,
   getNextStudyItem,
   getSessionQueueItems,
   getSessionSummary,
@@ -12,6 +13,10 @@ import {
 
 const now = new Date('2026-07-10T09:00:00.000Z');
 const identity = <T,>(items: T[]) => items;
+
+const sparseWords: VocabularyWord[] = [
+  { id: 'sparse-1', day: 1, topic: 'Sparse', term: 'alpha', phonetic: '', partOfSpeech: ['noun'], meanings: ['알파'] },
+];
 
 function progress(wordId: string, confidence: WordProgress['confidence'] = 'unknown'): WordProgress {
   return {
@@ -24,6 +29,61 @@ test('selecting DAY 1 through 5 creates 125 unique targets', () => {
   const session = createStudySession(words, [1, 2, 3, 4, 5], [], now, identity);
   expect(session.targetWordIds).toHaveLength(125);
   expect(new Set(session.targetWordIds).size).toBe(125);
+});
+
+test('random target session keeps exactly the selected word ids', () => {
+  const target = {
+    targetDayIds: [1, 2],
+    targetWordIds: ['0001', '0026'],
+    selection: { mode: 'random-words' as const, wordCount: 2 },
+  };
+  const session = createStudySessionFromTarget(words, target, [], now, identity);
+  expect(session.targetWordIds).toEqual(['0001', '0026']);
+  expect(session.selection).toEqual(target.selection);
+});
+
+test('random 25 target excludes due-review words outside the resolved target', () => {
+  const targetIds = words.slice(0, 25).map((word) => word.id);
+  const due = {
+    ...progress('0201', 'strong'),
+    nextReviewAt: '2026-07-09T09:00:00.000Z',
+    reviewStep: 1 as const,
+  };
+  const target = {
+    targetDayIds: [1],
+    targetWordIds: targetIds,
+    selection: { mode: 'random-words' as const, wordCount: 25 },
+  };
+
+  const session = createStudySessionFromTarget(words, target, [due], now, identity);
+  const queuedIds = getSessionQueueItems(session).map((item) => item.wordId);
+
+  expect(new Set(queuedIds)).toEqual(new Set(targetIds));
+  expect(queuedIds).not.toContain(due.wordId);
+  expect(session.dueReviewIds).toEqual([]);
+});
+
+test('legacy DAY filtering tolerates sparse or missing DAY ids', () => {
+  const sparseTarget = createStudySession(sparseWords, [1, 2], [], now, identity);
+  expect(sparseTarget.targetDayIds).toEqual([1, 2]);
+  expect(sparseTarget.targetWordIds).toEqual(['sparse-1']);
+  expect(getSessionQueueItems(sparseTarget).every((item) => item.wordId === 'sparse-1')).toBe(true);
+
+  const missingTarget = createStudySession(sparseWords, [2], [], now, identity);
+  expect(missingTarget.targetDayIds).toEqual([2]);
+  expect(missingTarget.targetWordIds).toEqual([]);
+  expect(getSessionQueueItems(missingTarget)).toEqual([]);
+});
+
+test('explicit target ids preserve their order within a queue block', () => {
+  const target = {
+    targetDayIds: [1],
+    targetWordIds: ['0002', '0001'],
+    selection: { mode: 'range' as const, startDay: 1, endDay: 1 },
+  };
+  const session = createStudySessionFromTarget(words, target, [], now, identity);
+  expect(session.targetWordIds).toEqual(['0002', '0001']);
+  expect(getSessionQueueItems(session).slice(0, 2).map((item) => item.wordId)).toEqual(['0002', '0001']);
 });
 
 test('normalizes duplicate, unordered and unknown DAY ids', () => {
@@ -42,9 +102,10 @@ test('creates exact targets for non-contiguous DAY combinations', () => {
   expect(seventyFive.targetWordIds).toHaveLength(75);
 });
 
-test('rejects a selection with no valid DAY', () => {
-  expect(() => createStudySession(words, [], [], now, identity)).toThrow('하나 이상의 유효한 DAY를 선택해 주세요.');
-  expect(() => createStudySession(words, [999], [], now, identity)).toThrow('하나 이상의 유효한 DAY를 선택해 주세요.');
+test('normalization reports no valid DAY without changing the compatibility wrapper', () => {
+  expect(normalizeTargetDays(words, [])).toEqual([]);
+  expect(normalizeTargetDays(words, [999])).toEqual([]);
+  expect(createStudySession(words, [999], [], now, identity).targetWordIds).toEqual([]);
 });
 
 test('initial learning operates in groups of five through three recall types', () => {

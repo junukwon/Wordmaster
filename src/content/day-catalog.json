@@ -1,0 +1,102 @@
+[
+  {
+    "day": 1,
+    "topic": "사람 묘사 I",
+    "wordCount": 25
+  },
+  {
+    "day": 2,
+    "topic": "사람 묘사 II",
+    "wordCount": 25
+  },
+  {
+    "day": 3,
+    "topic": "기분, 감정",
+    "wordCount": 25
+  },
+  {
+    "day": 4,
+    "topic": "건강, 질병",
+    "wordCount": 25
+  },
+  {
+    "day": 5,
+    "topic": "관계, 직업",
+    "wordCount": 25
+  },
+  {
+    "day": 6,
+    "topic": "행동, 동작",
+    "wordCount": 25
+  },
+  {
+    "day": 7,
+    "topic": "사고, 생각",
+    "wordCount": 25
+  },
+  {
+    "day": 8,
+    "topic": "의사소통",
+    "wordCount": 25
+  },
+  {
+    "day": 9,
+    "topic": "의미를 더해주는 어휘",
+    "wordCount": 25
+  },
+  {
+    "day": 10,
+    "topic": "일상, 집안일",
+    "wordCount": 25
+  },
+  {
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "wordCount": 25
+  },
+  {
+    "day": 12,
+    "topic": "음식, 조리",
+    "wordCount": 25
+  },
+  {
+    "day": 13,
+    "topic": "패션",
+    "wordCount": 25
+  },
+  {
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "wordCount": 25
+  },
+  {
+    "day": 15,
+    "topic": "학교 활동",
+    "wordCount": 25
+  },
+  {
+    "day": 16,
+    "topic": "모양, 정도",
+    "wordCount": 25
+  },
+  {
+    "day": 17,
+    "topic": "사물 묘사",
+    "wordCount": 25
+  },
+  {
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "wordCount": 25
+  },
+  {
+    "day": 19,
+    "topic": "시간, 순서",
+    "wordCount": 25
+  },
+  {
+    "day": 20,
+    "topic": "방향, 위치",
+    "wordCount": 25
+  }
+]

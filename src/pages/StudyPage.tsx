@@ -112,8 +112,8 @@ export function StudyPage({
             </>
           )}
 
-          {phoneticWordId === word.id && <p className="phonetic" lang="en-US">{word.phonetic}</p>}
-          <button className="speech-button" type="button" onClick={revealPronunciation} disabled={!word.phonetic} aria-label="발음 듣기">
+          {phoneticWordId === word.id && word.phonetic && <p className="phonetic" lang="en-US">{word.phonetic}</p>}
+          <button className="speech-button" type="button" onClick={revealPronunciation} disabled={!word.phonetic && !speechPlayer.isAvailable()} aria-label="발음 듣기">
             <span aria-hidden="true">🔊</span> 발음 듣기
           </button>
           {speechPlayer.getNotice() && <p className="inline-notice">{speechPlayer.getNotice()}</p>}
