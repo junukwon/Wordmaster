@@ -75,6 +75,14 @@ test('shows an unfinished session summary with a direct resume link', async () =
   expect(screen.getByRole('heading', { name: '집중 학습' })).toBeInTheDocument();
 });
 
+test('keeps one setup entry visible before DAY cards while a session is active', () => {
+  renderHome({ ...viewModel, activeSession });
+  const link = screen.getByRole('link', { name: '학습 범위 설정' });
+  expect(screen.getAllByRole('link', { name: '학습 범위 설정' })).toHaveLength(1);
+  const grid = screen.getByLabelText('학습할 DAY 선택');
+  expect(link.compareDocumentPosition(grid)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+});
+
 test('a completed saved session is stale and does not require replacement confirmation', async () => {
   const user = userEvent.setup();
   const onStartStudy = renderHome({
@@ -174,6 +182,6 @@ test('new study action opens the scalable setup screen', async () => {
       </Routes>
     </MemoryRouter>,
   );
-  await userEvent.click(screen.getByRole('link', { name: '학습 범위 선택하기' }));
+  await userEvent.click(screen.getByRole('link', { name: '학습 범위 설정' }));
   expect(screen.getByRole('heading', { name: '학습 범위 설정' })).toBeInTheDocument();
 });

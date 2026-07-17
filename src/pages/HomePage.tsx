@@ -87,13 +87,19 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest, speechPlayer }: 
           </div>
           <span className="review-pill">오늘 복습 {viewModel.dueReviews}개</span>
         </div>
+        <div className="study-setup-entry">
+          <div>
+            <strong>묶음·범위·랜덤 학습</strong>
+            <span>DAY가 많아져도 원하는 분량만 골라 시작할 수 있어요.</span>
+          </div>
+          <Link className="button button--secondary" to="/study/setup">학습 범위 설정</Link>
+        </div>
         <DaySelectionGrid summaries={viewModel.days} selectedDayIds={selectedDayIds} onChange={setSelectedDayIds} />
         <p className="selection-summary">{selectionText}</p>
         <div className="home-actions">
           <button className="button button--primary" type="button" disabled={selectedDayIds.length === 0} onClick={start}>
             {selectedWordCount}개 학습 시작하기
           </button>
-          {!activeSession && <Link className="button button--secondary" to="/study/setup">학습 범위 선택하기</Link>}
           <Link className="button button--secondary" to="/test/setup" onClick={onOpenTest}>수시 단어 테스트</Link>
         </div>
       </section>

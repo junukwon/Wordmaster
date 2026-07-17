@@ -17,6 +17,10 @@ a { color: inherit; }
 .routine-card h2 { margin: 0 0 .4rem; font-size: clamp(2rem, 6vw, 3.5rem); letter-spacing: -.06em; }
 .routine-card p { margin: 0; color: var(--color-muted); line-height: 1.65; }
 .review-pill { flex: none; padding: .75rem 1rem; border-radius: 999px; background: #fff4e7; color: #9a4d1b; font-weight: 800; }
+.study-setup-entry { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; padding: 1rem 1.1rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: #f5faf9; }
+.study-setup-entry > div { display: grid; gap: .25rem; }
+.study-setup-entry span { color: var(--color-muted); line-height: 1.45; }
+.study-setup-entry .button { flex: none; }
 .active-session-card, .active-session-banner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; padding: 1rem 1.25rem; border-radius: var(--radius-md); background: var(--color-primary); color: white; }
 .active-session-banner > div { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
 .active-session-banner .button { flex: none; border-color: white; }
@@ -166,6 +170,8 @@ a { color: inherit; }
   .page { width: min(100% - 1rem, 680px); padding-top: 1rem; }
   .brand-bar { align-items: flex-start; flex-direction: column; }
   .routine-card__title-row { flex-direction: column; }
+  .study-setup-entry { align-items: stretch; flex-direction: column; }
+  .study-setup-entry .button { width: 100%; }
   .day-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .active-session-card, .active-session-banner, .study-selection-summary, .home-actions { align-items: stretch; flex-direction: column; }
   .active-session-banner .button, .study-selection-summary .button, .home-actions .button { width: 100%; min-height: 44px; }

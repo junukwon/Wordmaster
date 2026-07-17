@@ -29,7 +29,7 @@
 - Consumes: 기존 React Router 경로 `/study/setup`
 - Produces: 세션 유무와 무관하게 하나만 렌더링되는 `학습 범위 설정` 링크
 
-- [ ] **Step 1: 진행 중 세션에서도 링크가 상단에 보이는 실패 테스트 작성**
+- [x] **Step 1: 진행 중 세션에서도 링크가 상단에 보이는 실패 테스트 작성**
 
 ```tsx
 test('keeps one setup entry visible before DAY cards while a session is active', () => {
@@ -41,13 +41,13 @@ test('keeps one setup entry visible before DAY cards while a session is active',
 });
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npm test -- tests/pages/home.test.tsx`
 
 Expected: FAIL because the active-session branch currently hides `학습 범위 선택하기` and no pre-grid link exists.
 
-- [ ] **Step 3: DAY 목록 앞에 상시 링크를 최소 구현**
+- [x] **Step 3: DAY 목록 앞에 상시 링크를 최소 구현**
 
 ```tsx
 <div className="study-setup-entry">
@@ -61,13 +61,13 @@ Expected: FAIL because the active-session branch currently hides `학습 범위 
 
 기존 `!activeSession` 조건 링크는 제거하고, `.study-setup-entry`는 iPad에서도 버튼이 밀리지 않는 반응형 레이아웃을 적용한다.
 
-- [ ] **Step 4: 통과 확인**
+- [x] **Step 4: 통과 확인**
 
 Run: `npm test -- tests/pages/home.test.tsx`
 
 Expected: PASS.
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add tests/pages/home.test.tsx src/pages/HomePage.tsx src/styles/global.css
