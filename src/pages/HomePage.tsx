@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { DaySelectionGrid } from '../components/DaySelectionGrid';
+import { HomeDayToolbar } from '../components/HomeDayToolbar';
 import { SessionReplacementDialog } from '../components/SessionReplacementDialog';
 import type { DaySummary } from '../domain/daySelection';
+import { buildDayRanges, filterHomeDays } from '../domain/homeDayFilter';
 import type { StudySession } from '../domain/types';
 import { PronunciationSettings, type PronunciationSpeechPlayer } from '../speech/PronunciationSettings';
 
@@ -22,10 +24,18 @@ type HomePageProps = {
 
 export function HomePage({ viewModel, onStartStudy, onOpenTest, speechPlayer }: HomePageProps) {
   const [selectedDayIds, setSelectedDayIds] = useState<number[]>([]);
+  const [dayQuery, setDayQuery] = useState('');
+  const [selectedRangeStart, setSelectedRangeStart] = useState(1);
   const [replacementOpen, setReplacementOpen] = useState(false);
   const storageAlertRef = useRef<HTMLParagraphElement>(null);
   const previousStorageErrorRef = useRef<string | null | undefined>(undefined);
   const navigate = useNavigate();
+  const dayRanges = useMemo(() => buildDayRanges(viewModel.days), [viewModel.days]);
+  const selectedRange = dayRanges.find((range) => range.start === selectedRangeStart) ?? dayRanges[0];
+  const visibleDays = useMemo(
+    () => selectedRange ? filterHomeDays(viewModel.days, selectedRange, dayQuery) : [],
+    [dayQuery, selectedRange, viewModel.days],
+  );
   const activeSession = viewModel.activeSession?.completedAt === null ? viewModel.activeSession : null;
   const selectedWordCount = selectedDayIds.reduce((total, day) =>
     total + (viewModel.days.find((summary) => summary.day === day)?.total ?? 0), 0);
@@ -94,7 +104,18 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest, speechPlayer }: 
           </div>
           <Link className="button button--secondary" to="/study/setup">학습 범위 설정</Link>
         </div>
-        <DaySelectionGrid summaries={viewModel.days} selectedDayIds={selectedDayIds} onChange={setSelectedDayIds} />
+        <HomeDayToolbar
+          query={dayQuery}
+          ranges={dayRanges}
+          selectedRangeStart={selectedRange?.start ?? 1}
+          onQueryChange={setDayQuery}
+          onRangeChange={setSelectedRangeStart}
+        />
+        {visibleDays.length > 0 ? (
+          <DaySelectionGrid summaries={visibleDays} selectedDayIds={selectedDayIds} onChange={setSelectedDayIds} />
+        ) : (
+          <p className="day-search-empty" role="status">검색 결과가 없어요.</p>
+        )}
         <p className="selection-summary">{selectionText}</p>
         <div className="home-actions">
           <button className="button button--primary" type="button" disabled={selectedDayIds.length === 0} onClick={start}>

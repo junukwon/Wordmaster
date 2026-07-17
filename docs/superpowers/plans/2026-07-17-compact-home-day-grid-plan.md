@@ -139,35 +139,35 @@ git commit -m "feat: add compact DAY status cards"
 - Consumes: `buildDayRanges`, `filterHomeDays`, `HomeDayToolbar`
 - Preserves: `HomePageProps`, `onStartStudy(dayIds)`, 세션 교체 대화상자
 
-- [ ] **Step 1: 구간 전환·검색·숨은 선택 유지 실패 테스트 작성**
+- [x] **Step 1: 구간 전환·검색·숨은 선택 유지 실패 테스트 작성**
 
 45개 DAY의 HomePage를 렌더링하고 기본 화면에 DAY 01–20만 있는지, 21–40을 누르면 DAY 21이 표시되는지, `학교` 검색으로 구간 밖 DAY가 표시되는지 검증한다. DAY 02 선택 후 다른 구간으로 이동해도 하단 요약은 `1개 선택 · 신규 25개`를 유지해야 한다.
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npm test -- tests/pages/home.test.tsx`
 
 Expected: FAIL because HomePage does not render filtering controls.
 
-- [ ] **Step 3: HomePage 필터 상태와 승인 레이아웃 구현**
+- [x] **Step 3: HomePage 필터 상태와 승인 레이아웃 구현**
 
 `useMemo`로 ranges와 visibleDays를 계산하고 `HomeDayToolbar` 뒤에 필터된 `DaySelectionGrid`를 렌더링한다. 검색 결과가 없으면 `role="status"`로 `검색 결과가 없어요.`를 표시한다. 선택 합계는 항상 전체 `viewModel.days`에서 계산한다.
 
-- [ ] **Step 4: CSS를 iPad 가로 5열 컴팩트 카드로 변경**
+- [x] **Step 4: CSS를 iPad 가로 5열 컴팩트 카드로 변경**
 
 기본 `.day-grid`는 5열, `.day-card`는 최소 높이 약 108px, 상태 캡슐은 34–38px × 18px로 구현한다. 900px 이하에서는 3열, 640px 이하에서는 2열로 전환한다. 헤더·도구 모음·하단 액션은 승인 시안의 여백과 색 체계를 따른다.
 
-- [ ] **Step 5: 홈 단위 테스트 통과 확인**
+- [x] **Step 5: 홈 단위 테스트 통과 확인**
 
 Run: `npm test -- tests/pages/home.test.tsx tests/components/HomeDayToolbar.test.tsx tests/components/DaySelectionGrid.test.tsx tests/domain/homeDayFilter.test.ts`
 
 Expected: PASS.
 
-- [ ] **Step 6: iPad Mini 가로 E2E 갱신**
+- [x] **Step 6: iPad Mini 가로 E2E 갱신**
 
 `iPad Mini landscape`에서 첫 구간에 DAY 카드 20개가 보이고, `.day-grid`의 첫 행에 5개가 배치되며, 문서 가로 폭이 viewport를 넘지 않는지 검증한다. 기존 DAY 선택·학습 시작·세션 교체 흐름도 유지한다.
 
-- [ ] **Step 7: 전체 검증**
+- [x] **Step 7: 전체 검증**
 
 Run:
 
@@ -180,7 +180,7 @@ npm run test:e2e
 
 Expected: 500 vocabulary records, all unit tests PASS, build PASS, all applicable E2E tests PASS.
 
-- [ ] **Step 8: 체크박스 갱신과 커밋**
+- [x] **Step 8: 체크박스 갱신과 커밋**
 
 ```bash
 git add src/pages/HomePage.tsx tests/pages/home.test.tsx src/styles/global.css tests/e2e/wordmaster.spec.ts docs/superpowers/plans/2026-07-17-compact-home-day-grid-plan.md

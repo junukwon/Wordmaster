@@ -14,6 +14,15 @@ const days = Array.from({ length: 10 }, (_, index) => ({
   unseen: 25,
 }));
 
+const manyDays = Array.from({ length: 45 }, (_, index) => ({
+  day: index + 1,
+  topic: index === 44 ? '학교 특별 활동' : `${index + 1}일차 주제`,
+  total: 25,
+  mastered: index === 0 ? 8 : 0,
+  learning: index === 0 ? 5 : 0,
+  unseen: index === 0 ? 12 : 25,
+}));
+
 const activeSession = {
   id: 'active', date: '2026-07-10', targetDayIds: [1, 3], targetWordIds: ['0001', '0002'],
   queue: ['one', 'two', 'three', 'four'], currentIndex: 2, phase: 'recall' as const,
@@ -54,7 +63,7 @@ test('renders pronunciation settings after the learning routine', () => {
 test('selects any DAY cards and starts the exact selection', async () => {
   const user = userEvent.setup();
   const onStartStudy = renderHome();
-  expect(screen.getAllByRole('button', { name: /DAY \d{2}/ })).toHaveLength(10);
+  expect(screen.getAllByRole('button', { name: /선택 안 됨/ })).toHaveLength(10);
   expect(screen.getByRole('button', { name: /학습 시작하기/ })).toBeDisabled();
   await user.click(screen.getByRole('button', { name: /DAY 02/ }));
   await user.click(screen.getByRole('button', { name: /DAY 07/ }));
@@ -73,6 +82,39 @@ test('shows an unfinished session summary with a direct resume link', async () =
   expect(banner).toHaveTextContent('현재 진행 2 / 4');
   await userEvent.click(screen.getByRole('link', { name: '이어서 학습하기' }));
   expect(screen.getByRole('heading', { name: '집중 학습' })).toBeInTheDocument();
+});
+
+test('shows only the selected 20-DAY range', async () => {
+  const user = userEvent.setup();
+  renderHome({ ...viewModel, days: manyDays });
+
+  expect(screen.getAllByRole('button', { name: /선택 안 됨/ })).toHaveLength(20);
+  expect(screen.getByRole('button', { name: /DAY 01 / })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /DAY 21 / })).not.toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '21–40' }));
+  expect(screen.getByRole('button', { name: /DAY 21 / })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /DAY 01 / })).not.toBeInTheDocument();
+});
+
+test('searches every DAY regardless of the selected range', async () => {
+  const user = userEvent.setup();
+  renderHome({ ...viewModel, days: manyDays });
+
+  await user.type(screen.getByLabelText('DAY 또는 주제 검색'), '학교');
+  expect(screen.getByRole('button', { name: /DAY 45 학교 특별 활동/ })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /DAY 01 / })).not.toBeInTheDocument();
+});
+
+test('keeps a selected DAY in the total after switching ranges', async () => {
+  const user = userEvent.setup();
+  renderHome({ ...viewModel, days: manyDays });
+
+  await user.click(screen.getByRole('button', { name: /DAY 02 / }));
+  await user.click(screen.getByRole('button', { name: '21–40' }));
+
+  expect(screen.getByText('1개 선택 · 신규 25개 · 복습 9개')).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /DAY 02 / })).not.toBeInTheDocument();
 });
 
 test('keeps one setup entry visible before DAY cards while a session is active', () => {
@@ -158,7 +200,7 @@ test('closes replacement confirmation and focuses a newly reported storage error
   }
   render(<FailedReplacementHome />);
   await user.click(screen.getByRole('button', { name: /DAY 02/ }));
-  await user.click(screen.getByRole('button', { name: /25/ }));
+  await user.click(screen.getByRole('button', { name: '25개 학습 시작하기' }));
   await user.click(screen.getAllByRole('button').at(-1)!);
 
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
