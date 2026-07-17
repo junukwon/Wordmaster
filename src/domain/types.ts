@@ -1,3 +1,5 @@
+import type { StudySelection } from './studySelection';
+
 export type VocabularyWord = {
   id: string;
   day: number;
@@ -60,6 +62,8 @@ export type StudySession = {
   updatedAt: string;
   completedAt: string | null;
   dueReviewIds?: string[];
+  /** Selection metadata is optional so sessions saved by earlier versions remain valid. */
+  selection?: StudySelection;
 };
 
 export type TestResult = 'correct' | 'uncertain' | 'incorrect';

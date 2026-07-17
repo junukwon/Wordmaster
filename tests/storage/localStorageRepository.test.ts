@@ -61,6 +61,18 @@ test('active session can be saved and cleared', () => {
   expect(repository.loadActiveSession()).toBeNull();
 });
 
+test('legacy stored sessions without selection still load', () => {
+  const legacy = { ...session() };
+  delete (legacy as Partial<StudySession>).selection;
+  localStorage.setItem('wordmaster:v1', JSON.stringify({
+    version: 1,
+    progress: {},
+    activeSession: legacy,
+    testAttempts: [],
+  }));
+  expect(new LocalStorageProgressRepository(localStorage).loadActiveSession()).toMatchObject({ targetDayIds: [1, 2, 3, 4, 5] });
+});
+
 test('malformed JSON is backed up and reset safely', () => {
   localStorage.setItem('wordmaster:v1', '{bad json');
   const repository = new LocalStorageProgressRepository(localStorage);

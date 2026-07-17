@@ -1,5 +1,6 @@
 import type { LearningOutcome } from './masteryEngine';
 import { isReviewDue } from './reviewScheduler';
+import { resolveStudySelection } from './studySelection';
 import type {
   QuestionType,
   StudyPhase,
@@ -7,6 +8,7 @@ import type {
   VocabularyWord,
   WordProgress,
 } from './types';
+import type { StudyTarget } from './studySelection';
 
 export type Shuffle = <T>(items: T[]) => T[];
 
@@ -97,10 +99,53 @@ export function createStudySession(
   shuffle: Shuffle = fisherYatesShuffle,
 ): StudySession {
   const selectedDays = [...new Set(targetDayIds)].sort((a, b) => a - b);
-  const wordsById = new Map(words.map((word) => [word.id, word]));
-  const targetWords = selectedDays.flatMap((day) =>
-    shuffle(words.filter((word) => word.day === day)),
+  const selection = {
+    mode: 'range' as const,
+    startDay: selectedDays[0] ?? 0,
+    endDay: selectedDays[selectedDays.length - 1] ?? 0,
+  };
+  if (selectedDays.length === 0 || words.length === 0) {
+    return createStudySessionFromTarget(
+      words,
+      { targetDayIds: selectedDays, targetWordIds: [], selection },
+      progressList,
+      now,
+      shuffle,
+    );
+  }
+  const target = resolveStudySelection(
+    selection,
+    words,
   );
+  // Keep the compatibility API's historical behavior for non-contiguous DAY ids.
+  const compatibilityTarget: StudyTarget = selectedDays.length === target.targetDayIds.length
+    && selectedDays.every((day, index) => day === target.targetDayIds[index])
+    ? target
+    : {
+      targetDayIds: selectedDays,
+      targetWordIds: words.filter((word) => selectedDays.includes(word.day)).map((word) => word.id),
+      selection,
+    };
+  return createStudySessionFromTarget(words, compatibilityTarget, progressList, now, shuffle);
+}
+
+export function createStudySessionFromTarget(
+  words: VocabularyWord[],
+  target: StudyTarget,
+  progressList: WordProgress[],
+  now: Date,
+  shuffle: Shuffle = fisherYatesShuffle,
+): StudySession {
+  const selectedDays = [...new Set(target.targetDayIds)].sort((a, b) => a - b);
+  const wordsById = new Map(words.map((word) => [word.id, word]));
+  const seenTargetIds = new Set<string>();
+  const targetWords = target.targetWordIds
+    .map((wordId) => wordsById.get(wordId))
+    .filter((word): word is VocabularyWord => {
+      if (!word || seenTargetIds.has(word.id)) return false;
+      seenTargetIds.add(word.id);
+      return selectedDays.includes(word.day);
+    });
   const targetWordIds = targetWords.map((word) => word.id);
   const targetSet = new Set(targetWordIds);
   const queue: StudyQueueItem[] = [];
@@ -123,7 +168,7 @@ export function createStudySession(
 
   const earlierWords: VocabularyWord[] = [];
   selectedDays.forEach((day, dayIndex) => {
-    const dayWords = targetWords.filter((word) => word.day === day);
+    const dayWords = shuffle(targetWords.filter((word) => word.day === day));
     for (let start = 0; start < dayWords.length; start += 5) {
       const block = dayWords.slice(start, start + 5);
       const blockId = `day-${day}-block-${Math.floor(start / 5)}`;
@@ -167,6 +212,7 @@ export function createStudySession(
     updatedAt: timestamp,
     completedAt: null,
     dueReviewIds: dueProgress.map((progress) => progress.wordId),
+    selection: target.selection,
   };
 }
 

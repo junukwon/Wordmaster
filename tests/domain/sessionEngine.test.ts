@@ -4,6 +4,7 @@ import type { WordProgress } from '../../src/domain/types';
 import {
   applySessionOutcome,
   createStudySession,
+  createStudySessionFromTarget,
   getNextStudyItem,
   getSessionQueueItems,
   getSessionSummary,
@@ -24,6 +25,17 @@ test('selecting DAY 1 through 5 creates 125 unique targets', () => {
   const session = createStudySession(words, [1, 2, 3, 4, 5], [], now, identity);
   expect(session.targetWordIds).toHaveLength(125);
   expect(new Set(session.targetWordIds).size).toBe(125);
+});
+
+test('random target session keeps exactly the selected word ids', () => {
+  const target = {
+    targetDayIds: [1, 2],
+    targetWordIds: ['0001', '0026'],
+    selection: { mode: 'random-words' as const, wordCount: 2 },
+  };
+  const session = createStudySessionFromTarget(words, target, [], now, identity);
+  expect(session.targetWordIds).toEqual(['0001', '0026']);
+  expect(session.selection).toEqual(target.selection);
 });
 
 test('initial learning operates in groups of five through three recall types', () => {

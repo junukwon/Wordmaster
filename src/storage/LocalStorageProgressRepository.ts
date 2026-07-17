@@ -1,4 +1,5 @@
 import type { StudySession, TestAttempt, WordProgress } from '../domain/types';
+import type { StudySelection } from '../domain/studySelection';
 import type { ProgressRepository } from './ProgressRepository';
 
 const STORAGE_KEY = 'wordmaster:v1';
@@ -41,7 +42,27 @@ function isStudySession(value: unknown): value is StudySession {
     && ['diagnosis', 'recognition', 'recall', 'spelling', 'mixed', 'reinforcement'].includes(item.phase ?? '')
     && typeof item.startedAt === 'string'
     && typeof item.updatedAt === 'string'
-    && (item.completedAt === null || typeof item.completedAt === 'string');
+    && (item.completedAt === null || typeof item.completedAt === 'string')
+    && (item.selection === undefined || isStudySelection(item.selection));
+}
+
+function isStudySelection(value: unknown): value is StudySelection {
+  if (!value || typeof value !== 'object') return false;
+  const selection = value as Partial<StudySelection> & { mode?: unknown };
+  if (typeof selection.mode !== 'string') return false;
+  if (selection.seed !== undefined && typeof selection.seed !== 'string') return false;
+  switch (selection.mode) {
+    case 'bundle':
+      return Number.isInteger(selection.bundleStartDay);
+    case 'range':
+      return Number.isInteger(selection.startDay) && Number.isInteger(selection.endDay);
+    case 'random-days':
+      return Number.isInteger(selection.dayCount) && Number(selection.dayCount) >= 1;
+    case 'random-words':
+      return [10, 25, 50, 125].includes(Number(selection.wordCount));
+    default:
+      return false;
+  }
 }
 
 function isTestAttempt(value: unknown): value is TestAttempt {
