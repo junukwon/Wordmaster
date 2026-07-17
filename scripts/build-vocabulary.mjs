@@ -10,6 +10,9 @@ function validateVocabularyWords(words) {
     if (word.id !== expectedId) throw new Error(`Expected ${expectedId}, got ${word.id}`);
     if (ids.has(word.id)) throw new Error(`Duplicate id: ${word.id}`);
     if (!word.term || !word.meanings[0]) throw new Error(`Empty content: ${word.id}`);
+    if (word.requiresPhonetic && !/^\/.+\/$/.test(word.phonetic)) {
+      throw new Error(`Invalid phonetic: ${word.id}`);
+    }
     ids.add(word.id);
   });
 
@@ -39,16 +42,24 @@ export function parseVocabularyMarkdown(markdown, { validate = true } = {}) {
 
     if (!/^\| \d{4} \|/.test(line) || currentDay === null) continue;
     const cells = line.slice(1, -1).split('|').map((cell) => cell.trim());
-    const [id, term, partOfSpeech, meaning, inflection] = cells;
-    words.push({
+    const requiresPhonetic = cells.length >= 6;
+    const [id, term] = cells;
+    const phonetic = requiresPhonetic ? cells[2] : '';
+    const partOfSpeech = requiresPhonetic ? cells[3] : cells[2];
+    const meaning = requiresPhonetic ? cells[4] : cells[3];
+    const inflection = requiresPhonetic ? cells[5] : cells[4];
+    const word = {
       id,
       day: currentDay,
       topic: currentTopic,
       term,
+      phonetic,
       partOfSpeech: partOfSpeech.split('/').map((value) => value.trim()),
       meanings: [meaning],
       ...(inflection ? { inflection } : {}),
-    });
+    };
+    Object.defineProperty(word, 'requiresPhonetic', { value: requiresPhonetic });
+    words.push(word);
   }
 
   return validate ? validateVocabularyWords(words) : words;

@@ -1,14 +1,14 @@
 import { useCallback, useMemo, useState } from 'react';
 import { HashRouter } from 'react-router-dom';
-import { loadVocabulary } from '../content/vocabulary';
 import dayCatalogData from '../content/day-catalog.json';
-import { buildDaySummaries } from '../domain/studySelection';
-import { createStudySession, createStudySessionFromTarget, selectTargetDays } from '../domain/sessionEngine';
+import { loadVocabulary } from '../content/vocabulary';
+import { buildDaySummaries as buildHomeDaySummaries } from '../domain/daySelection';
 import { isReviewDue } from '../domain/reviewScheduler';
-import { LocalStorageProgressRepository } from '../storage/LocalStorageProgressRepository';
-import { SpeechPlayer } from '../speech/SpeechPlayer';
-import type { StudyTarget } from '../domain/studySelection';
+import { createStudySession, createStudySessionFromTarget } from '../domain/sessionEngine';
+import { buildDaySummaries as buildStudyDaySummaries, type StudyTarget } from '../domain/studySelection';
 import type { HomeViewModel } from '../pages/HomePage';
+import { SpeechPlayer } from '../speech/SpeechPlayer';
+import { LocalStorageProgressRepository } from '../storage/LocalStorageProgressRepository';
 import { AppRouter } from './AppRouter';
 import '../styles/global.css';
 
@@ -17,52 +17,61 @@ const vocabulary = loadVocabulary();
 export function App() {
   const [repository] = useState(() => new LocalStorageProgressRepository());
   const [speechPlayer] = useState(() => new SpeechPlayer());
+  const [startError, setStartError] = useState<string | null>(null);
   const [revision, setRevision] = useState(0);
   const refresh = useCallback(() => setRevision((value) => value + 1), []);
 
   const homeViewModel = useMemo<HomeViewModel>(() => {
     const activeSession = repository.loadActiveSession();
     const progress = repository.getAllWordProgress();
-    const hasActiveTarget = Boolean(activeSession?.targetWordIds?.length);
-    const targetDays = hasActiveTarget ? activeSession!.targetDayIds : selectTargetDays(vocabulary, progress);
-    const targetDaySet = new Set(targetDays);
-    const targetIds = hasActiveTarget
-      ? activeSession!.targetWordIds
-      : vocabulary.filter((word) => targetDaySet.has(word.day)).map((word) => word.id);
-    const targetSet = new Set(targetIds);
-    const targetProgress = progress.filter((item) => targetSet.has(item.wordId));
-    const strong = targetProgress.filter((item) => item.confidence === 'strong').length;
-    const uncertain = targetProgress.filter((item) => item.confidence === 'uncertain').length;
-    const weak = targetProgress.filter((item) => item.confidence === 'weak').length;
     return {
-      target: targetIds.length,
-      strong,
-      uncertain,
-      weak,
-      remaining: targetIds.length - strong - uncertain - weak,
+      days: buildHomeDaySummaries(vocabulary, progress),
       dueReviews: progress.filter((item) => isReviewDue(item, new Date())).length,
       activeSession,
-      storageError: repository.getLastError(),
+      storageError: startError ?? repository.getLastError(),
     };
-  }, [repository, revision]);
+  }, [repository, revision, startError]);
 
-  const startStudy = useCallback(() => {
-    if (!repository.loadActiveSession()) {
-      const progress = repository.getAllWordProgress();
-      repository.saveActiveSession(createStudySession(vocabulary, selectTargetDays(vocabulary, progress), progress, new Date()));
+  const persistStudySession = useCallback((createSession: () => ReturnType<typeof createStudySession>): boolean => {
+    const previous = repository.loadActiveSession();
+    try {
+      repository.saveActiveSession(createSession());
+      const saveError = repository.getLastError();
+      if (saveError) {
+        repository.saveActiveSession(previous);
+        setStartError(saveError);
+        refresh();
+        return false;
+      }
+      setStartError(null);
       refresh();
+      return true;
+    } catch {
+      refresh();
+      return false;
     }
   }, [repository, refresh]);
 
-  const startStudyTarget = useCallback((target: StudyTarget) => {
-    const progress = repository.getAllWordProgress();
-    repository.saveActiveSession(createStudySessionFromTarget(vocabulary, target, progress, new Date()));
-    refresh();
-  }, [repository, refresh]);
+  const startStudy = useCallback((targetDays: number[]): boolean => (
+    persistStudySession(() => createStudySession(
+      vocabulary,
+      targetDays,
+      repository.getAllWordProgress(),
+      new Date(),
+    ))
+  ), [persistStudySession, repository]);
+
+  const startStudyTarget = useCallback((target: StudyTarget): boolean => (
+    persistStudySession(() => createStudySessionFromTarget(
+      vocabulary,
+      target,
+      repository.getAllWordProgress(),
+      new Date(),
+    ))
+  ), [persistStudySession, repository]);
 
   const dayCatalog = useMemo(() => {
-    const progress = repository.getAllWordProgress();
-    const summaries = buildDaySummaries(vocabulary, progress);
+    const summaries = buildStudyDaySummaries(vocabulary, repository.getAllWordProgress());
     const metadata = new Map(dayCatalogData.map((item) => [item.day, item]));
     return summaries.map((summary) => ({
       ...summary,

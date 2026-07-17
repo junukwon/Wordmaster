@@ -8,14 +8,14 @@ import {
   getNextStudyItem,
   getSessionQueueItems,
   getSessionSummary,
-  selectTargetDays,
+  normalizeTargetDays,
 } from '../../src/domain/sessionEngine';
 
 const now = new Date('2026-07-10T09:00:00.000Z');
 const identity = <T,>(items: T[]) => items;
 
 const sparseWords: VocabularyWord[] = [
-  { id: 'sparse-1', day: 1, topic: 'Sparse', term: 'alpha', partOfSpeech: ['noun'], meanings: ['알파'] },
+  { id: 'sparse-1', day: 1, topic: 'Sparse', term: 'alpha', phonetic: '', partOfSpeech: ['noun'], meanings: ['알파'] },
 ];
 
 function progress(wordId: string, confidence: WordProgress['confidence'] = 'unknown'): WordProgress {
@@ -63,6 +63,28 @@ test('explicit target ids preserve their order within a queue block', () => {
   const session = createStudySessionFromTarget(words, target, [], now, identity);
   expect(session.targetWordIds).toEqual(['0002', '0001']);
   expect(getSessionQueueItems(session).slice(0, 2).map((item) => item.wordId)).toEqual(['0002', '0001']);
+});
+
+test('normalizes duplicate, unordered and unknown DAY ids', () => {
+  expect(normalizeTargetDays(words, [7, 2, 7, 999])).toEqual([2, 7]);
+});
+
+test('creates exact targets for non-contiguous DAY combinations', () => {
+  const fifty = createStudySession(words, [7, 2], [], now, identity);
+  expect(fifty.targetDayIds).toEqual([2, 7]);
+  expect(fifty.targetWordIds).toHaveLength(50);
+  expect(new Set(fifty.targetWordIds).size).toBe(50);
+  expect(new Set(fifty.targetWordIds.map((id) => words.find((word) => word.id === id)!.day))).toEqual(new Set([2, 7]));
+
+  const seventyFive = createStudySession(words, [10, 1, 4], [], now, identity);
+  expect(seventyFive.targetDayIds).toEqual([1, 4, 10]);
+  expect(seventyFive.targetWordIds).toHaveLength(75);
+});
+
+test('normalization reports no valid DAY without changing the compatibility wrapper', () => {
+  expect(normalizeTargetDays(words, [])).toEqual([]);
+  expect(normalizeTargetDays(words, [999])).toEqual([]);
+  expect(createStudySession(words, [999], [], now, identity).targetWordIds).toEqual([]);
 });
 
 test('initial learning operates in groups of five through three recall types', () => {
@@ -124,12 +146,4 @@ test('due reviews appear before new words without reducing the new target', () =
   const session = createStudySession(words, [1, 2, 3, 4, 5], [due], now, identity);
   expect(session.targetWordIds).toHaveLength(125);
   expect(getNextStudyItem(session)).toMatchObject({ wordId: '0201', isReview: true });
-});
-
-test('selects the next five-DAY block after the first block is mastered', () => {
-  expect(selectTargetDays(words, [])).toEqual([1, 2, 3, 4, 5]);
-  const mastered = words.filter((word) => word.day <= 5).map((word) => ({
-    ...progress(word.id, 'strong'), stage: 'mastered_today' as const,
-  }));
-  expect(selectTargetDays(words, mastered)).toEqual([6, 7, 8, 9, 10]);
 });

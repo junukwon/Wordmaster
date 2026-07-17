@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import words from '../../src/content/vocabulary.json';
 import { createStudySession } from '../../src/domain/sessionEngine';
 import { LocalStorageProgressRepository } from '../../src/storage/LocalStorageProgressRepository';
 import { StudyPage } from '../../src/pages/StudyPage';
+import { SpeechPlayer } from '../../src/speech/SpeechPlayer';
 
 const fixedNow = new Date('2026-07-10T09:00:00.000Z');
 const identity = <T,>(items: T[]) => items;
@@ -13,6 +14,13 @@ function spellingSession() {
   const session = createStudySession(words, [1, 2, 3, 4, 5], [], fixedNow, identity);
   session.currentIndex = 10;
   session.phase = 'spelling';
+  return session;
+}
+
+function repeatedWordSession() {
+  const session = createStudySession(words, [1], [], fixedNow, identity);
+  session.queue = [session.queue[0], session.queue[5]];
+  session.targetWordIds = ['0001'];
   return session;
 }
 
@@ -31,7 +39,10 @@ beforeEach(() => {
   });
 });
 
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.useRealTimers();
+  vi.restoreAllMocks();
+});
 
 test('shows meaning and part of speech while keeping spelling out of the DOM', async () => {
   const { repository, speechPlayer } = services();
@@ -44,6 +55,72 @@ test('shows meaning and part of speech while keeping spelling out of the DOM', a
   expect(speechPlayer.speak).toHaveBeenCalledWith('knee');
 });
 
+test('reveals pronunciation only after its button is pressed and keeps it visible on repeat', async () => {
+  const { repository, speechPlayer } = services();
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+  const pronunciationButton = screen.getByRole('button', { name: '발음 듣기' });
+  await userEvent.click(pronunciationButton);
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  await userEvent.click(pronunciationButton);
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  expect(speechPlayer.speak).toHaveBeenCalledTimes(2);
+});
+
+test('reveals pronunciation when speech is unavailable and resets it after advancing', async () => {
+  const repository = new LocalStorageProgressRepository(localStorage);
+  const speechPlayer = {
+    speak: vi.fn(() => false),
+    isAvailable: () => false,
+    getNotice: () => '이 기기에서는 음성을 사용할 수 없어요.',
+  };
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  const pronunciationButton = screen.getByRole('button', { name: '발음 듣기' });
+  expect(pronunciationButton).toBeEnabled();
+  await userEvent.click(pronunciationButton);
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  expect(speechPlayer.speak).toHaveBeenCalledWith('knee');
+
+  const skipButton = document.querySelector<HTMLButtonElement>('.study-actions .button--secondary');
+  expect(skipButton).not.toBeNull();
+  await userEvent.click(skipButton!);
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+});
+
+test('reveals pronunciation even when the playback implementation throws', async () => {
+  const repository = new LocalStorageProgressRepository(localStorage);
+  const synthesis = {
+    getVoices: () => [{ voiceURI: 'sam', name: 'Samantha', lang: 'en-US', localService: true }],
+    cancel: () => {},
+    speak: () => { throw new Error('platform speech failed'); },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  } as unknown as SpeechSynthesis;
+  class Utterance { constructor(public text: string) {} }
+  const host = { speechSynthesis: synthesis, SpeechSynthesisUtterance: Utterance } as unknown as Window;
+  const speechPlayer = new SpeechPlayer(host);
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  await expect(userEvent.click(screen.getByRole('button', { name: '발음 듣기' }))).resolves.toBeUndefined();
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+});
+
+test('hides pronunciation when the same word returns in a later study item', async () => {
+  const { repository, speechPlayer } = services();
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={repeatedWordSession()} now={() => fixedNow} /></MemoryRouter>);
+
+  await userEvent.click(screen.getByRole('button', { name: '발음 듣기' }));
+  expect(screen.getByText('/niː/')).toBeInTheDocument();
+  const skipButton = document.querySelector<HTMLButtonElement>('.study-actions .button--secondary');
+  expect(skipButton).not.toBeNull();
+  await userEvent.click(skipButton!);
+
+  expect(screen.queryByText('/niː/')).not.toBeInTheDocument();
+  expect(screen.getByText('무릎')).toBeInTheDocument();
+});
+
 test('answer reveal shows the term and rating buttons', async () => {
   const { repository, speechPlayer } = services();
   render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
@@ -54,15 +131,41 @@ test('answer reveal shows the term and rating buttons', async () => {
   expect(screen.getByRole('button', { name: '기억남' })).toBeInTheDocument();
 });
 
+test('an immediate second tap after reveal cannot record a positive rating', async () => {
+  vi.useFakeTimers();
+  const { repository, speechPlayer } = services();
+  const saveWordProgress = vi.spyOn(repository, 'saveWordProgress');
+  const onProgressChange = vi.fn();
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} onProgressChange={onProgressChange} /></MemoryRouter>);
+
+  fireEvent.click(screen.getByRole('button', { name: '정답 보기' }));
+  const strongRating = screen.getByRole('button', { name: '기억남' });
+  fireEvent.click(strongRating);
+
+  expect(screen.getByText('knee')).toBeInTheDocument();
+  expect(saveWordProgress).not.toHaveBeenCalled();
+  expect(onProgressChange).not.toHaveBeenCalled();
+  expect(repository.loadActiveSession()).toBeNull();
+  expect(screen.getByText(/문제 11/)).toBeInTheDocument();
+
+  await act(() => vi.advanceTimersByTimeAsync(600));
+  fireEvent.click(strongRating);
+  expect(saveWordProgress).toHaveBeenCalledTimes(1);
+  expect(onProgressChange).toHaveBeenCalledTimes(1);
+  expect(repository.loadActiveSession()?.currentIndex).toBe(11);
+});
+
 test('rating persists progress, clears the canvas and advances', async () => {
+  vi.useFakeTimers();
   const { repository, speechPlayer } = services();
   render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={spellingSession()} now={() => fixedNow} /></MemoryRouter>);
   const canvas = screen.getByRole('img', { name: /Apple Pencil 필기장/ });
   fireEvent.pointerDown(canvas, { pointerId: 1, clientX: 10, clientY: 10, pressure: .5 });
   fireEvent.pointerUp(canvas, { pointerId: 1, clientX: 20, clientY: 20, pressure: .5 });
   expect(canvas).toHaveAttribute('data-stroke-count', '1');
-  await userEvent.click(screen.getByRole('button', { name: '정답 보기' }));
-  await userEvent.click(screen.getByRole('button', { name: '기억남' }));
+  fireEvent.click(screen.getByRole('button', { name: '정답 보기' }));
+  await act(() => vi.advanceTimersByTimeAsync(600));
+  fireEvent.click(screen.getByRole('button', { name: '기억남' }));
   expect(repository.getWordProgress('0001')).toMatchObject({ confidence: 'strong', correctCount: 1 });
   expect(repository.loadActiveSession()?.currentIndex).toBe(11);
   expect(screen.getByRole('img', { name: /Apple Pencil 필기장/ })).toHaveAttribute('data-stroke-count', '0');
@@ -95,5 +198,14 @@ test('new-word progress counts rated target words instead of queue questions', (
   const session = createStudySession(words, [1, 2, 3, 4, 5], repository.getAllWordProgress(), fixedNow, identity);
   session.currentIndex = 125;
   render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
-  expect(screen.getByRole('progressbar', { name: '125개 단어 진행률' })).toHaveAttribute('aria-valuenow', '1');
+  expect(screen.getByRole('progressbar', { name: '125개 신규 단어 진행률' })).toHaveAttribute('aria-valuenow', '1');
+});
+
+test('shows every selected DAY exactly and labels the selected word total', () => {
+  const { repository, speechPlayer } = services();
+  const session = createStudySession(words, [2, 7], [], fixedNow, identity);
+  render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
+  expect(screen.getByText('DAY 02 · DAY 07')).toBeInTheDocument();
+  expect(screen.getByRole('progressbar', { name: '50개 신규 단어 진행률' })).toBeInTheDocument();
+  expect(screen.queryByText(/DAY 02.*DAY 03/)).not.toBeInTheDocument();
 });

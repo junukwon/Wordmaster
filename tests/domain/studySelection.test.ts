@@ -13,6 +13,7 @@ function makeWords(dayCount: number): VocabularyWord[] {
     day: Math.floor(index / 5) + 1,
     topic: `DAY ${Math.floor(index / 5) + 1}`,
     term: `word-${index + 1}`,
+    phonetic: '',
     partOfSpeech: ['noun'],
     meanings: [`meaning-${index + 1}`],
   }));

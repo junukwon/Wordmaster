@@ -25,6 +25,13 @@ export default defineConfig({
         deviceScaleFactor: 2, isMobile: true, hasTouch: true,
       },
     },
+    {
+      name: 'iPad Mini portrait',
+      use: {
+        browserName: 'webkit', viewport: { width: 744, height: 1133 },
+        deviceScaleFactor: 2, isMobile: true, hasTouch: true,
+      },
+    },
     { name: 'iPhone', use: { ...devices['iPhone 13'] } },
   ],
 });
