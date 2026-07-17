@@ -95,5 +95,5 @@ test('new-word progress counts rated target words instead of queue questions', (
   const session = createStudySession(words, [1, 2, 3, 4, 5], repository.getAllWordProgress(), fixedNow, identity);
   session.currentIndex = 125;
   render(<MemoryRouter><StudyPage words={words} repository={repository} speechPlayer={speechPlayer} initialSession={session} now={() => fixedNow} /></MemoryRouter>);
-  expect(screen.getByRole('progressbar', { name: '125개 신규 단어 진행률' })).toHaveAttribute('aria-valuenow', '1');
+  expect(screen.getByRole('progressbar', { name: '125개 단어 진행률' })).toHaveAttribute('aria-valuenow', '1');
 });

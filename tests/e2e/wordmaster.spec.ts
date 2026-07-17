@@ -11,7 +11,8 @@ test.beforeEach(async ({ page }) => {
 
 test('completes the saved study and on-demand test journey', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '125개 단어 도전' })).toBeVisible();
-  await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
+  await page.getByRole('link', { name: '학습 범위 선택하기' }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
   await expect(page.getByRole('heading', { name: '집중 학습' })).toBeVisible();
 
   for (let index = 0; index < 10; index += 1) {
@@ -60,7 +61,8 @@ test('keeps core learning available offline after the first visit', async ({ pag
     await page.reload();
   }
   await expect(page.getByRole('heading', { name: '125개 단어 도전' })).toBeVisible();
-  await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
+  await page.getByRole('link', { name: '학습 범위 선택하기' }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
   const canvas = page.getByRole('img', { name: /Apple Pencil 필기장/ });
   await canvas.dispatchEvent('pointerdown', { pointerId: 1, clientX: 20, clientY: 20, pressure: .5 });
   await canvas.dispatchEvent('pointermove', { pointerId: 1, clientX: 70, clientY: 55, pressure: .7 });
@@ -78,7 +80,8 @@ test('keeps core learning available offline after the first visit', async ({ pag
 
 test('keeps study actions inside the initial iPad Mini landscape viewport', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'iPad Mini landscape');
-  await page.getByRole('link', { name: '오늘 학습 시작하기' }).click();
+  await page.getByRole('link', { name: '학습 범위 선택하기' }).click();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
 
   const actions = page.locator('.study-actions');
   await expect(actions).toBeVisible();
@@ -92,4 +95,24 @@ test('keeps study actions inside the initial iPad Mini landscape viewport', asyn
 
   expect(geometry.scrollY).toBe(0);
   expect(geometry.actionsBottom).toBeLessThanOrEqual(geometry.viewportHeight);
+});
+
+test('selects DAY 11–15 from the bundle setup', async ({ page }) => {
+  await page.getByRole('link', { name: '학습 범위 선택하기' }).click();
+  await expect(page.getByRole('heading', { name: '학습 범위 설정' })).toBeVisible();
+  await page.getByRole('button', { name: /DAY 11–15/ }).click();
+  await expect(page.getByText('125단어를 학습합니다.')).toBeVisible();
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByText(/문제 1/)).toBeVisible();
+  await expect(page.getByRole('progressbar', { name: '125개 단어 진행률' })).toBeVisible();
+});
+
+test('random word mode starts with 25 unique words', async ({ page }) => {
+  await page.getByRole('link', { name: '학습 범위 선택하기' }).click();
+  await page.getByRole('tab', { name: '랜덤으로 선택' }).click();
+  await page.getByRole('radio', { name: '랜덤 단어 세트' }).check();
+  await expect(page.getByLabel('랜덤 단어 수')).toHaveValue('25');
+  await page.getByRole('button', { name: '선택한 범위로 학습 시작' }).click();
+  await expect(page.getByText(/문제 1/)).toBeVisible();
+  await expect(page.getByRole('progressbar', { name: '25개 단어 진행률' })).toBeVisible();
 });

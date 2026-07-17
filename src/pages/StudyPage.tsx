@@ -83,7 +83,7 @@ export function StudyPage({
         </div>
         <div className="study-progress" aria-live="polite">
           <strong>문제 {session.currentIndex + 1}</strong>
-          <ProgressBar value={ratedTargetCount} max={session.targetWordIds.length} label="125개 신규 단어 진행률" />
+          <ProgressBar value={ratedTargetCount} max={session.targetWordIds.length} label={`${session.targetWordIds.length}개 단어 진행률`} />
         </div>
       </header>
 
