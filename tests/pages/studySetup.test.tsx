@@ -26,7 +26,10 @@ const setupProps = {
   onStart: vi.fn(),
 };
 
-beforeEach(() => vi.clearAllMocks());
+beforeEach(() => {
+  vi.clearAllMocks();
+  sessionStorage.clear();
+});
 
 test('shows bundle, range and random modes', async () => {
   const user = userEvent.setup();
@@ -36,6 +39,21 @@ test('shows bundle, range and random modes', async () => {
   expect(screen.getByLabelText('시작 DAY')).toBeInTheDocument();
   await user.click(screen.getByRole('tab', { name: '랜덤으로 선택' }));
   expect(screen.getByLabelText('랜덤 단어 수')).toHaveValue('25');
+});
+
+test('restores the setup selection after leaving and returning', async () => {
+  const user = userEvent.setup();
+  const firstRender = render(<MemoryRouter><StudySetupPage {...setupProps} /></MemoryRouter>);
+  await user.click(screen.getByRole('tab', { name: '범위로 선택' }));
+  await user.selectOptions(screen.getByLabelText('시작 DAY'), '4');
+  await user.selectOptions(screen.getByLabelText('종료 DAY'), '7');
+
+  firstRender.unmount();
+  render(<MemoryRouter><StudySetupPage {...setupProps} /></MemoryRouter>);
+
+  expect(screen.getByRole('tab', { name: '범위로 선택' })).toHaveAttribute('aria-selected', 'true');
+  expect(screen.getByLabelText('시작 DAY')).toHaveValue('4');
+  expect(screen.getByLabelText('종료 DAY')).toHaveValue('7');
 });
 
 test('setup tabs expose controlled panel semantics and a visible start action', () => {

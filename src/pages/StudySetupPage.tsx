@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import {
   buildDaySummaries,
@@ -12,9 +12,14 @@ import {
 import type { VocabularyWord, WordProgress } from '../domain/types';
 import { DayBundleList } from '../components/DayBundleList';
 import { DayRangePicker } from '../components/DayRangePicker';
-import { RandomStudyPicker, type RandomStudyMode } from '../components/RandomStudyPicker';
+import { RandomStudyPicker } from '../components/RandomStudyPicker';
 import { SessionReplacementDialog } from '../components/SessionReplacementDialog';
 import type { StudySession } from '../domain/types';
+import {
+  loadStudySetupDraft,
+  saveStudySetupDraft,
+  type StudySetupDraft,
+} from '../storage/StudySetupDraftRepository';
 
 export type StudySetupPageProps = {
   words: VocabularyWord[];
@@ -31,6 +36,36 @@ const RANDOM_WORD_COUNTS = [10, 25, 50, 125] as const;
 function defaultRandomWordCount(total: number): number {
   if (total >= 25) return 25;
   return RANDOM_WORD_COUNTS.filter((count) => count <= total).at(-1) ?? 10;
+}
+
+function getSessionStorage(): Storage | null {
+  try {
+    return typeof window === 'undefined' ? null : window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeDraft(
+  draft: StudySetupDraft,
+  defaults: StudySetupDraft,
+  days: DaySummary[],
+  bundles: ReturnType<typeof buildFiveDayBundles>,
+  totalWords: number,
+): StudySetupDraft {
+  const dayNumbers = new Set(days.map((day) => day.dayNumber));
+  const bundleStartDays = new Set(bundles.map((bundle) => bundle.dayNumbers[0]));
+  const wordCounts = new Set(RANDOM_WORD_COUNTS.filter((count) => count <= totalWords));
+  return {
+    ...draft,
+    bundleStartDay: draft.bundleStartDay === null || bundleStartDays.has(draft.bundleStartDay)
+      ? draft.bundleStartDay : defaults.bundleStartDay,
+    startDay: draft.startDay === null || dayNumbers.has(draft.startDay) ? draft.startDay : defaults.startDay,
+    endDay: draft.endDay === null || dayNumbers.has(draft.endDay) ? draft.endDay : defaults.endDay,
+    dayCount: draft.dayCount <= days.length ? draft.dayCount : defaults.dayCount,
+    wordCount: wordCounts.has(draft.wordCount as typeof RANDOM_WORD_COUNTS[number])
+      ? draft.wordCount : defaults.wordCount,
+  };
 }
 
 function seededRandom(seed: string) {
@@ -53,17 +88,32 @@ export function StudySetupPage({
   const days = dayCatalog.length ? dayCatalog : buildDaySummaries(words, progress);
   const bundles = useMemo(() => buildFiveDayBundles(days), [days]);
   const firstDay = days[0]?.dayNumber ?? null;
-  const [mode, setMode] = useState<SetupMode>('bundle');
-  const [bundleStartDay, setBundleStartDay] = useState<number | null>(bundles[0]?.dayNumbers[0] ?? null);
-  const [startDay, setStartDay] = useState<number | null>(firstDay);
-  const [endDay, setEndDay] = useState<number | null>(firstDay);
-  const [randomMode, setRandomMode] = useState<RandomStudyMode>('random-days');
-  const [dayCount, setDayCount] = useState(1);
-  const [wordCount, setWordCount] = useState(defaultRandomWordCount(words.length));
-  const [seed, setSeed] = useState('initial');
-  const [searchQuery, setSearchQuery] = useState('');
+  const defaults = useMemo<StudySetupDraft>(() => ({
+    mode: 'bundle',
+    bundleStartDay: bundles[0]?.dayNumbers[0] ?? null,
+    startDay: firstDay,
+    endDay: firstDay,
+    randomMode: 'random-days',
+    dayCount: 1,
+    wordCount: defaultRandomWordCount(words.length),
+    seed: 'initial',
+    searchQuery: '',
+  }), [bundles, firstDay, words.length]);
+  const storage = getSessionStorage();
+  const [draft, setDraft] = useState(() => normalizeDraft(
+    loadStudySetupDraft(storage, defaults), defaults, days, bundles, words.length,
+  ));
+  const { mode, bundleStartDay, startDay, endDay, randomMode, dayCount, wordCount, seed, searchQuery } = draft;
   const [replacementOpen, setReplacementOpen] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  useEffect(() => {
+    saveStudySetupDraft(storage, draft);
+  }, [draft, storage]);
+
+  const updateDraft = <Key extends keyof StudySetupDraft>(key: Key, value: StudySetupDraft[Key]) => {
+    setDraft((current) => ({ ...current, [key]: value }));
+  };
 
   const filteredBundles = useMemo(() => {
     const query = searchQuery.trim().toLocaleLowerCase('ko');
@@ -102,7 +152,10 @@ export function StudySetupPage({
     }
     onStart(target);
   };
-  const reroll = () => setSeed((current) => `${current}-${Date.now()}-${Math.random()}`);
+  const reroll = () => setDraft((current) => ({
+    ...current,
+    seed: `${current.seed}-${Date.now()}-${Math.random()}`,
+  }));
   const startLabel = '선택한 범위로 학습 시작';
   const modes: Array<{ value: SetupMode; label: string }> = [
     { value: 'bundle', label: '묶음으로 선택' },
@@ -111,7 +164,7 @@ export function StudySetupPage({
   ];
   const selectTab = (nextIndex: number) => {
     const next = modes[nextIndex];
-    setMode(next.value);
+    updateDraft('mode', next.value);
     tabRefs.current[nextIndex]?.focus();
   };
   const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
@@ -140,7 +193,7 @@ export function StudySetupPage({
           aria-label="DAY 번호 또는 주제 검색"
           placeholder="예: 12, 여행"
           value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
+          onChange={(event) => updateDraft('searchQuery', event.target.value)}
         />
       </label>
       <div className="choice-grid study-mode-tabs" role="tablist" aria-label="학습 범위 선택 방식">
@@ -155,7 +208,7 @@ export function StudySetupPage({
             aria-controls={`study-setup-panel-${value}`}
             tabIndex={mode === value ? 0 : -1}
             className="button button--secondary"
-            onClick={() => setMode(value)}
+            onClick={() => updateDraft('mode', value)}
             onKeyDown={(event) => handleTabKeyDown(event, index)}
           >
             {label}
@@ -170,9 +223,9 @@ export function StudySetupPage({
         aria-labelledby={`study-setup-tab-${mode}`}
         aria-live="polite"
       >
-        {mode === 'bundle' && <DayBundleList bundles={filteredBundles} value={bundleStartDay} onChange={setBundleStartDay} />}
-        {mode === 'range' && <DayRangePicker days={days} startDay={startDay} endDay={endDay} onStartChange={setStartDay} onEndChange={setEndDay} />}
-        {mode === 'random' && <RandomStudyPicker mode={randomMode} dayCount={dayCount} wordCount={wordCount} availableDayCount={days.length} availableWordCount={words.length} onModeChange={setRandomMode} onDayCountChange={setDayCount} onWordCountChange={setWordCount} onReroll={reroll} />}
+        {mode === 'bundle' && <DayBundleList bundles={filteredBundles} value={bundleStartDay} onChange={(value) => updateDraft('bundleStartDay', value)} />}
+        {mode === 'range' && <DayRangePicker days={days} startDay={startDay} endDay={endDay} onStartChange={(value) => updateDraft('startDay', value)} onEndChange={(value) => updateDraft('endDay', value)} />}
+        {mode === 'random' && <RandomStudyPicker mode={randomMode} dayCount={dayCount} wordCount={wordCount} availableDayCount={days.length} availableWordCount={words.length} onModeChange={(value) => updateDraft('randomMode', value)} onDayCountChange={(value) => updateDraft('dayCount', value)} onWordCountChange={(value) => updateDraft('wordCount', value)} onReroll={reroll} />}
       </section>
 
       <section className="test-summary selection-summary" id="study-selection-summary" aria-live="polite">

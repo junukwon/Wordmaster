@@ -149,7 +149,7 @@ git commit -m "feat: persist study setup draft per session"
 - Consumes: Task 2의 `StudySetupDraftRepository`
 - Produces: 홈 이동 후 다시 열어도 복원되는 설정 UI
 
-- [ ] **Step 1: 컴포넌트 재마운트 복원 실패 테스트 작성**
+- [x] **Step 1: 컴포넌트 재마운트 복원 실패 테스트 작성**
 
 ```tsx
 const first = render(<MemoryRouter><StudySetupPage {...setupProps} /></MemoryRouter>);
@@ -163,13 +163,13 @@ expect(screen.getByLabelText('시작 DAY')).toHaveValue('4');
 expect(screen.getByLabelText('종료 DAY')).toHaveValue('7');
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npm test -- tests/pages/studySetup.test.tsx`
 
 Expected: FAIL because the remounted page returns to bundle DAY 01–05.
 
-- [ ] **Step 3: 저장소를 상태 초기화와 변경 효과에 연결**
+- [x] **Step 3: 저장소를 상태 초기화와 변경 효과에 연결**
 
 ```tsx
 const defaults = createDefaultDraft(days, bundles, words.length);
@@ -182,17 +182,17 @@ useEffect(() => {
 
 각 자식 콜백은 `draft`의 해당 필드만 갱신한다. 브라우저 저장소가 없는 테스트·비브라우저 환경에서는 기본값을 사용한다.
 
-- [ ] **Step 4: 컴포넌트와 관련 회귀 테스트 통과 확인**
+- [x] **Step 4: 컴포넌트와 관련 회귀 테스트 통과 확인**
 
 Run: `npm test -- tests/pages/studySetup.test.tsx tests/pages/home.test.tsx tests/storage/studySetupDraftRepository.test.ts`
 
 Expected: PASS.
 
-- [ ] **Step 5: E2E에 홈 상시 진입과 복원 시나리오 추가**
+- [x] **Step 5: E2E에 홈 상시 진입과 복원 시나리오 추가**
 
 홈에서 `학습 범위 설정` 링크가 DAY 카드 목록보다 먼저 보이는지 확인하고, 범위 선택 후 홈 왕복 시 시작·종료 DAY가 유지되는지 검증한다.
 
-- [ ] **Step 6: 전체 검증**
+- [x] **Step 6: 전체 검증**
 
 Run:
 
@@ -205,7 +205,7 @@ npm run test:e2e
 
 Expected: content 500 records, all unit tests PASS, production build PASS, all applicable E2E tests PASS.
 
-- [ ] **Step 7: 체크박스 갱신과 커밋**
+- [x] **Step 7: 체크박스 갱신과 커밋**
 
 ```bash
 git add src/pages/StudySetupPage.tsx tests/pages/studySetup.test.tsx tests/e2e/wordmaster.spec.ts docs/superpowers/plans/2026-07-17-study-selection-home-integration-plan.md
