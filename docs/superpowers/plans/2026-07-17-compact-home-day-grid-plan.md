@@ -30,7 +30,7 @@
 - Produces: `buildDayRanges(days: DaySummary[], size?: number): DayRange[]`
 - Produces: `filterHomeDays(days: DaySummary[], range: DayRange, query: string): DaySummary[]`
 
-- [ ] **Step 1: 구간 생성과 전체 검색 실패 테스트 작성**
+- [x] **Step 1: 구간 생성과 전체 검색 실패 테스트 작성**
 
 ```ts
 const days = Array.from({ length: 45 }, (_, index) => ({
@@ -47,23 +47,23 @@ expect(filterHomeDays(days, { start: 1, end: 20, label: 'DAY 01–20' }, '25').m
 expect(filterHomeDays(days, { start: 1, end: 20, label: 'DAY 01–20' }, '학교').map((day) => day.day)).toEqual([25]);
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npm test -- tests/domain/homeDayFilter.test.ts`
 
 Expected: FAIL because `src/domain/homeDayFilter.ts` does not exist.
 
-- [ ] **Step 3: 최소 순수 함수 구현**
+- [x] **Step 3: 최소 순수 함수 구현**
 
 `buildDayRanges`는 정렬된 DAY의 최소·최대 번호를 20개 단위로 묶고 마지막 실제 DAY에서 종료한다. `filterHomeDays`는 검색어가 있으면 구간을 무시하고 DAY 번호 또는 소문자 주제를 검색하며, 검색어가 없으면 구간만 적용한다.
 
-- [ ] **Step 4: 통과 확인**
+- [x] **Step 4: 통과 확인**
 
 Run: `npm test -- tests/domain/homeDayFilter.test.ts`
 
 Expected: PASS.
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/domain/homeDayFilter.ts tests/domain/homeDayFilter.test.ts
