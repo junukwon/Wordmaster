@@ -25,7 +25,7 @@ export function RandomStudyPicker({
 }: RandomStudyPickerProps) {
   const wordOptions = [10, 25, 50, 125].filter((count) => count <= availableWordCount);
   return (
-    <div className="test-settings">
+    <div className="test-settings random-picker">
       <fieldset>
         <legend>무작위 방식</legend>
         <label className="setting-row">

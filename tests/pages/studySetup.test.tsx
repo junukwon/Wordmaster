@@ -36,6 +36,15 @@ test('shows bundle, range and random modes', async () => {
   expect(screen.getByLabelText('랜덤 단어 수')).toHaveValue('25');
 });
 
+test('setup tabs expose controlled panel semantics and a visible start action', () => {
+  render(<MemoryRouter><StudySetupPage {...setupProps} /></MemoryRouter>);
+  const bundleTab = screen.getByRole('tab', { name: '묶음으로 선택' });
+  expect(bundleTab).toHaveAttribute('aria-selected', 'true');
+  expect(bundleTab).toHaveAttribute('aria-controls', 'study-setup-panel-bundle');
+  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'study-setup-panel-bundle');
+  expect(screen.getByRole('button', { name: '선택한 범위로 학습 시작' })).toBeVisible();
+});
+
 test('displays a clear summary and passes a target on start', async () => {
   const user = userEvent.setup();
   const onStart = vi.fn();

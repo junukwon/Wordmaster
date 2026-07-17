@@ -10,7 +10,7 @@ export type DayRangePickerProps = {
 
 export function DayRangePicker({ days, startDay, endDay, onStartChange, onEndChange }: DayRangePickerProps) {
   return (
-    <div className="setting-row" role="group" aria-label="DAY 범위">
+    <div className="setting-row range-picker" role="group" aria-label="DAY 범위">
       <label>
         시작 DAY
         <select aria-label="시작 DAY" value={startDay ?? ''} onChange={(event) => onStartChange(event.target.value ? Number(event.target.value) : null)}>

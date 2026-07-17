@@ -80,21 +80,39 @@ export function StudySetupPage({ words, progress, dayCatalog, onStart }: StudySe
         <h1>학습 범위 설정</h1>
         <p>DAY 묶음, 원하는 범위, 또는 무작위 단어로 시작할 수 있어요.</p>
       </header>
-      <div className="choice-grid" role="tablist" aria-label="학습 범위 선택 방식">
+      <div className="choice-grid study-mode-tabs" role="tablist" aria-label="학습 범위 선택 방식">
         {([['bundle', '묶음으로 선택'], ['range', '범위로 선택'], ['random', '랜덤으로 선택']] as const).map(([value, label]) => (
-          <button key={value} role="tab" type="button" aria-selected={mode === value} className="button button--secondary" onClick={() => setMode(value)}>{label}</button>
+          <button
+            key={value}
+            id={`study-setup-tab-${value}`}
+            role="tab"
+            type="button"
+            aria-selected={mode === value}
+            aria-controls={`study-setup-panel-${value}`}
+            tabIndex={mode === value ? 0 : -1}
+            className="button button--secondary"
+            onClick={() => setMode(value)}
+          >
+            {label}
+          </button>
         ))}
       </div>
 
-      <section className="test-settings" aria-live="polite">
+      <section
+        className="test-settings study-setup-panel"
+        id={`study-setup-panel-${mode}`}
+        role="tabpanel"
+        aria-labelledby={`study-setup-tab-${mode}`}
+        aria-live="polite"
+      >
         {mode === 'bundle' && <DayBundleList bundles={bundles} value={bundleStartDay} onChange={setBundleStartDay} />}
         {mode === 'range' && <DayRangePicker days={days} startDay={startDay} endDay={endDay} onStartChange={setStartDay} onEndChange={setEndDay} />}
         {mode === 'random' && <RandomStudyPicker mode={randomMode} dayCount={dayCount} wordCount={wordCount} availableDayCount={days.length} availableWordCount={words.length} onModeChange={setRandomMode} onDayCountChange={setDayCount} onWordCountChange={setWordCount} onReroll={reroll} />}
       </section>
 
-      <section className="test-summary" aria-live="polite">
+      <section className="test-summary selection-summary" id="study-selection-summary" aria-live="polite">
         <div><strong>{target ? formatSelectionSummary(target) : '학습 범위를 선택하세요'}</strong>{target && <span>{target.targetWordIds.length}단어를 학습합니다.</span>}</div>
-        <button className="button button--primary" type="button" disabled={!target} onClick={startStudy}>{startLabel}</button>
+        <button className="button button--primary" type="button" aria-describedby="study-selection-summary" disabled={!target} onClick={startStudy}>{startLabel}</button>
       </section>
     </main>
   );
