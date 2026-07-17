@@ -2,33 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export function parseVocabularyMarkdown(markdown) {
-  const words = [];
-  let currentDay = null;
-  let currentTopic = '';
-
-  for (const line of markdown.split(/\r?\n/)) {
-    const heading = line.match(/^## DAY (\d{2}) — (.+)$/);
-    if (heading) {
-      currentDay = Number(heading[1]);
-      currentTopic = heading[2].trim();
-      continue;
-    }
-
-    if (!/^\| \d{4} \|/.test(line) || currentDay === null) continue;
-    const cells = line.slice(1, -1).split('|').map((cell) => cell.trim());
-    const [id, term, partOfSpeech, meaning, inflection] = cells;
-    words.push({
-      id,
-      day: currentDay,
-      topic: currentTopic,
-      term,
-      partOfSpeech: partOfSpeech.split('/').map((value) => value.trim()),
-      meanings: [meaning],
-      ...(inflection ? { inflection } : {}),
-    });
-  }
-
+function validateVocabularyWords(words) {
   if (words.length === 0) throw new Error('No vocabulary rows found');
   const ids = new Set();
   words.forEach((word, index) => {
@@ -50,17 +24,78 @@ export function parseVocabularyMarkdown(markdown) {
   return words;
 }
 
+export function parseVocabularyMarkdown(markdown, { validate = true } = {}) {
+  const words = [];
+  let currentDay = null;
+  let currentTopic = '';
+
+  for (const line of markdown.split(/\r?\n/)) {
+    const heading = line.match(/^## DAY (\d{2})\s+—\s+(.+)$/) ?? line.match(/^## DAY (\d{2})\s+(.+)$/);
+    if (heading) {
+      currentDay = Number(heading[1]);
+      currentTopic = heading[2].trim();
+      continue;
+    }
+
+    if (!/^\| \d{4} \|/.test(line) || currentDay === null) continue;
+    const cells = line.slice(1, -1).split('|').map((cell) => cell.trim());
+    const [id, term, partOfSpeech, meaning, inflection] = cells;
+    words.push({
+      id,
+      day: currentDay,
+      topic: currentTopic,
+      term,
+      partOfSpeech: partOfSpeech.split('/').map((value) => value.trim()),
+      meanings: [meaning],
+      ...(inflection ? { inflection } : {}),
+    });
+  }
+
+  return validate ? validateVocabularyWords(words) : words;
+}
+
+export function buildVocabularySources(markdowns) {
+  const sorted = [...markdowns].sort((a, b) => {
+    const dayA = Number(a.fileName.match(/DAY(\d+)/)?.[1] ?? Number.MAX_SAFE_INTEGER);
+    const dayB = Number(b.fileName.match(/DAY(\d+)/)?.[1] ?? Number.MAX_SAFE_INTEGER);
+    return dayA - dayB || a.fileName.localeCompare(b.fileName);
+  });
+  const words = sorted.flatMap(({ markdown }) => parseVocabularyMarkdown(markdown, { validate: false }));
+  return validateVocabularyWords(words);
+}
+
+function createDayCatalog(words) {
+  const days = new Map();
+  for (const word of words) {
+    const entry = days.get(word.day) ?? { day: word.day, topic: word.topic, wordCount: 0 };
+    entry.wordCount += 1;
+    days.set(word.day, entry);
+  }
+  return [...days.values()].sort((a, b) => a.day - b.day);
+}
+
 const scriptPath = fileURLToPath(import.meta.url);
 if (process.argv[1] && path.resolve(process.argv[1]) === scriptPath) {
   const root = path.resolve(path.dirname(scriptPath), '..');
-  const input = path.join(root, 'content', 'source', '영어_단어_DAY01-10.md');
+  const sourceDir = path.join(root, 'content', 'source');
+  const sources = fs.readdirSync(sourceDir, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /^영어_단어_DAY.*\.md$/.test(entry.name))
+    .map((entry) => ({ fileName: entry.name, markdown: fs.readFileSync(path.join(sourceDir, entry.name), 'utf8') }));
+  if (sources.length === 0) throw new Error('No vocabulary source files found');
+
+  const words = buildVocabularySources(sources);
+  const dayCatalog = createDayCatalog(words);
   const output = path.join(root, 'src', 'content', 'vocabulary.json');
   const publicOutput = path.join(root, 'public', 'data', 'vocabulary.json');
-  const words = parseVocabularyMarkdown(fs.readFileSync(input, 'utf8'));
+  const catalogOutput = path.join(root, 'src', 'content', 'day-catalog.json');
+  const publicCatalogOutput = path.join(root, 'public', 'data', 'day-catalog.json');
   fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.mkdirSync(path.dirname(publicOutput), { recursive: true });
   const json = `${JSON.stringify(words, null, 2)}\n`;
+  const catalogJson = `${JSON.stringify(dayCatalog, null, 2)}\n`;
   fs.writeFileSync(output, json, 'utf8');
   fs.writeFileSync(publicOutput, json, 'utf8');
+  fs.writeFileSync(catalogOutput, catalogJson, 'utf8');
+  fs.writeFileSync(publicCatalogOutput, catalogJson, 'utf8');
   console.log(`Generated ${words.length} vocabulary records`);
 }

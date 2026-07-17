@@ -3065,5 +3065,3082 @@
     "meanings": [
       "(늦게까지) 안 자고 있다, 깨어 있다"
     ]
+  },
+  {
+    "id": "0251",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "plate",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "접시"
+    ],
+    "inflection": "(= dish)"
+  },
+  {
+    "id": "0252",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "space",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 공간 2. 우주"
+    ]
+  },
+  {
+    "id": "0253",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "nail",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "1. 손톱 2. 못 / 못으로 박다"
+    ]
+  },
+  {
+    "id": "0254",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "power",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 힘 2. 전기, 에너지"
+    ]
+  },
+  {
+    "id": "0255",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "counter",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 계산대 2. (주방의) 조리대, 카운터"
+    ]
+  },
+  {
+    "id": "0256",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "calendar",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "달력"
+    ]
+  },
+  {
+    "id": "0257",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "apartment",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "아파트"
+    ]
+  },
+  {
+    "id": "0258",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "carpet",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "카펫"
+    ]
+  },
+  {
+    "id": "0259",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "cushion",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "쿠션, 방석"
+    ]
+  },
+  {
+    "id": "0260",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "curtain",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "커튼"
+    ]
+  },
+  {
+    "id": "0261",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "kit",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "도구 세트"
+    ]
+  },
+  {
+    "id": "0262",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "lid",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "뚜껑, 덮개"
+    ]
+  },
+  {
+    "id": "0263",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "mess",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "엉망진창, 뒤죽박죽"
+    ]
+  },
+  {
+    "id": "0264",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "tidy",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "깔끔한, 단정한"
+    ],
+    "inflection": "(= neat)"
+  },
+  {
+    "id": "0265",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "tool",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "연장, 도구, 공구"
+    ]
+  },
+  {
+    "id": "0266",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "stuff",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "물건, 일"
+    ]
+  },
+  {
+    "id": "0267",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "handle",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "손잡이 / 다루다, 처리하다"
+    ]
+  },
+  {
+    "id": "0268",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "laundry",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "세탁, 세탁물"
+    ]
+  },
+  {
+    "id": "0269",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "pile",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "더미, 덩어리 / 쌓다, 포개다"
+    ]
+  },
+  {
+    "id": "0270",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "blanket",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "담요, 이불"
+    ]
+  },
+  {
+    "id": "0271",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "pillow",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "베개"
+    ]
+  },
+  {
+    "id": "0272",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "shelf",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "선반"
+    ]
+  },
+  {
+    "id": "0273",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "refrigerator",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "냉장고"
+    ],
+    "inflection": "(= fridge)"
+  },
+  {
+    "id": "0274",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "run out (of)",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "(~이) 다 떨어지다, 없어지다"
+    ],
+    "inflection": "ran – run"
+  },
+  {
+    "id": "0275",
+    "day": 11,
+    "topic": "집, 집 안의 물건",
+    "term": "show ~ around",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~에게 구경시켜 주다"
+    ]
+  },
+  {
+    "id": "0276",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "tea",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "차"
+    ]
+  },
+  {
+    "id": "0277",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "meal",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "식사, 끼니"
+    ]
+  },
+  {
+    "id": "0278",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "dish",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 접시 2. 요리 3. 설거지 감"
+    ],
+    "inflection": "(= plate)"
+  },
+  {
+    "id": "0279",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "cool",
+    "partOfSpeech": [
+      "형",
+      "동"
+    ],
+    "meanings": [
+      "1. 시원한, 서늘한 2. 멋진 / 식히다"
+    ]
+  },
+  {
+    "id": "0280",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "fill",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "채우다"
+    ]
+  },
+  {
+    "id": "0281",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "curry",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "카레, 카레 요리"
+    ]
+  },
+  {
+    "id": "0282",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "honey",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "꿀"
+    ]
+  },
+  {
+    "id": "0283",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "pie",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "파이"
+    ]
+  },
+  {
+    "id": "0284",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "nut",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "견과(류)"
+    ]
+  },
+  {
+    "id": "0285",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "bean",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "콩"
+    ]
+  },
+  {
+    "id": "0286",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "beef",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "소고기"
+    ]
+  },
+  {
+    "id": "0287",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "pork",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "돼지고기"
+    ]
+  },
+  {
+    "id": "0288",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "serve",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. (음식을) 제공하다 2. (손님을) 응대하다"
+    ]
+  },
+  {
+    "id": "0289",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "freeze",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. 얼다 2. 얼리다"
+    ],
+    "inflection": "froze – frozen"
+  },
+  {
+    "id": "0290",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "pour",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "(음료를) 붓다, 따르다"
+    ]
+  },
+  {
+    "id": "0291",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "grocery",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 식료품 2. 식료품점"
+    ]
+  },
+  {
+    "id": "0292",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "slice",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "(얇게) 썰다, 자르다 / (얇게 썬) 조각"
+    ]
+  },
+  {
+    "id": "0293",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "fried",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "(기름에) 튀긴, 프라이한"
+    ]
+  },
+  {
+    "id": "0294",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "sour",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. (맛이) 신, 시큼한 2. (음식이) 상한"
+    ]
+  },
+  {
+    "id": "0295",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "noodle",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "면, 국수"
+    ]
+  },
+  {
+    "id": "0296",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "flour",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "밀가루"
+    ]
+  },
+  {
+    "id": "0297",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "pepper",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "후추, 고추"
+    ]
+  },
+  {
+    "id": "0298",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "flavor",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "맛, 풍미"
+    ]
+  },
+  {
+    "id": "0299",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "at a time",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "한 번에"
+    ]
+  },
+  {
+    "id": "0300",
+    "day": 12,
+    "topic": "음식, 조리",
+    "term": "cut ~ into pieces",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~을 썰다, 토막 내다"
+    ],
+    "inflection": "cut – cut"
+  },
+  {
+    "id": "0301",
+    "day": 13,
+    "topic": "패션",
+    "term": "boot",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "부츠, 장화"
+    ],
+    "inflection": "(-s)"
+  },
+  {
+    "id": "0302",
+    "day": 13,
+    "topic": "패션",
+    "term": "scarf",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "스카프"
+    ]
+  },
+  {
+    "id": "0303",
+    "day": 13,
+    "topic": "패션",
+    "term": "sweater",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "스웨터"
+    ]
+  },
+  {
+    "id": "0304",
+    "day": 13,
+    "topic": "패션",
+    "term": "pair",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "한 쌍, 한 짝"
+    ]
+  },
+  {
+    "id": "0305",
+    "day": 13,
+    "topic": "패션",
+    "term": "style",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 방식, 방법 2. (옷의) 스타일 3. 유행"
+    ]
+  },
+  {
+    "id": "0306",
+    "day": 13,
+    "topic": "패션",
+    "term": "dress",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "드레스, 원피스 / 1. 옷을 입다 2. 옷을 입히다"
+    ]
+  },
+  {
+    "id": "0307",
+    "day": 13,
+    "topic": "패션",
+    "term": "fit",
+    "partOfSpeech": [
+      "동",
+      "형"
+    ],
+    "meanings": [
+      "1. (치수·모양 등이) 꼭 맞다 2. 적합하다, 어울리다 / 건강한, 탄탄한"
+    ],
+    "inflection": "fit – fit"
+  },
+  {
+    "id": "0308",
+    "day": 13,
+    "topic": "패션",
+    "term": "clothing",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "옷, 의복"
+    ]
+  },
+  {
+    "id": "0309",
+    "day": 13,
+    "topic": "패션",
+    "term": "fancy",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "멋진, 화려한"
+    ]
+  },
+  {
+    "id": "0310",
+    "day": 13,
+    "topic": "패션",
+    "term": "hang",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "걸다, 매달다"
+    ],
+    "inflection": "hung – hung"
+  },
+  {
+    "id": "0311",
+    "day": 13,
+    "topic": "패션",
+    "term": "match",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "1. 경기 2. 성냥 / 어울리다"
+    ]
+  },
+  {
+    "id": "0312",
+    "day": 13,
+    "topic": "패션",
+    "term": "pattern",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 양식, 패턴 2. 무늬"
+    ]
+  },
+  {
+    "id": "0313",
+    "day": 13,
+    "topic": "패션",
+    "term": "tight",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "꽉 조이는, 딱 붙는"
+    ]
+  },
+  {
+    "id": "0314",
+    "day": 13,
+    "topic": "패션",
+    "term": "loose",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "느슨한, 헐거운"
+    ]
+  },
+  {
+    "id": "0315",
+    "day": 13,
+    "topic": "패션",
+    "term": "suit",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "정장 / 1. 알맞다, 적합하다 2. 어울리다"
+    ]
+  },
+  {
+    "id": "0316",
+    "day": 13,
+    "topic": "패션",
+    "term": "closet",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "벽장, 옷장"
+    ]
+  },
+  {
+    "id": "0317",
+    "day": 13,
+    "topic": "패션",
+    "term": "wool",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "양모, 양털"
+    ]
+  },
+  {
+    "id": "0318",
+    "day": 13,
+    "topic": "패션",
+    "term": "cotton",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 면, 솜 2. 목화"
+    ]
+  },
+  {
+    "id": "0319",
+    "day": 13,
+    "topic": "패션",
+    "term": "material",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. (물건의) 재료 2. 직물, 천"
+    ]
+  },
+  {
+    "id": "0320",
+    "day": 13,
+    "topic": "패션",
+    "term": "slipper",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "슬리퍼"
+    ],
+    "inflection": "(-s)"
+  },
+  {
+    "id": "0321",
+    "day": 13,
+    "topic": "패션",
+    "term": "jewelry",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "보석류, 장신구"
+    ]
+  },
+  {
+    "id": "0322",
+    "day": 13,
+    "topic": "패션",
+    "term": "wallet",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "지갑"
+    ]
+  },
+  {
+    "id": "0323",
+    "day": 13,
+    "topic": "패션",
+    "term": "put on",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. 입다, 착용하다 2. (얼굴 등에) 바르다"
+    ],
+    "inflection": "put – put"
+  },
+  {
+    "id": "0324",
+    "day": 13,
+    "topic": "패션",
+    "term": "take off",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "벗다, 벗기다"
+    ],
+    "inflection": "took – taken"
+  },
+  {
+    "id": "0325",
+    "day": 13,
+    "topic": "패션",
+    "term": "change into",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. ~으로 바꾸다 2. ~로 바꿔 입다, 갈아입다"
+    ]
+  },
+  {
+    "id": "0326",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "topic",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "주제, 화제"
+    ]
+  },
+  {
+    "id": "0327",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "goal",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 목표 2. 골, 득점"
+    ]
+  },
+  {
+    "id": "0328",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "secret",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "비밀의 / 비밀"
+    ]
+  },
+  {
+    "id": "0329",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "hint",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "힌트, 암시"
+    ]
+  },
+  {
+    "id": "0330",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "advice",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "조언, 충고"
+    ]
+  },
+  {
+    "id": "0331",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "helpful",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "도움이 되는, 유용한, 쓸모 있는"
+    ]
+  },
+  {
+    "id": "0332",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "check",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "확인하다, 점검하다 / 1. 확인, 점검 2. 계산서 3. 수표"
+    ]
+  },
+  {
+    "id": "0333",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "fail",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. 실패하다 2. (시험에) 떨어지다"
+    ]
+  },
+  {
+    "id": "0334",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "unit",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 구성단위 2. (측정의) 단위 3. 단원"
+    ]
+  },
+  {
+    "id": "0335",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "false",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "틀린, 거짓의"
+    ]
+  },
+  {
+    "id": "0336",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "fault",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 잘못, 책임 2. 단점, 결점"
+    ]
+  },
+  {
+    "id": "0337",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "prepare",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "준비하다, 대비하다"
+    ]
+  },
+  {
+    "id": "0338",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "effort",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "노력, 수고"
+    ]
+  },
+  {
+    "id": "0339",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "correct",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "맞는, 정확한"
+    ]
+  },
+  {
+    "id": "0340",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "essay",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. (짧은 논문식) 과제물, 리포트 2. 수필"
+    ]
+  },
+  {
+    "id": "0341",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "skip",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "빼먹다, 거르다"
+    ]
+  },
+  {
+    "id": "0342",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "aloud",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "소리 내어"
+    ]
+  },
+  {
+    "id": "0343",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "sentence",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "문장"
+    ]
+  },
+  {
+    "id": "0344",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "college",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "대학교"
+    ]
+  },
+  {
+    "id": "0345",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "university",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "(종합)대학교"
+    ]
+  },
+  {
+    "id": "0346",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "difficulty",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "어려움, 곤란"
+    ]
+  },
+  {
+    "id": "0347",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "education",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "교육"
+    ]
+  },
+  {
+    "id": "0348",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "counselor",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "상담사, 상담 교사"
+    ]
+  },
+  {
+    "id": "0349",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "on one's own",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "혼자 힘으로, 스스로"
+    ]
+  },
+  {
+    "id": "0350",
+    "day": 14,
+    "topic": "학교 수업, 고민",
+    "term": "make fun of",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~을 놀리다"
+    ],
+    "inflection": "made – made"
+  },
+  {
+    "id": "0351",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "enter",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. 들어가다 2. 참가하다 3. 입력하다"
+    ]
+  },
+  {
+    "id": "0352",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "activity",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "활동"
+    ]
+  },
+  {
+    "id": "0353",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "exercise",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "1. 운동 2. 연습 / 운동하다"
+    ]
+  },
+  {
+    "id": "0354",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "chat",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "이야기하다 / 대화, 수다"
+    ]
+  },
+  {
+    "id": "0355",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "award",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "상 / 수여하다"
+    ]
+  },
+  {
+    "id": "0356",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "contest",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "시합, 대회"
+    ]
+  },
+  {
+    "id": "0357",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "decision",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "결정, 판단"
+    ]
+  },
+  {
+    "id": "0358",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "lend",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "빌려주다"
+    ],
+    "inflection": "lent – lent"
+  },
+  {
+    "id": "0359",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "glue",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "풀, 접착제 / (접착제로) 붙이다"
+    ]
+  },
+  {
+    "id": "0360",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "erase",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "지우다, 없애다"
+    ]
+  },
+  {
+    "id": "0361",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "stick",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "나뭇가지, 막대기 / 붙다, 붙이다"
+    ],
+    "inflection": "stuck – stuck"
+  },
+  {
+    "id": "0362",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "achieve",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "(일, 목적 등을) 성취하다, 달성하다"
+    ]
+  },
+  {
+    "id": "0363",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "deserve",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~할 만한 가치가 있다"
+    ]
+  },
+  {
+    "id": "0364",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "volunteer",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "지원자, 자원봉사자 / 지원하다, 자원봉사하다"
+    ]
+  },
+  {
+    "id": "0365",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "campaign",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "(사회적, 정치적) 운동, 캠페인"
+    ]
+  },
+  {
+    "id": "0366",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "reward",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "보상 / 보상하다, 보답하다"
+    ]
+  },
+  {
+    "id": "0367",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "term",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 용어 2. 기간"
+    ]
+  },
+  {
+    "id": "0368",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "discuss",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~에 대해 논의하다, 토론하다"
+    ]
+  },
+  {
+    "id": "0369",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "remain",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. 계속 ~이다 2. (없어지지 않고) 남다"
+    ]
+  },
+  {
+    "id": "0370",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "relay",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "릴레이 경주, 계주"
+    ]
+  },
+  {
+    "id": "0371",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "praise",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "칭찬, 찬사 / 칭찬하다"
+    ]
+  },
+  {
+    "id": "0372",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "choir",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "합창단"
+    ]
+  },
+  {
+    "id": "0373",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "sign up (for)",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "(~을) 신청하다, 등록하다"
+    ]
+  },
+  {
+    "id": "0374",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "keep ~ in mind",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~을 명심하다"
+    ],
+    "inflection": "kept – kept"
+  },
+  {
+    "id": "0375",
+    "day": 15,
+    "topic": "학교 활동",
+    "term": "take part in",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~에 참가하다, 참여하다"
+    ],
+    "inflection": "took – taken"
+  },
+  {
+    "id": "0376",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "part",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 부분 2. 일부, 약간"
+    ]
+  },
+  {
+    "id": "0377",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "level",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 수준, 단계 2. 높이"
+    ]
+  },
+  {
+    "id": "0378",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "shape",
+    "partOfSpeech": [
+      "명",
+      "동"
+    ],
+    "meanings": [
+      "1. 모양, 형태 2. 몸매, 체형 / (어떤) 모양으로 만들다"
+    ]
+  },
+  {
+    "id": "0379",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "tiny",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "아주 작은"
+    ]
+  },
+  {
+    "id": "0380",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "empty",
+    "partOfSpeech": [
+      "형",
+      "동"
+    ],
+    "meanings": [
+      "비어 있는 / 비우다"
+    ]
+  },
+  {
+    "id": "0381",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "light",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "1. 빛 2. 전등 / 1. 가벼운 2. 연한"
+    ]
+  },
+  {
+    "id": "0382",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "bright",
+    "partOfSpeech": [
+      "형",
+      "부"
+    ],
+    "meanings": [
+      "1. 밝은 2. 영리한 / 밝게, 환히"
+    ],
+    "inflection": "(= brightly)"
+  },
+  {
+    "id": "0383",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "dark",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "1. 어두운 2. 진한 / 어둠, 암흑"
+    ]
+  },
+  {
+    "id": "0384",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "cross",
+    "partOfSpeech": [
+      "동",
+      "명"
+    ],
+    "meanings": [
+      "(가로질러) 건너다, 횡단하다 / 1. ×표 2. 십자가"
+    ]
+  },
+  {
+    "id": "0385",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "triangle",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "삼각형"
+    ]
+  },
+  {
+    "id": "0386",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "square",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "1. 정사각형 2. 광장 / 정사각형 모양의"
+    ]
+  },
+  {
+    "id": "0387",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "almost",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "거의"
+    ]
+  },
+  {
+    "id": "0388",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "weigh",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "1. 무게가 ~이다 2. 무게를 달다"
+    ]
+  },
+  {
+    "id": "0389",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "length",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "길이"
+    ]
+  },
+  {
+    "id": "0390",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "narrow",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "좁은"
+    ]
+  },
+  {
+    "id": "0391",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "broad",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. (폭이) 넓은 2. 폭넓은, 광범위한"
+    ],
+    "inflection": "(= wide)"
+  },
+  {
+    "id": "0392",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "whole",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "전체의, 모든 / 전부, 전체"
+    ]
+  },
+  {
+    "id": "0393",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "entire",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "전체의, 완전한"
+    ]
+  },
+  {
+    "id": "0394",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "complete",
+    "partOfSpeech": [
+      "형",
+      "동"
+    ],
+    "meanings": [
+      "완전한 / 1. 완료하다 2. 완성하다"
+    ]
+  },
+  {
+    "id": "0395",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "dot",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "(작고 동그란) 점"
+    ]
+  },
+  {
+    "id": "0396",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "chip",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 조각, 부스러기 2. 감자칩"
+    ]
+  },
+  {
+    "id": "0397",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "cone",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 원뿔 2. 아이스크림용 콘"
+    ]
+  },
+  {
+    "id": "0398",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "look like",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~처럼 보이다"
+    ]
+  },
+  {
+    "id": "0399",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "at least",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "적어도, 최소한"
+    ]
+  },
+  {
+    "id": "0400",
+    "day": 16,
+    "topic": "모양, 정도",
+    "term": "be full of",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "~로 가득 차다"
+    ],
+    "inflection": "was[were] – been"
+  },
+  {
+    "id": "0401",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "base",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. (사물의) 맨 아랫부분 2. 기초, 근거"
+    ]
+  },
+  {
+    "id": "0402",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "dry",
+    "partOfSpeech": [
+      "형",
+      "동"
+    ],
+    "meanings": [
+      "마른, 건조한 / 마르다, 말리다"
+    ]
+  },
+  {
+    "id": "0403",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "flat",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "평평한, 납작한"
+    ]
+  },
+  {
+    "id": "0404",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "useful",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "유용한, 도움이 되는"
+    ]
+  },
+  {
+    "id": "0405",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "sharp",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "날카로운, 뾰족한"
+    ]
+  },
+  {
+    "id": "0406",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "simple",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. 간단한, 단순한 2. 간결한, 꾸밈없는"
+    ]
+  },
+  {
+    "id": "0407",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "normal",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "보통의, 평범한, 정상적인"
+    ]
+  },
+  {
+    "id": "0408",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "common",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. 흔한 2. 공통의"
+    ]
+  },
+  {
+    "id": "0409",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "giant",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "거대한, 위대한 / 거인"
+    ]
+  },
+  {
+    "id": "0410",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "object",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "물건, 물체"
+    ]
+  },
+  {
+    "id": "0411",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "extra",
+    "partOfSpeech": [
+      "형",
+      "부",
+      "명"
+    ],
+    "meanings": [
+      "추가의 / 추가로 / 추가되는 것"
+    ]
+  },
+  {
+    "id": "0412",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "edge",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "끝, 가장자리"
+    ]
+  },
+  {
+    "id": "0413",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "curve",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "곡선, 커브"
+    ]
+  },
+  {
+    "id": "0414",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "bold",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. 대담한 2. 선명한, 굵은"
+    ]
+  },
+  {
+    "id": "0415",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "average",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "평균의, 보통의 / 평균, 보통"
+    ]
+  },
+  {
+    "id": "0416",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "row",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "줄, 열"
+    ]
+  },
+  {
+    "id": "0417",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "string",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "줄, 끈"
+    ]
+  },
+  {
+    "id": "0418",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "rough",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. 매끄럽지 않은, 거친 2. 대강의, 대충의"
+    ]
+  },
+  {
+    "id": "0419",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "similar",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "비슷한, 유사한"
+    ]
+  },
+  {
+    "id": "0420",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "various",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "다양한, 여러 가지의"
+    ]
+  },
+  {
+    "id": "0421",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "without",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "~ 없이"
+    ]
+  },
+  {
+    "id": "0422",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "unlike",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "~와 다른, ~와 달리"
+    ]
+  },
+  {
+    "id": "0423",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "go bad",
+    "partOfSpeech": [
+      "동"
+    ],
+    "meanings": [
+      "썩다, 상하다"
+    ],
+    "inflection": "went – gone"
+  },
+  {
+    "id": "0424",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "upside down",
+    "partOfSpeech": [
+      "부",
+      "형"
+    ],
+    "meanings": [
+      "1. 거꾸로, 뒤집혀 2. 거꾸로 된, 뒤집힌"
+    ]
+  },
+  {
+    "id": "0425",
+    "day": 17,
+    "topic": "사물 묘사",
+    "term": "not ~ anymore",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "더 이상 ~ 아니다"
+    ]
+  },
+  {
+    "id": "0426",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "each",
+    "partOfSpeech": [
+      "형",
+      "대",
+      "부"
+    ],
+    "meanings": [
+      "각각의, 각각의 / 각각, 각자 / 각자에게"
+    ]
+  },
+  {
+    "id": "0427",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "single",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. 한 개의 2. 1인용의"
+    ]
+  },
+  {
+    "id": "0428",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "couple",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 한 쌍, 두 개 2. 부부, 커플"
+    ]
+  },
+  {
+    "id": "0429",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "once",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "1. 한 번 2. (과거) 언젠가, 한때"
+    ]
+  },
+  {
+    "id": "0430",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "bowl",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. (우묵한) 그릇, 사발 2. 한 그릇[통]"
+    ]
+  },
+  {
+    "id": "0431",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "half",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "1. 반, 2분의 1 2. 30분 / 반의, 절반의"
+    ]
+  },
+  {
+    "id": "0432",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "quarter",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 4분의 1 2. 15분"
+    ]
+  },
+  {
+    "id": "0433",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "volume",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 음량 2. 양, 분량"
+    ]
+  },
+  {
+    "id": "0434",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "little",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. 작은 2. (a ~) 약간의, 조금의 3. 거의 없는"
+    ]
+  },
+  {
+    "id": "0435",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "few",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. (a ~) 약간의, 몇몇의 2. 거의 없는"
+    ]
+  },
+  {
+    "id": "0436",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "great",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "1. 정말 좋은, 대단한 2. 큰, 많은"
+    ]
+  },
+  {
+    "id": "0437",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "quite",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "꽤, 상당히"
+    ]
+  },
+  {
+    "id": "0438",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "less",
+    "partOfSpeech": [
+      "형",
+      "부"
+    ],
+    "meanings": [
+      "(양, 정도가) 보다 적은 / 덜, 더 적게"
+    ]
+  },
+  {
+    "id": "0439",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "several",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "몇몇의, 여러"
+    ],
+    "inflection": "(= a few)"
+  },
+  {
+    "id": "0440",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "per",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "~마다"
+    ]
+  },
+  {
+    "id": "0441",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "percent",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "퍼센트(%), 백분"
+    ]
+  },
+  {
+    "id": "0442",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "dozen",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "12개, 12개짜리 묶음"
+    ]
+  },
+  {
+    "id": "0443",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "thousand",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "천, 1,000"
+    ]
+  },
+  {
+    "id": "0444",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "million",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "100만"
+    ]
+  },
+  {
+    "id": "0445",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "none",
+    "partOfSpeech": [
+      "대"
+    ],
+    "meanings": [
+      "아무도 ~않다"
+    ]
+  },
+  {
+    "id": "0446",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "either",
+    "partOfSpeech": [
+      "대",
+      "부"
+    ],
+    "meanings": [
+      "(둘 중) 어느 한쪽 / (부정문) ~도 또한, 역시"
+    ]
+  },
+  {
+    "id": "0447",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "neither",
+    "partOfSpeech": [
+      "대"
+    ],
+    "meanings": [
+      "(둘 중) 어느 한쪽도 아니다"
+    ]
+  },
+  {
+    "id": "0448",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "a bit",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "조금, 약간"
+    ]
+  },
+  {
+    "id": "0449",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "all the time",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "줄곧, 내내, 항상"
+    ]
+  },
+  {
+    "id": "0450",
+    "day": 18,
+    "topic": "수, 양, 빈도",
+    "term": "again and again",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "반복해서"
+    ]
+  },
+  {
+    "id": "0451",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "past",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "과거 / 과거의, 지나간"
+    ]
+  },
+  {
+    "id": "0452",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "still",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "아직도, 여전히"
+    ]
+  },
+  {
+    "id": "0453",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "until/till",
+    "partOfSpeech": [
+      "전",
+      "접"
+    ],
+    "meanings": [
+      "~까지 / ~할 때까지"
+    ]
+  },
+  {
+    "id": "0454",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "since",
+    "partOfSpeech": [
+      "전",
+      "접"
+    ],
+    "meanings": [
+      "~부터, ~이래 / 1. ~한 때부터 2. ~ 때문에"
+    ]
+  },
+  {
+    "id": "0455",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "while",
+    "partOfSpeech": [
+      "접",
+      "명"
+    ],
+    "meanings": [
+      "~하는 동안 / (짧은) 동안, 잠깐"
+    ]
+  },
+  {
+    "id": "0456",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "eve",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "전날, 전날 밤"
+    ]
+  },
+  {
+    "id": "0457",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "final",
+    "partOfSpeech": [
+      "형",
+      "명"
+    ],
+    "meanings": [
+      "1. 마지막의, 최종의 2. 최종적인 / 결승전"
+    ]
+  },
+  {
+    "id": "0458",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "lately",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "최근에, 요즘"
+    ],
+    "inflection": "(= recently)"
+  },
+  {
+    "id": "0459",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "ever",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "1. 지금까지, 이제까지 2. 언제나, 항상"
+    ]
+  },
+  {
+    "id": "0460",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "moment",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 잠깐, 잠시 2. 순간 3. (특정) 시기, 때"
+    ]
+  },
+  {
+    "id": "0461",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "century",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "세기, 100년"
+    ]
+  },
+  {
+    "id": "0462",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "recent",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "최근의"
+    ]
+  },
+  {
+    "id": "0463",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "period",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "기간, 시대"
+    ]
+  },
+  {
+    "id": "0464",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "beginning",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "처음, 시작"
+    ]
+  },
+  {
+    "id": "0465",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "lastly",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "마지막으로, 끝으로"
+    ]
+  },
+  {
+    "id": "0466",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "weekly",
+    "partOfSpeech": [
+      "형",
+      "부"
+    ],
+    "meanings": [
+      "매주의, 주간의 / 주마다, 주 1회씩"
+    ]
+  },
+  {
+    "id": "0467",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "weekday",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "평일"
+    ]
+  },
+  {
+    "id": "0468",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "someday",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "언젠가, 머지않아"
+    ],
+    "inflection": "(= one day)"
+  },
+  {
+    "id": "0469",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "following",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "다음에 오는, 다음의"
+    ]
+  },
+  {
+    "id": "0470",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "midnight",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "자정, 밤 열두 시"
+    ]
+  },
+  {
+    "id": "0471",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "dawn",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "동틀 녘, 새벽"
+    ]
+  },
+  {
+    "id": "0472",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "decade",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "10년"
+    ]
+  },
+  {
+    "id": "0473",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "at first",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "처음에는"
+    ]
+  },
+  {
+    "id": "0474",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "in the end",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "결국, 마침내"
+    ]
+  },
+  {
+    "id": "0475",
+    "day": 19,
+    "topic": "시간, 순서",
+    "term": "on time",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "제때, 정각에"
+    ]
+  },
+  {
+    "id": "0476",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "low",
+    "partOfSpeech": [
+      "형",
+      "부"
+    ],
+    "meanings": [
+      "낮은 / 낮게"
+    ]
+  },
+  {
+    "id": "0477",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "away",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "떨어져"
+    ]
+  },
+  {
+    "id": "0478",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "across",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "1. 건너편에 2. ~의 전역에"
+    ]
+  },
+  {
+    "id": "0479",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "ahead",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "앞에, 앞쪽에"
+    ]
+  },
+  {
+    "id": "0480",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "bottom",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "아랫부분, 밑바닥 / 맨 아래쪽에"
+    ]
+  },
+  {
+    "id": "0481",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "straight",
+    "partOfSpeech": [
+      "부",
+      "형"
+    ],
+    "meanings": [
+      "1. 똑바로 2. 곧장, 곧바로 / 곧은, 일직선의"
+    ]
+  },
+  {
+    "id": "0482",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "against",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "1. ~에 반대하여 2. ~에 맞서, 부딪쳐 3. ~에 기대어"
+    ]
+  },
+  {
+    "id": "0483",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "through",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "~을 통해, ~사이로"
+    ]
+  },
+  {
+    "id": "0484",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "front",
+    "partOfSpeech": [
+      "명",
+      "형"
+    ],
+    "meanings": [
+      "앞쪽, 앞면 / 앞쪽의"
+    ]
+  },
+  {
+    "id": "0485",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "below",
+    "partOfSpeech": [
+      "전",
+      "부"
+    ],
+    "meanings": [
+      "~보다 아래에 / 아래에, 밑에"
+    ]
+  },
+  {
+    "id": "0486",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "above",
+    "partOfSpeech": [
+      "전",
+      "부"
+    ],
+    "meanings": [
+      "~보다 위에 / 위에서, 위쪽에"
+    ]
+  },
+  {
+    "id": "0487",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "over",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "1. ~ 위에 2. ~을 건너, 넘어"
+    ]
+  },
+  {
+    "id": "0488",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "among",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "~의 사이에"
+    ]
+  },
+  {
+    "id": "0489",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "indoor",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "실내의"
+    ]
+  },
+  {
+    "id": "0490",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "outdoor",
+    "partOfSpeech": [
+      "형"
+    ],
+    "meanings": [
+      "야외의"
+    ]
+  },
+  {
+    "id": "0491",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "beside",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "~ 옆에"
+    ]
+  },
+  {
+    "id": "0492",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "aside",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "1. 곁에, 옆에 2. 따로 두고"
+    ]
+  },
+  {
+    "id": "0493",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "position",
+    "partOfSpeech": [
+      "명"
+    ],
+    "meanings": [
+      "1. 위치, 자리 2. (몸의) 자세"
+    ]
+  },
+  {
+    "id": "0494",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "nearby",
+    "partOfSpeech": [
+      "형",
+      "부"
+    ],
+    "meanings": [
+      "가까운, 가까이의 / 가까이에, 근처에"
+    ]
+  },
+  {
+    "id": "0495",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "somewhere",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "어딘가에"
+    ]
+  },
+  {
+    "id": "0496",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "forward",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "앞으로"
+    ]
+  },
+  {
+    "id": "0497",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "toward",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "~쪽으로, ~을 향하여"
+    ]
+  },
+  {
+    "id": "0498",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "in the middle of",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "1. ~의 가운데에 2. ~의 도중에"
+    ]
+  },
+  {
+    "id": "0499",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "up and down",
+    "partOfSpeech": [
+      "부"
+    ],
+    "meanings": [
+      "1. 위아래로 2. 좋다가 나쁘다가"
+    ]
+  },
+  {
+    "id": "0500",
+    "day": 20,
+    "topic": "방향, 위치",
+    "term": "out of",
+    "partOfSpeech": [
+      "전"
+    ],
+    "meanings": [
+      "1. ~ 밖으로 2. (수단, 재료) ~으로 3. ~ 중에서"
+    ]
   }
 ]
