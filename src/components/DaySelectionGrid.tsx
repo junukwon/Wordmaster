@@ -34,7 +34,7 @@ export function DaySelectionGrid({
             data-selected={isSelected}
             type="button"
             aria-pressed={isSelected}
-            aria-label={`${dayLabel} ${summary.topic} ${isSelected ? '선택됨' : '선택 안 됨'}`}
+            aria-label={`${dayLabel} ${summary.topic} 숙달 ${summary.mastered} 학습 중 ${summary.learning} 미학습 ${summary.unseen} ${isSelected ? '선택됨' : '선택 안 됨'}`}
             key={summary.day}
             onClick={() => toggle(summary.day)}
           >
@@ -42,12 +42,11 @@ export function DaySelectionGrid({
               {isSelected ? '✓' : ''}
             </span>
             <strong>{dayLabel}</strong>
-            <span>{summary.topic}</span>
-            <small>{summary.total}개</small>
-            <div className="day-card__progress">
-              <span>숙달 {summary.mastered}</span>
-              <span>학습 중 {summary.learning}</span>
-              <span>미학습 {summary.unseen}</span>
+            <span className="day-card__topic">{summary.topic}</span>
+            <div className="day-card__status" aria-hidden="true">
+              <span className="day-status-pill day-status-pill--mastered" data-testid={`day-${summary.day}-mastered`}>{summary.mastered}</span>
+              <span className="day-status-pill day-status-pill--learning" data-testid={`day-${summary.day}-learning`}>{summary.learning}</span>
+              <span className="day-status-pill day-status-pill--unseen" data-testid={`day-${summary.day}-unseen`}>{summary.unseen}</span>
             </div>
           </button>
         );

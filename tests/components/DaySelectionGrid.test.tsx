@@ -26,7 +26,11 @@ describe('DaySelectionGrid', () => {
       'aria-pressed',
       'true',
     );
-    expect(screen.getByText('숙달 8')).toBeInTheDocument();
+    expect(screen.getByTestId('day-1-mastered')).toHaveTextContent('8');
+    expect(screen.getByTestId('day-1-learning')).toHaveTextContent('5');
+    expect(screen.getByTestId('day-1-unseen')).toHaveTextContent('12');
+    expect(screen.getByRole('button', { name: /숙달 8 학습 중 5 미학습 12/ })).toBeInTheDocument();
+    expect(screen.queryByText('25개')).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /DAY 01 사람 묘사 I/ }));
     expect(onChange).toHaveBeenCalledWith([1, 7]);

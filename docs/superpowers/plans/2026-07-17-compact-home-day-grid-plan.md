@@ -83,7 +83,7 @@ git commit -m "feat: add scalable home DAY filtering"
 - Produces: `HomeDayToolbarProps = { query; ranges; selectedRangeStart; onQueryChange; onRangeChange }`
 - Preserves: `DaySelectionGridProps = { summaries; selectedDayIds; onChange }`
 
-- [ ] **Step 1: 상태 범례와 구간 선택 실패 테스트 작성**
+- [x] **Step 1: 상태 범례와 구간 선택 실패 테스트 작성**
 
 ```tsx
 render(<HomeDayToolbar query="" ranges={ranges} selectedRangeStart={1} onQueryChange={onQueryChange} onRangeChange={onRangeChange} />);
@@ -93,7 +93,7 @@ await user.click(screen.getByRole('button', { name: '21–40' }));
 expect(onRangeChange).toHaveBeenCalledWith(21);
 ```
 
-- [ ] **Step 2: 카드 3색 숫자 실패 테스트 작성**
+- [x] **Step 2: 카드 3색 숫자 실패 테스트 작성**
 
 ```tsx
 expect(screen.getByTestId('day-1-mastered')).toHaveTextContent('8');
@@ -103,23 +103,23 @@ expect(screen.getByRole('button', { name: /숙달 8 학습 중 5 미학습 12/ }
 expect(screen.queryByText('25개')).not.toBeInTheDocument();
 ```
 
-- [ ] **Step 3: 실패 확인**
+- [x] **Step 3: 실패 확인**
 
 Run: `npm test -- tests/components/HomeDayToolbar.test.tsx tests/components/DaySelectionGrid.test.tsx`
 
 Expected: FAIL because the toolbar is missing and the current card renders vertical labels.
 
-- [ ] **Step 4: 최소 컴포넌트 구현**
+- [x] **Step 4: 최소 컴포넌트 구현**
 
 `HomeDayToolbar`는 검색 입력, 단일 상태 범례, 구간 버튼을 렌더링한다. `DaySelectionGrid`는 DAY·주제·선택 원과 `day-status-pill--mastered|learning|unseen` 숫자 캡슐만 렌더링한다.
 
-- [ ] **Step 5: 통과 확인**
+- [x] **Step 5: 통과 확인**
 
 Run: `npm test -- tests/components/HomeDayToolbar.test.tsx tests/components/DaySelectionGrid.test.tsx`
 
 Expected: PASS.
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/components/HomeDayToolbar.tsx tests/components/HomeDayToolbar.test.tsx src/components/DaySelectionGrid.tsx tests/components/DaySelectionGrid.test.tsx
