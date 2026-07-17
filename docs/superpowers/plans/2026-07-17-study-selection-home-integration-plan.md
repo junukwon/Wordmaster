@@ -84,7 +84,7 @@ git commit -m "feat: keep study setup visible from home"
 - Produces: `StudySetupDraft`, `loadStudySetupDraft(storage, defaults)`, `saveStudySetupDraft(storage, draft)`
 - Consumes: `Storage` 호환 객체와 현재 단어 데이터에서 계산한 기본값
 
-- [ ] **Step 1: 유효값 복원·손상값 기본 처리·저장 실패 무시 테스트 작성**
+- [x] **Step 1: 유효값 복원·손상값 기본 처리·저장 실패 무시 테스트 작성**
 
 ```ts
 const defaults = {
@@ -98,13 +98,13 @@ expect(loadStudySetupDraft(storageWithMalformedJson, defaults)).toEqual(defaults
 expect(() => saveStudySetupDraft(throwingStorage, defaults)).not.toThrow();
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npm test -- tests/storage/studySetupDraftRepository.test.ts`
 
 Expected: FAIL because the repository module does not exist.
 
-- [ ] **Step 3: 검증과 예외 격리를 최소 구현**
+- [x] **Step 3: 검증과 예외 격리를 최소 구현**
 
 ```ts
 export const STUDY_SETUP_DRAFT_KEY = 'wordmaster:study-setup-draft:v1';
@@ -124,13 +124,13 @@ export type StudySetupDraft = {
 
 `loadStudySetupDraft`는 JSON 객체와 각 필드 타입을 검사하고, 유효하지 않거나 읽기 예외가 나면 `defaults`를 반환한다. `saveStudySetupDraft`는 쓰기 예외를 삼킨다.
 
-- [ ] **Step 4: 통과 확인**
+- [x] **Step 4: 통과 확인**
 
 Run: `npm test -- tests/storage/studySetupDraftRepository.test.ts`
 
 Expected: PASS.
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/storage/StudySetupDraftRepository.ts tests/storage/studySetupDraftRepository.test.ts
