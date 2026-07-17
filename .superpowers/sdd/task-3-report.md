@@ -22,3 +22,18 @@
 
 - `npm run build` still reports pre-existing TypeScript errors in `tests/content/build-vocabulary.test.ts` related to Node typings/module declarations; no errors were reported in the Task 3 source files.
 - The pre-existing `.superpowers/sdd/task-2-report.md` modification was left untouched and uncommitted.
+
+## Follow-up Fix: Legacy sparse DAY compatibility
+
+- Updated `createStudySession` to keep its historical filter semantics instead of resolving the strict range selection. Missing or sparse DAY ids are now ignored while available words remain valid targets; `createStudySessionFromTarget` remains the strict explicit-target API.
+- Added regressions for a vocabulary containing only DAY 1 with targets `[1, 2]` and `[2]`, plus an explicit target-id queue-order assertion.
+
+### Fix Verification
+
+- `npm test -- tests/domain/sessionEngine.test.ts tests/storage/localStorageRepository.test.ts`: PASS (20 tests)
+- `npm test`: PASS (13 files, 78 tests)
+- `git diff --check`: PASS
+
+### Fix Commit
+
+- `aaf90d6 fix: preserve sparse legacy study targets`
