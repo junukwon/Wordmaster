@@ -41,6 +41,19 @@ test('navigates to on-demand test setup', async () => {
   expect(screen.getByRole('heading', { name: '테스트 설정 화면' })).toBeInTheDocument();
 });
 
+test('new study action opens the scalable setup screen', async () => {
+  render(
+    <MemoryRouter initialEntries={['/']}>
+      <Routes>
+        <Route path="/" element={<HomePage viewModel={{ ...viewModel, activeSession: null }} />} />
+        <Route path="/study/setup" element={<h2>학습 범위 설정</h2>} />
+      </Routes>
+    </MemoryRouter>,
+  );
+  await userEvent.click(screen.getByRole('link', { name: '학습 범위 선택하기' }));
+  expect(screen.getByRole('heading', { name: '학습 범위 설정' })).toBeInTheDocument();
+});
+
 test('shows a recoverable storage error without blocking the routine', () => {
   render(<MemoryRouter><HomePage viewModel={{ ...viewModel, storageError: '학습 기록의 일부를 복구했습니다.' }} /></MemoryRouter>);
   expect(screen.getByRole('alert')).toHaveTextContent('학습 기록의 일부를 복구했습니다.');

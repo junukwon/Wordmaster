@@ -55,8 +55,12 @@ export function HomePage({ viewModel, onStartStudy, onOpenTest }: HomePageProps)
         </div>
 
         <div className="home-actions">
-          <Link className="button button--primary" to="/study" onClick={onStartStudy}>
-            {viewModel.activeSession ? '이어서 학습하기' : '오늘 학습 시작하기'}
+          <Link
+            className="button button--primary"
+            to={viewModel.activeSession ? '/study' : '/study/setup'}
+            onClick={viewModel.activeSession ? onStartStudy : undefined}
+          >
+            {viewModel.activeSession ? '이어서 학습하기' : '학습 범위 선택하기'}
           </Link>
           <Link className="button button--secondary" to="/test/setup" onClick={onOpenTest}>수시 단어 테스트</Link>
         </div>

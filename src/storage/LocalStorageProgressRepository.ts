@@ -48,7 +48,7 @@ function isStudySession(value: unknown): value is StudySession {
 
 function isStudySelection(value: unknown): value is StudySelection {
   if (!value || typeof value !== 'object') return false;
-  const selection = value as Partial<StudySelection> & { mode?: unknown };
+  const selection = value as Record<string, unknown>;
   if (typeof selection.mode !== 'string') return false;
   if (selection.seed !== undefined && typeof selection.seed !== 'string') return false;
   switch (selection.mode) {
