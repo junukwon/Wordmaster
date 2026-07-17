@@ -1,6 +1,6 @@
 import words from '../../src/content/vocabulary.json';
 import type { LearningOutcome } from '../../src/domain/masteryEngine';
-import type { WordProgress } from '../../src/domain/types';
+import type { VocabularyWord, WordProgress } from '../../src/domain/types';
 import {
   applySessionOutcome,
   createStudySession,
@@ -13,6 +13,10 @@ import {
 
 const now = new Date('2026-07-10T09:00:00.000Z');
 const identity = <T,>(items: T[]) => items;
+
+const sparseWords: VocabularyWord[] = [
+  { id: 'sparse-1', day: 1, topic: 'Sparse', term: 'alpha', partOfSpeech: ['noun'], meanings: ['알파'] },
+];
 
 function progress(wordId: string, confidence: WordProgress['confidence'] = 'unknown'): WordProgress {
   return {
@@ -36,6 +40,29 @@ test('random target session keeps exactly the selected word ids', () => {
   const session = createStudySessionFromTarget(words, target, [], now, identity);
   expect(session.targetWordIds).toEqual(['0001', '0026']);
   expect(session.selection).toEqual(target.selection);
+});
+
+test('legacy DAY filtering tolerates sparse or missing DAY ids', () => {
+  const sparseTarget = createStudySession(sparseWords, [1, 2], [], now, identity);
+  expect(sparseTarget.targetDayIds).toEqual([1, 2]);
+  expect(sparseTarget.targetWordIds).toEqual(['sparse-1']);
+  expect(getSessionQueueItems(sparseTarget).every((item) => item.wordId === 'sparse-1')).toBe(true);
+
+  const missingTarget = createStudySession(sparseWords, [2], [], now, identity);
+  expect(missingTarget.targetDayIds).toEqual([2]);
+  expect(missingTarget.targetWordIds).toEqual([]);
+  expect(getSessionQueueItems(missingTarget)).toEqual([]);
+});
+
+test('explicit target ids preserve their order within a queue block', () => {
+  const target = {
+    targetDayIds: [1],
+    targetWordIds: ['0002', '0001'],
+    selection: { mode: 'range' as const, startDay: 1, endDay: 1 },
+  };
+  const session = createStudySessionFromTarget(words, target, [], now, identity);
+  expect(session.targetWordIds).toEqual(['0002', '0001']);
+  expect(getSessionQueueItems(session).slice(0, 2).map((item) => item.wordId)).toEqual(['0002', '0001']);
 });
 
 test('initial learning operates in groups of five through three recall types', () => {

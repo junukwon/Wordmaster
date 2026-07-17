@@ -1,6 +1,5 @@
 import type { LearningOutcome } from './masteryEngine';
 import { isReviewDue } from './reviewScheduler';
-import { resolveStudySelection } from './studySelection';
 import type {
   QuestionType,
   StudyPhase,
@@ -104,28 +103,16 @@ export function createStudySession(
     startDay: selectedDays[0] ?? 0,
     endDay: selectedDays[selectedDays.length - 1] ?? 0,
   };
-  if (selectedDays.length === 0 || words.length === 0) {
-    return createStudySessionFromTarget(
-      words,
-      { targetDayIds: selectedDays, targetWordIds: [], selection },
-      progressList,
-      now,
-      shuffle,
-    );
-  }
-  const target = resolveStudySelection(
+  // This compatibility API historically treated targetDayIds as a filter.  In
+  // particular, callers may pass sparse or not-yet-loaded DAY ids; missing days
+  // are simply ignored and must not make session creation fail.  The strict
+  // validation for the new selection modes lives in resolveStudySelection and
+  // createStudySessionFromTarget's callers.
+  const compatibilityTarget: StudyTarget = {
+    targetDayIds: selectedDays,
+    targetWordIds: words.filter((word) => selectedDays.includes(word.day)).map((word) => word.id),
     selection,
-    words,
-  );
-  // Keep the compatibility API's historical behavior for non-contiguous DAY ids.
-  const compatibilityTarget: StudyTarget = selectedDays.length === target.targetDayIds.length
-    && selectedDays.every((day, index) => day === target.targetDayIds[index])
-    ? target
-    : {
-      targetDayIds: selectedDays,
-      targetWordIds: words.filter((word) => selectedDays.includes(word.day)).map((word) => word.id),
-      selection,
-    };
+  };
   return createStudySessionFromTarget(words, compatibilityTarget, progressList, now, shuffle);
 }
 
